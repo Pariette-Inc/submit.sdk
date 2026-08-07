@@ -135,6 +135,16 @@ final class Platform extends Module
         return $this->client->get('/api/platform/plans');
     }
 
+    /**
+     * Tek planın dökümü — modüller, limitler, dönem fiyatları, para birimleri.
+     *
+     * @param array<string,mixed> $params
+     */
+    public function plan(string $code, array $params = []): mixed
+    {
+        return $this->client->get('/api/platform/plans/' . $this->seg($code), $params);
+    }
+
     /** Ödeme bağlantısı — oturum gerekmez, bağlantıyı alan herkes kullanır. */
     public function payLink(string $token): mixed
     {

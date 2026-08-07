@@ -3,12 +3,12 @@
  "source": {
   "repo": "submit.api",
   "branch": "test",
-  "commit": "05d9b26"
+  "commit": "d0f2a18"
  },
  "counts": {
   "modules": 21,
-  "methods": 206,
-  "liveEndpoints": 235
+  "methods": 207,
+  "liveEndpoints": 236
  },
  "packages": {
   "js": {
@@ -5340,6 +5340,43 @@
       "php": "plans",
       "swift": "plans",
       "kotlin": "plans"
+     }
+    },
+    {
+     "name": "team.plan",
+     "group": "team",
+     "params": [
+      {
+       "name": "code",
+       "type": "string",
+       "optional": false,
+       "default": null
+      },
+      {
+       "name": "params",
+       "type": "Record<string, unknown>",
+       "optional": true,
+       "default": "{}"
+      }
+     ],
+     "returns": "Promise<ApiResponse<Record<string, unknown>>>",
+     "method": "GET",
+     "path": "/api/platform/plans/${encodeURIComponent(code)}",
+     "specPath": "/api/platform/plans/{code}",
+     "auth": [
+      "envToken"
+     ],
+     "moduleGate": null,
+     "throttle": null,
+     "status": "live",
+     "summary": "Tek planın dökümü: modüller, limitler, iki dönem fiyatı ve satılabildiği para birimleri. Ödeme ekranı satın alınacak planı BURADAN okur — istemcide taşınan fiyata ya da sepette kalmış eski kayda güvenilmez.",
+     "body": "",
+     "example": "",
+     "names": {
+      "js": "team.plan",
+      "php": "plan",
+      "swift": "plan",
+      "kotlin": "plan"
      }
     },
     {

@@ -98,6 +98,11 @@ public struct PlatformModule: Sendable {
         try await client.get("/api/platform/plans", as: [JSONValue].self)
     }
 
+    /// Tek planın dökümü — modüller, limitler, dönem fiyatları, para birimleri.
+    public func plan(code: String, params: [String: Any] = [:]) async throws -> SubmitResponse<JSONValue> {
+        try await client.get("/api/platform/plans/\(esc(code))", query: params, as: JSONValue.self)
+    }
+
     /// Ödeme bağlantısı — oturum gerekmez.
     public func payLink(token: String) async throws -> SubmitResponse<JSONValue> {
         try await client.get("/api/platform/pay/\(esc(token))")

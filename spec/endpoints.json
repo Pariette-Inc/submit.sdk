@@ -3,11 +3,11 @@
  "source": {
   "repo": "submit.api",
   "branch": "test",
-  "commit": "05d9b26"
+  "commit": "d0f2a18"
  },
  "counts": {
-  "total": 436,
-  "live": 235,
+  "total": 437,
+  "live": 236,
   "retired": 201
  },
  "authLegend": {
@@ -3174,6 +3174,17 @@
    "method": "GET",
    "path": "/api/platform/plans",
    "controller": "Platform\\PublicPlanController",
+   "auth": [
+    "envToken"
+   ],
+   "moduleGate": null,
+   "throttle": null,
+   "status": "live"
+  },
+  {
+   "method": "GET",
+   "path": "/api/platform/plans/{code}",
+   "controller": "Platform\\PublicPlanController@show",
    "auth": [
     "envToken"
    ],

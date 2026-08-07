@@ -69,6 +69,10 @@ class Platform(private val client: SubmitClient) {
     /** Herkese açık paket listesi — fiyatlandırma ekranı için. */
     suspend fun plans(): JsonObject = client.get("/api/platform/plans")
 
+    /** Tek planın dökümü — modüller, limitler, dönem fiyatları, para birimleri. */
+    suspend fun plan(code: String, params: Map<String, Any?> = emptyMap()): JsonObject =
+        client.get("/api/platform/plans/${esc(code)}", params)
+
     /** Ödeme bağlantısı — oturum gerekmez. */
     suspend fun payLink(token: String): JsonObject = client.get("/api/platform/pay/${esc(token)}")
 

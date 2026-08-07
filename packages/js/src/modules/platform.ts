@@ -108,6 +108,15 @@ export class PlatformModule extends BaseModule {
   }
 
   /**
+   * Tek planın dökümü: modüller, limitler, iki dönem fiyatı ve satılabildiği
+   * para birimleri. Ödeme ekranı satın alınacak planı BURADAN okur — istemcide
+   * taşınan fiyata ya da sepette kalmış eski kayda güvenilmez.
+   */
+  plan(code: string, params: Record<string, unknown> = {}): Promise<ApiResponse<Record<string, unknown>>> {
+    return this.client.get(`/api/platform/plans/${encodeURIComponent(code)}`, { params })
+  }
+
+  /**
    * Ödeme bağlantısı akışı — oturum gerektirmez, bağlantıyı alan herkes kullanır.
    * Partner müşterisine gönderilen "öde" sayfası bunları çağırır.
    */
