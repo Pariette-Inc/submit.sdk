@@ -33,6 +33,31 @@ export class PlatformModule extends BaseModule {
     pdfUrl: (id: number): string => `${this.client.baseUrl}/api/platform/my/receipts/${id}/pdf`,
   }
 
+  /**
+   * Abonelik yönetimi.
+   *
+   * Plan değiştirmede kural: YÜKSELTME dönemin kalan günleri için fark tahsil
+   * edilerek hemen uygulanır (`mode: "payment"` + `pay_url`), DÜŞÜRME tahsilat
+   * olmadan dönem sonuna randevulanır (`mode: "scheduled"`). Plan, müşterinin
+   * ödediği para biriminde satılmıyorsa geçiş reddedilir.
+   */
+  readonly subscription = {
+    /** Uzatma ödemesi başlatır; yanıttaki `pay_url` ödeme ekranına götürür. */
+    renew: (period: 'monthly' | 'yearly'): Promise<ApiResponse<Record<string, unknown>>> =>
+      this.client.post('/api/platform/my/subscription/renew', { period }),
+
+    /** Geçilebilecek planlar: her biri için şimdi ödenecek fark ve dönem fiyatı. */
+    plans: (params: Record<string, unknown> = {}): Promise<ApiResponse<Record<string, unknown>>> =>
+      this.client.get('/api/platform/my/subscription/plans', { params }),
+
+    changePlan: (packageId: number, period: 'monthly' | 'yearly'): Promise<ApiResponse<Record<string, unknown>>> =>
+      this.client.post('/api/platform/my/subscription/change-plan', { package_id: packageId, period }),
+
+    /** Dönem sonuna randevulanmış düşürmeyi iptal eder. */
+    cancelPendingChange: (): Promise<ApiResponse<Record<string, unknown>>> =>
+      this.client.delete('/api/platform/my/subscription/pending-change'),
+  }
+
   /** Sitede açık/kapalı modüller ve satın alınabilir olanlar. */
   readonly modules = {
     list: (): Promise<ApiResponse<Array<Record<string, unknown>>>> =>

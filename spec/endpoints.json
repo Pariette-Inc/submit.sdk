@@ -3,11 +3,11 @@
  "source": {
   "repo": "submit.api",
   "branch": "test",
-  "commit": "7734978"
+  "commit": "05d9b26"
  },
  "counts": {
-  "total": 433,
-  "live": 232,
+  "total": 436,
+  "live": 235,
   "retired": 201
  },
  "authLegend": {
@@ -2744,6 +2744,45 @@
    "method": "GET",
    "path": "/api/platform/my/receipts/{id}/pdf",
    "controller": "Platform\\CustomerPlatformController@receiptPdf",
+   "auth": [
+    "envToken",
+    "jwt",
+    "envMember"
+   ],
+   "moduleGate": null,
+   "throttle": null,
+   "status": "live"
+  },
+  {
+   "method": "POST",
+   "path": "/api/platform/my/subscription/change-plan",
+   "controller": "Platform\\CustomerPlatformController@changePlan",
+   "auth": [
+    "envToken",
+    "jwt",
+    "envMember"
+   ],
+   "moduleGate": null,
+   "throttle": "10,1",
+   "status": "live"
+  },
+  {
+   "method": "DELETE",
+   "path": "/api/platform/my/subscription/pending-change",
+   "controller": "Platform\\CustomerPlatformController@cancelPendingPlanChange",
+   "auth": [
+    "envToken",
+    "jwt",
+    "envMember"
+   ],
+   "moduleGate": null,
+   "throttle": null,
+   "status": "live"
+  },
+  {
+   "method": "GET",
+   "path": "/api/platform/my/subscription/plans",
+   "controller": "Platform\\CustomerPlatformController@subscriptionPlans",
    "auth": [
     "envToken",
     "jwt",

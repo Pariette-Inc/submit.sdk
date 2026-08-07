@@ -40,6 +40,39 @@ final class Platform extends Module
         return $this->client->baseUrl() . '/api/platform/my/receipts/' . $id . '/pdf';
     }
 
+    /** Uzatma ödemesi başlatır; yanıttaki `pay_url` ödeme ekranına götürür. */
+    public function renewSubscription(string $period = 'monthly'): mixed
+    {
+        return $this->client->post('/api/platform/my/subscription/renew', ['period' => $period]);
+    }
+
+    /**
+     * Geçilebilecek planlar: her biri için şimdi ödenecek fark ve dönem fiyatı.
+     *
+     * @param array<string,mixed> $params
+     */
+    public function subscriptionPlans(array $params = []): mixed
+    {
+        return $this->client->get('/api/platform/my/subscription/plans', $params);
+    }
+
+    /**
+     * Plan değiştirir. Yükseltme fark tahsilatıyla hemen (`mode: payment`),
+     * düşürme dönem sonunda (`mode: scheduled`) geçerli olur.
+     */
+    public function changePlan(int $packageId, string $period = 'monthly'): mixed
+    {
+        return $this->client->post('/api/platform/my/subscription/change-plan', [
+            'package_id' => $packageId,
+            'period' => $period,
+        ]);
+    }
+
+    public function cancelPendingPlanChange(): mixed
+    {
+        return $this->client->delete('/api/platform/my/subscription/pending-change');
+    }
+
     public function modules(): mixed
     {
         return $this->client->get('/api/platform/my/modules');

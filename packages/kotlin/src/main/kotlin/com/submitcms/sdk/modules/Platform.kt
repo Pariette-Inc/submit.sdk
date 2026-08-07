@@ -22,6 +22,21 @@ class Platform(private val client: SubmitClient) {
     /** PDF indirme adresi — ikili veri döndürülmez. */
     fun receiptPdfUrl(id: Int): String = "${client.baseUrl}/api/platform/my/receipts/$id/pdf"
 
+    /** Uzatma ödemesi başlatır; yanıttaki `pay_url` ödeme ekranına götürür. */
+    suspend fun renewSubscription(period: String = "monthly"): JsonObject =
+        client.post("/api/platform/my/subscription/renew", mapOf("period" to period))
+
+    /** Geçilebilecek planlar: şimdi ödenecek fark ve dönem fiyatlarıyla. */
+    suspend fun subscriptionPlans(params: Map<String, Any?> = emptyMap()): JsonObject =
+        client.get("/api/platform/my/subscription/plans", params)
+
+    /** Yükseltme fark tahsilatıyla hemen, düşürme dönem sonunda geçerli olur. */
+    suspend fun changePlan(packageId: Int, period: String = "monthly"): JsonObject =
+        client.post("/api/platform/my/subscription/change-plan", mapOf("package_id" to packageId, "period" to period))
+
+    suspend fun cancelPendingPlanChange(): JsonObject =
+        client.delete("/api/platform/my/subscription/pending-change")
+
     suspend fun modules(): JsonObject = client.get("/api/platform/my/modules")
 
     /** Modülü satın alır; ödeme gerekiyorsa yanıtta yönlendirme döner. */

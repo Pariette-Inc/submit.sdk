@@ -27,6 +27,26 @@ public struct PlatformModule: Sendable {
         client.baseURL.appendingPathComponent("api/platform/my/receipts/\(id)/pdf")
     }
 
+    /// Uzatma ödemesi başlatır; yanıttaki `pay_url` ödeme ekranına götürür.
+    public func renewSubscription(period: String = "monthly") async throws -> SubmitResponse<JSONValue> {
+        try await client.post("/api/platform/my/subscription/renew", body: ["period": period])
+    }
+
+    /// Geçilebilecek planlar: şimdi ödenecek fark ve dönem fiyatlarıyla.
+    public func subscriptionPlans(params: [String: Any] = [:]) async throws -> SubmitResponse<JSONValue> {
+        try await client.get("/api/platform/my/subscription/plans", query: params, as: JSONValue.self)
+    }
+
+    /// Yükseltme fark tahsilatıyla hemen, düşürme dönem sonunda geçerli olur.
+    public func changePlan(packageId: Int, period: String = "monthly") async throws -> SubmitResponse<JSONValue> {
+        try await client.post("/api/platform/my/subscription/change-plan", body: ["package_id": packageId, "period": period])
+    }
+
+    @discardableResult
+    public func cancelPendingPlanChange() async throws -> SubmitResponse<JSONValue> {
+        try await client.delete("/api/platform/my/subscription/pending-change")
+    }
+
     public func modules() async throws -> SubmitResponse<[JSONValue]> {
         try await client.get("/api/platform/my/modules", as: [JSONValue].self)
     }

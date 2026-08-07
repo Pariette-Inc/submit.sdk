@@ -3,12 +3,12 @@
  "source": {
   "repo": "submit.api",
   "branch": "test",
-  "commit": "7734978"
+  "commit": "05d9b26"
  },
  "counts": {
   "modules": 21,
-  "methods": 202,
-  "liveEndpoints": 232
+  "methods": 206,
+  "liveEndpoints": 235
  },
  "packages": {
   "js": {
@@ -4851,9 +4851,75 @@
       }
      ],
      "returns": "string",
+     "method": "POST",
+     "path": "/api/platform/my/subscription/renew",
+     "specPath": "/api/platform/my/subscription/renew",
+     "auth": [
+      "envToken",
+      "jwt",
+      "envMember"
+     ],
+     "moduleGate": null,
+     "throttle": "10,1",
+     "status": "live",
+     "summary": "PDF adresi — indirme bağlantısı olarak verin, SDK ikili veri döndürmez.",
+     "body": "",
+     "example": "",
+     "names": {
+      "js": "receipts.pdfUrl",
+      "php": "renewSubscription",
+      "swift": "renewSubscription",
+      "kotlin": "renewSubscription"
+     }
+    },
+    {
+     "name": "subscription.renew",
+     "group": "subscription",
+     "params": [
+      {
+       "name": "period",
+       "type": "'monthly' | 'yearly'",
+       "optional": false,
+       "default": null
+      }
+     ],
+     "returns": "Promise<ApiResponse<Record<string, unknown>>>",
+     "method": "POST",
+     "path": "/api/platform/my/subscription/renew",
+     "specPath": "/api/platform/my/subscription/renew",
+     "auth": [
+      "envToken",
+      "jwt",
+      "envMember"
+     ],
+     "moduleGate": null,
+     "throttle": "10,1",
+     "status": "live",
+     "summary": "Uzatma ödemesi başlatır; yanıttaki `pay_url` ödeme ekranına götürür.",
+     "body": "",
+     "example": "",
+     "names": {
+      "js": "subscription.renew",
+      "php": "renewSubscription",
+      "swift": "renewSubscription",
+      "kotlin": "renewSubscription"
+     }
+    },
+    {
+     "name": "subscription.plans",
+     "group": "subscription",
+     "params": [
+      {
+       "name": "params",
+       "type": "Record<string, unknown>",
+       "optional": true,
+       "default": "{}"
+      }
+     ],
+     "returns": "Promise<ApiResponse<Record<string, unknown>>>",
      "method": "GET",
-     "path": "/api/platform/my/modules",
-     "specPath": "/api/platform/my/modules",
+     "path": "/api/platform/my/subscription/plans",
+     "specPath": "/api/platform/my/subscription/plans",
      "auth": [
       "envToken",
       "jwt",
@@ -4862,14 +4928,79 @@
      "moduleGate": null,
      "throttle": null,
      "status": "live",
-     "summary": "PDF adresi — indirme bağlantısı olarak verin, SDK ikili veri döndürmez.",
+     "summary": "Geçilebilecek planlar: her biri için şimdi ödenecek fark ve dönem fiyatı.",
      "body": "",
      "example": "",
      "names": {
-      "js": "receipts.pdfUrl",
-      "php": "modules",
-      "swift": "modules",
-      "kotlin": "modules"
+      "js": "subscription.plans",
+      "php": "subscriptionPlans",
+      "swift": "subscriptionPlans",
+      "kotlin": "subscriptionPlans"
+     }
+    },
+    {
+     "name": "subscription.changePlan",
+     "group": "subscription",
+     "params": [
+      {
+       "name": "packageId",
+       "type": "number",
+       "optional": false,
+       "default": null
+      },
+      {
+       "name": "period",
+       "type": "'monthly' | 'yearly'",
+       "optional": false,
+       "default": null
+      }
+     ],
+     "returns": "Promise<ApiResponse<Record<string, unknown>>>",
+     "method": "POST",
+     "path": "/api/platform/my/subscription/change-plan",
+     "specPath": "/api/platform/my/subscription/change-plan",
+     "auth": [
+      "envToken",
+      "jwt",
+      "envMember"
+     ],
+     "moduleGate": null,
+     "throttle": "10,1",
+     "status": "live",
+     "summary": "",
+     "body": "",
+     "example": "",
+     "names": {
+      "js": "subscription.changePlan",
+      "php": "changePlan",
+      "swift": "changePlan",
+      "kotlin": "changePlan"
+     }
+    },
+    {
+     "name": "subscription.cancelPendingChange",
+     "group": "subscription",
+     "params": [],
+     "returns": "Promise<ApiResponse<Record<string, unknown>>>",
+     "method": "DELETE",
+     "path": "/api/platform/my/subscription/pending-change",
+     "specPath": "/api/platform/my/subscription/pending-change",
+     "auth": [
+      "envToken",
+      "jwt",
+      "envMember"
+     ],
+     "moduleGate": null,
+     "throttle": null,
+     "status": "live",
+     "summary": "Dönem sonuna randevulanmış düşürmeyi iptal eder.",
+     "body": "",
+     "example": "",
+     "names": {
+      "js": "subscription.cancelPendingChange",
+      "php": "cancelPendingPlanChange",
+      "swift": "cancelPendingPlanChange",
+      "kotlin": "cancelPendingPlanChange"
      }
     },
     {
