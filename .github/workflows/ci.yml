@@ -1,0 +1,68 @@
+name: CI
+
+on:
+  push:
+    branches: [main, test]
+  pull_request:
+
+jobs:
+  spec:
+    name: Kontrat testleri
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: { node-version: '20' }
+      # Kontrat testi yalnızca kaynak dosyaları ile spec/endpoints.json'ı
+      # karşılaştırır; bağımlılık gerektirmez.
+      - run: node --test tests/contract/endpoints.test.mjs
+
+  js:
+    name: JS/TS
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: { node-version: '20' }
+      - run: npm install
+        working-directory: packages/js
+      - run: npx tsc --noEmit
+        working-directory: packages/js
+      - run: npx tsup
+        working-directory: packages/js
+
+  php:
+    name: PHP
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: shivammathur/setup-php@v2
+        with: { php-version: '8.2' }
+      - run: composer install --no-interaction --prefer-dist
+        working-directory: packages/php
+      - run: find src -name '*.php' -print0 | xargs -0 -n1 php -l
+        working-directory: packages/php
+      - run: vendor/bin/phpunit --no-coverage
+        working-directory: packages/php
+        continue-on-error: true
+
+  swift:
+    name: Swift
+    runs-on: macos-14
+    steps:
+      - uses: actions/checkout@v4
+      - run: swift build
+        working-directory: packages/swift
+      - run: swift test
+        working-directory: packages/swift
+
+  kotlin:
+    name: Kotlin
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
+        with: { distribution: temurin, java-version: '17' }
+      - uses: gradle/actions/setup-gradle@v4
+      - run: gradle build --no-daemon
+        working-directory: packages/kotlin

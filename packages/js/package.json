@@ -1,0 +1,57 @@
+{
+  "name": "@submitcms/sdk",
+  "version": "1.0.0",
+  "description": "SubmitCMS resmî SDK'sı — headless CMS, e-ticaret ve SaaS platformu için Node.js ve tarayıcı istemcisi",
+  "main": "./dist/index.js",
+  "module": "./dist/index.mjs",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.mjs",
+      "require": "./dist/index.js"
+    }
+  },
+  "files": ["dist", "README.md"],
+  "scripts": {
+    "build": "tsup",
+    "dev": "tsup --watch",
+    "typecheck": "tsc --noEmit",
+    "prepublishOnly": "npm run build"
+  },
+  "keywords": [
+    "submitcms",
+    "sdk",
+    "cms",
+    "headless-cms",
+    "ecommerce",
+    "headless-commerce",
+    "saas",
+    "api",
+    "multi-tenant",
+    "typescript",
+    "rest-api",
+    "laravel",
+    "nextjs",
+    "react"
+  ],
+  "author": "SubmitCMS",
+  "license": "MIT",
+  "homepage": "https://submitcms.com/sdk",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Pariette-Inc/submit.sdk.git",
+    "directory": "packages/js"
+  },
+  "bugs": { "url": "https://github.com/Pariette-Inc/submit.sdk/issues" },
+  "dependencies": {
+    "axios": "^1.7.7"
+  },
+  "devDependencies": {
+    "@types/node": "^22.9.0",
+    "tsup": "^8.3.0",
+    "typescript": "^5.6.0"
+  },
+  "engines": { "node": ">=18.0.0" },
+  "sideEffects": false
+}

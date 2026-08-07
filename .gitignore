@@ -1,0 +1,17 @@
+node_modules/
+dist/
+.DS_Store
+*.log
+
+# PHP
+packages/php/vendor/
+packages/php/composer.lock
+
+# Swift
+packages/swift/.build/
+packages/swift/*.xcodeproj
+
+# Kotlin
+packages/kotlin/build/
+packages/kotlin/.gradle/
+packages/kotlin/local.properties

@@ -1,0 +1,5532 @@
+{
+ "$comment": "submit.api'nin gerçek rota tablosundan üretildi (php artisan route:list). Elle düzenlemeyin — `pnpm spec:generate` ile yenileyin.",
+ "source": {
+  "repo": "submit.api",
+  "branch": "test",
+  "commit": "7734978"
+ },
+ "counts": {
+  "total": 433,
+  "live": 232,
+  "retired": 201
+ },
+ "authLegend": {
+  "envToken": "SubmitToken başlığı (veya ?env=) — site kimliği. Neredeyse her uçta gerekir.",
+  "jwt": "Authorization: Bearer <token> — oturum açmış kullanıcı.",
+  "envMember": "Kullanıcının o environment'ta üyeliği olmalı."
+ },
+ "endpoints": [
+  {
+   "method": "POST",
+   "path": "/api/add-gallery-image",
+   "controller": "StorageController@addImageToGallery",
+   "auth": [
+    "envToken",
+    "jwt"
+   ],
+   "moduleGate": null,
+   "throttle": null,
+   "status": "retired",
+   "httpStatus": 410,
+   "reason": "PANEL_RETIRED — eski sahip-yönetim paneli (karar 2026-07-30). Yerine: schema/records, menus, platform/my, commerce."
+  },
+  {
+   "method": "GET",
+   "path": "/api/agent",
+   "controller": "AgentController@index",
+   "auth": [
+    "envToken",
+    "jwt"
+   ],
+   "moduleGate": null,
+   "throttle": null,
+   "status": "retired",
+   "httpStatus": 410,
+   "reason": "PANEL_RETIRED — eski sahip-yönetim paneli (karar 2026-07-30). Yerine: schema/records, menus, platform/my, commerce."
+  },
+  {
+   "method": "POST",
+   "path": "/api/agent/{environment}/analyze",
+   "controller": "AgentController@analyzeContent",
+   "auth": [
+    "envToken",
+    "jwt"
+   ],
+   "moduleGate": null,
+   "throttle": null,
+   "status": "retired",
+   "httpStatus": 410,
+   "reason": "PANEL_RETIRED — eski sahip-yönetim paneli (karar 2026-07-30). Yerine: schema/records, menus, platform/my, commerce."
+  },
+  {
+   "method": "POST",
+   "path": "/api/agent/proofread",
+   "controller": "AgentController@proofread",
+   "auth": [
+    "envToken",
+    "jwt"
+   ],
+   "moduleGate": null,
+   "throttle": null,
+   "status": "retired",
+   "httpStatus": 410,
+   "reason": "PANEL_RETIRED — eski sahip-yönetim paneli (karar 2026-07-30). Yerine: schema/records, menus, platform/my, commerce."
+  },
+  {
+   "method": "POST",
+   "path": "/api/agent/suggest",
+   "controller": "AgentController@suggest",
+   "auth": [
+    "envToken",
+    "jwt"
+   ],
+   "moduleGate": null,
+   "throttle": null,
+   "status": "retired",
+   "httpStatus": 410,
+   "reason": "PANEL_RETIRED — eski sahip-yönetim paneli (karar 2026-07-30). Yerine: schema/records, menus, platform/my, commerce."
+  },
+  {
+   "method": "POST",
+   "path": "/api/agent/translate",
+   "controller": "AgentController@translate",
+   "auth": [
+    "envToken",
+    "jwt"
+   ],
+   "moduleGate": null,
+   "throttle": null,
+   "status": "retired",
+   "httpStatus": 410,
+   "reason": "PANEL_RETIRED — eski sahip-yönetim paneli (karar 2026-07-30). Yerine: schema/records, menus, platform/my, commerce."
+  },
+  {
+   "method": "GET",
+   "path": "/api/ai/{environment}/access",
+   "controller": "AiController@envAccessView",
+   "auth": [
+    "envToken",
+    "jwt"
+   ],
+   "moduleGate": null,
+   "throttle": null,
+   "status": "retired",
+   "httpStatus": 410,
+   "reason": "PANEL_RETIRED — eski sahip-yönetim paneli (karar 2026-07-30). Yerine: schema/records, menus, platform/my, commerce."
+  },
+  {
+   "method": "POST",
+   "path": "/api/ai/{environment}/access",
+   "controller": "AiController@envAccessDefine",
+   "auth": [
+    "envToken",
+    "jwt"
+   ],
+   "moduleGate": null,
+   "throttle": null,
+   "status": "retired",
+   "httpStatus": 410,
+   "reason": "PANEL_RETIRED — eski sahip-yönetim paneli (karar 2026-07-30). Yerine: schema/records, menus, platform/my, commerce."
+  },
+  {
+   "method": "GET",
+   "path": "/api/ai/{environment}/stats",
+   "controller": "AiController@getUsageStats",
+   "auth": [
+    "envToken",
+    "jwt"
+   ],
+   "moduleGate": null,
+   "throttle": null,
+   "status": "retired",
+   "httpStatus": 410,
+   "reason": "PANEL_RETIRED — eski sahip-yönetim paneli (karar 2026-07-30). Yerine: schema/records, menus, platform/my, commerce."
+  },
+  {
+   "method": "GET",
+   "path": "/api/ai/{environment}/usage-summary",
+   "controller": "AiController@envUsageSummary",
+   "auth": [
+    "envToken",
+    "jwt"
+   ],
+   "moduleGate": null,
+   "throttle": null,
+   "status": "retired",
+   "httpStatus": 410,
+   "reason": "PANEL_RETIRED — eski sahip-yönetim paneli (karar 2026-07-30). Yerine: schema/records, menus, platform/my, commerce."
+  },
+  {
+   "method": "GET",
+   "path": "/api/ai/available-models",
+   "controller": "AiController@availableModels",
+   "auth": [
+    "envToken",
+    "jwt"
+   ],
+   "moduleGate": null,
+   "throttle": null,
+   "status": "retired",
+   "httpStatus": 410,
+   "reason": "PANEL_RETIRED — eski sahip-yönetim paneli (karar 2026-07-30). Yerine: schema/records, menus, platform/my, commerce."
+  },
+  {
+   "method": "GET",
+   "path": "/api/ai/credits",
+   "controller": "Ai\\AiCreditController@summary",
+   "auth": [
+    "envToken",
+    "jwt",
+    "envMember"
+   ],
+   "moduleGate": null,
+   "throttle": null,
+   "status": "live"
+  },
+  {
+   "method": "GET",
+   "path": "/api/ai/credits/packages",
+   "controller": "Ai\\AiCreditController@packages",
+   "auth": [
+    "envToken",
+    "jwt",
+    "envMember"
+   ],
+   "moduleGate": null,
+   "throttle": null,
+   "status": "live"
+  },
+  {
+   "method": "POST",
+   "path": "/api/ai/credits/purchase",
+   "controller": "Ai\\AiCreditController@purchase",
+   "auth": [
+    "envToken",
+    "jwt",
+    "envMember"
+   ],
+   "moduleGate": null,
+   "throttle": "10,1",
+   "status": "live"
+  },
+  {
+   "method": "GET",
+   "path": "/api/ai/credits/transactions",
+   "controller": "Ai\\AiCreditController@transactions",
+   "auth": [
+    "envToken",
+    "jwt",
+    "envMember"
+   ],
+   "moduleGate": null,
+   "throttle": null,
+   "status": "live"
+  },
+  {
+   "method": "POST",
+   "path": "/api/ai/usage",
+   "controller": "AiController@storeUsage",
+   "auth": [
+    "envToken",
+    "jwt"
+   ],
+   "moduleGate": null,
+   "throttle": null,
+   "status": "retired",
+   "httpStatus": 410,
+   "reason": "PANEL_RETIRED — eski sahip-yönetim paneli (karar 2026-07-30). Yerine: schema/records, menus, platform/my, commerce."
+  },
+  {
+   "method": "GET",
+   "path": "/api/attachments",
+   "controller": "StorageController@getAttachments",
+   "auth": [
+    "envToken",
+    "jwt"
+   ],
+   "moduleGate": null,
+   "throttle": null,
+   "status": "retired",
+   "httpStatus": 410,
+   "reason": "PANEL_RETIRED — eski sahip-yönetim paneli (karar 2026-07-30). Yerine: schema/records, menus, platform/my, commerce."
+  },
+  {
+   "method": "POST",
+   "path": "/api/attachments",
+   "controller": "StorageController@createAttachment",
+   "auth": [
+    "envToken",
+    "jwt"
+   ],
+   "moduleGate": null,
+   "throttle": null,
+   "status": "retired",
+   "httpStatus": 410,
+   "reason": "PANEL_RETIRED — eski sahip-yönetim paneli (karar 2026-07-30). Yerine: schema/records, menus, platform/my, commerce."
+  },
+  {
+   "method": "DELETE",
+   "path": "/api/attachments/{id}",
+   "controller": "StorageController@deleteAttachment",
+   "auth": [
+    "envToken",
+    "jwt"
+   ],
+   "moduleGate": null,
+   "throttle": null,
+   "status": "retired",
+   "httpStatus": 410,
+   "reason": "PANEL_RETIRED — eski sahip-yönetim paneli (karar 2026-07-30). Yerine: schema/records, menus, platform/my, commerce."
+  },
+  {
+   "method": "PUT",
+   "path": "/api/attachments/{id}",
+   "controller": "StorageController@updateAttachment",
+   "auth": [
+    "envToken",
+    "jwt"
+   ],
+   "moduleGate": null,
+   "throttle": null,
+   "status": "retired",
+   "httpStatus": 410,
+   "reason": "PANEL_RETIRED — eski sahip-yönetim paneli (karar 2026-07-30). Yerine: schema/records, menus, platform/my, commerce."
+  },
+  {
+   "method": "POST",
+   "path": "/api/attribute",
+   "controller": "AttributeController@createAttribute",
+   "auth": [
+    "envToken",
+    "jwt"
+   ],
+   "moduleGate": null,
+   "throttle": null,
+   "status": "retired",
+   "httpStatus": 410,
+   "reason": "PANEL_RETIRED — eski sahip-yönetim paneli (karar 2026-07-30). Yerine: schema/records, menus, platform/my, commerce."
+  },
+  {
+   "method": "GET",
+   "path": "/api/attribute-by-type/{type}",
+   "controller": "AttributeController@getAttributeByType",
+   "auth": [
+    "envToken",
+    "jwt"
+   ],
+   "moduleGate": null,
+   "throttle": null,
+   "status": "retired",
+   "httpStatus": 410,
+   "reason": "PANEL_RETIRED — eski sahip-yönetim paneli (karar 2026-07-30). Yerine: schema/records, menus, platform/my, commerce."
+  },
+  {
+   "method": "POST",
+   "path": "/api/attribute-item",
+   "controller": "AttributeController@createAttributeItem",
+   "auth": [
+    "envToken",
+    "jwt"
+   ],
+   "moduleGate": null,
+   "throttle": null,
+   "status": "retired",
+   "httpStatus": 410,
+   "reason": "PANEL_RETIRED — eski sahip-yönetim paneli (karar 2026-07-30). Yerine: schema/records, menus, platform/my, commerce."
+  },
+  {
+   "method": "DELETE",
+   "path": "/api/attribute-item/{id}",
+   "controller": "AttributeController@deleteAttributeItem",
+   "auth": [
+    "envToken",
+    "jwt"
+   ],
+   "moduleGate": null,
+   "throttle": null,
+   "status": "retired",
+   "httpStatus": 410,
+   "reason": "PANEL_RETIRED — eski sahip-yönetim paneli (karar 2026-07-30). Yerine: schema/records, menus, platform/my, commerce."
+  },
+  {
+   "method": "PUT",
+   "path": "/api/attribute-item/{id}",
+   "controller": "AttributeController@updateAttributeItem",
+   "auth": [
+    "envToken",
+    "jwt"
+   ],
+   "moduleGate": null,
+   "throttle": null,
+   "status": "retired",
+   "httpStatus": 410,
+   "reason": "PANEL_RETIRED — eski sahip-yönetim paneli (karar 2026-07-30). Yerine: schema/records, menus, platform/my, commerce."
+  },
+  {
+   "method": "DELETE",
+   "path": "/api/attribute-items/bulk",
+   "controller": "AttributeController@bulkDeleteItems",
+   "auth": [
+    "envToken",
+    "jwt"
+   ],
+   "moduleGate": null,
+   "throttle": null,
+   "status": "retired",
+   "httpStatus": 410,
+   "reason": "PANEL_RETIRED — eski sahip-yönetim paneli (karar 2026-07-30). Yerine: schema/records, menus, platform/my, commerce."
+  },
+  {
+   "method": "POST",
+   "path": "/api/attribute-items/bulk",
+   "controller": "AttributeController@bulkCreateItems",
+   "auth": [
+    "envToken",
+    "jwt"
+   ],
+   "moduleGate": null,
+   "throttle": null,
+   "status": "retired",
+   "httpStatus": 410,
+   "reason": "PANEL_RETIRED — eski sahip-yönetim paneli (karar 2026-07-30). Yerine: schema/records, menus, platform/my, commerce."
+  },
+  {
+   "method": "PUT",
+   "path": "/api/attribute-items/bulk",
+   "controller": "AttributeController@bulkUpdateItems",
+   "auth": [
+    "envToken",
+    "jwt"
+   ],
+   "moduleGate": null,
+   "throttle": null,
+   "status": "retired",
+   "httpStatus": 410,
+   "reason": "PANEL_RETIRED — eski sahip-yönetim paneli (karar 2026-07-30). Yerine: schema/records, menus, platform/my, commerce."
+  },
+  {
+   "method": "DELETE",
+   "path": "/api/attribute/{id}",
+   "controller": "AttributeController@deleteAttribute",
+   "auth": [
+    "envToken",
+    "jwt"
+   ],
+   "moduleGate": null,
+   "throttle": null,
+   "status": "retired",
+   "httpStatus": 410,
+   "reason": "PANEL_RETIRED — eski sahip-yönetim paneli (karar 2026-07-30). Yerine: schema/records, menus, platform/my, commerce."
+  },
+  {
+   "method": "GET",
+   "path": "/api/attribute/{id}",
+   "controller": "AttributeController@getAttribute",
+   "auth": [
+    "envToken",
+    "jwt"
+   ],
+   "moduleGate": null,
+   "throttle": null,
+   "status": "retired",
+   "httpStatus": 410,
+   "reason": "PANEL_RETIRED — eski sahip-yönetim paneli (karar 2026-07-30). Yerine: schema/records, menus, platform/my, commerce."
+  },
+  {
+   "method": "PUT",
+   "path": "/api/attribute/{id}",
+   "controller": "AttributeController@updateAttribute",
+   "auth": [
+    "envToken",
+    "jwt"
+   ],
+   "moduleGate": null,
+   "throttle": null,
+   "status": "retired",
+   "httpStatus": 410,
+   "reason": "PANEL_RETIRED — eski sahip-yönetim paneli (karar 2026-07-30). Yerine: schema/records, menus, platform/my, commerce."
+  },
+  {
+   "method": "GET",
+   "path": "/api/attribute/{id}/items",
+   "controller": "AttributeController@getAttributeItems",
+   "auth": [
+    "envToken",
+    "jwt"
+   ],
+   "moduleGate": null,
+   "throttle": null,
+   "status": "retired",
+   "httpStatus": 410,
+   "reason": "PANEL_RETIRED — eski sahip-yönetim paneli (karar 2026-07-30). Yerine: schema/records, menus, platform/my, commerce."
+  },
+  {
+   "method": "GET",
+   "path": "/api/attributes",
+   "controller": "AttributeController@getAttributes",
+   "auth": [
+    "envToken",
+    "jwt"
+   ],
+   "moduleGate": null,
+   "throttle": null,
+   "status": "retired",
+   "httpStatus": 410,
+   "reason": "PANEL_RETIRED — eski sahip-yönetim paneli (karar 2026-07-30). Yerine: schema/records, menus, platform/my, commerce."
+  },
+  {
+   "method": "GET",
+   "path": "/api/attributes/where/{context}",
+   "controller": "AttributeController@getAttributesByWhere",
+   "auth": [
+    "envToken",
+    "jwt"
+   ],
+   "moduleGate": null,
+   "throttle": null,
+   "status": "retired",
+   "httpStatus": 410,
+   "reason": "PANEL_RETIRED — eski sahip-yönetim paneli (karar 2026-07-30). Yerine: schema/records, menus, platform/my, commerce."
+  },
+  {
+   "method": "POST",
+   "path": "/api/auth/2fa/confirm",
+   "controller": "AuthController@twoFactorConfirm",
+   "auth": [
+    "envToken",
+    "jwt"
+   ],
+   "moduleGate": null,
+   "throttle": null,
+   "status": "live"
+  },
+  {
+   "method": "POST",
+   "path": "/api/auth/2fa/disable",
+   "controller": "AuthController@twoFactorDisable",
+   "auth": [
+    "envToken",
+    "jwt"
+   ],
+   "moduleGate": null,
+   "throttle": null,
+   "status": "live"
+  },
+  {
+   "method": "POST",
+   "path": "/api/auth/2fa/setup",
+   "controller": "AuthController@twoFactorSetup",
+   "auth": [
+    "envToken",
+    "jwt"
+   ],
+   "moduleGate": null,
+   "throttle": null,
+   "status": "live"
+  },
+  {
+   "method": "POST",
+   "path": "/api/auth/2fa/verify",
+   "controller": "AuthController@twoFactorVerify",
+   "auth": [],
+   "moduleGate": null,
+   "throttle": null,
+   "status": "live"
+  },
+  {
+   "method": "PUT",
+   "path": "/api/auth/account-activation/{token}",
+   "controller": "AuthController@accountActivation",
+   "auth": [],
+   "moduleGate": null,
+   "throttle": null,
+   "status": "live"
+  },
+  {
+   "method": "POST",
+   "path": "/api/auth/auth-method/update",
+   "controller": "AuthController@updateAuthMethod",
+   "auth": [
+    "envToken",
+    "jwt"
+   ],
+   "moduleGate": null,
+   "throttle": null,
+   "status": "live"
+  },
+  {
+   "method": "GET",
+   "path": "/api/auth/check-reset-token",
+   "controller": "AuthController@checkResetToken",
+   "auth": [],
+   "moduleGate": null,
+   "throttle": null,
+   "status": "live"
+  },
+  {
+   "method": "POST",
+   "path": "/api/auth/complete-invitation",
+   "controller": "AuthController@completeInvitation",
+   "auth": [],
+   "moduleGate": null,
+   "throttle": null,
+   "status": "live"
+  },
+  {
+   "method": "POST",
+   "path": "/api/auth/console",
+   "controller": "AuthController@consoleLogin",
+   "auth": [
+    "envToken"
+   ],
+   "moduleGate": null,
+   "throttle": "auth",
+   "status": "live"
+  },
+  {
+   "method": "POST",
+   "path": "/api/auth/device/register",
+   "controller": "DeviceController@register",
+   "auth": [],
+   "moduleGate": null,
+   "throttle": null,
+   "status": "live"
+  },
+  {
+   "method": "POST",
+   "path": "/api/auth/device/remove",
+   "controller": "DeviceController@remove",
+   "auth": [],
+   "moduleGate": null,
+   "throttle": null,
+   "status": "live"
+  },
+  {
+   "method": "POST",
+   "path": "/api/auth/email/update",
+   "controller": "AuthController@updateEmail",
+   "auth": [
+    "envToken",
+    "jwt"
+   ],
+   "moduleGate": null,
+   "throttle": null,
+   "status": "live"
+  },
+  {
+   "method": "POST",
+   "path": "/api/auth/forgot-password",
+   "controller": "AuthController@forgotPassword",
+   "auth": [],
+   "moduleGate": null,
+   "throttle": "forgot-password",
+   "status": "live"
+  },
+  {
+   "method": "GET",
+   "path": "/api/auth/google/callback",
+   "controller": "AuthController@googleCallback",
+   "auth": [],
+   "moduleGate": null,
+   "throttle": null,
+   "status": "live"
+  },
+  {
+   "method": "GET",
+   "path": "/api/auth/google/redirect",
+   "controller": "AuthController@googleRedirect",
+   "auth": [],
+   "moduleGate": null,
+   "throttle": null,
+   "status": "live"
+  },
+  {
+   "method": "GET",
+   "path": "/api/auth/invitation/{token}",
+   "controller": "AuthController@getInvitation",
+   "auth": [],
+   "moduleGate": null,
+   "throttle": null,
+   "status": "live"
+  },
+  {
+   "method": "POST",
+   "path": "/api/auth/login",
+   "controller": "AuthController@login",
+   "auth": [
+    "envToken"
+   ],
+   "moduleGate": null,
+   "throttle": "auth",
+   "status": "live"
+  },
+  {
+   "method": "POST",
+   "path": "/api/auth/login-app",
+   "controller": "AuthController@appLogin",
+   "auth": [
+    "envToken"
+   ],
+   "moduleGate": null,
+   "throttle": "auth",
+   "status": "live"
+  },
+  {
+   "method": "POST",
+   "path": "/api/auth/logout",
+   "controller": "AuthController@logout",
+   "auth": [],
+   "moduleGate": null,
+   "throttle": null,
+   "status": "live"
+  },
+  {
+   "method": "GET",
+   "path": "/api/auth/me",
+   "controller": "AuthController@me",
+   "auth": [
+    "jwt"
+   ],
+   "moduleGate": null,
+   "throttle": null,
+   "status": "live"
+  },
+  {
+   "method": "POST",
+   "path": "/api/auth/password/update",
+   "controller": "AuthController@updatePassword",
+   "auth": [
+    "envToken",
+    "jwt"
+   ],
+   "moduleGate": null,
+   "throttle": null,
+   "status": "live"
+  },
+  {
+   "method": "POST",
+   "path": "/api/auth/profile/update",
+   "controller": "AuthController@updateProfile",
+   "auth": [
+    "envToken",
+    "jwt"
+   ],
+   "moduleGate": null,
+   "throttle": null,
+   "status": "live"
+  },
+  {
+   "method": "GET",
+   "path": "/api/auth/refresh",
+   "controller": "AuthController@refresh",
+   "auth": [],
+   "moduleGate": null,
+   "throttle": null,
+   "status": "live"
+  },
+  {
+   "method": "POST",
+   "path": "/api/auth/register",
+   "controller": "AuthController@register",
+   "auth": [],
+   "moduleGate": null,
+   "throttle": "register",
+   "status": "live"
+  },
+  {
+   "method": "POST",
+   "path": "/api/auth/registerAndCreateEnvironment",
+   "controller": "AuthController@registerAndCreateEnvironment",
+   "auth": [],
+   "moduleGate": null,
+   "throttle": null,
+   "status": "live"
+  },
+  {
+   "method": "POST",
+   "path": "/api/auth/resend-forgot-password-mail",
+   "controller": "AuthController@resendForgotPasswordMail",
+   "auth": [],
+   "moduleGate": null,
+   "throttle": "forgot-password",
+   "status": "live"
+  },
+  {
+   "method": "POST",
+   "path": "/api/auth/reset-password",
+   "controller": "AuthController@resetPassword",
+   "auth": [],
+   "moduleGate": null,
+   "throttle": "forgot-password",
+   "status": "live"
+  },
+  {
+   "method": "GET",
+   "path": "/api/canvas",
+   "controller": "CanvasController@adminCanvases",
+   "auth": [
+    "envToken",
+    "jwt"
+   ],
+   "moduleGate": null,
+   "throttle": null,
+   "status": "retired",
+   "httpStatus": 410,
+   "reason": "PANEL_RETIRED — eski sahip-yönetim paneli (karar 2026-07-30). Yerine: schema/records, menus, platform/my, commerce."
+  },
+  {
+   "method": "POST",
+   "path": "/api/canvas-attributes",
+   "controller": "CanvasController@setCanvasAttribute",
+   "auth": [
+    "envToken",
+    "jwt"
+   ],
+   "moduleGate": null,
+   "throttle": null,
+   "status": "retired",
+   "httpStatus": 410,
+   "reason": "PANEL_RETIRED — eski sahip-yönetim paneli (karar 2026-07-30). Yerine: schema/records, menus, platform/my, commerce."
+  },
+  {
+   "method": "DELETE",
+   "path": "/api/canvas-content/{id}",
+   "controller": "CanvasController@deleteCanvasContent",
+   "auth": [
+    "envToken",
+    "jwt"
+   ],
+   "moduleGate": null,
+   "throttle": null,
+   "status": "retired",
+   "httpStatus": 410,
+   "reason": "PANEL_RETIRED — eski sahip-yönetim paneli (karar 2026-07-30). Yerine: schema/records, menus, platform/my, commerce."
+  },
+  {
+   "method": "POST",
+   "path": "/api/canvas-gallery",
+   "controller": "CanvasController@addCanvasGallery",
+   "auth": [
+    "envToken",
+    "jwt"
+   ],
+   "moduleGate": null,
+   "throttle": null,
+   "status": "retired",
+   "httpStatus": 410,
+   "reason": "PANEL_RETIRED — eski sahip-yönetim paneli (karar 2026-07-30). Yerine: schema/records, menus, platform/my, commerce."
+  },
+  {
+   "method": "PUT",
+   "path": "/api/canvas-gallery/{id}",
+   "controller": "CanvasController@updateCanvasGalleryOrder",
+   "auth": [
+    "envToken",
+    "jwt"
+   ],
+   "moduleGate": null,
+   "throttle": null,
+   "status": "retired",
+   "httpStatus": 410,
+   "reason": "PANEL_RETIRED — eski sahip-yönetim paneli (karar 2026-07-30). Yerine: schema/records, menus, platform/my, commerce."
+  },
+  {
+   "method": "POST",
+   "path": "/api/canvas-gallery/delete",
+   "controller": "CanvasController@deleteCanvasGallery",
+   "auth": [
+    "envToken",
+    "jwt"
+   ],
+   "moduleGate": null,
+   "throttle": null,
+   "status": "retired",
+   "httpStatus": 410,
+   "reason": "PANEL_RETIRED — eski sahip-yönetim paneli (karar 2026-07-30). Yerine: schema/records, menus, platform/my, commerce."
+  },
+  {
+   "method": "GET",
+   "path": "/api/canvas-metric-details/{id}",
+   "controller": "CanvasController@canvasMetricDetails",
+   "auth": [
+    "envToken",
+    "jwt"
+   ],
+   "moduleGate": null,
+   "throttle": null,
+   "status": "retired",
+   "httpStatus": 410,
+   "reason": "PANEL_RETIRED — eski sahip-yönetim paneli (karar 2026-07-30). Yerine: schema/records, menus, platform/my, commerce."
+  },
+  {
+   "method": "GET",
+   "path": "/api/canvas-metrics/{id}",
+   "controller": "CanvasController@canvasMetrics",
+   "auth": [
+    "envToken",
+    "jwt"
+   ],
+   "moduleGate": null,
+   "throttle": null,
+   "status": "retired",
+   "httpStatus": 410,
+   "reason": "PANEL_RETIRED — eski sahip-yönetim paneli (karar 2026-07-30). Yerine: schema/records, menus, platform/my, commerce."
+  },
+  {
+   "method": "POST",
+   "path": "/api/canvas-relations",
+   "controller": "CanvasController@createCanvasRelation",
+   "auth": [
+    "envToken",
+    "jwt"
+   ],
+   "moduleGate": null,
+   "throttle": null,
+   "status": "retired",
+   "httpStatus": 410,
+   "reason": "PANEL_RETIRED — eski sahip-yönetim paneli (karar 2026-07-30). Yerine: schema/records, menus, platform/my, commerce."
+  },
+  {
+   "method": "DELETE",
+   "path": "/api/canvas-relations/{id}",
+   "controller": "CanvasController@deleteCanvasRelation",
+   "auth": [
+    "envToken",
+    "jwt"
+   ],
+   "moduleGate": null,
+   "throttle": null,
+   "status": "retired",
+   "httpStatus": 410,
+   "reason": "PANEL_RETIRED — eski sahip-yönetim paneli (karar 2026-07-30). Yerine: schema/records, menus, platform/my, commerce."
+  },
+  {
+   "method": "GET",
+   "path": "/api/canvas-relations/{id}",
+   "controller": "CanvasController@adminCanvasRelations",
+   "auth": [
+    "envToken",
+    "jwt"
+   ],
+   "moduleGate": null,
+   "throttle": null,
+   "status": "retired",
+   "httpStatus": 410,
+   "reason": "PANEL_RETIRED — eski sahip-yönetim paneli (karar 2026-07-30). Yerine: schema/records, menus, platform/my, commerce."
+  },
+  {
+   "method": "GET",
+   "path": "/api/canvas/{slug}",
+   "controller": "CanvasController@adminCanvas",
+   "auth": [
+    "envToken",
+    "jwt"
+   ],
+   "moduleGate": null,
+   "throttle": null,
+   "status": "retired",
+   "httpStatus": 410,
+   "reason": "PANEL_RETIRED — eski sahip-yönetim paneli (karar 2026-07-30). Yerine: schema/records, menus, platform/my, commerce."
+  },
+  {
+   "method": "PUT",
+   "path": "/api/canvas/{slug}",
+   "controller": "CanvasController@updateCanvas",
+   "auth": [
+    "envToken",
+    "jwt"
+   ],
+   "moduleGate": null,
+   "throttle": null,
+   "status": "retired",
+   "httpStatus": 410,
+   "reason": "PANEL_RETIRED — eski sahip-yönetim paneli (karar 2026-07-30). Yerine: schema/records, menus, platform/my, commerce."
+  },
+  {
+   "method": "GET",
+   "path": "/api/commerce/orders",
+   "controller": "Commerce\\OrderAdminController@index",
+   "auth": [
+    "envToken",
+    "jwt",
+    "envMember"
+   ],
+   "moduleGate": "orders",
+   "throttle": null,
+   "status": "live"
+  },
+  {
+   "method": "GET",
+   "path": "/api/commerce/orders/{id}",
+   "controller": "Commerce\\OrderAdminController@show",
+   "auth": [
+    "envToken",
+    "jwt",
+    "envMember"
+   ],
+   "moduleGate": "orders",
+   "throttle": null,
+   "status": "live"
+  },
+  {
+   "method": "PUT",
+   "path": "/api/commerce/orders/{id}",
+   "controller": "Commerce\\OrderAdminController@update",
+   "auth": [
+    "envToken",
+    "jwt",
+    "envMember"
+   ],
+   "moduleGate": "orders",
+   "throttle": null,
+   "status": "live"
+  },
+  {
+   "method": "POST",
+   "path": "/api/commerce/orders/{id}/cancel",
+   "controller": "Commerce\\OrderAdminController@cancel",
+   "auth": [
+    "envToken",
+    "jwt",
+    "envMember"
+   ],
+   "moduleGate": "orders",
+   "throttle": null,
+   "status": "live"
+  },
+  {
+   "method": "GET",
+   "path": "/api/commerce/orders/{id}/invoice",
+   "controller": "Commerce\\OrderAdminController@downloadInvoice",
+   "auth": [
+    "envToken",
+    "jwt",
+    "envMember"
+   ],
+   "moduleGate": "orders",
+   "throttle": null,
+   "status": "live"
+  },
+  {
+   "method": "POST",
+   "path": "/api/commerce/orders/{id}/invoice",
+   "controller": "Commerce\\OrderAdminController@uploadInvoice",
+   "auth": [
+    "envToken",
+    "jwt",
+    "envMember"
+   ],
+   "moduleGate": "orders",
+   "throttle": null,
+   "status": "live"
+  },
+  {
+   "method": "PUT",
+   "path": "/api/commerce/orders/{id}/status",
+   "controller": "Commerce\\OrderAdminController@updateStatus",
+   "auth": [
+    "envToken",
+    "jwt",
+    "envMember"
+   ],
+   "moduleGate": "orders",
+   "throttle": null,
+   "status": "live"
+  },
+  {
+   "method": "GET",
+   "path": "/api/commerce/orders/mail-settings",
+   "controller": "Commerce\\OrderAdminController@mailSettings",
+   "auth": [
+    "envToken",
+    "jwt",
+    "envMember"
+   ],
+   "moduleGate": "orders",
+   "throttle": null,
+   "status": "live"
+  },
+  {
+   "method": "PUT",
+   "path": "/api/commerce/orders/mail-settings",
+   "controller": "Commerce\\OrderAdminController@updateMailSettings",
+   "auth": [
+    "envToken",
+    "jwt",
+    "envMember"
+   ],
+   "moduleGate": "orders",
+   "throttle": null,
+   "status": "live"
+  },
+  {
+   "method": "GET",
+   "path": "/api/commerce/orders/report",
+   "controller": "Commerce\\OrderAdminController@report",
+   "auth": [
+    "envToken",
+    "jwt",
+    "envMember"
+   ],
+   "moduleGate": "orders",
+   "throttle": null,
+   "status": "live"
+  },
+  {
+   "method": "GET",
+   "path": "/api/console/carriers",
+   "controller": "CarrierController@index",
+   "auth": [
+    "envToken",
+    "jwt"
+   ],
+   "moduleGate": null,
+   "throttle": null,
+   "status": "retired",
+   "httpStatus": 410,
+   "reason": "PANEL_RETIRED — eski sahip-yönetim paneli (karar 2026-07-30). Yerine: schema/records, menus, platform/my, commerce."
+  },
+  {
+   "method": "POST",
+   "path": "/api/console/carriers",
+   "controller": "CarrierController@store",
+   "auth": [
+    "envToken",
+    "jwt"
+   ],
+   "moduleGate": null,
+   "throttle": null,
+   "status": "retired",
+   "httpStatus": 410,
+   "reason": "PANEL_RETIRED — eski sahip-yönetim paneli (karar 2026-07-30). Yerine: schema/records, menus, platform/my, commerce."
+  },
+  {
+   "method": "DELETE",
+   "path": "/api/console/carriers/{id}",
+   "controller": "CarrierController@destroy",
+   "auth": [
+    "envToken",
+    "jwt"
+   ],
+   "moduleGate": null,
+   "throttle": null,
+   "status": "retired",
+   "httpStatus": 410,
+   "reason": "PANEL_RETIRED — eski sahip-yönetim paneli (karar 2026-07-30). Yerine: schema/records, menus, platform/my, commerce."
+  },
+  {
+   "method": "PUT",
+   "path": "/api/console/carriers/{id}",
+   "controller": "CarrierController@update",
+   "auth": [
+    "envToken",
+    "jwt"
+   ],
+   "moduleGate": null,
+   "throttle": null,
+   "status": "retired",
+   "httpStatus": 410,
+   "reason": "PANEL_RETIRED — eski sahip-yönetim paneli (karar 2026-07-30). Yerine: schema/records, menus, platform/my, commerce."
+  },
+  {
+   "method": "GET",
+   "path": "/api/console/coupons",
+   "controller": "CouponController@index",
+   "auth": [
+    "envToken",
+    "jwt"
+   ],
+   "moduleGate": null,
+   "throttle": null,
+   "status": "retired",
+   "httpStatus": 410,
+   "reason": "PANEL_RETIRED — eski sahip-yönetim paneli (karar 2026-07-30). Yerine: schema/records, menus, platform/my, commerce."
+  },
+  {
+   "method": "POST",
+   "path": "/api/console/coupons",
+   "controller": "CouponController@store",
+   "auth": [
+    "envToken",
+    "jwt"
+   ],
+   "moduleGate": null,
+   "throttle": null,
+   "status": "retired",
+   "httpStatus": 410,
+   "reason": "PANEL_RETIRED — eski sahip-yönetim paneli (karar 2026-07-30). Yerine: schema/records, menus, platform/my, commerce."
+  },
+  {
+   "method": "DELETE",
+   "path": "/api/console/coupons/{id}",
+   "controller": "CouponController@destroy",
+   "auth": [
+    "envToken",
+    "jwt"
+   ],
+   "moduleGate": null,
+   "throttle": null,
+   "status": "retired",
+   "httpStatus": 410,
+   "reason": "PANEL_RETIRED — eski sahip-yönetim paneli (karar 2026-07-30). Yerine: schema/records, menus, platform/my, commerce."
+  },
+  {
+   "method": "PUT",
+   "path": "/api/console/coupons/{id}",
+   "controller": "CouponController@update",
+   "auth": [
+    "envToken",
+    "jwt"
+   ],
+   "moduleGate": null,
+   "throttle": null,
+   "status": "retired",
+   "httpStatus": 410,
+   "reason": "PANEL_RETIRED — eski sahip-yönetim paneli (karar 2026-07-30). Yerine: schema/records, menus, platform/my, commerce."
+  },
+  {
+   "method": "GET",
+   "path": "/api/console/orders",
+   "controller": "SellerOrderController@index",
+   "auth": [
+    "envToken",
+    "jwt"
+   ],
+   "moduleGate": null,
+   "throttle": null,
+   "status": "retired",
+   "httpStatus": 410,
+   "reason": "PANEL_RETIRED — eski sahip-yönetim paneli (karar 2026-07-30). Yerine: schema/records, menus, platform/my, commerce."
+  },
+  {
+   "method": "GET",
+   "path": "/api/console/orders/{id}",
+   "controller": "SellerOrderController@show",
+   "auth": [
+    "envToken",
+    "jwt"
+   ],
+   "moduleGate": null,
+   "throttle": null,
+   "status": "retired",
+   "httpStatus": 410,
+   "reason": "PANEL_RETIRED — eski sahip-yönetim paneli (karar 2026-07-30). Yerine: schema/records, menus, platform/my, commerce."
+  },
+  {
+   "method": "POST",
+   "path": "/api/console/orders/{id}/message",
+   "controller": "SellerOrderController@sendMessage",
+   "auth": [
+    "envToken",
+    "jwt"
+   ],
+   "moduleGate": null,
+   "throttle": null,
+   "status": "retired",
+   "httpStatus": 410,
+   "reason": "PANEL_RETIRED — eski sahip-yönetim paneli (karar 2026-07-30). Yerine: schema/records, menus, platform/my, commerce."
+  },
+  {
+   "method": "POST",
+   "path": "/api/console/orders/{id}/refund",
+   "controller": "SellerOrderController@refund",
+   "auth": [
+    "envToken",
+    "jwt"
+   ],
+   "moduleGate": null,
+   "throttle": null,
+   "status": "retired",
+   "httpStatus": 410,
+   "reason": "PANEL_RETIRED — eski sahip-yönetim paneli (karar 2026-07-30). Yerine: schema/records, menus, platform/my, commerce."
+  },
+  {
+   "method": "PUT",
+   "path": "/api/console/orders/{id}/shipping",
+   "controller": "SellerOrderController@updateShipping",
+   "auth": [
+    "envToken",
+    "jwt"
+   ],
+   "moduleGate": null,
+   "throttle": null,
+   "status": "retired",
+   "httpStatus": 410,
+   "reason": "PANEL_RETIRED — eski sahip-yönetim paneli (karar 2026-07-30). Yerine: schema/records, menus, platform/my, commerce."
+  },
+  {
+   "method": "PUT",
+   "path": "/api/console/orders/{id}/status",
+   "controller": "SellerOrderController@updateStatus",
+   "auth": [
+    "envToken",
+    "jwt"
+   ],
+   "moduleGate": null,
+   "throttle": null,
+   "status": "retired",
+   "httpStatus": 410,
+   "reason": "PANEL_RETIRED — eski sahip-yönetim paneli (karar 2026-07-30). Yerine: schema/records, menus, platform/my, commerce."
+  },
+  {
+   "method": "GET",
+   "path": "/api/console/orders/stats",
+   "controller": "SellerOrderController@stats",
+   "auth": [
+    "envToken",
+    "jwt"
+   ],
+   "moduleGate": null,
+   "throttle": null,
+   "status": "retired",
+   "httpStatus": 410,
+   "reason": "PANEL_RETIRED — eski sahip-yönetim paneli (karar 2026-07-30). Yerine: schema/records, menus, platform/my, commerce."
+  },
+  {
+   "method": "GET",
+   "path": "/api/console/payment-gateways",
+   "controller": "PaymentGatewayController@index",
+   "auth": [
+    "envToken",
+    "jwt"
+   ],
+   "moduleGate": null,
+   "throttle": null,
+   "status": "retired",
+   "httpStatus": 410,
+   "reason": "PANEL_RETIRED — eski sahip-yönetim paneli (karar 2026-07-30). Yerine: schema/records, menus, platform/my, commerce."
+  },
+  {
+   "method": "POST",
+   "path": "/api/console/payment-gateways",
+   "controller": "PaymentGatewayController@store",
+   "auth": [
+    "envToken",
+    "jwt"
+   ],
+   "moduleGate": null,
+   "throttle": null,
+   "status": "retired",
+   "httpStatus": 410,
+   "reason": "PANEL_RETIRED — eski sahip-yönetim paneli (karar 2026-07-30). Yerine: schema/records, menus, platform/my, commerce."
+  },
+  {
+   "method": "DELETE",
+   "path": "/api/console/payment-gateways/{id}",
+   "controller": "PaymentGatewayController@destroy",
+   "auth": [
+    "envToken",
+    "jwt"
+   ],
+   "moduleGate": null,
+   "throttle": null,
+   "status": "retired",
+   "httpStatus": 410,
+   "reason": "PANEL_RETIRED — eski sahip-yönetim paneli (karar 2026-07-30). Yerine: schema/records, menus, platform/my, commerce."
+  },
+  {
+   "method": "PUT",
+   "path": "/api/console/payment-gateways/{id}",
+   "controller": "PaymentGatewayController@update",
+   "auth": [
+    "envToken",
+    "jwt"
+   ],
+   "moduleGate": null,
+   "throttle": null,
+   "status": "retired",
+   "httpStatus": 410,
+   "reason": "PANEL_RETIRED — eski sahip-yönetim paneli (karar 2026-07-30). Yerine: schema/records, menus, platform/my, commerce."
+  },
+  {
+   "method": "GET",
+   "path": "/api/console/payment-gateways/providers",
+   "controller": "PaymentGatewayController@providers",
+   "auth": [
+    "envToken",
+    "jwt"
+   ],
+   "moduleGate": null,
+   "throttle": null,
+   "status": "retired",
+   "httpStatus": 410,
+   "reason": "PANEL_RETIRED — eski sahip-yönetim paneli (karar 2026-07-30). Yerine: schema/records, menus, platform/my, commerce."
+  },
+  {
+   "method": "GET",
+   "path": "/api/console/webhooks",
+   "controller": "WebhookController@index",
+   "auth": [
+    "envToken",
+    "jwt"
+   ],
+   "moduleGate": null,
+   "throttle": null,
+   "status": "retired",
+   "httpStatus": 410,
+   "reason": "PANEL_RETIRED — eski sahip-yönetim paneli (karar 2026-07-30). Yerine: schema/records, menus, platform/my, commerce."
+  },
+  {
+   "method": "POST",
+   "path": "/api/console/webhooks",
+   "controller": "WebhookController@store",
+   "auth": [
+    "envToken",
+    "jwt"
+   ],
+   "moduleGate": null,
+   "throttle": null,
+   "status": "retired",
+   "httpStatus": 410,
+   "reason": "PANEL_RETIRED — eski sahip-yönetim paneli (karar 2026-07-30). Yerine: schema/records, menus, platform/my, commerce."
+  },
+  {
+   "method": "DELETE",
+   "path": "/api/console/webhooks/{id}",
+   "controller": "WebhookController@destroy",
+   "auth": [
+    "envToken",
+    "jwt"
+   ],
+   "moduleGate": null,
+   "throttle": null,
+   "status": "retired",
+   "httpStatus": 410,
+   "reason": "PANEL_RETIRED — eski sahip-yönetim paneli (karar 2026-07-30). Yerine: schema/records, menus, platform/my, commerce."
+  },
+  {
+   "method": "PUT",
+   "path": "/api/console/webhooks/{id}",
+   "controller": "WebhookController@update",
+   "auth": [
+    "envToken",
+    "jwt"
+   ],
+   "moduleGate": null,
+   "throttle": null,
+   "status": "retired",
+   "httpStatus": 410,
+   "reason": "PANEL_RETIRED — eski sahip-yönetim paneli (karar 2026-07-30). Yerine: schema/records, menus, platform/my, commerce."
+  },
+  {
+   "method": "POST",
+   "path": "/api/console/webhooks/{id}/test",
+   "controller": "WebhookController@test",
+   "auth": [
+    "envToken",
+    "jwt"
+   ],
+   "moduleGate": null,
+   "throttle": null,
+   "status": "retired",
+   "httpStatus": 410,
+   "reason": "PANEL_RETIRED — eski sahip-yönetim paneli (karar 2026-07-30). Yerine: schema/records, menus, platform/my, commerce."
+  },
+  {
+   "method": "POST",
+   "path": "/api/content",
+   "controller": "ContentController@setContent",
+   "auth": [
+    "envToken",
+    "jwt"
+   ],
+   "moduleGate": null,
+   "throttle": null,
+   "status": "retired",
+   "httpStatus": 410,
+   "reason": "PANEL_RETIRED — eski sahip-yönetim paneli (karar 2026-07-30). Yerine: schema/records, menus, platform/my, commerce."
+  },
+  {
+   "method": "POST",
+   "path": "/api/content-attributes",
+   "controller": "ContentController@setContentAttribute",
+   "auth": [
+    "envToken",
+    "jwt"
+   ],
+   "moduleGate": null,
+   "throttle": null,
+   "status": "retired",
+   "httpStatus": 410,
+   "reason": "PANEL_RETIRED — eski sahip-yönetim paneli (karar 2026-07-30). Yerine: schema/records, menus, platform/my, commerce."
+  },
+  {
+   "method": "GET",
+   "path": "/api/content/{id}",
+   "controller": "ContentController@showContent",
+   "auth": [
+    "envToken",
+    "jwt"
+   ],
+   "moduleGate": null,
+   "throttle": null,
+   "status": "retired",
+   "httpStatus": 410,
+   "reason": "PANEL_RETIRED — eski sahip-yönetim paneli (karar 2026-07-30). Yerine: schema/records, menus, platform/my, commerce."
+  },
+  {
+   "method": "PUT",
+   "path": "/api/content/{id}",
+   "controller": "ContentController@updateContent",
+   "auth": [
+    "envToken",
+    "jwt"
+   ],
+   "moduleGate": null,
+   "throttle": null,
+   "status": "retired",
+   "httpStatus": 410,
+   "reason": "PANEL_RETIRED — eski sahip-yönetim paneli (karar 2026-07-30). Yerine: schema/records, menus, platform/my, commerce."
+  },
+  {
+   "method": "GET",
+   "path": "/api/content/{id}/history",
+   "controller": "ContentController@getContentHistory",
+   "auth": [
+    "envToken",
+    "jwt"
+   ],
+   "moduleGate": null,
+   "throttle": null,
+   "status": "retired",
+   "httpStatus": 410,
+   "reason": "PANEL_RETIRED — eski sahip-yönetim paneli (karar 2026-07-30). Yerine: schema/records, menus, platform/my, commerce."
+  },
+  {
+   "method": "POST",
+   "path": "/api/cron/check-expired-subscriptions",
+   "controller": "SystemController@cronCheckExpired",
+   "auth": [],
+   "moduleGate": null,
+   "throttle": null,
+   "status": "live"
+  },
+  {
+   "method": "POST",
+   "path": "/api/cron/process-recurring-payments",
+   "controller": "SystemController@cronProcessRecurring",
+   "auth": [],
+   "moduleGate": null,
+   "throttle": null,
+   "status": "live"
+  },
+  {
+   "method": "POST",
+   "path": "/api/cron/send-subscription-reminders",
+   "controller": "SystemController@cronSendReminders",
+   "auth": [],
+   "moduleGate": null,
+   "throttle": null,
+   "status": "live"
+  },
+  {
+   "method": "POST",
+   "path": "/api/delete-gallery-image",
+   "controller": "StorageController@deleteImageFromGallery",
+   "auth": [
+    "envToken",
+    "jwt"
+   ],
+   "moduleGate": null,
+   "throttle": null,
+   "status": "retired",
+   "httpStatus": 410,
+   "reason": "PANEL_RETIRED — eski sahip-yönetim paneli (karar 2026-07-30). Yerine: schema/records, menus, platform/my, commerce."
+  },
+  {
+   "method": "GET",
+   "path": "/api/documents",
+   "controller": "App\\Documents\\DocumentController@index",
+   "auth": [],
+   "moduleGate": null,
+   "throttle": null,
+   "status": "live"
+  },
+  {
+   "method": "GET",
+   "path": "/api/documents/{slug}",
+   "controller": "App\\Documents\\DocumentController@show",
+   "auth": [],
+   "moduleGate": null,
+   "throttle": null,
+   "status": "live"
+  },
+  {
+   "method": "GET",
+   "path": "/api/documents/collection/{id}",
+   "controller": "App\\Documents\\DocumentController@collection",
+   "auth": [],
+   "moduleGate": null,
+   "throttle": null,
+   "status": "live"
+  },
+  {
+   "method": "GET",
+   "path": "/api/documents/products",
+   "controller": "App\\Documents\\DocumentController@products",
+   "auth": [],
+   "moduleGate": null,
+   "throttle": null,
+   "status": "live"
+  },
+  {
+   "method": "GET",
+   "path": "/api/environment",
+   "controller": "EnvironmentController@index",
+   "auth": [
+    "envToken",
+    "jwt"
+   ],
+   "moduleGate": null,
+   "throttle": null,
+   "status": "retired",
+   "httpStatus": 410,
+   "reason": "PANEL_RETIRED — eski sahip-yönetim paneli (karar 2026-07-30). Yerine: schema/records, menus, platform/my, commerce."
+  },
+  {
+   "method": "PUT",
+   "path": "/api/environment/{token}",
+   "controller": "EnvironmentController@updateGeneral",
+   "auth": [
+    "envToken",
+    "jwt"
+   ],
+   "moduleGate": null,
+   "throttle": null,
+   "status": "retired",
+   "httpStatus": 410,
+   "reason": "PANEL_RETIRED — eski sahip-yönetim paneli (karar 2026-07-30). Yerine: schema/records, menus, platform/my, commerce."
+  },
+  {
+   "method": "PUT",
+   "path": "/api/environment/{token}/design",
+   "controller": "EnvironmentController@updateDesign",
+   "auth": [
+    "envToken",
+    "jwt"
+   ],
+   "moduleGate": null,
+   "throttle": null,
+   "status": "retired",
+   "httpStatus": 410,
+   "reason": "PANEL_RETIRED — eski sahip-yönetim paneli (karar 2026-07-30). Yerine: schema/records, menus, platform/my, commerce."
+  },
+  {
+   "method": "DELETE",
+   "path": "/api/environment/{token}/invitations/{id}",
+   "controller": "EnvUserController@destroyInvitation",
+   "auth": [
+    "envToken",
+    "jwt"
+   ],
+   "moduleGate": null,
+   "throttle": null,
+   "status": "retired",
+   "httpStatus": 410,
+   "reason": "PANEL_RETIRED — eski sahip-yönetim paneli (karar 2026-07-30). Yerine: schema/records, menus, platform/my, commerce."
+  },
+  {
+   "method": "PUT",
+   "path": "/api/environment/{token}/legal",
+   "controller": "EnvironmentController@updateLegal",
+   "auth": [
+    "envToken",
+    "jwt"
+   ],
+   "moduleGate": null,
+   "throttle": null,
+   "status": "retired",
+   "httpStatus": 410,
+   "reason": "PANEL_RETIRED — eski sahip-yönetim paneli (karar 2026-07-30). Yerine: schema/records, menus, platform/my, commerce."
+  },
+  {
+   "method": "GET",
+   "path": "/api/environment/{token}/mail-template",
+   "controller": "EnvironmentController@getMailTemplate",
+   "auth": [
+    "envToken",
+    "jwt"
+   ],
+   "moduleGate": null,
+   "throttle": null,
+   "status": "retired",
+   "httpStatus": 410,
+   "reason": "PANEL_RETIRED — eski sahip-yönetim paneli (karar 2026-07-30). Yerine: schema/records, menus, platform/my, commerce."
+  },
+  {
+   "method": "PUT",
+   "path": "/api/environment/{token}/meta",
+   "controller": "EnvironmentController@updateMeta",
+   "auth": [
+    "envToken",
+    "jwt"
+   ],
+   "moduleGate": null,
+   "throttle": null,
+   "status": "retired",
+   "httpStatus": 410,
+   "reason": "PANEL_RETIRED — eski sahip-yönetim paneli (karar 2026-07-30). Yerine: schema/records, menus, platform/my, commerce."
+  },
+  {
+   "method": "PUT",
+   "path": "/api/environment/{token}/notify",
+   "controller": "EnvironmentController@updateNotify",
+   "auth": [
+    "envToken",
+    "jwt"
+   ],
+   "moduleGate": null,
+   "throttle": null,
+   "status": "retired",
+   "httpStatus": 410,
+   "reason": "PANEL_RETIRED — eski sahip-yönetim paneli (karar 2026-07-30). Yerine: schema/records, menus, platform/my, commerce."
+  },
+  {
+   "method": "GET",
+   "path": "/api/environment/{token}/roles",
+   "controller": "EnvUserController@roles",
+   "auth": [
+    "envToken",
+    "jwt"
+   ],
+   "moduleGate": null,
+   "throttle": null,
+   "status": "retired",
+   "httpStatus": 410,
+   "reason": "PANEL_RETIRED — eski sahip-yönetim paneli (karar 2026-07-30). Yerine: schema/records, menus, platform/my, commerce."
+  },
+  {
+   "method": "GET",
+   "path": "/api/environment/{token}/statistics",
+   "controller": "EnvironmentController@environmentStatistics",
+   "auth": [
+    "envToken",
+    "jwt"
+   ],
+   "moduleGate": null,
+   "throttle": null,
+   "status": "retired",
+   "httpStatus": 410,
+   "reason": "PANEL_RETIRED — eski sahip-yönetim paneli (karar 2026-07-30). Yerine: schema/records, menus, platform/my, commerce."
+  },
+  {
+   "method": "GET",
+   "path": "/api/environment/{token}/users",
+   "controller": "EnvUserController@index",
+   "auth": [
+    "envToken",
+    "jwt"
+   ],
+   "moduleGate": null,
+   "throttle": null,
+   "status": "retired",
+   "httpStatus": 410,
+   "reason": "PANEL_RETIRED — eski sahip-yönetim paneli (karar 2026-07-30). Yerine: schema/records, menus, platform/my, commerce."
+  },
+  {
+   "method": "POST",
+   "path": "/api/environment/{token}/users",
+   "controller": "EnvUserController@store",
+   "auth": [
+    "envToken",
+    "jwt"
+   ],
+   "moduleGate": null,
+   "throttle": null,
+   "status": "retired",
+   "httpStatus": 410,
+   "reason": "PANEL_RETIRED — eski sahip-yönetim paneli (karar 2026-07-30). Yerine: schema/records, menus, platform/my, commerce."
+  },
+  {
+   "method": "DELETE",
+   "path": "/api/environment/{token}/users/{id}",
+   "controller": "EnvUserController@destroy",
+   "auth": [
+    "envToken",
+    "jwt"
+   ],
+   "moduleGate": null,
+   "throttle": null,
+   "status": "retired",
+   "httpStatus": 410,
+   "reason": "PANEL_RETIRED — eski sahip-yönetim paneli (karar 2026-07-30). Yerine: schema/records, menus, platform/my, commerce."
+  },
+  {
+   "method": "PUT",
+   "path": "/api/environment/{token}/users/{id}",
+   "controller": "EnvUserController@update",
+   "auth": [
+    "envToken",
+    "jwt"
+   ],
+   "moduleGate": null,
+   "throttle": null,
+   "status": "retired",
+   "httpStatus": 410,
+   "reason": "PANEL_RETIRED — eski sahip-yönetim paneli (karar 2026-07-30). Yerine: schema/records, menus, platform/my, commerce."
+  },
+  {
+   "method": "POST",
+   "path": "/api/file",
+   "controller": "StorageController@fileStore",
+   "auth": [
+    "envToken",
+    "jwt"
+   ],
+   "moduleGate": null,
+   "throttle": null,
+   "status": "retired",
+   "httpStatus": 410,
+   "reason": "PANEL_RETIRED — eski sahip-yönetim paneli (karar 2026-07-30). Yerine: schema/records, menus, platform/my, commerce."
+  },
+  {
+   "method": "DELETE",
+   "path": "/api/file/{id}",
+   "controller": "StorageController@deleteFile",
+   "auth": [
+    "envToken",
+    "jwt"
+   ],
+   "moduleGate": null,
+   "throttle": null,
+   "status": "retired",
+   "httpStatus": 410,
+   "reason": "PANEL_RETIRED — eski sahip-yönetim paneli (karar 2026-07-30). Yerine: schema/records, menus, platform/my, commerce."
+  },
+  {
+   "method": "GET",
+   "path": "/api/files",
+   "controller": "StorageController@getFiles",
+   "auth": [
+    "envToken",
+    "jwt"
+   ],
+   "moduleGate": null,
+   "throttle": null,
+   "status": "retired",
+   "httpStatus": 410,
+   "reason": "PANEL_RETIRED — eski sahip-yönetim paneli (karar 2026-07-30). Yerine: schema/records, menus, platform/my, commerce."
+  },
+  {
+   "method": "GET",
+   "path": "/api/galleries",
+   "controller": "StorageController@getGalleries",
+   "auth": [
+    "envToken",
+    "jwt"
+   ],
+   "moduleGate": null,
+   "throttle": null,
+   "status": "retired",
+   "httpStatus": 410,
+   "reason": "PANEL_RETIRED — eski sahip-yönetim paneli (karar 2026-07-30). Yerine: schema/records, menus, platform/my, commerce."
+  },
+  {
+   "method": "POST",
+   "path": "/api/gallery",
+   "controller": "StorageController@setGallery",
+   "auth": [
+    "envToken",
+    "jwt"
+   ],
+   "moduleGate": null,
+   "throttle": null,
+   "status": "retired",
+   "httpStatus": 410,
+   "reason": "PANEL_RETIRED — eski sahip-yönetim paneli (karar 2026-07-30). Yerine: schema/records, menus, platform/my, commerce."
+  },
+  {
+   "method": "DELETE",
+   "path": "/api/gallery-image/{id}",
+   "controller": "StorageController@deleteGalleryImage",
+   "auth": [
+    "envToken",
+    "jwt"
+   ],
+   "moduleGate": null,
+   "throttle": null,
+   "status": "retired",
+   "httpStatus": 410,
+   "reason": "PANEL_RETIRED — eski sahip-yönetim paneli (karar 2026-07-30). Yerine: schema/records, menus, platform/my, commerce."
+  },
+  {
+   "method": "PUT",
+   "path": "/api/gallery-image/{id}",
+   "controller": "StorageController@updateGalleryImage",
+   "auth": [
+    "envToken",
+    "jwt"
+   ],
+   "moduleGate": null,
+   "throttle": null,
+   "status": "retired",
+   "httpStatus": 410,
+   "reason": "PANEL_RETIRED — eski sahip-yönetim paneli (karar 2026-07-30). Yerine: schema/records, menus, platform/my, commerce."
+  },
+  {
+   "method": "POST",
+   "path": "/api/gallery-images",
+   "controller": "StorageController@createGalleryImage",
+   "auth": [
+    "envToken",
+    "jwt"
+   ],
+   "moduleGate": null,
+   "throttle": null,
+   "status": "retired",
+   "httpStatus": 410,
+   "reason": "PANEL_RETIRED — eski sahip-yönetim paneli (karar 2026-07-30). Yerine: schema/records, menus, platform/my, commerce."
+  },
+  {
+   "method": "DELETE",
+   "path": "/api/gallery/{id}",
+   "controller": "StorageController@deleteGallery",
+   "auth": [
+    "envToken",
+    "jwt"
+   ],
+   "moduleGate": null,
+   "throttle": null,
+   "status": "retired",
+   "httpStatus": 410,
+   "reason": "PANEL_RETIRED — eski sahip-yönetim paneli (karar 2026-07-30). Yerine: schema/records, menus, platform/my, commerce."
+  },
+  {
+   "method": "GET",
+   "path": "/api/gallery/{id}",
+   "controller": "StorageController@showGallery",
+   "auth": [
+    "envToken",
+    "jwt"
+   ],
+   "moduleGate": null,
+   "throttle": null,
+   "status": "retired",
+   "httpStatus": 410,
+   "reason": "PANEL_RETIRED — eski sahip-yönetim paneli (karar 2026-07-30). Yerine: schema/records, menus, platform/my, commerce."
+  },
+  {
+   "method": "PUT",
+   "path": "/api/gallery/{id}",
+   "controller": "StorageController@updateGallery",
+   "auth": [
+    "envToken",
+    "jwt"
+   ],
+   "moduleGate": null,
+   "throttle": null,
+   "status": "retired",
+   "httpStatus": 410,
+   "reason": "PANEL_RETIRED — eski sahip-yönetim paneli (karar 2026-07-30). Yerine: schema/records, menus, platform/my, commerce."
+  },
+  {
+   "method": "DELETE",
+   "path": "/api/gallery/{id}/hard",
+   "controller": "StorageController@deleteGalleryHard",
+   "auth": [
+    "envToken",
+    "jwt"
+   ],
+   "moduleGate": null,
+   "throttle": null,
+   "status": "retired",
+   "httpStatus": 410,
+   "reason": "PANEL_RETIRED — eski sahip-yönetim paneli (karar 2026-07-30). Yerine: schema/records, menus, platform/my, commerce."
+  },
+  {
+   "method": "GET",
+   "path": "/api/health",
+   "controller": "SystemController@health",
+   "auth": [],
+   "moduleGate": null,
+   "throttle": null,
+   "status": "live"
+  },
+  {
+   "method": "POST",
+   "path": "/api/lookup",
+   "controller": "AttributeController@createLookup",
+   "auth": [
+    "envToken",
+    "jwt"
+   ],
+   "moduleGate": null,
+   "throttle": null,
+   "status": "retired",
+   "httpStatus": 410,
+   "reason": "PANEL_RETIRED — eski sahip-yönetim paneli (karar 2026-07-30). Yerine: schema/records, menus, platform/my, commerce."
+  },
+  {
+   "method": "POST",
+   "path": "/api/lookup-item",
+   "controller": "AttributeController@createLookupItem",
+   "auth": [
+    "envToken",
+    "jwt"
+   ],
+   "moduleGate": null,
+   "throttle": null,
+   "status": "retired",
+   "httpStatus": 410,
+   "reason": "PANEL_RETIRED — eski sahip-yönetim paneli (karar 2026-07-30). Yerine: schema/records, menus, platform/my, commerce."
+  },
+  {
+   "method": "POST",
+   "path": "/api/lookup-item-by-value",
+   "controller": "AttributeController@createLookupItemByValue",
+   "auth": [
+    "envToken",
+    "jwt"
+   ],
+   "moduleGate": null,
+   "throttle": null,
+   "status": "retired",
+   "httpStatus": 410,
+   "reason": "PANEL_RETIRED — eski sahip-yönetim paneli (karar 2026-07-30). Yerine: schema/records, menus, platform/my, commerce."
+  },
+  {
+   "method": "DELETE",
+   "path": "/api/lookup-item/{id}",
+   "controller": "AttributeController@deleteLookupItem",
+   "auth": [
+    "envToken",
+    "jwt"
+   ],
+   "moduleGate": null,
+   "throttle": null,
+   "status": "retired",
+   "httpStatus": 410,
+   "reason": "PANEL_RETIRED — eski sahip-yönetim paneli (karar 2026-07-30). Yerine: schema/records, menus, platform/my, commerce."
+  },
+  {
+   "method": "PUT",
+   "path": "/api/lookup-item/{id}",
+   "controller": "AttributeController@updateLookupItem",
+   "auth": [
+    "envToken",
+    "jwt"
+   ],
+   "moduleGate": null,
+   "throttle": null,
+   "status": "retired",
+   "httpStatus": 410,
+   "reason": "PANEL_RETIRED — eski sahip-yönetim paneli (karar 2026-07-30). Yerine: schema/records, menus, platform/my, commerce."
+  },
+  {
+   "method": "POST",
+   "path": "/api/lookup-item/bulk",
+   "controller": "AttributeController@bulkCreateLookupItems",
+   "auth": [
+    "envToken",
+    "jwt"
+   ],
+   "moduleGate": null,
+   "throttle": null,
+   "status": "retired",
+   "httpStatus": 410,
+   "reason": "PANEL_RETIRED — eski sahip-yönetim paneli (karar 2026-07-30). Yerine: schema/records, menus, platform/my, commerce."
+  },
+  {
+   "method": "DELETE",
+   "path": "/api/lookup/{id}",
+   "controller": "AttributeController@deleteLookup",
+   "auth": [
+    "envToken",
+    "jwt"
+   ],
+   "moduleGate": null,
+   "throttle": null,
+   "status": "retired",
+   "httpStatus": 410,
+   "reason": "PANEL_RETIRED — eski sahip-yönetim paneli (karar 2026-07-30). Yerine: schema/records, menus, platform/my, commerce."
+  },
+  {
+   "method": "GET",
+   "path": "/api/lookup/{id}",
+   "controller": "AttributeController@getLookup",
+   "auth": [
+    "envToken",
+    "jwt"
+   ],
+   "moduleGate": null,
+   "throttle": null,
+   "status": "retired",
+   "httpStatus": 410,
+   "reason": "PANEL_RETIRED — eski sahip-yönetim paneli (karar 2026-07-30). Yerine: schema/records, menus, platform/my, commerce."
+  },
+  {
+   "method": "PUT",
+   "path": "/api/lookup/{id}",
+   "controller": "AttributeController@updateLookup",
+   "auth": [
+    "envToken",
+    "jwt"
+   ],
+   "moduleGate": null,
+   "throttle": null,
+   "status": "retired",
+   "httpStatus": 410,
+   "reason": "PANEL_RETIRED — eski sahip-yönetim paneli (karar 2026-07-30). Yerine: schema/records, menus, platform/my, commerce."
+  },
+  {
+   "method": "GET",
+   "path": "/api/lookup/{id}/attributes",
+   "controller": "AttributeController@getAttributesByLookup",
+   "auth": [
+    "envToken",
+    "jwt"
+   ],
+   "moduleGate": null,
+   "throttle": null,
+   "status": "retired",
+   "httpStatus": 410,
+   "reason": "PANEL_RETIRED — eski sahip-yönetim paneli (karar 2026-07-30). Yerine: schema/records, menus, platform/my, commerce."
+  },
+  {
+   "method": "GET",
+   "path": "/api/lookup/{id}/items",
+   "controller": "AttributeController@getLookupItems",
+   "auth": [
+    "envToken",
+    "jwt"
+   ],
+   "moduleGate": null,
+   "throttle": null,
+   "status": "retired",
+   "httpStatus": 410,
+   "reason": "PANEL_RETIRED — eski sahip-yönetim paneli (karar 2026-07-30). Yerine: schema/records, menus, platform/my, commerce."
+  },
+  {
+   "method": "GET",
+   "path": "/api/lookups",
+   "controller": "AttributeController@getLookups",
+   "auth": [
+    "envToken",
+    "jwt"
+   ],
+   "moduleGate": null,
+   "throttle": null,
+   "status": "retired",
+   "httpStatus": 410,
+   "reason": "PANEL_RETIRED — eski sahip-yönetim paneli (karar 2026-07-30). Yerine: schema/records, menus, platform/my, commerce."
+  },
+  {
+   "method": "GET",
+   "path": "/api/menus",
+   "controller": "Menu\\MenuController@index",
+   "auth": [
+    "envToken",
+    "jwt",
+    "envMember"
+   ],
+   "moduleGate": null,
+   "throttle": null,
+   "status": "live"
+  },
+  {
+   "method": "POST",
+   "path": "/api/menus",
+   "controller": "Menu\\MenuController@store",
+   "auth": [
+    "envToken",
+    "jwt",
+    "envMember"
+   ],
+   "moduleGate": null,
+   "throttle": null,
+   "status": "live"
+  },
+  {
+   "method": "DELETE",
+   "path": "/api/menus/{code}",
+   "controller": "Menu\\MenuController@destroy",
+   "auth": [
+    "envToken",
+    "jwt",
+    "envMember"
+   ],
+   "moduleGate": null,
+   "throttle": null,
+   "status": "live"
+  },
+  {
+   "method": "GET",
+   "path": "/api/menus/{code}",
+   "controller": "Menu\\MenuController@show",
+   "auth": [
+    "envToken",
+    "jwt",
+    "envMember"
+   ],
+   "moduleGate": null,
+   "throttle": null,
+   "status": "live"
+  },
+  {
+   "method": "PUT",
+   "path": "/api/menus/{code}",
+   "controller": "Menu\\MenuController@update",
+   "auth": [
+    "envToken",
+    "jwt",
+    "envMember"
+   ],
+   "moduleGate": null,
+   "throttle": null,
+   "status": "live"
+  },
+  {
+   "method": "GET",
+   "path": "/api/menus/{code}/preview",
+   "controller": "Menu\\MenuController@preview",
+   "auth": [
+    "envToken",
+    "jwt",
+    "envMember"
+   ],
+   "moduleGate": null,
+   "throttle": null,
+   "status": "live"
+  },
+  {
+   "method": "POST",
+   "path": "/api/menus/{code}/restore/{version}",
+   "controller": "Menu\\MenuController@restore",
+   "auth": [
+    "envToken",
+    "jwt",
+    "envMember"
+   ],
+   "moduleGate": null,
+   "throttle": null,
+   "status": "live"
+  },
+  {
+   "method": "GET",
+   "path": "/api/menus/{code}/revisions",
+   "controller": "Menu\\MenuController@revisions",
+   "auth": [
+    "envToken",
+    "jwt",
+    "envMember"
+   ],
+   "moduleGate": null,
+   "throttle": null,
+   "status": "live"
+  },
+  {
+   "method": "GET",
+   "path": "/api/my-environments",
+   "controller": "AuthController@getUsersEnvs",
+   "auth": [
+    "envToken",
+    "jwt"
+   ],
+   "moduleGate": null,
+   "throttle": null,
+   "status": "live"
+  },
+  {
+   "method": "GET",
+   "path": "/api/my-galleries",
+   "controller": "StorageController@environmentGalleries",
+   "auth": [
+    "envToken",
+    "jwt"
+   ],
+   "moduleGate": null,
+   "throttle": null,
+   "status": "retired",
+   "httpStatus": 410,
+   "reason": "PANEL_RETIRED — eski sahip-yönetim paneli (karar 2026-07-30). Yerine: schema/records, menus, platform/my, commerce."
+  },
+  {
+   "method": "GET",
+   "path": "/api/my-images",
+   "controller": "StorageController@environmentImages",
+   "auth": [
+    "envToken",
+    "jwt"
+   ],
+   "moduleGate": null,
+   "throttle": null,
+   "status": "retired",
+   "httpStatus": 410,
+   "reason": "PANEL_RETIRED — eski sahip-yönetim paneli (karar 2026-07-30). Yerine: schema/records, menus, platform/my, commerce."
+  },
+  {
+   "method": "DELETE",
+   "path": "/api/my-images/{id}/force",
+   "controller": "StorageController@forceDeleteImage",
+   "auth": [
+    "envToken",
+    "jwt"
+   ],
+   "moduleGate": null,
+   "throttle": null,
+   "status": "retired",
+   "httpStatus": 410,
+   "reason": "PANEL_RETIRED — eski sahip-yönetim paneli (karar 2026-07-30). Yerine: schema/records, menus, platform/my, commerce."
+  },
+  {
+   "method": "GET",
+   "path": "/api/my-orders",
+   "controller": "CustomerOrderController@index",
+   "auth": [
+    "envToken",
+    "jwt"
+   ],
+   "moduleGate": null,
+   "throttle": null,
+   "status": "live"
+  },
+  {
+   "method": "GET",
+   "path": "/api/my-orders/{id}",
+   "controller": "CustomerOrderController@show",
+   "auth": [
+    "envToken",
+    "jwt"
+   ],
+   "moduleGate": null,
+   "throttle": null,
+   "status": "live"
+  },
+  {
+   "method": "POST",
+   "path": "/api/my-orders/{id}/cancel",
+   "controller": "CustomerOrderController@cancel",
+   "auth": [
+    "envToken",
+    "jwt"
+   ],
+   "moduleGate": null,
+   "throttle": null,
+   "status": "live"
+  },
+  {
+   "method": "POST",
+   "path": "/api/my-orders/{id}/message",
+   "controller": "CustomerOrderController@sendMessage",
+   "auth": [
+    "envToken",
+    "jwt"
+   ],
+   "moduleGate": null,
+   "throttle": null,
+   "status": "live"
+  },
+  {
+   "method": "POST",
+   "path": "/api/navigation-links",
+   "controller": "ComponentController@createNavigationLink",
+   "auth": [
+    "envToken",
+    "jwt"
+   ],
+   "moduleGate": null,
+   "throttle": null,
+   "status": "retired",
+   "httpStatus": 410,
+   "reason": "PANEL_RETIRED — eski sahip-yönetim paneli (karar 2026-07-30). Yerine: schema/records, menus, platform/my, commerce."
+  },
+  {
+   "method": "DELETE",
+   "path": "/api/navigation-links/{id}",
+   "controller": "ComponentController@deleteNavigationLink",
+   "auth": [
+    "envToken",
+    "jwt"
+   ],
+   "moduleGate": null,
+   "throttle": null,
+   "status": "retired",
+   "httpStatus": 410,
+   "reason": "PANEL_RETIRED — eski sahip-yönetim paneli (karar 2026-07-30). Yerine: schema/records, menus, platform/my, commerce."
+  },
+  {
+   "method": "GET",
+   "path": "/api/navigation-links/{id}",
+   "controller": "ComponentController@getNavigationLinks",
+   "auth": [
+    "envToken",
+    "jwt"
+   ],
+   "moduleGate": null,
+   "throttle": null,
+   "status": "retired",
+   "httpStatus": 410,
+   "reason": "PANEL_RETIRED — eski sahip-yönetim paneli (karar 2026-07-30). Yerine: schema/records, menus, platform/my, commerce."
+  },
+  {
+   "method": "PUT",
+   "path": "/api/navigation-links/{id}",
+   "controller": "ComponentController@updateNavigationLink",
+   "auth": [
+    "envToken",
+    "jwt"
+   ],
+   "moduleGate": null,
+   "throttle": null,
+   "status": "retired",
+   "httpStatus": 410,
+   "reason": "PANEL_RETIRED — eski sahip-yönetim paneli (karar 2026-07-30). Yerine: schema/records, menus, platform/my, commerce."
+  },
+  {
+   "method": "PUT",
+   "path": "/api/navigation-links/reorder",
+   "controller": "ComponentController@reorderNavigationLinks",
+   "auth": [
+    "envToken",
+    "jwt"
+   ],
+   "moduleGate": null,
+   "throttle": null,
+   "status": "retired",
+   "httpStatus": 410,
+   "reason": "PANEL_RETIRED — eski sahip-yönetim paneli (karar 2026-07-30). Yerine: schema/records, menus, platform/my, commerce."
+  },
+  {
+   "method": "GET",
+   "path": "/api/navigations",
+   "controller": "ComponentController@getNavigations",
+   "auth": [
+    "envToken",
+    "jwt"
+   ],
+   "moduleGate": null,
+   "throttle": null,
+   "status": "retired",
+   "httpStatus": 410,
+   "reason": "PANEL_RETIRED — eski sahip-yönetim paneli (karar 2026-07-30). Yerine: schema/records, menus, platform/my, commerce."
+  },
+  {
+   "method": "POST",
+   "path": "/api/navigations",
+   "controller": "ComponentController@createNavigation",
+   "auth": [
+    "envToken",
+    "jwt"
+   ],
+   "moduleGate": null,
+   "throttle": null,
+   "status": "retired",
+   "httpStatus": 410,
+   "reason": "PANEL_RETIRED — eski sahip-yönetim paneli (karar 2026-07-30). Yerine: schema/records, menus, platform/my, commerce."
+  },
+  {
+   "method": "DELETE",
+   "path": "/api/navigations/{id}",
+   "controller": "ComponentController@deleteNavigation",
+   "auth": [
+    "envToken",
+    "jwt"
+   ],
+   "moduleGate": null,
+   "throttle": null,
+   "status": "retired",
+   "httpStatus": 410,
+   "reason": "PANEL_RETIRED — eski sahip-yönetim paneli (karar 2026-07-30). Yerine: schema/records, menus, platform/my, commerce."
+  },
+  {
+   "method": "PUT",
+   "path": "/api/navigations/{id}",
+   "controller": "ComponentController@updateNavigation",
+   "auth": [
+    "envToken",
+    "jwt"
+   ],
+   "moduleGate": null,
+   "throttle": null,
+   "status": "retired",
+   "httpStatus": 410,
+   "reason": "PANEL_RETIRED — eski sahip-yönetim paneli (karar 2026-07-30). Yerine: schema/records, menus, platform/my, commerce."
+  },
+  {
+   "method": "POST",
+   "path": "/api/new-canvas",
+   "controller": "CanvasController@newCanvas",
+   "auth": [
+    "envToken",
+    "jwt"
+   ],
+   "moduleGate": null,
+   "throttle": null,
+   "status": "retired",
+   "httpStatus": 410,
+   "reason": "PANEL_RETIRED — eski sahip-yönetim paneli (karar 2026-07-30). Yerine: schema/records, menus, platform/my, commerce."
+  },
+  {
+   "method": "POST",
+   "path": "/api/new-environment",
+   "controller": "EnvironmentController@newEnvironment",
+   "auth": [
+    "envToken",
+    "jwt"
+   ],
+   "moduleGate": null,
+   "throttle": null,
+   "status": "retired",
+   "httpStatus": 410,
+   "reason": "PANEL_RETIRED — eski sahip-yönetim paneli (karar 2026-07-30). Yerine: schema/records, menus, platform/my, commerce."
+  },
+  {
+   "method": "GET",
+   "path": "/api/payments",
+   "controller": "PaymentsController@index",
+   "auth": [
+    "envToken",
+    "jwt"
+   ],
+   "moduleGate": null,
+   "throttle": null,
+   "status": "live"
+  },
+  {
+   "method": "POST",
+   "path": "/api/payments",
+   "controller": "PaymentsController@store",
+   "auth": [
+    "envToken",
+    "jwt"
+   ],
+   "moduleGate": null,
+   "throttle": "10,1",
+   "status": "live"
+  },
+  {
+   "method": "GET",
+   "path": "/api/payments/{id}",
+   "controller": "PaymentsController@show",
+   "auth": [
+    "envToken",
+    "jwt"
+   ],
+   "moduleGate": null,
+   "throttle": null,
+   "status": "live"
+  },
+  {
+   "method": "POST",
+   "path": "/api/payments/stripe/create-intent",
+   "controller": "PaymentsController@stripeCreateIntent",
+   "auth": [
+    "envToken",
+    "jwt"
+   ],
+   "moduleGate": null,
+   "throttle": "10,1",
+   "status": "live"
+  },
+  {
+   "method": "POST",
+   "path": "/api/payments/stripe/webhook",
+   "controller": "PaymentsController@stripeWebhook",
+   "auth": [],
+   "moduleGate": null,
+   "throttle": null,
+   "status": "live"
+  },
+  {
+   "method": "GET",
+   "path": "/api/payments/tami/callback",
+   "controller": "PaymentsController@tamiCallback",
+   "auth": [],
+   "moduleGate": null,
+   "throttle": null,
+   "status": "live"
+  },
+  {
+   "method": "POST",
+   "path": "/api/payments/tami/callback",
+   "controller": "PaymentsController@tamiCallback",
+   "auth": [],
+   "moduleGate": null,
+   "throttle": null,
+   "status": "live"
+  },
+  {
+   "method": "GET",
+   "path": "/api/platform/my/analytics",
+   "controller": "Platform\\CustomerPlatformController@analytics",
+   "auth": [
+    "envToken",
+    "jwt",
+    "envMember"
+   ],
+   "moduleGate": null,
+   "throttle": null,
+   "status": "live"
+  },
+  {
+   "method": "GET",
+   "path": "/api/platform/my/dashboard",
+   "controller": "Platform\\ConsoleDashboardController",
+   "auth": [
+    "envToken",
+    "jwt",
+    "envMember"
+   ],
+   "moduleGate": null,
+   "throttle": null,
+   "status": "live"
+  },
+  {
+   "method": "GET",
+   "path": "/api/platform/my/domains",
+   "controller": "Platform\\CustomerPlatformController@domains",
+   "auth": [
+    "envToken",
+    "jwt",
+    "envMember"
+   ],
+   "moduleGate": null,
+   "throttle": null,
+   "status": "live"
+  },
+  {
+   "method": "POST",
+   "path": "/api/platform/my/domains",
+   "controller": "Platform\\CustomerPlatformController@addDomain",
+   "auth": [
+    "envToken",
+    "jwt",
+    "envMember"
+   ],
+   "moduleGate": null,
+   "throttle": null,
+   "status": "live"
+  },
+  {
+   "method": "DELETE",
+   "path": "/api/platform/my/domains/{id}",
+   "controller": "Platform\\CustomerPlatformController@removeDomain",
+   "auth": [
+    "envToken",
+    "jwt",
+    "envMember"
+   ],
+   "moduleGate": null,
+   "throttle": null,
+   "status": "live"
+  },
+  {
+   "method": "POST",
+   "path": "/api/platform/my/domains/{id}/verify",
+   "controller": "Platform\\CustomerPlatformController@verifyDomain",
+   "auth": [
+    "envToken",
+    "jwt",
+    "envMember"
+   ],
+   "moduleGate": null,
+   "throttle": null,
+   "status": "live"
+  },
+  {
+   "method": "GET",
+   "path": "/api/platform/my/modules",
+   "controller": "Platform\\CustomerPlatformController@moduleGallery",
+   "auth": [
+    "envToken",
+    "jwt",
+    "envMember"
+   ],
+   "moduleGate": null,
+   "throttle": null,
+   "status": "live"
+  },
+  {
+   "method": "POST",
+   "path": "/api/platform/my/modules/{code}/purchase",
+   "controller": "Platform\\CustomerPlatformController@purchaseModule",
+   "auth": [
+    "envToken",
+    "jwt",
+    "envMember"
+   ],
+   "moduleGate": null,
+   "throttle": "10,1",
+   "status": "live"
+  },
+  {
+   "method": "GET",
+   "path": "/api/platform/my/notifications",
+   "controller": "Platform\\NotificationCenterController@index",
+   "auth": [
+    "envToken",
+    "jwt",
+    "envMember"
+   ],
+   "moduleGate": null,
+   "throttle": null,
+   "status": "live"
+  },
+  {
+   "method": "POST",
+   "path": "/api/platform/my/notifications/{id}/read",
+   "controller": "Platform\\NotificationCenterController@markRead",
+   "auth": [
+    "envToken",
+    "jwt",
+    "envMember"
+   ],
+   "moduleGate": null,
+   "throttle": null,
+   "status": "live"
+  },
+  {
+   "method": "POST",
+   "path": "/api/platform/my/notifications/read-all",
+   "controller": "Platform\\NotificationCenterController@markAllRead",
+   "auth": [
+    "envToken",
+    "jwt",
+    "envMember"
+   ],
+   "moduleGate": null,
+   "throttle": null,
+   "status": "live"
+  },
+  {
+   "method": "GET",
+   "path": "/api/platform/my/notifications/summary",
+   "controller": "Platform\\NotificationCenterController@summary",
+   "auth": [
+    "envToken",
+    "jwt",
+    "envMember"
+   ],
+   "moduleGate": null,
+   "throttle": null,
+   "status": "live"
+  },
+  {
+   "method": "GET",
+   "path": "/api/platform/my/overview",
+   "controller": "Platform\\CustomerPlatformController@overview",
+   "auth": [
+    "envToken",
+    "jwt",
+    "envMember"
+   ],
+   "moduleGate": null,
+   "throttle": null,
+   "status": "live"
+  },
+  {
+   "method": "GET",
+   "path": "/api/platform/my/payments",
+   "controller": "Platform\\CustomerPlatformController@payments",
+   "auth": [
+    "envToken",
+    "jwt",
+    "envMember"
+   ],
+   "moduleGate": null,
+   "throttle": null,
+   "status": "live"
+  },
+  {
+   "method": "GET",
+   "path": "/api/platform/my/receipts",
+   "controller": "Platform\\CustomerPlatformController@receipts",
+   "auth": [
+    "envToken",
+    "jwt",
+    "envMember"
+   ],
+   "moduleGate": null,
+   "throttle": null,
+   "status": "live"
+  },
+  {
+   "method": "GET",
+   "path": "/api/platform/my/receipts/{id}/pdf",
+   "controller": "Platform\\CustomerPlatformController@receiptPdf",
+   "auth": [
+    "envToken",
+    "jwt",
+    "envMember"
+   ],
+   "moduleGate": null,
+   "throttle": null,
+   "status": "live"
+  },
+  {
+   "method": "POST",
+   "path": "/api/platform/my/subscription/renew",
+   "controller": "Platform\\CustomerPlatformController@renewSubscription",
+   "auth": [
+    "envToken",
+    "jwt",
+    "envMember"
+   ],
+   "moduleGate": null,
+   "throttle": "10,1",
+   "status": "live"
+  },
+  {
+   "method": "GET",
+   "path": "/api/platform/my/team",
+   "controller": "Platform\\CustomerPlatformController@team",
+   "auth": [
+    "envToken",
+    "jwt",
+    "envMember"
+   ],
+   "moduleGate": null,
+   "throttle": null,
+   "status": "live"
+  },
+  {
+   "method": "DELETE",
+   "path": "/api/platform/my/team/invitations/{id}",
+   "controller": "Platform\\CustomerPlatformController@teamRevokeInvitation",
+   "auth": [
+    "envToken",
+    "jwt",
+    "envMember"
+   ],
+   "moduleGate": null,
+   "throttle": null,
+   "status": "live"
+  },
+  {
+   "method": "POST",
+   "path": "/api/platform/my/team/invite",
+   "controller": "Platform\\CustomerPlatformController@teamInvite",
+   "auth": [
+    "envToken",
+    "jwt",
+    "envMember"
+   ],
+   "moduleGate": null,
+   "throttle": null,
+   "status": "live"
+  },
+  {
+   "method": "DELETE",
+   "path": "/api/platform/my/team/members/{id}",
+   "controller": "Platform\\CustomerPlatformController@teamRemove",
+   "auth": [
+    "envToken",
+    "jwt",
+    "envMember"
+   ],
+   "moduleGate": null,
+   "throttle": null,
+   "status": "live"
+  },
+  {
+   "method": "GET",
+   "path": "/api/platform/partner/bank-transfers",
+   "controller": "Platform\\PartnerPanelController@bankTransfers",
+   "auth": [
+    "jwt"
+   ],
+   "moduleGate": null,
+   "throttle": "60,1",
+   "status": "live"
+  },
+  {
+   "method": "POST",
+   "path": "/api/platform/partner/bank-transfers/{id}/review",
+   "controller": "Platform\\PartnerPanelController@reviewBankTransfer",
+   "auth": [
+    "jwt"
+   ],
+   "moduleGate": null,
+   "throttle": "60,1",
+   "status": "live"
+  },
+  {
+   "method": "GET",
+   "path": "/api/platform/partner/checkout-links",
+   "controller": "Platform\\PartnerPanelController@checkoutLinks",
+   "auth": [
+    "jwt"
+   ],
+   "moduleGate": null,
+   "throttle": "60,1",
+   "status": "live"
+  },
+  {
+   "method": "POST",
+   "path": "/api/platform/partner/checkout-links",
+   "controller": "Platform\\PartnerPanelController@createCheckoutLink",
+   "auth": [
+    "jwt"
+   ],
+   "moduleGate": null,
+   "throttle": "60,1",
+   "status": "live"
+  },
+  {
+   "method": "POST",
+   "path": "/api/platform/partner/checkout-links/{id}/cancel",
+   "controller": "Platform\\PartnerPanelController@cancelCheckoutLink",
+   "auth": [
+    "jwt"
+   ],
+   "moduleGate": null,
+   "throttle": "60,1",
+   "status": "live"
+  },
+  {
+   "method": "POST",
+   "path": "/api/platform/partner/checkout-links/{id}/send",
+   "controller": "Platform\\PartnerPanelController@emailCheckoutLink",
+   "auth": [
+    "jwt"
+   ],
+   "moduleGate": null,
+   "throttle": "60,1",
+   "status": "live"
+  },
+  {
+   "method": "GET",
+   "path": "/api/platform/partner/customers",
+   "controller": "Platform\\PartnerPanelController@customers",
+   "auth": [
+    "jwt"
+   ],
+   "moduleGate": null,
+   "throttle": "60,1",
+   "status": "live"
+  },
+  {
+   "method": "GET",
+   "path": "/api/platform/partner/customers/{id}",
+   "controller": "Platform\\PartnerPanelController@showCustomer",
+   "auth": [
+    "jwt"
+   ],
+   "moduleGate": null,
+   "throttle": "60,1",
+   "status": "live"
+  },
+  {
+   "method": "POST",
+   "path": "/api/platform/partner/customers/{id}/prices",
+   "controller": "Platform\\PartnerPanelController@setCustomerPrice",
+   "auth": [
+    "jwt"
+   ],
+   "moduleGate": null,
+   "throttle": "60,1",
+   "status": "live"
+  },
+  {
+   "method": "GET",
+   "path": "/api/platform/partner/dashboard",
+   "controller": "Platform\\PartnerPanelController@dashboard",
+   "auth": [
+    "jwt"
+   ],
+   "moduleGate": null,
+   "throttle": "60,1",
+   "status": "live"
+  },
+  {
+   "method": "GET",
+   "path": "/api/platform/partner/gateways",
+   "controller": "Platform\\PartnerPanelController@gateways",
+   "auth": [
+    "jwt"
+   ],
+   "moduleGate": null,
+   "throttle": "60,1",
+   "status": "live"
+  },
+  {
+   "method": "POST",
+   "path": "/api/platform/partner/gateways",
+   "controller": "Platform\\PartnerPanelController@storeGateway",
+   "auth": [
+    "jwt"
+   ],
+   "moduleGate": null,
+   "throttle": "60,1",
+   "status": "live"
+  },
+  {
+   "method": "DELETE",
+   "path": "/api/platform/partner/gateways/{id}",
+   "controller": "Platform\\PartnerPanelController@deleteGateway",
+   "auth": [
+    "jwt"
+   ],
+   "moduleGate": null,
+   "throttle": "60,1",
+   "status": "live"
+  },
+  {
+   "method": "PUT",
+   "path": "/api/platform/partner/gateways/{id}",
+   "controller": "Platform\\PartnerPanelController@updateGateway",
+   "auth": [
+    "jwt"
+   ],
+   "moduleGate": null,
+   "throttle": "60,1",
+   "status": "live"
+  },
+  {
+   "method": "POST",
+   "path": "/api/platform/partner/gateways/{id}/verify",
+   "controller": "Platform\\PartnerPanelController@verifyGateway",
+   "auth": [
+    "jwt"
+   ],
+   "moduleGate": null,
+   "throttle": "60,1",
+   "status": "live"
+  },
+  {
+   "method": "GET",
+   "path": "/api/platform/partner/modules",
+   "controller": "Platform\\PartnerPanelController@modules",
+   "auth": [
+    "jwt"
+   ],
+   "moduleGate": null,
+   "throttle": "60,1",
+   "status": "live"
+  },
+  {
+   "method": "GET",
+   "path": "/api/platform/partner/packages",
+   "controller": "Platform\\PartnerPanelController@packages",
+   "auth": [
+    "jwt"
+   ],
+   "moduleGate": null,
+   "throttle": "60,1",
+   "status": "live"
+  },
+  {
+   "method": "POST",
+   "path": "/api/platform/partner/packages",
+   "controller": "Platform\\PartnerPanelController@storePackage",
+   "auth": [
+    "jwt"
+   ],
+   "moduleGate": null,
+   "throttle": "60,1",
+   "status": "live"
+  },
+  {
+   "method": "DELETE",
+   "path": "/api/platform/partner/packages/{id}",
+   "controller": "Platform\\PartnerPanelController@deletePackage",
+   "auth": [
+    "jwt"
+   ],
+   "moduleGate": null,
+   "throttle": "60,1",
+   "status": "live"
+  },
+  {
+   "method": "PUT",
+   "path": "/api/platform/partner/packages/{id}",
+   "controller": "Platform\\PartnerPanelController@updatePackage",
+   "auth": [
+    "jwt"
+   ],
+   "moduleGate": null,
+   "throttle": "60,1",
+   "status": "live"
+  },
+  {
+   "method": "GET",
+   "path": "/api/platform/partner/receipts/{id}/pdf",
+   "controller": "Platform\\PartnerPanelController@receiptPdf",
+   "auth": [
+    "jwt"
+   ],
+   "moduleGate": null,
+   "throttle": "60,1",
+   "status": "live"
+  },
+  {
+   "method": "GET",
+   "path": "/api/platform/partner/settings",
+   "controller": "Platform\\PartnerPanelController@settings",
+   "auth": [
+    "jwt"
+   ],
+   "moduleGate": null,
+   "throttle": "60,1",
+   "status": "live"
+  },
+  {
+   "method": "PUT",
+   "path": "/api/platform/partner/settings",
+   "controller": "Platform\\PartnerPanelController@updateSettings",
+   "auth": [
+    "jwt"
+   ],
+   "moduleGate": null,
+   "throttle": "60,1",
+   "status": "live"
+  },
+  {
+   "method": "GET",
+   "path": "/api/platform/partner/transfers",
+   "controller": "Platform\\PartnerPanelController@transfers",
+   "auth": [
+    "jwt"
+   ],
+   "moduleGate": null,
+   "throttle": "60,1",
+   "status": "live"
+  },
+  {
+   "method": "POST",
+   "path": "/api/platform/partner/transfers",
+   "controller": "Platform\\PartnerPanelController@startTransfer",
+   "auth": [
+    "jwt"
+   ],
+   "moduleGate": null,
+   "throttle": "60,1",
+   "status": "live"
+  },
+  {
+   "method": "POST",
+   "path": "/api/platform/partner/transfers/{id}/respond",
+   "controller": "Platform\\PartnerPanelController@respondTransfer",
+   "auth": [
+    "jwt"
+   ],
+   "moduleGate": null,
+   "throttle": "60,1",
+   "status": "live"
+  },
+  {
+   "method": "GET",
+   "path": "/api/platform/pay/{token}",
+   "controller": "Platform\\CheckoutLinkController@show",
+   "auth": [],
+   "moduleGate": null,
+   "throttle": null,
+   "status": "live"
+  },
+  {
+   "method": "POST",
+   "path": "/api/platform/pay/{token}/bank-transfer",
+   "controller": "Platform\\CheckoutLinkController@submitBankTransfer",
+   "auth": [],
+   "moduleGate": null,
+   "throttle": null,
+   "status": "live"
+  },
+  {
+   "method": "POST",
+   "path": "/api/platform/pay/{token}/card",
+   "controller": "Platform\\CheckoutLinkController@payWithCard",
+   "auth": [],
+   "moduleGate": null,
+   "throttle": "5,1",
+   "status": "live"
+  },
+  {
+   "method": "GET",
+   "path": "/api/platform/plans",
+   "controller": "Platform\\PublicPlanController",
+   "auth": [
+    "envToken"
+   ],
+   "moduleGate": null,
+   "throttle": null,
+   "status": "live"
+  },
+  {
+   "method": "GET",
+   "path": "/api/platform/site/{slug}",
+   "controller": "Platform\\CheckoutLinkController@partnerSite",
+   "auth": [],
+   "moduleGate": null,
+   "throttle": null,
+   "status": "live"
+  },
+  {
+   "method": "POST",
+   "path": "/api/platform/site/{slug}/packages/{packageId}/buy",
+   "controller": "Platform\\CheckoutLinkController@buyPackage",
+   "auth": [],
+   "moduleGate": null,
+   "throttle": "10,1",
+   "status": "live"
+  },
+  {
+   "method": "GET",
+   "path": "/api/product",
+   "controller": "ProductController@getProducts",
+   "auth": [
+    "envToken",
+    "jwt"
+   ],
+   "moduleGate": null,
+   "throttle": null,
+   "status": "retired",
+   "httpStatus": 410,
+   "reason": "PANEL_RETIRED — eski sahip-yönetim paneli (karar 2026-07-30). Yerine: schema/records, menus, platform/my, commerce."
+  },
+  {
+   "method": "POST",
+   "path": "/api/product",
+   "controller": "ProductController@setProduct",
+   "auth": [
+    "envToken",
+    "jwt"
+   ],
+   "moduleGate": null,
+   "throttle": null,
+   "status": "retired",
+   "httpStatus": 410,
+   "reason": "PANEL_RETIRED — eski sahip-yönetim paneli (karar 2026-07-30). Yerine: schema/records, menus, platform/my, commerce."
+  },
+  {
+   "method": "POST",
+   "path": "/api/product-attributes",
+   "controller": "ProductController@setProductAttribute",
+   "auth": [
+    "envToken",
+    "jwt"
+   ],
+   "moduleGate": null,
+   "throttle": null,
+   "status": "retired",
+   "httpStatus": 410,
+   "reason": "PANEL_RETIRED — eski sahip-yönetim paneli (karar 2026-07-30). Yerine: schema/records, menus, platform/my, commerce."
+  },
+  {
+   "method": "GET",
+   "path": "/api/product-brands",
+   "controller": "ProductController@getProductBrands",
+   "auth": [
+    "envToken",
+    "jwt"
+   ],
+   "moduleGate": null,
+   "throttle": null,
+   "status": "retired",
+   "httpStatus": 410,
+   "reason": "PANEL_RETIRED — eski sahip-yönetim paneli (karar 2026-07-30). Yerine: schema/records, menus, platform/my, commerce."
+  },
+  {
+   "method": "GET",
+   "path": "/api/product-collection/{id}",
+   "controller": "ProductController@adminProductCollections",
+   "auth": [
+    "envToken",
+    "jwt"
+   ],
+   "moduleGate": null,
+   "throttle": null,
+   "status": "retired",
+   "httpStatus": 410,
+   "reason": "PANEL_RETIRED — eski sahip-yönetim paneli (karar 2026-07-30). Yerine: schema/records, menus, platform/my, commerce."
+  },
+  {
+   "method": "POST",
+   "path": "/api/product-collections",
+   "controller": "ProductController@setProductCollection",
+   "auth": [
+    "envToken",
+    "jwt"
+   ],
+   "moduleGate": null,
+   "throttle": null,
+   "status": "retired",
+   "httpStatus": 410,
+   "reason": "PANEL_RETIRED — eski sahip-yönetim paneli (karar 2026-07-30). Yerine: schema/records, menus, platform/my, commerce."
+  },
+  {
+   "method": "DELETE",
+   "path": "/api/product-collections/{id}",
+   "controller": "ProductController@deleteProductCollection",
+   "auth": [
+    "envToken",
+    "jwt"
+   ],
+   "moduleGate": null,
+   "throttle": null,
+   "status": "retired",
+   "httpStatus": 410,
+   "reason": "PANEL_RETIRED — eski sahip-yönetim paneli (karar 2026-07-30). Yerine: schema/records, menus, platform/my, commerce."
+  },
+  {
+   "method": "POST",
+   "path": "/api/product-gallery",
+   "controller": "ProductController@addProductGallery",
+   "auth": [
+    "envToken",
+    "jwt"
+   ],
+   "moduleGate": null,
+   "throttle": null,
+   "status": "retired",
+   "httpStatus": 410,
+   "reason": "PANEL_RETIRED — eski sahip-yönetim paneli (karar 2026-07-30). Yerine: schema/records, menus, platform/my, commerce."
+  },
+  {
+   "method": "POST",
+   "path": "/api/product-gallery/delete",
+   "controller": "ProductController@deleteProductGallery",
+   "auth": [
+    "envToken",
+    "jwt"
+   ],
+   "moduleGate": null,
+   "throttle": null,
+   "status": "retired",
+   "httpStatus": 410,
+   "reason": "PANEL_RETIRED — eski sahip-yönetim paneli (karar 2026-07-30). Yerine: schema/records, menus, platform/my, commerce."
+  },
+  {
+   "method": "POST",
+   "path": "/api/product-relations",
+   "controller": "ProductController@setProductRelation",
+   "auth": [
+    "envToken",
+    "jwt"
+   ],
+   "moduleGate": null,
+   "throttle": null,
+   "status": "retired",
+   "httpStatus": 410,
+   "reason": "PANEL_RETIRED — eski sahip-yönetim paneli (karar 2026-07-30). Yerine: schema/records, menus, platform/my, commerce."
+  },
+  {
+   "method": "DELETE",
+   "path": "/api/product-relations/{id}",
+   "controller": "ProductController@deleteProductRelation",
+   "auth": [
+    "envToken",
+    "jwt"
+   ],
+   "moduleGate": null,
+   "throttle": null,
+   "status": "retired",
+   "httpStatus": 410,
+   "reason": "PANEL_RETIRED — eski sahip-yönetim paneli (karar 2026-07-30). Yerine: schema/records, menus, platform/my, commerce."
+  },
+  {
+   "method": "GET",
+   "path": "/api/product-relations/{id}",
+   "controller": "ProductController@adminProductRelations",
+   "auth": [
+    "envToken",
+    "jwt"
+   ],
+   "moduleGate": null,
+   "throttle": null,
+   "status": "retired",
+   "httpStatus": 410,
+   "reason": "PANEL_RETIRED — eski sahip-yönetim paneli (karar 2026-07-30). Yerine: schema/records, menus, platform/my, commerce."
+  },
+  {
+   "method": "GET",
+   "path": "/api/product-vendors",
+   "controller": "ProductController@getProductVendors",
+   "auth": [
+    "envToken",
+    "jwt"
+   ],
+   "moduleGate": null,
+   "throttle": null,
+   "status": "retired",
+   "httpStatus": 410,
+   "reason": "PANEL_RETIRED — eski sahip-yönetim paneli (karar 2026-07-30). Yerine: schema/records, menus, platform/my, commerce."
+  },
+  {
+   "method": "DELETE",
+   "path": "/api/product/{id}",
+   "controller": "ProductController@deleteProduct",
+   "auth": [
+    "envToken",
+    "jwt"
+   ],
+   "moduleGate": null,
+   "throttle": null,
+   "status": "retired",
+   "httpStatus": 410,
+   "reason": "PANEL_RETIRED — eski sahip-yönetim paneli (karar 2026-07-30). Yerine: schema/records, menus, platform/my, commerce."
+  },
+  {
+   "method": "PUT",
+   "path": "/api/product/{id}",
+   "controller": "ProductController@updateProduct",
+   "auth": [
+    "envToken",
+    "jwt"
+   ],
+   "moduleGate": null,
+   "throttle": null,
+   "status": "retired",
+   "httpStatus": 410,
+   "reason": "PANEL_RETIRED — eski sahip-yönetim paneli (karar 2026-07-30). Yerine: schema/records, menus, platform/my, commerce."
+  },
+  {
+   "method": "POST",
+   "path": "/api/product/{id}/localizations",
+   "controller": "ProductController@setLocalizations",
+   "auth": [
+    "envToken",
+    "jwt"
+   ],
+   "moduleGate": null,
+   "throttle": null,
+   "status": "retired",
+   "httpStatus": 410,
+   "reason": "PANEL_RETIRED — eski sahip-yönetim paneli (karar 2026-07-30). Yerine: schema/records, menus, platform/my, commerce."
+  },
+  {
+   "method": "POST",
+   "path": "/api/product/{id}/media",
+   "controller": "ProductController@setMedia",
+   "auth": [
+    "envToken",
+    "jwt"
+   ],
+   "moduleGate": null,
+   "throttle": null,
+   "status": "retired",
+   "httpStatus": 410,
+   "reason": "PANEL_RETIRED — eski sahip-yönetim paneli (karar 2026-07-30). Yerine: schema/records, menus, platform/my, commerce."
+  },
+  {
+   "method": "POST",
+   "path": "/api/product/{id}/prices",
+   "controller": "ProductController@setPrices",
+   "auth": [
+    "envToken",
+    "jwt"
+   ],
+   "moduleGate": null,
+   "throttle": null,
+   "status": "retired",
+   "httpStatus": 410,
+   "reason": "PANEL_RETIRED — eski sahip-yönetim paneli (karar 2026-07-30). Yerine: schema/records, menus, platform/my, commerce."
+  },
+  {
+   "method": "POST",
+   "path": "/api/product/{id}/variants",
+   "controller": "ProductController@setVariants",
+   "auth": [
+    "envToken",
+    "jwt"
+   ],
+   "moduleGate": null,
+   "throttle": null,
+   "status": "retired",
+   "httpStatus": 410,
+   "reason": "PANEL_RETIRED — eski sahip-yönetim paneli (karar 2026-07-30). Yerine: schema/records, menus, platform/my, commerce."
+  },
+  {
+   "method": "GET",
+   "path": "/api/product/{id}/versions",
+   "controller": "ProductController@versionHistory",
+   "auth": [
+    "envToken",
+    "jwt"
+   ],
+   "moduleGate": null,
+   "throttle": null,
+   "status": "retired",
+   "httpStatus": 410,
+   "reason": "PANEL_RETIRED — eski sahip-yönetim paneli (karar 2026-07-30). Yerine: schema/records, menus, platform/my, commerce."
+  },
+  {
+   "method": "GET",
+   "path": "/api/product/{slug}",
+   "controller": "ProductController@showAdminProduct",
+   "auth": [
+    "envToken",
+    "jwt"
+   ],
+   "moduleGate": null,
+   "throttle": null,
+   "status": "retired",
+   "httpStatus": 410,
+   "reason": "PANEL_RETIRED — eski sahip-yönetim paneli (karar 2026-07-30). Yerine: schema/records, menus, platform/my, commerce."
+  },
+  {
+   "method": "POST",
+   "path": "/api/product/revert/{versionId}",
+   "controller": "ProductController@revertVersion",
+   "auth": [
+    "envToken",
+    "jwt"
+   ],
+   "moduleGate": null,
+   "throttle": null,
+   "status": "retired",
+   "httpStatus": 410,
+   "reason": "PANEL_RETIRED — eski sahip-yönetim paneli (karar 2026-07-30). Yerine: schema/records, menus, platform/my, commerce."
+  },
+  {
+   "method": "GET",
+   "path": "/api/products",
+   "controller": "ProductController@getProducts",
+   "auth": [
+    "envToken",
+    "jwt"
+   ],
+   "moduleGate": null,
+   "throttle": null,
+   "status": "retired",
+   "httpStatus": 410,
+   "reason": "PANEL_RETIRED — eski sahip-yönetim paneli (karar 2026-07-30). Yerine: schema/records, menus, platform/my, commerce."
+  },
+  {
+   "method": "POST",
+   "path": "/api/products/bulk",
+   "controller": "ProductController@bulkStore",
+   "auth": [
+    "envToken",
+    "jwt"
+   ],
+   "moduleGate": null,
+   "throttle": null,
+   "status": "retired",
+   "httpStatus": 410,
+   "reason": "PANEL_RETIRED — eski sahip-yönetim paneli (karar 2026-07-30). Yerine: schema/records, menus, platform/my, commerce."
+  },
+  {
+   "method": "PUT",
+   "path": "/api/products/bulk-multiple",
+   "controller": "ProductController@bulkUpdateMultiple",
+   "auth": [
+    "envToken",
+    "jwt"
+   ],
+   "moduleGate": null,
+   "throttle": null,
+   "status": "retired",
+   "httpStatus": 410,
+   "reason": "PANEL_RETIRED — eski sahip-yönetim paneli (karar 2026-07-30). Yerine: schema/records, menus, platform/my, commerce."
+  },
+  {
+   "method": "GET",
+   "path": "/api/public/banners",
+   "controller": "ComponentController@getBanners",
+   "auth": [
+    "envToken"
+   ],
+   "moduleGate": null,
+   "throttle": null,
+   "status": "live"
+  },
+  {
+   "method": "GET",
+   "path": "/api/public/canvas",
+   "controller": "CanvasController@getCanvases",
+   "auth": [
+    "envToken"
+   ],
+   "moduleGate": null,
+   "throttle": null,
+   "status": "live"
+  },
+  {
+   "method": "GET",
+   "path": "/api/public/canvas/{slug}",
+   "controller": "CanvasController@showCanvas",
+   "auth": [
+    "envToken"
+   ],
+   "moduleGate": null,
+   "throttle": null,
+   "status": "live"
+  },
+  {
+   "method": "GET",
+   "path": "/api/public/categories",
+   "controller": "Schema\\PublicCategoryController@index",
+   "auth": [
+    "envToken"
+   ],
+   "moduleGate": null,
+   "throttle": null,
+   "status": "live"
+  },
+  {
+   "method": "GET",
+   "path": "/api/public/categories/{slug}",
+   "controller": "Schema\\PublicCategoryController@show",
+   "auth": [
+    "envToken"
+   ],
+   "moduleGate": null,
+   "throttle": null,
+   "status": "live"
+  },
+  {
+   "method": "POST",
+   "path": "/api/public/client-error",
+   "controller": "JourneyController@clientError",
+   "auth": [
+    "envToken"
+   ],
+   "moduleGate": null,
+   "throttle": null,
+   "status": "live"
+  },
+  {
+   "method": "GET",
+   "path": "/api/public/collection/{id}",
+   "controller": "CanvasController@canvasCollections",
+   "auth": [
+    "envToken"
+   ],
+   "moduleGate": null,
+   "throttle": null,
+   "status": "live"
+  },
+  {
+   "method": "GET",
+   "path": "/api/public/environment/{token}",
+   "controller": "EnvironmentController@showEnvironment",
+   "auth": [
+    "envToken"
+   ],
+   "moduleGate": null,
+   "throttle": null,
+   "status": "live"
+  },
+  {
+   "method": "GET",
+   "path": "/api/public/gallery/{slug}",
+   "controller": "ComponentController@showGallery",
+   "auth": [
+    "envToken"
+   ],
+   "moduleGate": null,
+   "throttle": null,
+   "status": "live"
+  },
+  {
+   "method": "GET",
+   "path": "/api/public/init",
+   "controller": "InitController@init",
+   "auth": [
+    "envToken"
+   ],
+   "moduleGate": null,
+   "throttle": null,
+   "status": "live"
+  },
+  {
+   "method": "GET",
+   "path": "/api/public/llms.txt",
+   "controller": "Schema\\IntegrationController@llmsTxt",
+   "auth": [
+    "envToken"
+   ],
+   "moduleGate": null,
+   "throttle": null,
+   "status": "live"
+  },
+  {
+   "method": "GET",
+   "path": "/api/public/manifest",
+   "controller": "Schema\\IntegrationController@manifest",
+   "auth": [
+    "envToken"
+   ],
+   "moduleGate": null,
+   "throttle": null,
+   "status": "live"
+  },
+  {
+   "method": "GET",
+   "path": "/api/public/menus/{code}",
+   "controller": "Menu\\PublicMenuController@show",
+   "auth": [
+    "envToken"
+   ],
+   "moduleGate": null,
+   "throttle": null,
+   "status": "live"
+  },
+  {
+   "method": "GET",
+   "path": "/api/public/navigation/{slug}",
+   "controller": "EnvironmentController@showNavigation",
+   "auth": [
+    "envToken"
+   ],
+   "moduleGate": null,
+   "throttle": null,
+   "status": "live"
+  },
+  {
+   "method": "GET",
+   "path": "/api/public/notification/{token}",
+   "controller": "NotificationController@getPublicNotification",
+   "auth": [
+    "envToken"
+   ],
+   "moduleGate": null,
+   "throttle": null,
+   "status": "live"
+  },
+  {
+   "method": "GET",
+   "path": "/api/public/product-categories/{slug}",
+   "controller": "ProductController@getProductRelations",
+   "auth": [
+    "envToken"
+   ],
+   "moduleGate": null,
+   "throttle": null,
+   "status": "live"
+  },
+  {
+   "method": "GET",
+   "path": "/api/public/product-collection/{id}",
+   "controller": "ProductController@getCollectionsProducts",
+   "auth": [
+    "envToken"
+   ],
+   "moduleGate": null,
+   "throttle": null,
+   "status": "live"
+  },
+  {
+   "method": "GET",
+   "path": "/api/public/product/{slug}",
+   "controller": "ProductController@showBySlug",
+   "auth": [
+    "envToken"
+   ],
+   "moduleGate": null,
+   "throttle": null,
+   "status": "live"
+  },
+  {
+   "method": "GET",
+   "path": "/api/public/products",
+   "controller": "ProductController@getProducts",
+   "auth": [
+    "envToken"
+   ],
+   "moduleGate": null,
+   "throttle": null,
+   "status": "live"
+  },
+  {
+   "method": "GET",
+   "path": "/api/public/records/{typeCode}",
+   "controller": "Schema\\PublicRecordController@index",
+   "auth": [
+    "envToken"
+   ],
+   "moduleGate": null,
+   "throttle": null,
+   "status": "live"
+  },
+  {
+   "method": "GET",
+   "path": "/api/public/records/{typeCode}/item/{slug}",
+   "controller": "Schema\\PublicRecordController@show",
+   "auth": [
+    "envToken"
+   ],
+   "moduleGate": null,
+   "throttle": null,
+   "status": "live"
+  },
+  {
+   "method": "GET",
+   "path": "/api/public/records/{typeCode}/item/{slug}/also-read",
+   "controller": "Schema\\PublicRecordController@alsoRead",
+   "auth": [
+    "envToken"
+   ],
+   "moduleGate": null,
+   "throttle": null,
+   "status": "live"
+  },
+  {
+   "method": "POST",
+   "path": "/api/public/records/{typeCode}/item/{slug}/ping",
+   "controller": "Schema\\PublicRecordController@ping",
+   "auth": [
+    "envToken"
+   ],
+   "moduleGate": null,
+   "throttle": "60,1",
+   "status": "live"
+  },
+  {
+   "method": "GET",
+   "path": "/api/public/records/{typeCode}/schema",
+   "controller": "Schema\\PublicRecordController@schema",
+   "auth": [
+    "envToken"
+   ],
+   "moduleGate": null,
+   "throttle": null,
+   "status": "live"
+  },
+  {
+   "method": "GET",
+   "path": "/api/public/sitemap.xml",
+   "controller": "Seo\\SitemapController@index",
+   "auth": [
+    "envToken"
+   ],
+   "moduleGate": null,
+   "throttle": null,
+   "status": "live"
+  },
+  {
+   "method": "POST",
+   "path": "/api/public/ticket-content",
+   "controller": "NotificationController@setTicketContent",
+   "auth": [
+    "envToken"
+   ],
+   "moduleGate": null,
+   "throttle": null,
+   "status": "live"
+  },
+  {
+   "method": "POST",
+   "path": "/api/public/ticket-submit",
+   "controller": "NotificationController@setTicketLambda",
+   "auth": [
+    "envToken"
+   ],
+   "moduleGate": null,
+   "throttle": null,
+   "status": "live"
+  },
+  {
+   "method": "GET",
+   "path": "/api/schema/agent-content",
+   "controller": "Schema\\AgentContentController@index",
+   "auth": [
+    "envToken",
+    "jwt",
+    "envMember"
+   ],
+   "moduleGate": null,
+   "throttle": null,
+   "status": "live"
+  },
+  {
+   "method": "POST",
+   "path": "/api/schema/agent-content",
+   "controller": "Schema\\AgentContentController@store",
+   "auth": [
+    "envToken",
+    "jwt",
+    "envMember"
+   ],
+   "moduleGate": null,
+   "throttle": "10,1",
+   "status": "live"
+  },
+  {
+   "method": "GET",
+   "path": "/api/schema/agent-content/{id}",
+   "controller": "Schema\\AgentContentController@show",
+   "auth": [
+    "envToken",
+    "jwt",
+    "envMember"
+   ],
+   "moduleGate": null,
+   "throttle": null,
+   "status": "live"
+  },
+  {
+   "method": "POST",
+   "path": "/api/schema/agent-content/{id}/cancel",
+   "controller": "Schema\\AgentContentController@cancel",
+   "auth": [
+    "envToken",
+    "jwt",
+    "envMember"
+   ],
+   "moduleGate": null,
+   "throttle": null,
+   "status": "live"
+  },
+  {
+   "method": "POST",
+   "path": "/api/schema/agent-content/{id}/resume",
+   "controller": "Schema\\AgentContentController@resume",
+   "auth": [
+    "envToken",
+    "jwt",
+    "envMember"
+   ],
+   "moduleGate": null,
+   "throttle": null,
+   "status": "live"
+  },
+  {
+   "method": "POST",
+   "path": "/api/schema/agent-content/{id}/run-now",
+   "controller": "Schema\\AgentContentController@runNow",
+   "auth": [
+    "envToken",
+    "jwt",
+    "envMember"
+   ],
+   "moduleGate": null,
+   "throttle": "20,1",
+   "status": "live"
+  },
+  {
+   "method": "POST",
+   "path": "/api/schema/agent-content/estimate",
+   "controller": "Schema\\AgentContentController@estimate",
+   "auth": [
+    "envToken",
+    "jwt",
+    "envMember"
+   ],
+   "moduleGate": null,
+   "throttle": null,
+   "status": "live"
+  },
+  {
+   "method": "GET",
+   "path": "/api/schema/agent-content/options",
+   "controller": "Schema\\AgentContentController@options",
+   "auth": [
+    "envToken",
+    "jwt",
+    "envMember"
+   ],
+   "moduleGate": null,
+   "throttle": null,
+   "status": "live"
+  },
+  {
+   "method": "POST",
+   "path": "/api/schema/ai/image",
+   "controller": "Schema\\RecordAiController@image",
+   "auth": [
+    "envToken",
+    "jwt",
+    "envMember"
+   ],
+   "moduleGate": null,
+   "throttle": "10,1",
+   "status": "live"
+  },
+  {
+   "method": "GET",
+   "path": "/api/schema/ai/image-models",
+   "controller": "Schema\\RecordAiController@imageModels",
+   "auth": [
+    "envToken",
+    "jwt",
+    "envMember"
+   ],
+   "moduleGate": null,
+   "throttle": null,
+   "status": "live"
+  },
+  {
+   "method": "GET",
+   "path": "/api/schema/categories",
+   "controller": "Schema\\CategoryController@index",
+   "auth": [
+    "envToken",
+    "jwt",
+    "envMember"
+   ],
+   "moduleGate": null,
+   "throttle": null,
+   "status": "live"
+  },
+  {
+   "method": "POST",
+   "path": "/api/schema/categories",
+   "controller": "Schema\\CategoryController@store",
+   "auth": [
+    "envToken",
+    "jwt",
+    "envMember"
+   ],
+   "moduleGate": null,
+   "throttle": null,
+   "status": "live"
+  },
+  {
+   "method": "DELETE",
+   "path": "/api/schema/categories/{id}",
+   "controller": "Schema\\CategoryController@destroy",
+   "auth": [
+    "envToken",
+    "jwt",
+    "envMember"
+   ],
+   "moduleGate": null,
+   "throttle": null,
+   "status": "live"
+  },
+  {
+   "method": "PUT",
+   "path": "/api/schema/categories/{id}",
+   "controller": "Schema\\CategoryController@update",
+   "auth": [
+    "envToken",
+    "jwt",
+    "envMember"
+   ],
+   "moduleGate": null,
+   "throttle": null,
+   "status": "live"
+  },
+  {
+   "method": "GET",
+   "path": "/api/schema/field-types",
+   "controller": "Schema\\ContentTypeController@fieldTypes",
+   "auth": [
+    "envToken",
+    "jwt",
+    "envMember"
+   ],
+   "moduleGate": null,
+   "throttle": null,
+   "status": "live"
+  },
+  {
+   "method": "GET",
+   "path": "/api/schema/locales",
+   "controller": "Schema\\SiteLocaleController@index",
+   "auth": [
+    "envToken",
+    "jwt",
+    "envMember"
+   ],
+   "moduleGate": null,
+   "throttle": null,
+   "status": "live"
+  },
+  {
+   "method": "POST",
+   "path": "/api/schema/locales",
+   "controller": "Schema\\SiteLocaleController@store",
+   "auth": [
+    "envToken",
+    "jwt",
+    "envMember"
+   ],
+   "moduleGate": null,
+   "throttle": null,
+   "status": "live"
+  },
+  {
+   "method": "DELETE",
+   "path": "/api/schema/locales/{code}",
+   "controller": "Schema\\SiteLocaleController@destroy",
+   "auth": [
+    "envToken",
+    "jwt",
+    "envMember"
+   ],
+   "moduleGate": null,
+   "throttle": null,
+   "status": "live"
+  },
+  {
+   "method": "GET",
+   "path": "/api/schema/modules",
+   "controller": "Schema\\ModuleStatusController",
+   "auth": [
+    "envToken",
+    "jwt",
+    "envMember"
+   ],
+   "moduleGate": null,
+   "throttle": null,
+   "status": "live"
+  },
+  {
+   "method": "GET",
+   "path": "/api/schema/presets",
+   "controller": "Schema\\IntegrationController@presets",
+   "auth": [
+    "envToken",
+    "jwt",
+    "envMember"
+   ],
+   "moduleGate": null,
+   "throttle": null,
+   "status": "live"
+  },
+  {
+   "method": "GET",
+   "path": "/api/schema/records",
+   "controller": "Schema\\RecordController@all",
+   "auth": [
+    "envToken",
+    "jwt",
+    "envMember"
+   ],
+   "moduleGate": null,
+   "throttle": null,
+   "status": "live"
+  },
+  {
+   "method": "GET",
+   "path": "/api/schema/records/{typeCode}",
+   "controller": "Schema\\RecordController@index",
+   "auth": [
+    "envToken",
+    "jwt",
+    "envMember"
+   ],
+   "moduleGate": null,
+   "throttle": null,
+   "status": "live"
+  },
+  {
+   "method": "POST",
+   "path": "/api/schema/records/{typeCode}",
+   "controller": "Schema\\RecordController@store",
+   "auth": [
+    "envToken",
+    "jwt",
+    "envMember"
+   ],
+   "moduleGate": null,
+   "throttle": null,
+   "status": "live"
+  },
+  {
+   "method": "DELETE",
+   "path": "/api/schema/records/{typeCode}/{id}",
+   "controller": "Schema\\RecordController@destroy",
+   "auth": [
+    "envToken",
+    "jwt",
+    "envMember"
+   ],
+   "moduleGate": null,
+   "throttle": null,
+   "status": "live"
+  },
+  {
+   "method": "GET",
+   "path": "/api/schema/records/{typeCode}/{id}",
+   "controller": "Schema\\RecordController@show",
+   "auth": [
+    "envToken",
+    "jwt",
+    "envMember"
+   ],
+   "moduleGate": null,
+   "throttle": null,
+   "status": "live"
+  },
+  {
+   "method": "PUT",
+   "path": "/api/schema/records/{typeCode}/{id}",
+   "controller": "Schema\\RecordController@update",
+   "auth": [
+    "envToken",
+    "jwt",
+    "envMember"
+   ],
+   "moduleGate": null,
+   "throttle": null,
+   "status": "live"
+  },
+  {
+   "method": "POST",
+   "path": "/api/schema/records/{typeCode}/{id}/ai/improve",
+   "controller": "Schema\\RecordAiController@improve",
+   "auth": [
+    "envToken",
+    "jwt",
+    "envMember"
+   ],
+   "moduleGate": null,
+   "throttle": "20,1",
+   "status": "live"
+  },
+  {
+   "method": "POST",
+   "path": "/api/schema/records/{typeCode}/{id}/ai/seo",
+   "controller": "Schema\\RecordAiController@seo",
+   "auth": [
+    "envToken",
+    "jwt",
+    "envMember"
+   ],
+   "moduleGate": null,
+   "throttle": "20,1",
+   "status": "live"
+  },
+  {
+   "method": "POST",
+   "path": "/api/schema/records/{typeCode}/{id}/ai/translate",
+   "controller": "Schema\\RecordAiController@translate",
+   "auth": [
+    "envToken",
+    "jwt",
+    "envMember"
+   ],
+   "moduleGate": null,
+   "throttle": "20,1",
+   "status": "live"
+  },
+  {
+   "method": "GET",
+   "path": "/api/schema/records/{typeCode}/{id}/analytics",
+   "controller": "Schema\\RecordController@analytics",
+   "auth": [
+    "envToken",
+    "jwt",
+    "envMember"
+   ],
+   "moduleGate": null,
+   "throttle": null,
+   "status": "live"
+  },
+  {
+   "method": "GET",
+   "path": "/api/schema/records/{typeCode}/{id}/gallery/{field}",
+   "controller": "Schema\\RecordGalleryController@index",
+   "auth": [
+    "envToken",
+    "jwt",
+    "envMember"
+   ],
+   "moduleGate": null,
+   "throttle": null,
+   "status": "live"
+  },
+  {
+   "method": "POST",
+   "path": "/api/schema/records/{typeCode}/{id}/gallery/{field}",
+   "controller": "Schema\\RecordGalleryController@attach",
+   "auth": [
+    "envToken",
+    "jwt",
+    "envMember"
+   ],
+   "moduleGate": null,
+   "throttle": null,
+   "status": "live"
+  },
+  {
+   "method": "DELETE",
+   "path": "/api/schema/records/{typeCode}/{id}/gallery/{field}/{imageId}",
+   "controller": "Schema\\RecordGalleryController@detach",
+   "auth": [
+    "envToken",
+    "jwt",
+    "envMember"
+   ],
+   "moduleGate": null,
+   "throttle": null,
+   "status": "live"
+  },
+  {
+   "method": "PUT",
+   "path": "/api/schema/records/{typeCode}/{id}/gallery/{field}/{imageId}",
+   "controller": "Schema\\RecordGalleryController@updateImage",
+   "auth": [
+    "envToken",
+    "jwt",
+    "envMember"
+   ],
+   "moduleGate": null,
+   "throttle": null,
+   "status": "live"
+  },
+  {
+   "method": "PUT",
+   "path": "/api/schema/records/{typeCode}/{id}/gallery/{field}/order",
+   "controller": "Schema\\RecordGalleryController@reorder",
+   "auth": [
+    "envToken",
+    "jwt",
+    "envMember"
+   ],
+   "moduleGate": null,
+   "throttle": null,
+   "status": "live"
+  },
+  {
+   "method": "GET",
+   "path": "/api/schema/records/{typeCode}/{id}/revisions",
+   "controller": "Schema\\RecordController@revisions",
+   "auth": [
+    "envToken",
+    "jwt",
+    "envMember"
+   ],
+   "moduleGate": null,
+   "throttle": null,
+   "status": "live"
+  },
+  {
+   "method": "GET",
+   "path": "/api/schema/records/{typeCode}/{id}/revisions/{version}",
+   "controller": "Schema\\RecordController@revision",
+   "auth": [
+    "envToken",
+    "jwt",
+    "envMember"
+   ],
+   "moduleGate": null,
+   "throttle": null,
+   "status": "live"
+  },
+  {
+   "method": "POST",
+   "path": "/api/schema/records/{typeCode}/{id}/revisions/{version}/restore",
+   "controller": "Schema\\RecordController@restoreRevision",
+   "auth": [
+    "envToken",
+    "jwt",
+    "envMember"
+   ],
+   "moduleGate": null,
+   "throttle": null,
+   "status": "live"
+  },
+  {
+   "method": "GET",
+   "path": "/api/schema/sitemap",
+   "controller": "Seo\\SitemapController@summary",
+   "auth": [
+    "envToken",
+    "jwt",
+    "envMember"
+   ],
+   "moduleGate": null,
+   "throttle": null,
+   "status": "live"
+  },
+  {
+   "method": "GET",
+   "path": "/api/schema/types",
+   "controller": "Schema\\ContentTypeController@index",
+   "auth": [
+    "envToken",
+    "jwt",
+    "envMember"
+   ],
+   "moduleGate": null,
+   "throttle": null,
+   "status": "live"
+  },
+  {
+   "method": "POST",
+   "path": "/api/schema/types",
+   "controller": "Schema\\ContentTypeController@store",
+   "auth": [
+    "envToken",
+    "jwt",
+    "envMember"
+   ],
+   "moduleGate": null,
+   "throttle": null,
+   "status": "live"
+  },
+  {
+   "method": "DELETE",
+   "path": "/api/schema/types/{code}",
+   "controller": "Schema\\ContentTypeController@destroy",
+   "auth": [
+    "envToken",
+    "jwt",
+    "envMember"
+   ],
+   "moduleGate": null,
+   "throttle": null,
+   "status": "live"
+  },
+  {
+   "method": "GET",
+   "path": "/api/schema/types/{code}",
+   "controller": "Schema\\ContentTypeController@show",
+   "auth": [
+    "envToken",
+    "jwt",
+    "envMember"
+   ],
+   "moduleGate": null,
+   "throttle": null,
+   "status": "live"
+  },
+  {
+   "method": "PUT",
+   "path": "/api/schema/types/{code}",
+   "controller": "Schema\\ContentTypeController@update",
+   "auth": [
+    "envToken",
+    "jwt",
+    "envMember"
+   ],
+   "moduleGate": null,
+   "throttle": null,
+   "status": "live"
+  },
+  {
+   "method": "GET",
+   "path": "/api/schema/types/{code}/form",
+   "controller": "Schema\\ContentTypeController@form",
+   "auth": [
+    "envToken",
+    "jwt",
+    "envMember"
+   ],
+   "moduleGate": null,
+   "throttle": null,
+   "status": "live"
+  },
+  {
+   "method": "GET",
+   "path": "/api/schema/types/{code}/integration",
+   "controller": "Schema\\IntegrationController@snippets",
+   "auth": [
+    "envToken",
+    "jwt",
+    "envMember"
+   ],
+   "moduleGate": null,
+   "throttle": null,
+   "status": "live"
+  },
+  {
+   "method": "GET",
+   "path": "/api/schema/types/{code}/revisions",
+   "controller": "Schema\\ContentTypeController@revisions",
+   "auth": [
+    "envToken",
+    "jwt",
+    "envMember"
+   ],
+   "moduleGate": null,
+   "throttle": null,
+   "status": "live"
+  },
+  {
+   "method": "POST",
+   "path": "/api/schema/types/{typeCode}/ai/generate",
+   "controller": "Schema\\RecordAiController@generate",
+   "auth": [
+    "envToken",
+    "jwt",
+    "envMember"
+   ],
+   "moduleGate": null,
+   "throttle": "20,1",
+   "status": "live"
+  },
+  {
+   "method": "GET",
+   "path": "/api/sendSlackTest",
+   "controller": "SystemController@sendSlackTest",
+   "auth": [],
+   "moduleGate": null,
+   "throttle": null,
+   "status": "live"
+  },
+  {
+   "method": "DELETE",
+   "path": "/api/shop/cart",
+   "controller": "Commerce\\PublicCartController@clear",
+   "auth": [
+    "envToken"
+   ],
+   "moduleGate": "ecommerce",
+   "throttle": null,
+   "status": "live"
+  },
+  {
+   "method": "GET",
+   "path": "/api/shop/cart",
+   "controller": "Commerce\\PublicCartController@show",
+   "auth": [
+    "envToken"
+   ],
+   "moduleGate": "ecommerce",
+   "throttle": null,
+   "status": "live"
+  },
+  {
+   "method": "POST",
+   "path": "/api/shop/cart",
+   "controller": "Commerce\\PublicCartController@add",
+   "auth": [
+    "envToken"
+   ],
+   "moduleGate": "ecommerce",
+   "throttle": null,
+   "status": "live"
+  },
+  {
+   "method": "DELETE",
+   "path": "/api/shop/cart/items/{itemId}",
+   "controller": "Commerce\\PublicCartController@removeItem",
+   "auth": [
+    "envToken"
+   ],
+   "moduleGate": "ecommerce",
+   "throttle": null,
+   "status": "live"
+  },
+  {
+   "method": "PUT",
+   "path": "/api/shop/cart/items/{itemId}",
+   "controller": "Commerce\\PublicCartController@updateItem",
+   "auth": [
+    "envToken"
+   ],
+   "moduleGate": "ecommerce",
+   "throttle": null,
+   "status": "live"
+  },
+  {
+   "method": "POST",
+   "path": "/api/shop/checkout",
+   "controller": "Commerce\\PublicCartController@checkout",
+   "auth": [
+    "envToken"
+   ],
+   "moduleGate": "ecommerce",
+   "throttle": "10,1",
+   "status": "live"
+  },
+  {
+   "method": "GET",
+   "path": "/api/shopping/{token}/finance/balance",
+   "controller": "FinanceController@getBalance",
+   "auth": [
+    "envToken",
+    "jwt"
+   ],
+   "moduleGate": null,
+   "throttle": null,
+   "status": "retired",
+   "httpStatus": 410,
+   "reason": "PANEL_RETIRED — eski sahip-yönetim paneli (karar 2026-07-30). Yerine: schema/records, menus, platform/my, commerce."
+  },
+  {
+   "method": "GET",
+   "path": "/api/shopping/{token}/finance/invoices",
+   "controller": "FinanceController@getInvoices",
+   "auth": [
+    "envToken",
+    "jwt"
+   ],
+   "moduleGate": null,
+   "throttle": null,
+   "status": "retired",
+   "httpStatus": 410,
+   "reason": "PANEL_RETIRED — eski sahip-yönetim paneli (karar 2026-07-30). Yerine: schema/records, menus, platform/my, commerce."
+  },
+  {
+   "method": "GET",
+   "path": "/api/shopping/{token}/finance/invoices/{id}",
+   "controller": "FinanceController@showInvoice",
+   "auth": [
+    "envToken",
+    "jwt"
+   ],
+   "moduleGate": null,
+   "throttle": null,
+   "status": "retired",
+   "httpStatus": 410,
+   "reason": "PANEL_RETIRED — eski sahip-yönetim paneli (karar 2026-07-30). Yerine: schema/records, menus, platform/my, commerce."
+  },
+  {
+   "method": "GET",
+   "path": "/api/shopping/{token}/finance/movements",
+   "controller": "FinanceController@getMovements",
+   "auth": [
+    "envToken",
+    "jwt"
+   ],
+   "moduleGate": null,
+   "throttle": null,
+   "status": "retired",
+   "httpStatus": 410,
+   "reason": "PANEL_RETIRED — eski sahip-yönetim paneli (karar 2026-07-30). Yerine: schema/records, menus, platform/my, commerce."
+  },
+  {
+   "method": "GET",
+   "path": "/api/shopping/{token}/products",
+   "controller": "ProductController@index",
+   "auth": [
+    "envToken",
+    "jwt"
+   ],
+   "moduleGate": null,
+   "throttle": null,
+   "status": "retired",
+   "httpStatus": 410,
+   "reason": "PANEL_RETIRED — eski sahip-yönetim paneli (karar 2026-07-30). Yerine: schema/records, menus, platform/my, commerce."
+  },
+  {
+   "method": "POST",
+   "path": "/api/shopping/{token}/products",
+   "controller": "ProductController@store",
+   "auth": [
+    "envToken",
+    "jwt"
+   ],
+   "moduleGate": null,
+   "throttle": null,
+   "status": "retired",
+   "httpStatus": 410,
+   "reason": "PANEL_RETIRED — eski sahip-yönetim paneli (karar 2026-07-30). Yerine: schema/records, menus, platform/my, commerce."
+  },
+  {
+   "method": "GET",
+   "path": "/api/shopping/{token}/products/{id}/variants",
+   "controller": "ProductController@variants",
+   "auth": [
+    "envToken",
+    "jwt"
+   ],
+   "moduleGate": null,
+   "throttle": null,
+   "status": "retired",
+   "httpStatus": 410,
+   "reason": "PANEL_RETIRED — eski sahip-yönetim paneli (karar 2026-07-30). Yerine: schema/records, menus, platform/my, commerce."
+  },
+  {
+   "method": "POST",
+   "path": "/api/shopping/{token}/products/{id}/variants",
+   "controller": "ProductController@createVariant",
+   "auth": [
+    "envToken",
+    "jwt"
+   ],
+   "moduleGate": null,
+   "throttle": null,
+   "status": "retired",
+   "httpStatus": 410,
+   "reason": "PANEL_RETIRED — eski sahip-yönetim paneli (karar 2026-07-30). Yerine: schema/records, menus, platform/my, commerce."
+  },
+  {
+   "method": "DELETE",
+   "path": "/api/shopping/{token}/products/{product}",
+   "controller": "ProductController@destroy",
+   "auth": [
+    "envToken",
+    "jwt"
+   ],
+   "moduleGate": null,
+   "throttle": null,
+   "status": "retired",
+   "httpStatus": 410,
+   "reason": "PANEL_RETIRED — eski sahip-yönetim paneli (karar 2026-07-30). Yerine: schema/records, menus, platform/my, commerce."
+  },
+  {
+   "method": "GET",
+   "path": "/api/shopping/{token}/products/{product}",
+   "controller": "ProductController@show",
+   "auth": [
+    "envToken",
+    "jwt"
+   ],
+   "moduleGate": null,
+   "throttle": null,
+   "status": "retired",
+   "httpStatus": 410,
+   "reason": "PANEL_RETIRED — eski sahip-yönetim paneli (karar 2026-07-30). Yerine: schema/records, menus, platform/my, commerce."
+  },
+  {
+   "method": "PATCH",
+   "path": "/api/shopping/{token}/products/{product}",
+   "controller": "ProductController@update",
+   "auth": [
+    "envToken",
+    "jwt"
+   ],
+   "moduleGate": null,
+   "throttle": null,
+   "status": "retired",
+   "httpStatus": 410,
+   "reason": "PANEL_RETIRED — eski sahip-yönetim paneli (karar 2026-07-30). Yerine: schema/records, menus, platform/my, commerce."
+  },
+  {
+   "method": "PUT",
+   "path": "/api/shopping/{token}/products/{product}",
+   "controller": "ProductController@update",
+   "auth": [
+    "envToken",
+    "jwt"
+   ],
+   "moduleGate": null,
+   "throttle": null,
+   "status": "retired",
+   "httpStatus": 410,
+   "reason": "PANEL_RETIRED — eski sahip-yönetim paneli (karar 2026-07-30). Yerine: schema/records, menus, platform/my, commerce."
+  },
+  {
+   "method": "POST",
+   "path": "/api/shopping/{token}/products/bulk-delete",
+   "controller": "ProductController@bulkDelete",
+   "auth": [
+    "envToken",
+    "jwt"
+   ],
+   "moduleGate": null,
+   "throttle": null,
+   "status": "retired",
+   "httpStatus": 410,
+   "reason": "PANEL_RETIRED — eski sahip-yönetim paneli (karar 2026-07-30). Yerine: schema/records, menus, platform/my, commerce."
+  },
+  {
+   "method": "POST",
+   "path": "/api/shopping/{token}/products/bulk-update",
+   "controller": "ProductController@bulkUpdate",
+   "auth": [
+    "envToken",
+    "jwt"
+   ],
+   "moduleGate": null,
+   "throttle": null,
+   "status": "retired",
+   "httpStatus": 410,
+   "reason": "PANEL_RETIRED — eski sahip-yönetim paneli (karar 2026-07-30). Yerine: schema/records, menus, platform/my, commerce."
+  },
+  {
+   "method": "GET",
+   "path": "/api/shopping/{token}/products/by-environment/{environmentId}",
+   "controller": "ProductController@byEnvironment",
+   "auth": [
+    "envToken",
+    "jwt"
+   ],
+   "moduleGate": null,
+   "throttle": null,
+   "status": "retired",
+   "httpStatus": 410,
+   "reason": "PANEL_RETIRED — eski sahip-yönetim paneli (karar 2026-07-30). Yerine: schema/records, menus, platform/my, commerce."
+  },
+  {
+   "method": "GET",
+   "path": "/api/shopping/{token}/products/search/{query}",
+   "controller": "ProductController@search",
+   "auth": [
+    "envToken",
+    "jwt"
+   ],
+   "moduleGate": null,
+   "throttle": null,
+   "status": "retired",
+   "httpStatus": 410,
+   "reason": "PANEL_RETIRED — eski sahip-yönetim paneli (karar 2026-07-30). Yerine: schema/records, menus, platform/my, commerce."
+  },
+  {
+   "method": "GET",
+   "path": "/api/shopping/addresses",
+   "controller": "UserAddressController@index",
+   "auth": [
+    "envToken",
+    "jwt"
+   ],
+   "moduleGate": null,
+   "throttle": null,
+   "status": "live"
+  },
+  {
+   "method": "POST",
+   "path": "/api/shopping/addresses",
+   "controller": "UserAddressController@store",
+   "auth": [
+    "envToken",
+    "jwt"
+   ],
+   "moduleGate": null,
+   "throttle": null,
+   "status": "live"
+  },
+  {
+   "method": "DELETE",
+   "path": "/api/shopping/addresses/{id}",
+   "controller": "UserAddressController@destroy",
+   "auth": [
+    "envToken",
+    "jwt"
+   ],
+   "moduleGate": null,
+   "throttle": null,
+   "status": "live"
+  },
+  {
+   "method": "PUT",
+   "path": "/api/shopping/addresses/{id}",
+   "controller": "UserAddressController@update",
+   "auth": [
+    "envToken",
+    "jwt"
+   ],
+   "moduleGate": null,
+   "throttle": null,
+   "status": "live"
+  },
+  {
+   "method": "GET",
+   "path": "/api/shopping/brands",
+   "controller": "EnvironmentController@brands",
+   "auth": [
+    "envToken",
+    "jwt"
+   ],
+   "moduleGate": null,
+   "throttle": null,
+   "status": "retired",
+   "httpStatus": 410,
+   "reason": "PANEL_RETIRED — eski sahip-yönetim paneli (karar 2026-07-30). Yerine: schema/records, menus, platform/my, commerce."
+  },
+  {
+   "method": "GET",
+   "path": "/api/shopping/brands/{id}/orders",
+   "controller": "EnvironmentController@brandOrders",
+   "auth": [
+    "envToken",
+    "jwt"
+   ],
+   "moduleGate": null,
+   "throttle": null,
+   "status": "retired",
+   "httpStatus": 410,
+   "reason": "PANEL_RETIRED — eski sahip-yönetim paneli (karar 2026-07-30). Yerine: schema/records, menus, platform/my, commerce."
+  },
+  {
+   "method": "GET",
+   "path": "/api/shopping/brands/{id}/products",
+   "controller": "EnvironmentController@brandProducts",
+   "auth": [
+    "envToken",
+    "jwt"
+   ],
+   "moduleGate": null,
+   "throttle": null,
+   "status": "retired",
+   "httpStatus": 410,
+   "reason": "PANEL_RETIRED — eski sahip-yönetim paneli (karar 2026-07-30). Yerine: schema/records, menus, platform/my, commerce."
+  },
+  {
+   "method": "GET",
+   "path": "/api/shopping/brands/{id}/shops",
+   "controller": "EnvironmentController@brandShops",
+   "auth": [
+    "envToken",
+    "jwt"
+   ],
+   "moduleGate": null,
+   "throttle": null,
+   "status": "retired",
+   "httpStatus": 410,
+   "reason": "PANEL_RETIRED — eski sahip-yönetim paneli (karar 2026-07-30). Yerine: schema/records, menus, platform/my, commerce."
+  },
+  {
+   "method": "GET",
+   "path": "/api/shopping/brands/{id}/warehouses",
+   "controller": "EnvironmentController@brandWarehouses",
+   "auth": [
+    "envToken",
+    "jwt"
+   ],
+   "moduleGate": null,
+   "throttle": null,
+   "status": "retired",
+   "httpStatus": 410,
+   "reason": "PANEL_RETIRED — eski sahip-yönetim paneli (karar 2026-07-30). Yerine: schema/records, menus, platform/my, commerce."
+  },
+  {
+   "method": "GET",
+   "path": "/api/shopping/campaigns",
+   "controller": "ProductController@listCampaigns",
+   "auth": [
+    "envToken",
+    "jwt"
+   ],
+   "moduleGate": null,
+   "throttle": null,
+   "status": "retired",
+   "httpStatus": 410,
+   "reason": "PANEL_RETIRED — eski sahip-yönetim paneli (karar 2026-07-30). Yerine: schema/records, menus, platform/my, commerce."
+  },
+  {
+   "method": "POST",
+   "path": "/api/shopping/campaigns",
+   "controller": "ProductController@createCampaign",
+   "auth": [
+    "envToken",
+    "jwt"
+   ],
+   "moduleGate": null,
+   "throttle": null,
+   "status": "retired",
+   "httpStatus": 410,
+   "reason": "PANEL_RETIRED — eski sahip-yönetim paneli (karar 2026-07-30). Yerine: schema/records, menus, platform/my, commerce."
+  },
+  {
+   "method": "DELETE",
+   "path": "/api/shopping/campaigns/{id}",
+   "controller": "ProductController@deleteCampaign",
+   "auth": [
+    "envToken",
+    "jwt"
+   ],
+   "moduleGate": null,
+   "throttle": null,
+   "status": "retired",
+   "httpStatus": 410,
+   "reason": "PANEL_RETIRED — eski sahip-yönetim paneli (karar 2026-07-30). Yerine: schema/records, menus, platform/my, commerce."
+  },
+  {
+   "method": "GET",
+   "path": "/api/shopping/campaigns/{id}",
+   "controller": "ProductController@showCampaign",
+   "auth": [
+    "envToken",
+    "jwt"
+   ],
+   "moduleGate": null,
+   "throttle": null,
+   "status": "retired",
+   "httpStatus": 410,
+   "reason": "PANEL_RETIRED — eski sahip-yönetim paneli (karar 2026-07-30). Yerine: schema/records, menus, platform/my, commerce."
+  },
+  {
+   "method": "PUT",
+   "path": "/api/shopping/campaigns/{id}",
+   "controller": "ProductController@updateCampaign",
+   "auth": [
+    "envToken",
+    "jwt"
+   ],
+   "moduleGate": null,
+   "throttle": null,
+   "status": "retired",
+   "httpStatus": 410,
+   "reason": "PANEL_RETIRED — eski sahip-yönetim paneli (karar 2026-07-30). Yerine: schema/records, menus, platform/my, commerce."
+  },
+  {
+   "method": "GET",
+   "path": "/api/shopping/carriers",
+   "controller": "CarrierController@publicIndex",
+   "auth": [
+    "envToken"
+   ],
+   "moduleGate": null,
+   "throttle": null,
+   "status": "live"
+  },
+  {
+   "method": "GET",
+   "path": "/api/shopping/cart",
+   "controller": "CartController@index",
+   "auth": [
+    "envToken"
+   ],
+   "moduleGate": null,
+   "throttle": null,
+   "status": "live"
+  },
+  {
+   "method": "POST",
+   "path": "/api/shopping/cart",
+   "controller": "CartController@store",
+   "auth": [
+    "envToken"
+   ],
+   "moduleGate": null,
+   "throttle": null,
+   "status": "live"
+  },
+  {
+   "method": "DELETE",
+   "path": "/api/shopping/cart/{itemId}",
+   "controller": "CartController@destroyItem",
+   "auth": [
+    "envToken"
+   ],
+   "moduleGate": null,
+   "throttle": null,
+   "status": "live"
+  },
+  {
+   "method": "PUT",
+   "path": "/api/shopping/cart/{itemId}",
+   "controller": "CartController@update",
+   "auth": [
+    "envToken"
+   ],
+   "moduleGate": null,
+   "throttle": null,
+   "status": "live"
+  },
+  {
+   "method": "DELETE",
+   "path": "/api/shopping/cart/clear",
+   "controller": "CartController@clear",
+   "auth": [
+    "envToken"
+   ],
+   "moduleGate": null,
+   "throttle": null,
+   "status": "live"
+  },
+  {
+   "method": "POST",
+   "path": "/api/shopping/checkout",
+   "controller": "CheckoutController@store",
+   "auth": [
+    "envToken"
+   ],
+   "moduleGate": null,
+   "throttle": null,
+   "status": "live"
+  },
+  {
+   "method": "POST",
+   "path": "/api/shopping/checkout/coupon",
+   "controller": "CouponController@validateCoupon",
+   "auth": [
+    "envToken"
+   ],
+   "moduleGate": null,
+   "throttle": null,
+   "status": "live"
+  },
+  {
+   "method": "GET",
+   "path": "/api/shopping/checkout/options",
+   "controller": "CheckoutController@options",
+   "auth": [
+    "envToken"
+   ],
+   "moduleGate": null,
+   "throttle": null,
+   "status": "live"
+  },
+  {
+   "method": "GET",
+   "path": "/api/shopping/dashboard/stats",
+   "controller": "EnvironmentController@dashboardStats",
+   "auth": [
+    "envToken",
+    "jwt"
+   ],
+   "moduleGate": null,
+   "throttle": null,
+   "status": "retired",
+   "httpStatus": 410,
+   "reason": "PANEL_RETIRED — eski sahip-yönetim paneli (karar 2026-07-30). Yerine: schema/records, menus, platform/my, commerce."
+  },
+  {
+   "method": "GET",
+   "path": "/api/shopping/environments",
+   "controller": "EnvironmentController@index",
+   "auth": [
+    "envToken",
+    "jwt"
+   ],
+   "moduleGate": null,
+   "throttle": null,
+   "status": "retired",
+   "httpStatus": 410,
+   "reason": "PANEL_RETIRED — eski sahip-yönetim paneli (karar 2026-07-30). Yerine: schema/records, menus, platform/my, commerce."
+  },
+  {
+   "method": "POST",
+   "path": "/api/shopping/environments",
+   "controller": "EnvironmentController@store",
+   "auth": [
+    "envToken",
+    "jwt"
+   ],
+   "moduleGate": null,
+   "throttle": null,
+   "status": "retired",
+   "httpStatus": 410,
+   "reason": "PANEL_RETIRED — eski sahip-yönetim paneli (karar 2026-07-30). Yerine: schema/records, menus, platform/my, commerce."
+  },
+  {
+   "method": "DELETE",
+   "path": "/api/shopping/environments/{environment}",
+   "controller": "EnvironmentController@destroy",
+   "auth": [
+    "envToken",
+    "jwt"
+   ],
+   "moduleGate": null,
+   "throttle": null,
+   "status": "retired",
+   "httpStatus": 410,
+   "reason": "PANEL_RETIRED — eski sahip-yönetim paneli (karar 2026-07-30). Yerine: schema/records, menus, platform/my, commerce."
+  },
+  {
+   "method": "GET",
+   "path": "/api/shopping/environments/{environment}",
+   "controller": "EnvironmentController@show",
+   "auth": [
+    "envToken",
+    "jwt"
+   ],
+   "moduleGate": null,
+   "throttle": null,
+   "status": "retired",
+   "httpStatus": 410,
+   "reason": "PANEL_RETIRED — eski sahip-yönetim paneli (karar 2026-07-30). Yerine: schema/records, menus, platform/my, commerce."
+  },
+  {
+   "method": "PATCH",
+   "path": "/api/shopping/environments/{environment}",
+   "controller": "EnvironmentController@update",
+   "auth": [
+    "envToken",
+    "jwt"
+   ],
+   "moduleGate": null,
+   "throttle": null,
+   "status": "retired",
+   "httpStatus": 410,
+   "reason": "PANEL_RETIRED — eski sahip-yönetim paneli (karar 2026-07-30). Yerine: schema/records, menus, platform/my, commerce."
+  },
+  {
+   "method": "PUT",
+   "path": "/api/shopping/environments/{environment}",
+   "controller": "EnvironmentController@update",
+   "auth": [
+    "envToken",
+    "jwt"
+   ],
+   "moduleGate": null,
+   "throttle": null,
+   "status": "retired",
+   "httpStatus": 410,
+   "reason": "PANEL_RETIRED — eski sahip-yönetim paneli (karar 2026-07-30). Yerine: schema/records, menus, platform/my, commerce."
+  },
+  {
+   "method": "GET",
+   "path": "/api/shopping/environments/{id}/relationships",
+   "controller": "EnvironmentController@relationships",
+   "auth": [
+    "envToken",
+    "jwt"
+   ],
+   "moduleGate": null,
+   "throttle": null,
+   "status": "retired",
+   "httpStatus": 410,
+   "reason": "PANEL_RETIRED — eski sahip-yönetim paneli (karar 2026-07-30). Yerine: schema/records, menus, platform/my, commerce."
+  },
+  {
+   "method": "POST",
+   "path": "/api/shopping/environments/{id}/relationships",
+   "controller": "EnvironmentController@createRelationship",
+   "auth": [
+    "envToken",
+    "jwt"
+   ],
+   "moduleGate": null,
+   "throttle": null,
+   "status": "retired",
+   "httpStatus": 410,
+   "reason": "PANEL_RETIRED — eski sahip-yönetim paneli (karar 2026-07-30). Yerine: schema/records, menus, platform/my, commerce."
+  },
+  {
+   "method": "DELETE",
+   "path": "/api/shopping/environments/{id}/relationships/{relationshipId}",
+   "controller": "EnvironmentController@deleteRelationship",
+   "auth": [
+    "envToken",
+    "jwt"
+   ],
+   "moduleGate": null,
+   "throttle": null,
+   "status": "retired",
+   "httpStatus": 410,
+   "reason": "PANEL_RETIRED — eski sahip-yönetim paneli (karar 2026-07-30). Yerine: schema/records, menus, platform/my, commerce."
+  },
+  {
+   "method": "POST",
+   "path": "/api/shopping/invite-partner",
+   "controller": "EnvironmentController@invitePartner",
+   "auth": [
+    "envToken",
+    "jwt"
+   ],
+   "moduleGate": null,
+   "throttle": null,
+   "status": "retired",
+   "httpStatus": 410,
+   "reason": "PANEL_RETIRED — eski sahip-yönetim paneli (karar 2026-07-30). Yerine: schema/records, menus, platform/my, commerce."
+  },
+  {
+   "method": "GET",
+   "path": "/api/shopping/partner-invitations",
+   "controller": "EnvironmentController@getInvitations",
+   "auth": [
+    "envToken",
+    "jwt"
+   ],
+   "moduleGate": null,
+   "throttle": null,
+   "status": "retired",
+   "httpStatus": 410,
+   "reason": "PANEL_RETIRED — eski sahip-yönetim paneli (karar 2026-07-30). Yerine: schema/records, menus, platform/my, commerce."
+  },
+  {
+   "method": "GET",
+   "path": "/api/shopping/products/{productId}/campaigns/preview",
+   "controller": "ProductController@previewCampaignsForProduct",
+   "auth": [
+    "envToken",
+    "jwt"
+   ],
+   "moduleGate": null,
+   "throttle": null,
+   "status": "retired",
+   "httpStatus": 410,
+   "reason": "PANEL_RETIRED — eski sahip-yönetim paneli (karar 2026-07-30). Yerine: schema/records, menus, platform/my, commerce."
+  },
+  {
+   "method": "GET",
+   "path": "/api/shopping/reports/sales",
+   "controller": "OrderController@salesReport",
+   "auth": [
+    "envToken",
+    "jwt"
+   ],
+   "moduleGate": null,
+   "throttle": null,
+   "status": "retired",
+   "httpStatus": 410,
+   "reason": "PANEL_RETIRED — eski sahip-yönetim paneli (karar 2026-07-30). Yerine: schema/records, menus, platform/my, commerce."
+  },
+  {
+   "method": "GET",
+   "path": "/api/shopping/shops",
+   "controller": "EnvironmentController@shops",
+   "auth": [
+    "envToken",
+    "jwt"
+   ],
+   "moduleGate": null,
+   "throttle": null,
+   "status": "retired",
+   "httpStatus": 410,
+   "reason": "PANEL_RETIRED — eski sahip-yönetim paneli (karar 2026-07-30). Yerine: schema/records, menus, platform/my, commerce."
+  },
+  {
+   "method": "GET",
+   "path": "/api/shopping/shops/{id}/brands",
+   "controller": "EnvironmentController@shopBrands",
+   "auth": [
+    "envToken",
+    "jwt"
+   ],
+   "moduleGate": null,
+   "throttle": null,
+   "status": "retired",
+   "httpStatus": 410,
+   "reason": "PANEL_RETIRED — eski sahip-yönetim paneli (karar 2026-07-30). Yerine: schema/records, menus, platform/my, commerce."
+  },
+  {
+   "method": "GET",
+   "path": "/api/shopping/shops/{id}/orders",
+   "controller": "EnvironmentController@shopOrders",
+   "auth": [
+    "envToken",
+    "jwt"
+   ],
+   "moduleGate": null,
+   "throttle": null,
+   "status": "retired",
+   "httpStatus": 410,
+   "reason": "PANEL_RETIRED — eski sahip-yönetim paneli (karar 2026-07-30). Yerine: schema/records, menus, platform/my, commerce."
+  },
+  {
+   "method": "GET",
+   "path": "/api/shopping/warehouses",
+   "controller": "EnvironmentController@warehouses",
+   "auth": [
+    "envToken",
+    "jwt"
+   ],
+   "moduleGate": null,
+   "throttle": null,
+   "status": "retired",
+   "httpStatus": 410,
+   "reason": "PANEL_RETIRED — eski sahip-yönetim paneli (karar 2026-07-30). Yerine: schema/records, menus, platform/my, commerce."
+  },
+  {
+   "method": "GET",
+   "path": "/api/shopping/warehouses/{id}/brands",
+   "controller": "EnvironmentController@warehouseBrands",
+   "auth": [
+    "envToken",
+    "jwt"
+   ],
+   "moduleGate": null,
+   "throttle": null,
+   "status": "retired",
+   "httpStatus": 410,
+   "reason": "PANEL_RETIRED — eski sahip-yönetim paneli (karar 2026-07-30). Yerine: schema/records, menus, platform/my, commerce."
+  },
+  {
+   "method": "GET",
+   "path": "/api/shopping/warehouses/{id}/inventory",
+   "controller": "EnvironmentController@warehouseInventory",
+   "auth": [
+    "envToken",
+    "jwt"
+   ],
+   "moduleGate": null,
+   "throttle": null,
+   "status": "retired",
+   "httpStatus": 410,
+   "reason": "PANEL_RETIRED — eski sahip-yönetim paneli (karar 2026-07-30). Yerine: schema/records, menus, platform/my, commerce."
+  },
+  {
+   "method": "GET",
+   "path": "/api/shopping/warehouses/{id}/orders",
+   "controller": "EnvironmentController@warehouseOrders",
+   "auth": [
+    "envToken",
+    "jwt"
+   ],
+   "moduleGate": null,
+   "throttle": null,
+   "status": "retired",
+   "httpStatus": 410,
+   "reason": "PANEL_RETIRED — eski sahip-yönetim paneli (karar 2026-07-30). Yerine: schema/records, menus, platform/my, commerce."
+  },
+  {
+   "method": "POST",
+   "path": "/api/storage-file",
+   "controller": "StorageController@fileStore",
+   "auth": [
+    "envToken",
+    "jwt"
+   ],
+   "moduleGate": null,
+   "throttle": null,
+   "status": "retired",
+   "httpStatus": 410,
+   "reason": "PANEL_RETIRED — eski sahip-yönetim paneli (karar 2026-07-30). Yerine: schema/records, menus, platform/my, commerce."
+  },
+  {
+   "method": "POST",
+   "path": "/api/storage-image",
+   "controller": "StorageController@imageStore",
+   "auth": [
+    "envToken",
+    "jwt",
+    "envMember"
+   ],
+   "moduleGate": null,
+   "throttle": null,
+   "status": "live"
+  },
+  {
+   "method": "POST",
+   "path": "/api/storage-images",
+   "controller": "StorageController@imagesStore",
+   "auth": [
+    "envToken",
+    "jwt",
+    "envMember"
+   ],
+   "moduleGate": null,
+   "throttle": null,
+   "status": "live"
+  },
+  {
+   "method": "GET",
+   "path": "/api/test-suspicious",
+   "controller": "Closure",
+   "auth": [],
+   "moduleGate": null,
+   "throttle": null,
+   "status": "live"
+  },
+  {
+   "method": "GET",
+   "path": "/api/tickets",
+   "controller": "NotificationController@getTickets",
+   "auth": [
+    "envToken",
+    "jwt"
+   ],
+   "moduleGate": null,
+   "throttle": null,
+   "status": "retired",
+   "httpStatus": 410,
+   "reason": "PANEL_RETIRED — eski sahip-yönetim paneli (karar 2026-07-30). Yerine: schema/records, menus, platform/my, commerce."
+  },
+  {
+   "method": "POST",
+   "path": "/api/track",
+   "controller": "JourneyController@store",
+   "auth": [
+    "envToken"
+   ],
+   "moduleGate": null,
+   "throttle": "120,1",
+   "status": "live"
+  },
+  {
+   "method": "POST",
+   "path": "/api/twilio-sms",
+   "controller": "NotificationController@sendViaTwilio",
+   "auth": [
+    "envToken",
+    "jwt"
+   ],
+   "moduleGate": null,
+   "throttle": null,
+   "status": "retired",
+   "httpStatus": 410,
+   "reason": "PANEL_RETIRED — eski sahip-yönetim paneli (karar 2026-07-30). Yerine: schema/records, menus, platform/my, commerce."
+  },
+  {
+   "method": "GET",
+   "path": "/api/user",
+   "controller": "Closure",
+   "auth": [],
+   "moduleGate": null,
+   "throttle": null,
+   "status": "live"
+  },
+  {
+   "method": "GET",
+   "path": "/api/user/addresses",
+   "controller": "UserAddressController@index",
+   "auth": [
+    "envToken",
+    "jwt"
+   ],
+   "moduleGate": null,
+   "throttle": null,
+   "status": "live"
+  },
+  {
+   "method": "POST",
+   "path": "/api/user/addresses",
+   "controller": "UserAddressController@store",
+   "auth": [
+    "envToken",
+    "jwt"
+   ],
+   "moduleGate": null,
+   "throttle": null,
+   "status": "live"
+  },
+  {
+   "method": "DELETE",
+   "path": "/api/user/addresses/{id}",
+   "controller": "UserAddressController@destroy",
+   "auth": [
+    "envToken",
+    "jwt"
+   ],
+   "moduleGate": null,
+   "throttle": null,
+   "status": "live"
+  },
+  {
+   "method": "PUT",
+   "path": "/api/user/addresses/{id}",
+   "controller": "UserAddressController@update",
+   "auth": [
+    "envToken",
+    "jwt"
+   ],
+   "moduleGate": null,
+   "throttle": null,
+   "status": "live"
+  },
+  {
+   "method": "GET",
+   "path": "/api/user/billing-profiles",
+   "controller": "SubscriptionController@getBillingProfiles",
+   "auth": [
+    "envToken",
+    "jwt"
+   ],
+   "moduleGate": null,
+   "throttle": null,
+   "status": "live"
+  },
+  {
+   "method": "POST",
+   "path": "/api/user/billing-profiles",
+   "controller": "SubscriptionController@storeBillingProfile",
+   "auth": [
+    "envToken",
+    "jwt"
+   ],
+   "moduleGate": null,
+   "throttle": null,
+   "status": "live"
+  },
+  {
+   "method": "PUT",
+   "path": "/api/user/billing-profiles/{id}",
+   "controller": "SubscriptionController@updateBillingProfile",
+   "auth": [
+    "envToken",
+    "jwt"
+   ],
+   "moduleGate": null,
+   "throttle": null,
+   "status": "live"
+  },
+  {
+   "method": "POST",
+   "path": "/api/user/calculate-pricing",
+   "controller": "SubscriptionController@calculatePricing",
+   "auth": [
+    "envToken",
+    "jwt"
+   ],
+   "moduleGate": null,
+   "throttle": null,
+   "status": "live"
+  },
+  {
+   "method": "POST",
+   "path": "/api/user/subscribe",
+   "controller": "SubscriptionController@subscribe",
+   "auth": [
+    "envToken",
+    "jwt"
+   ],
+   "moduleGate": null,
+   "throttle": "5,1",
+   "status": "live"
+  },
+  {
+   "method": "GET",
+   "path": "/api/user/subscriptions",
+   "controller": "EnvironmentController@userSubscriptions",
+   "auth": [
+    "envToken",
+    "jwt"
+   ],
+   "moduleGate": null,
+   "throttle": null,
+   "status": "live"
+  }
+ ]
+}

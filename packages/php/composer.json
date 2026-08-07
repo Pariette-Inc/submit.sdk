@@ -1,0 +1,33 @@
+{
+  "name": "submitcms/sdk",
+  "description": "SubmitCMS resmî PHP SDK'sı — headless CMS, e-ticaret ve SaaS platformu istemcisi",
+  "type": "library",
+  "license": "MIT",
+  "homepage": "https://submitcms.com/sdk",
+  "keywords": ["submitcms", "sdk", "cms", "headless-cms", "ecommerce", "saas", "api", "laravel"],
+  "authors": [{ "name": "SubmitCMS", "homepage": "https://submitcms.com" }],
+  "require": {
+    "php": "^8.2",
+    "guzzlehttp/guzzle": "^7.8",
+    "ext-json": "*"
+  },
+  "require-dev": {
+    "phpunit/phpunit": "^11.0",
+    "friendsofphp/php-cs-fixer": "^3.64"
+  },
+  "autoload": {
+    "psr-4": { "SubmitCms\\Sdk\\": "src/" }
+  },
+  "autoload-dev": {
+    "psr-4": { "SubmitCms\\Sdk\\Tests\\": "tests/" }
+  },
+  "extra": {
+    "laravel": {
+      "providers": ["SubmitCms\\Sdk\\Laravel\\SubmitCmsServiceProvider"],
+      "aliases": { "SubmitCms": "SubmitCms\\Sdk\\Laravel\\SubmitCmsFacade" }
+    }
+  },
+  "config": { "sort-packages": true },
+  "minimum-stability": "stable",
+  "prefer-stable": true
+}

@@ -1,0 +1,6729 @@
+{
+ "$comment": "SDK kaynağından üretildi (scripts/generate-reference.mjs). Elle düzenlemeyin — kaynak değişince yeniden üretin.",
+ "source": {
+  "repo": "submit.api",
+  "branch": "test",
+  "commit": "7734978"
+ },
+ "counts": {
+  "modules": 21,
+  "methods": 202,
+  "liveEndpoints": 232
+ },
+ "packages": {
+  "js": {
+   "name": "@submitcms/sdk",
+   "install": "npm i @submitcms/sdk",
+   "registry": "npm"
+  },
+  "php": {
+   "name": "submitcms/sdk",
+   "install": "composer require submitcms/sdk",
+   "registry": "Packagist"
+  },
+  "swift": {
+   "name": "SubmitCMS",
+   "install": ".package(url: \"https://github.com/Pariette-Inc/submit.sdk-swift\", from: \"1.0.0\")",
+   "registry": "SwiftPM"
+  },
+  "kotlin": {
+   "name": "com.submitcms:sdk",
+   "install": "implementation(\"com.submitcms:sdk:1.0.0\")",
+   "registry": "Maven Central"
+  }
+ },
+ "modules": [
+  {
+   "class": "AddressModule",
+   "file": "commerce.ts",
+   "summary": "Kullanıcı adresleri.",
+   "body": "`/api/user/addresses` ve `/api/shopping/addresses` aynı işi görür; SDK\nilkini kullanır.",
+   "example": "",
+   "methods": [
+    {
+     "name": "list",
+     "group": null,
+     "params": [],
+     "returns": "Promise<ApiResponse<Address[]>>",
+     "method": "GET",
+     "path": "/api/user/addresses",
+     "specPath": "/api/user/addresses",
+     "auth": [
+      "envToken",
+      "jwt"
+     ],
+     "moduleGate": null,
+     "throttle": null,
+     "status": "live",
+     "summary": "",
+     "body": "",
+     "example": "",
+     "names": {
+      "js": "list",
+      "php": "list",
+      "swift": "list",
+      "kotlin": "list"
+     }
+    },
+    {
+     "name": "create",
+     "group": null,
+     "params": [
+      {
+       "name": "payload",
+       "type": "Omit<Address, 'id'>",
+       "optional": false,
+       "default": null
+      }
+     ],
+     "returns": "Promise<ApiResponse<Address>>",
+     "method": "POST",
+     "path": "/api/user/addresses",
+     "specPath": "/api/user/addresses",
+     "auth": [
+      "envToken",
+      "jwt"
+     ],
+     "moduleGate": null,
+     "throttle": null,
+     "status": "live",
+     "summary": "",
+     "body": "",
+     "example": "",
+     "names": {
+      "js": "create",
+      "php": "create",
+      "swift": "create",
+      "kotlin": "create"
+     }
+    },
+    {
+     "name": "update",
+     "group": null,
+     "params": [
+      {
+       "name": "id",
+       "type": "number",
+       "optional": false,
+       "default": null
+      },
+      {
+       "name": "payload",
+       "type": "Partial<Address>",
+       "optional": false,
+       "default": null
+      }
+     ],
+     "returns": "Promise<ApiResponse<Address>>",
+     "method": "PUT",
+     "path": "/api/user/addresses/${id}",
+     "specPath": "/api/user/addresses/{id}",
+     "auth": [
+      "envToken",
+      "jwt"
+     ],
+     "moduleGate": null,
+     "throttle": null,
+     "status": "live",
+     "summary": "",
+     "body": "",
+     "example": "",
+     "names": {
+      "js": "update",
+      "php": "update",
+      "swift": "update",
+      "kotlin": "update"
+     }
+    },
+    {
+     "name": "delete",
+     "group": null,
+     "params": [
+      {
+       "name": "id",
+       "type": "number",
+       "optional": false,
+       "default": null
+      }
+     ],
+     "returns": "Promise<ApiResponse<null>>",
+     "method": "DELETE",
+     "path": "/api/user/addresses/${id}",
+     "specPath": "/api/user/addresses/{id}",
+     "auth": [
+      "envToken",
+      "jwt"
+     ],
+     "moduleGate": null,
+     "throttle": null,
+     "status": "live",
+     "summary": "",
+     "body": "",
+     "example": "",
+     "names": {
+      "js": "delete",
+      "php": "delete",
+      "swift": "delete",
+      "kotlin": "delete"
+     }
+    }
+   ],
+   "accessor": "addresses"
+  },
+  {
+   "class": "AiModule",
+   "file": "misc.ts",
+   "summary": "Yapay zekâ kredileri.",
+   "body": "Her AI çağrısı (metin iyileştirme, çeviri, SEO, görsel üretimi) kredi harcar.\nBakiye yetmezse ilgili uç 402 döner.",
+   "example": "",
+   "methods": [
+    {
+     "name": "credits",
+     "group": null,
+     "params": [],
+     "returns": "Promise<ApiResponse<",
+     "method": "GET",
+     "path": "/api/ai/credits",
+     "specPath": "/api/ai/credits",
+     "auth": [
+      "envToken",
+      "jwt",
+      "envMember"
+     ],
+     "moduleGate": null,
+     "throttle": null,
+     "status": "live",
+     "summary": "Kalan kredi ve dönem bilgisi.",
+     "body": "",
+     "example": "",
+     "names": {
+      "js": "credits",
+      "php": "credits",
+      "swift": "credits",
+      "kotlin": "credits"
+     }
+    },
+    {
+     "name": "packages",
+     "group": null,
+     "params": [],
+     "returns": "Promise<ApiResponse<Array<Record<string, unknown>>>>",
+     "method": "GET",
+     "path": "/api/ai/credits/packages",
+     "specPath": "/api/ai/credits/packages",
+     "auth": [
+      "envToken",
+      "jwt",
+      "envMember"
+     ],
+     "moduleGate": null,
+     "throttle": null,
+     "status": "live",
+     "summary": "",
+     "body": "",
+     "example": "",
+     "names": {
+      "js": "packages",
+      "php": "packages",
+      "swift": "packages",
+      "kotlin": "packages"
+     }
+    },
+    {
+     "name": "purchase",
+     "group": null,
+     "params": [
+      {
+       "name": "packageId",
+       "type": "number",
+       "optional": false,
+       "default": null
+      },
+      {
+       "name": "payload",
+       "type": "Record<string, unknown>",
+       "optional": true,
+       "default": "{}"
+      }
+     ],
+     "returns": "Promise<ApiResponse<Record<string, unknown>>>",
+     "method": "POST",
+     "path": "/api/ai/credits/purchase",
+     "specPath": "/api/ai/credits/purchase",
+     "auth": [
+      "envToken",
+      "jwt",
+      "envMember"
+     ],
+     "moduleGate": null,
+     "throttle": "10,1",
+     "status": "live",
+     "summary": "",
+     "body": "",
+     "example": "",
+     "names": {
+      "js": "purchase",
+      "php": "purchase",
+      "swift": "purchase",
+      "kotlin": "purchase"
+     }
+    },
+    {
+     "name": "transactions",
+     "group": null,
+     "params": [
+      {
+       "name": "params",
+       "type": "Record<string, unknown>",
+       "optional": true,
+       "default": "{}"
+      }
+     ],
+     "returns": "Promise<ApiResponse<Array<Record<string, unknown>>>>",
+     "method": "GET",
+     "path": "/api/ai/credits/transactions",
+     "specPath": "/api/ai/credits/transactions",
+     "auth": [
+      "envToken",
+      "jwt",
+      "envMember"
+     ],
+     "moduleGate": null,
+     "throttle": null,
+     "status": "live",
+     "summary": "Harcama geçmişi — hangi işlem ne kadar kredi yaktı.",
+     "body": "",
+     "example": "",
+     "names": {
+      "js": "transactions",
+      "php": "transactions",
+      "swift": "transactions",
+      "kotlin": "transactions"
+     }
+    },
+    {
+     "name": "imageModels",
+     "group": null,
+     "params": [],
+     "returns": "Promise<ApiResponse<Array<Record<string, unknown>>>>",
+     "method": "GET",
+     "path": "/api/schema/ai/image-models",
+     "specPath": "/api/schema/ai/image-models",
+     "auth": [
+      "envToken",
+      "jwt",
+      "envMember"
+     ],
+     "moduleGate": null,
+     "throttle": null,
+     "status": "live",
+     "summary": "Kullanılabilir görsel üretim modelleri ve kredi maliyetleri.",
+     "body": "",
+     "example": "",
+     "names": {
+      "js": "imageModels",
+      "php": "imageModels",
+      "swift": "imageModels",
+      "kotlin": "imageModels"
+     }
+    },
+    {
+     "name": "generateImage",
+     "group": null,
+     "params": [
+      {
+       "name": "payload",
+       "type": "{ prompt: string; model?: string } & Record<string, unknown>",
+       "optional": true,
+       "default": null
+      }
+     ],
+     "returns": "Promise< ApiResponse<Record<string, unknown>> >",
+     "method": "POST",
+     "path": "/api/schema/ai/image",
+     "specPath": "/api/schema/ai/image",
+     "auth": [
+      "envToken",
+      "jwt",
+      "envMember"
+     ],
+     "moduleGate": null,
+     "throttle": "10,1",
+     "status": "live",
+     "summary": "Görsel üretir ve site medyasına kaydeder.",
+     "body": "",
+     "example": "",
+     "names": {
+      "js": "generateImage",
+      "php": "generateImage",
+      "swift": "generateImage",
+      "kotlin": "generateImage"
+     }
+    }
+   ],
+   "accessor": "ai"
+  },
+  {
+   "class": "AuthModule",
+   "file": "auth.ts",
+   "summary": "Kimlik doğrulama, hesap ve oturum işlemleri.",
+   "body": "Başarılı `login`/`register` sonrası JWT istemciye otomatik yazılır — ayrıca\n`setAuthToken` çağırmanız gerekmez. `logout` da temizler.",
+   "example": "const { data } = await sdk.auth.login({ email, password })\n  if (data?.two_factor_required) {\n    await sdk.auth.twoFactor.verify({ token: data.two_factor_token!, code: '123456' })\n  }",
+   "methods": [
+    {
+     "name": "login",
+     "group": null,
+     "params": [
+      {
+       "name": "payload",
+       "type": "LoginPayload",
+       "optional": false,
+       "default": null
+      }
+     ],
+     "returns": "Promise<ApiResponse<LoginResult>>",
+     "method": "POST",
+     "path": "/api/auth/login",
+     "specPath": "/api/auth/login",
+     "auth": [
+      "envToken"
+     ],
+     "moduleGate": null,
+     "throttle": "auth",
+     "status": "live",
+     "summary": "",
+     "body": "",
+     "example": "",
+     "names": {
+      "js": "login",
+      "php": "login",
+      "swift": "login",
+      "kotlin": "login"
+     }
+    },
+    {
+     "name": "loginApp",
+     "group": null,
+     "params": [
+      {
+       "name": "payload",
+       "type": "LoginPayload",
+       "optional": false,
+       "default": null
+      }
+     ],
+     "returns": "Promise<ApiResponse<LoginResult>>",
+     "method": "POST",
+     "path": "/api/auth/login-app",
+     "specPath": "/api/auth/login-app",
+     "auth": [
+      "envToken"
+     ],
+     "moduleGate": null,
+     "throttle": "auth",
+     "status": "live",
+     "summary": "",
+     "body": "",
+     "example": "",
+     "names": {
+      "js": "loginApp",
+      "php": "loginApp",
+      "swift": "loginApp",
+      "kotlin": "loginApp"
+     }
+    },
+    {
+     "name": "console",
+     "group": null,
+     "params": [
+      {
+       "name": "payload",
+       "type": "LoginPayload",
+       "optional": false,
+       "default": null
+      }
+     ],
+     "returns": "Promise<ApiResponse<LoginResult>>",
+     "method": "POST",
+     "path": "/api/auth/console",
+     "specPath": "/api/auth/console",
+     "auth": [
+      "envToken"
+     ],
+     "moduleGate": null,
+     "throttle": "auth",
+     "status": "live",
+     "summary": "",
+     "body": "",
+     "example": "",
+     "names": {
+      "js": "console",
+      "php": "console",
+      "swift": "console",
+      "kotlin": "console"
+     }
+    },
+    {
+     "name": "register",
+     "group": null,
+     "params": [
+      {
+       "name": "payload",
+       "type": "RegisterPayload",
+       "optional": false,
+       "default": null
+      }
+     ],
+     "returns": "Promise<ApiResponse<LoginResult>>",
+     "method": "POST",
+     "path": "/api/auth/register",
+     "specPath": "/api/auth/register",
+     "auth": [],
+     "moduleGate": null,
+     "throttle": "register",
+     "status": "live",
+     "summary": "Yeni hesap açar.",
+     "body": "Hesabın doğrudan aktif olup olmayacağına **site** karar verir\n(`environments.auto_activate`). Kapalıysa kullanıcı `waiting` grubuna düşer\nve onay bekler; bu davranış istemciden değiştirilemez.",
+     "example": "",
+     "names": {
+      "js": "register",
+      "php": "register",
+      "swift": "register",
+      "kotlin": "register"
+     }
+    },
+    {
+     "name": "registerAndCreateEnvironment",
+     "group": null,
+     "params": [
+      {
+       "name": "payload",
+       "type": "RegisterPayload & { site_title: string; site_type?: string }",
+       "optional": true,
+       "default": null
+      }
+     ],
+     "returns": "Promise<ApiResponse<LoginResult>>",
+     "method": "POST",
+     "path": "/api/auth/registerAndCreateEnvironment",
+     "specPath": "/api/auth/registerAndCreateEnvironment",
+     "auth": [],
+     "moduleGate": null,
+     "throttle": null,
+     "status": "live",
+     "summary": "Hesap açıp aynı istekte yeni bir site kurar (onboarding akışı).",
+     "body": "",
+     "example": "",
+     "names": {
+      "js": "registerAndCreateEnvironment",
+      "php": "registerAndCreateEnvironment",
+      "swift": "registerAndCreateEnvironment",
+      "kotlin": "registerAndCreateEnvironment"
+     }
+    },
+    {
+     "name": "logout",
+     "group": null,
+     "params": [],
+     "returns": "Promise<ApiResponse<null>>",
+     "method": "POST",
+     "path": "/api/auth/logout",
+     "specPath": "/api/auth/logout",
+     "auth": [],
+     "moduleGate": null,
+     "throttle": null,
+     "status": "live",
+     "summary": "",
+     "body": "",
+     "example": "",
+     "names": {
+      "js": "logout",
+      "php": "logout",
+      "swift": "logout",
+      "kotlin": "logout"
+     }
+    },
+    {
+     "name": "me",
+     "group": null,
+     "params": [],
+     "returns": "Promise<ApiResponse<AuthUser>>",
+     "method": "GET",
+     "path": "/api/auth/me",
+     "specPath": "/api/auth/me",
+     "auth": [
+      "jwt"
+     ],
+     "moduleGate": null,
+     "throttle": null,
+     "status": "live",
+     "summary": "Oturum açmış kullanıcı. Yalnızca JWT ister, site token'ı gerekmez.",
+     "body": "",
+     "example": "",
+     "names": {
+      "js": "me",
+      "php": "me",
+      "swift": "me",
+      "kotlin": "me"
+     }
+    },
+    {
+     "name": "refresh",
+     "group": null,
+     "params": [],
+     "returns": "Promise<ApiResponse<",
+     "method": "GET",
+     "path": "/api/auth/refresh",
+     "specPath": "/api/auth/refresh",
+     "auth": [],
+     "moduleGate": null,
+     "throttle": null,
+     "status": "live",
+     "summary": "",
+     "body": "",
+     "example": "",
+     "names": {
+      "js": "refresh",
+      "php": "refresh",
+      "swift": "refresh",
+      "kotlin": "refresh"
+     }
+    },
+    {
+     "name": "myEnvironments",
+     "group": null,
+     "params": [],
+     "returns": "Promise<ApiResponse<Array<",
+     "method": "GET",
+     "path": "/api/my-environments",
+     "specPath": "/api/my-environments",
+     "auth": [
+      "envToken",
+      "jwt"
+     ],
+     "moduleGate": null,
+     "throttle": null,
+     "status": "live",
+     "summary": "Kullanıcının erişebildiği siteler — panelde site seçici bunu kullanır.",
+     "body": "",
+     "example": "",
+     "names": {
+      "js": "myEnvironments",
+      "php": "myEnvironments",
+      "swift": "myEnvironments",
+      "kotlin": "myEnvironments"
+     }
+    },
+    {
+     "name": "forgotPassword",
+     "group": null,
+     "params": [
+      {
+       "name": "email",
+       "type": "string",
+       "optional": false,
+       "default": null
+      }
+     ],
+     "returns": "Promise<ApiResponse<null>>",
+     "method": "POST",
+     "path": "/api/auth/forgot-password",
+     "specPath": "/api/auth/forgot-password",
+     "auth": [],
+     "moduleGate": null,
+     "throttle": "forgot-password",
+     "status": "live",
+     "summary": "Sıfırlama bağlantısı gönderir. Rate limit: `throttle:forgot-password`.",
+     "body": "",
+     "example": "",
+     "names": {
+      "js": "forgotPassword",
+      "php": "forgotPassword",
+      "swift": "forgotPassword",
+      "kotlin": "forgotPassword"
+     }
+    },
+    {
+     "name": "resendForgotPasswordMail",
+     "group": null,
+     "params": [
+      {
+       "name": "email",
+       "type": "string",
+       "optional": false,
+       "default": null
+      }
+     ],
+     "returns": "Promise<ApiResponse<null>>",
+     "method": "POST",
+     "path": "/api/auth/resend-forgot-password-mail",
+     "specPath": "/api/auth/resend-forgot-password-mail",
+     "auth": [],
+     "moduleGate": null,
+     "throttle": "forgot-password",
+     "status": "live",
+     "summary": "Sıfırlama e-postasını yeniden gönderir.",
+     "body": "",
+     "example": "",
+     "names": {
+      "js": "resendForgotPasswordMail",
+      "php": "resendForgotPasswordMail",
+      "swift": "resendForgotPasswordMail",
+      "kotlin": "resendForgotPasswordMail"
+     }
+    },
+    {
+     "name": "checkResetToken",
+     "group": null,
+     "params": [
+      {
+       "name": "token",
+       "type": "string",
+       "optional": false,
+       "default": null
+      }
+     ],
+     "returns": "Promise<ApiResponse<",
+     "method": "GET",
+     "path": "/api/auth/check-reset-token",
+     "specPath": "/api/auth/check-reset-token",
+     "auth": [],
+     "moduleGate": null,
+     "throttle": null,
+     "status": "live",
+     "summary": "Sıfırlama bağlantısındaki token hâlâ geçerli mi — formu göstermeden önce.",
+     "body": "",
+     "example": "",
+     "names": {
+      "js": "checkResetToken",
+      "php": "checkResetToken",
+      "swift": "checkResetToken",
+      "kotlin": "checkResetToken"
+     }
+    },
+    {
+     "name": "resetPassword",
+     "group": null,
+     "params": [
+      {
+       "name": "payload",
+       "type": "{ token: string email: string password: string password_confirmation: string }",
+       "optional": false,
+       "default": null
+      }
+     ],
+     "returns": "Promise<ApiResponse<null>>",
+     "method": "POST",
+     "path": "/api/auth/reset-password",
+     "specPath": "/api/auth/reset-password",
+     "auth": [],
+     "moduleGate": null,
+     "throttle": "forgot-password",
+     "status": "live",
+     "summary": "",
+     "body": "",
+     "example": "",
+     "names": {
+      "js": "resetPassword",
+      "php": "resetPassword",
+      "swift": "resetPassword",
+      "kotlin": "resetPassword"
+     }
+    },
+    {
+     "name": "updatePassword",
+     "group": null,
+     "params": [
+      {
+       "name": "payload",
+       "type": "{ current_password: string password: string password_confirmation: string }",
+       "optional": false,
+       "default": null
+      }
+     ],
+     "returns": "Promise<ApiResponse<null>>",
+     "method": "POST",
+     "path": "/api/auth/password/update",
+     "specPath": "/api/auth/password/update",
+     "auth": [
+      "envToken",
+      "jwt"
+     ],
+     "moduleGate": null,
+     "throttle": null,
+     "status": "live",
+     "summary": "Oturum içi parola değişimi — mevcut parola zorunlu.",
+     "body": "",
+     "example": "",
+     "names": {
+      "js": "updatePassword",
+      "php": "updatePassword",
+      "swift": "updatePassword",
+      "kotlin": "updatePassword"
+     }
+    },
+    {
+     "name": "updateProfile",
+     "group": null,
+     "params": [
+      {
+       "name": "payload",
+       "type": "Partial<Pick<AuthUser, 'name' | 'surname'>> & Record<string, unknown>",
+       "optional": false,
+       "default": null
+      }
+     ],
+     "returns": "Promise< ApiResponse<AuthUser> >",
+     "method": "POST",
+     "path": "/api/auth/profile/update",
+     "specPath": "/api/auth/profile/update",
+     "auth": [
+      "envToken",
+      "jwt"
+     ],
+     "moduleGate": null,
+     "throttle": null,
+     "status": "live",
+     "summary": "",
+     "body": "",
+     "example": "",
+     "names": {
+      "js": "updateProfile",
+      "php": "updateProfile",
+      "swift": "updateProfile",
+      "kotlin": "updateProfile"
+     }
+    },
+    {
+     "name": "updateEmail",
+     "group": null,
+     "params": [
+      {
+       "name": "payload",
+       "type": "{ email: string; password: string }",
+       "optional": false,
+       "default": null
+      }
+     ],
+     "returns": "Promise<ApiResponse<null>>",
+     "method": "POST",
+     "path": "/api/auth/email/update",
+     "specPath": "/api/auth/email/update",
+     "auth": [
+      "envToken",
+      "jwt"
+     ],
+     "moduleGate": null,
+     "throttle": null,
+     "status": "live",
+     "summary": "E-posta değişimi — yeni adrese doğrulama gider.",
+     "body": "",
+     "example": "",
+     "names": {
+      "js": "updateEmail",
+      "php": "updateEmail",
+      "swift": "updateEmail",
+      "kotlin": "updateEmail"
+     }
+    },
+    {
+     "name": "updateAuthMethod",
+     "group": null,
+     "params": [
+      {
+       "name": "payload",
+       "type": "Record<string, unknown>",
+       "optional": false,
+       "default": null
+      }
+     ],
+     "returns": "Promise<ApiResponse<null>>",
+     "method": "POST",
+     "path": "/api/auth/auth-method/update",
+     "specPath": "/api/auth/auth-method/update",
+     "auth": [
+      "envToken",
+      "jwt"
+     ],
+     "moduleGate": null,
+     "throttle": null,
+     "status": "live",
+     "summary": "Giriş yöntemini değiştirir (parola / Google / 2FA zorunluluğu).",
+     "body": "",
+     "example": "",
+     "names": {
+      "js": "updateAuthMethod",
+      "php": "updateAuthMethod",
+      "swift": "updateAuthMethod",
+      "kotlin": "updateAuthMethod"
+     }
+    },
+    {
+     "name": "activateAccount",
+     "group": null,
+     "params": [
+      {
+       "name": "token",
+       "type": "string",
+       "optional": false,
+       "default": null
+      }
+     ],
+     "returns": "Promise<ApiResponse<null>>",
+     "method": "PUT",
+     "path": "/api/auth/account-activation/${encodeURIComponent(token)}",
+     "specPath": "/api/auth/account-activation/{token}",
+     "auth": [],
+     "moduleGate": null,
+     "throttle": null,
+     "status": "live",
+     "summary": "E-posta ile gelen aktivasyon bağlantısını tamamlar.",
+     "body": "",
+     "example": "",
+     "names": {
+      "js": "activateAccount",
+      "php": "activateAccount",
+      "swift": "activateAccount",
+      "kotlin": "activateAccount"
+     }
+    },
+    {
+     "name": "invitation",
+     "group": null,
+     "params": [
+      {
+       "name": "token",
+       "type": "string",
+       "optional": false,
+       "default": null
+      }
+     ],
+     "returns": "Promise<ApiResponse<",
+     "method": "GET",
+     "path": "/api/auth/invitation/${encodeURIComponent(token)}",
+     "specPath": "/api/auth/invitation/{token}",
+     "auth": [],
+     "moduleGate": null,
+     "throttle": null,
+     "status": "live",
+     "summary": "Davet bağlantısındaki bilgileri okur (kimin, hangi siteye davet ettiği).",
+     "body": "",
+     "example": "",
+     "names": {
+      "js": "invitation",
+      "php": "invitation",
+      "swift": "invitation",
+      "kotlin": "invitation"
+     }
+    },
+    {
+     "name": "completeInvitation",
+     "group": null,
+     "params": [
+      {
+       "name": "payload",
+       "type": "{ token: string name: string surname?: string password: string password_confirmation: string }",
+       "optional": true,
+       "default": null
+      }
+     ],
+     "returns": "Promise<ApiResponse<LoginResult>>",
+     "method": "POST",
+     "path": "/api/auth/complete-invitation",
+     "specPath": "/api/auth/complete-invitation",
+     "auth": [],
+     "moduleGate": null,
+     "throttle": null,
+     "status": "live",
+     "summary": "Daveti kabul edip hesabı tamamlar.",
+     "body": "",
+     "example": "",
+     "names": {
+      "js": "completeInvitation",
+      "php": "completeInvitation",
+      "swift": "completeInvitation",
+      "kotlin": "completeInvitation"
+     }
+    },
+    {
+     "name": "googleRedirectUrl",
+     "group": null,
+     "params": [],
+     "returns": "string",
+     "method": "POST",
+     "path": "/api/auth/2fa/setup",
+     "specPath": "/api/auth/2fa/setup",
+     "auth": [
+      "envToken",
+      "jwt"
+     ],
+     "moduleGate": null,
+     "throttle": null,
+     "status": "live",
+     "summary": "Google ile giriş akışı tarayıcı yönlendirmesiyle yürür — XHR ile çağrılamaz. Kullanıcıyı bu adrese gönderin; dönüşte `callback` sizin sitenize yönlendirir.",
+     "body": "",
+     "example": "",
+     "names": {
+      "js": "googleRedirectUrl",
+      "php": "setupTwoFactor",
+      "swift": "setupTwoFactor",
+      "kotlin": "setupTwoFactor"
+     }
+    },
+    {
+     "name": "twoFactor.setup",
+     "group": "twoFactor",
+     "params": [],
+     "returns": "Promise<ApiResponse<",
+     "method": "POST",
+     "path": "/api/auth/2fa/setup",
+     "specPath": "/api/auth/2fa/setup",
+     "auth": [
+      "envToken",
+      "jwt"
+     ],
+     "moduleGate": null,
+     "throttle": null,
+     "status": "live",
+     "summary": "TOTP kurulumu başlatır — QR için `otpauth://` URI'si döner.",
+     "body": "",
+     "example": "",
+     "names": {
+      "js": "twoFactor.setup",
+      "php": "setupTwoFactor",
+      "swift": "setupTwoFactor",
+      "kotlin": "setupTwoFactor"
+     }
+    },
+    {
+     "name": "twoFactor.confirm",
+     "group": "twoFactor",
+     "params": [
+      {
+       "name": "code",
+       "type": "string",
+       "optional": false,
+       "default": null
+      }
+     ],
+     "returns": "Promise<ApiResponse<",
+     "method": "POST",
+     "path": "/api/auth/2fa/confirm",
+     "specPath": "/api/auth/2fa/confirm",
+     "auth": [
+      "envToken",
+      "jwt"
+     ],
+     "moduleGate": null,
+     "throttle": null,
+     "status": "live",
+     "summary": "Kurulumu ilk kodla onaylar.",
+     "body": "",
+     "example": "",
+     "names": {
+      "js": "twoFactor.confirm",
+      "php": "confirmTwoFactor",
+      "swift": "confirmTwoFactor",
+      "kotlin": "confirmTwoFactor"
+     }
+    },
+    {
+     "name": "twoFactor.verify",
+     "group": "twoFactor",
+     "params": [
+      {
+       "name": "payload",
+       "type": "{ token: string; code: string }",
+       "optional": false,
+       "default": null
+      }
+     ],
+     "returns": "Promise<ApiResponse<LoginResult>>",
+     "method": "POST",
+     "path": "/api/auth/2fa/verify",
+     "specPath": "/api/auth/2fa/verify",
+     "auth": [],
+     "moduleGate": null,
+     "throttle": null,
+     "status": "live",
+     "summary": "Girişteki 2FA adımını tamamlar. `login` yanıtındaki `two_factor_token` ile birlikte gönderilir; başarılıysa JWT istemciye yazılır.",
+     "body": "",
+     "example": "",
+     "names": {
+      "js": "twoFactor.verify",
+      "php": "verifyTwoFactor",
+      "swift": "verifyTwoFactor",
+      "kotlin": "verifyTwoFactor"
+     }
+    },
+    {
+     "name": "twoFactor.disable",
+     "group": "twoFactor",
+     "params": [
+      {
+       "name": "password",
+       "type": "string",
+       "optional": false,
+       "default": null
+      }
+     ],
+     "returns": "Promise<ApiResponse<null>>",
+     "method": "POST",
+     "path": "/api/auth/2fa/disable",
+     "specPath": "/api/auth/2fa/disable",
+     "auth": [
+      "envToken",
+      "jwt"
+     ],
+     "moduleGate": null,
+     "throttle": null,
+     "status": "live",
+     "summary": "",
+     "body": "",
+     "example": "",
+     "names": {
+      "js": "twoFactor.disable",
+      "php": "disableTwoFactor",
+      "swift": "disableTwoFactor",
+      "kotlin": "disableTwoFactor"
+     }
+    },
+    {
+     "name": "device.register",
+     "group": "device",
+     "params": [
+      {
+       "name": "payload",
+       "type": "{ token: string; platform?: 'ios' | 'android' | 'web' }",
+       "optional": true,
+       "default": null
+      }
+     ],
+     "returns": "Promise<ApiResponse<null>>",
+     "method": "POST",
+     "path": "/api/auth/device/register",
+     "specPath": "/api/auth/device/register",
+     "auth": [],
+     "moduleGate": null,
+     "throttle": null,
+     "status": "live",
+     "summary": "Push token'ı kaydeder (Expo / FCM / APNs).",
+     "body": "",
+     "example": "",
+     "names": {
+      "js": "device.register",
+      "php": "registerDevice",
+      "swift": "registerDevice",
+      "kotlin": "registerDevice"
+     }
+    },
+    {
+     "name": "device.remove",
+     "group": "device",
+     "params": [
+      {
+       "name": "token",
+       "type": "string",
+       "optional": false,
+       "default": null
+      }
+     ],
+     "returns": "Promise<ApiResponse<null>>",
+     "method": "POST",
+     "path": "/api/auth/device/remove",
+     "specPath": "/api/auth/device/remove",
+     "auth": [],
+     "moduleGate": null,
+     "throttle": null,
+     "status": "live",
+     "summary": "",
+     "body": "",
+     "example": "",
+     "names": {
+      "js": "device.remove",
+      "php": "removeDevice",
+      "swift": "removeDevice",
+      "kotlin": "removeDevice"
+     }
+    }
+   ],
+   "accessor": "auth"
+  },
+  {
+   "class": "BillingModule",
+   "file": "commerce.ts",
+   "summary": "Abonelik ve fatura profilleri (SaaS tarafı).",
+   "body": "",
+   "example": "",
+   "methods": [
+    {
+     "name": "subscriptions",
+     "group": null,
+     "params": [],
+     "returns": "Promise<ApiResponse<Array<Record<string, unknown>>>>",
+     "method": "GET",
+     "path": "/api/user/subscriptions",
+     "specPath": "/api/user/subscriptions",
+     "auth": [
+      "envToken",
+      "jwt"
+     ],
+     "moduleGate": null,
+     "throttle": null,
+     "status": "live",
+     "summary": "",
+     "body": "",
+     "example": "",
+     "names": {
+      "js": "subscriptions",
+      "php": "subscriptions",
+      "swift": "subscriptions",
+      "kotlin": "subscriptions"
+     }
+    },
+    {
+     "name": "calculatePricing",
+     "group": null,
+     "params": [
+      {
+       "name": "payload",
+       "type": "Record<string, unknown>",
+       "optional": false,
+       "default": null
+      }
+     ],
+     "returns": "Promise<ApiResponse<Record<string, unknown>>>",
+     "method": "POST",
+     "path": "/api/user/calculate-pricing",
+     "specPath": "/api/user/calculate-pricing",
+     "auth": [
+      "envToken",
+      "jwt"
+     ],
+     "moduleGate": null,
+     "throttle": null,
+     "status": "live",
+     "summary": "Satın almadan önce vergi dahil tutarı hesaplatır.",
+     "body": "",
+     "example": "",
+     "names": {
+      "js": "calculatePricing",
+      "php": "calculatePricing",
+      "swift": "calculatePricing",
+      "kotlin": "calculatePricing"
+     }
+    },
+    {
+     "name": "subscribe",
+     "group": null,
+     "params": [
+      {
+       "name": "payload",
+       "type": "Record<string, unknown>",
+       "optional": false,
+       "default": null
+      }
+     ],
+     "returns": "Promise<ApiResponse<Record<string, unknown>>>",
+     "method": "POST",
+     "path": "/api/user/subscribe",
+     "specPath": "/api/user/subscribe",
+     "auth": [
+      "envToken",
+      "jwt"
+     ],
+     "moduleGate": null,
+     "throttle": "5,1",
+     "status": "live",
+     "summary": "",
+     "body": "",
+     "example": "",
+     "names": {
+      "js": "subscribe",
+      "php": "subscribe",
+      "swift": "subscribe",
+      "kotlin": "subscribe"
+     }
+    },
+    {
+     "name": "profiles.list",
+     "group": "profiles",
+     "params": [],
+     "returns": "Promise<ApiResponse<Array<Record<string, unknown>>>>",
+     "method": "GET",
+     "path": "/api/user/billing-profiles",
+     "specPath": "/api/user/billing-profiles",
+     "auth": [
+      "envToken",
+      "jwt"
+     ],
+     "moduleGate": null,
+     "throttle": null,
+     "status": "live",
+     "summary": "",
+     "body": "",
+     "example": "",
+     "names": {
+      "js": "profiles.list",
+      "php": "profiles",
+      "swift": "profiles",
+      "kotlin": "profiles"
+     }
+    },
+    {
+     "name": "profiles.create",
+     "group": "profiles",
+     "params": [
+      {
+       "name": "payload",
+       "type": "Record<string, unknown>",
+       "optional": false,
+       "default": null
+      }
+     ],
+     "returns": "Promise<ApiResponse<Record<string, unknown>>>",
+     "method": "POST",
+     "path": "/api/user/billing-profiles",
+     "specPath": "/api/user/billing-profiles",
+     "auth": [
+      "envToken",
+      "jwt"
+     ],
+     "moduleGate": null,
+     "throttle": null,
+     "status": "live",
+     "summary": "",
+     "body": "",
+     "example": "",
+     "names": {
+      "js": "profiles.create",
+      "php": "createProfile",
+      "swift": "createProfile",
+      "kotlin": "createProfile"
+     }
+    },
+    {
+     "name": "profiles.update",
+     "group": "profiles",
+     "params": [
+      {
+       "name": "id",
+       "type": "number",
+       "optional": false,
+       "default": null
+      },
+      {
+       "name": "payload",
+       "type": "Record<string, unknown>",
+       "optional": false,
+       "default": null
+      }
+     ],
+     "returns": "Promise<ApiResponse<Record<string, unknown>>>",
+     "method": "PUT",
+     "path": "/api/user/billing-profiles/${id}",
+     "specPath": "/api/user/billing-profiles/{id}",
+     "auth": [
+      "envToken",
+      "jwt"
+     ],
+     "moduleGate": null,
+     "throttle": null,
+     "status": "live",
+     "summary": "",
+     "body": "",
+     "example": "",
+     "names": {
+      "js": "profiles.update",
+      "php": "updateProfile",
+      "swift": "updateProfile",
+      "kotlin": "updateProfile"
+     }
+    }
+   ],
+   "accessor": "billing"
+  },
+  {
+   "class": "CartModule",
+   "file": "commerce.ts",
+   "summary": "Ziyaretçi sepeti — mağaza önyüzü.",
+   "body": "Oturum gerekmez; misafir sepeti `X-Guest-Id` ile taşınır\n(`client.setGuestId(...)`). `ecommerce` modülü kapalıysa uçlar 403 döner.",
+   "example": "sdk.client.setGuestId(localStorage.getItem('guest') ?? crypto.randomUUID())\n  await sdk.cart.add({ record_id: 12, quantity: 2 })\n  const { data } = await sdk.cart.get()",
+   "methods": [
+    {
+     "name": "get",
+     "group": null,
+     "params": [],
+     "returns": "Promise<ApiResponse<Cart>>",
+     "method": "GET",
+     "path": "/api/shop/cart",
+     "specPath": "/api/shop/cart",
+     "auth": [
+      "envToken"
+     ],
+     "moduleGate": "ecommerce",
+     "throttle": null,
+     "status": "live",
+     "summary": "",
+     "body": "",
+     "example": "",
+     "names": {
+      "js": "get",
+      "php": "get",
+      "swift": "get",
+      "kotlin": "get"
+     }
+    },
+    {
+     "name": "add",
+     "group": null,
+     "params": [
+      {
+       "name": "payload",
+       "type": "{ record_id?: number; product_id?: number; quantity?: number } & Record<string, unknown>",
+       "optional": true,
+       "default": null
+      }
+     ],
+     "returns": "Promise< ApiResponse<Cart> >",
+     "method": "POST",
+     "path": "/api/shop/cart",
+     "specPath": "/api/shop/cart",
+     "auth": [
+      "envToken"
+     ],
+     "moduleGate": "ecommerce",
+     "throttle": null,
+     "status": "live",
+     "summary": "Ürün ekler. Aynı ürün tekrar eklenirse adet artar.",
+     "body": "",
+     "example": "",
+     "names": {
+      "js": "add",
+      "php": "add",
+      "swift": "add",
+      "kotlin": "add"
+     }
+    },
+    {
+     "name": "updateItem",
+     "group": null,
+     "params": [
+      {
+       "name": "itemId",
+       "type": "number",
+       "optional": false,
+       "default": null
+      },
+      {
+       "name": "quantity",
+       "type": "number",
+       "optional": false,
+       "default": null
+      }
+     ],
+     "returns": "Promise<ApiResponse<Cart>>",
+     "method": "PUT",
+     "path": "/api/shop/cart/items/${itemId}",
+     "specPath": "/api/shop/cart/items/{itemId}",
+     "auth": [
+      "envToken"
+     ],
+     "moduleGate": "ecommerce",
+     "throttle": null,
+     "status": "live",
+     "summary": "Satır adedini değiştirir. `0` göndermek satırı silmez — `removeItem` kullanın.",
+     "body": "",
+     "example": "",
+     "names": {
+      "js": "updateItem",
+      "php": "updateItem",
+      "swift": "updateItem",
+      "kotlin": "updateItem"
+     }
+    },
+    {
+     "name": "removeItem",
+     "group": null,
+     "params": [
+      {
+       "name": "itemId",
+       "type": "number",
+       "optional": false,
+       "default": null
+      }
+     ],
+     "returns": "Promise<ApiResponse<Cart>>",
+     "method": "DELETE",
+     "path": "/api/shop/cart/items/${itemId}",
+     "specPath": "/api/shop/cart/items/{itemId}",
+     "auth": [
+      "envToken"
+     ],
+     "moduleGate": "ecommerce",
+     "throttle": null,
+     "status": "live",
+     "summary": "",
+     "body": "",
+     "example": "",
+     "names": {
+      "js": "removeItem",
+      "php": "removeItem",
+      "swift": "removeItem",
+      "kotlin": "removeItem"
+     }
+    },
+    {
+     "name": "clear",
+     "group": null,
+     "params": [],
+     "returns": "Promise<ApiResponse<null>>",
+     "method": "DELETE",
+     "path": "/api/shop/cart",
+     "specPath": "/api/shop/cart",
+     "auth": [
+      "envToken"
+     ],
+     "moduleGate": "ecommerce",
+     "throttle": null,
+     "status": "live",
+     "summary": "Sepeti tamamen boşaltır.",
+     "body": "",
+     "example": "",
+     "names": {
+      "js": "clear",
+      "php": "clear",
+      "swift": "clear",
+      "kotlin": "clear"
+     }
+    },
+    {
+     "name": "checkout",
+     "group": null,
+     "params": [
+      {
+       "name": "payload",
+       "type": "Record<string, unknown>",
+       "optional": false,
+       "default": null
+      }
+     ],
+     "returns": "Promise<ApiResponse<Record<string, unknown>>>",
+     "method": "POST",
+     "path": "/api/shop/checkout",
+     "specPath": "/api/shop/checkout",
+     "auth": [
+      "envToken"
+     ],
+     "moduleGate": "ecommerce",
+     "throttle": "10,1",
+     "status": "live",
+     "summary": "Sepeti siparişe çevirir. Ödeme yönlendirmesi yanıtta döner.",
+     "body": "",
+     "example": "",
+     "names": {
+      "js": "checkout",
+      "php": "checkout",
+      "swift": "checkout",
+      "kotlin": "checkout"
+     }
+    }
+   ],
+   "accessor": "cart"
+  },
+  {
+   "class": "CategoryModule",
+   "file": "content-types.ts",
+   "summary": "Kayıt kategorileri — ağaç yapısını `parent_id` kurar.",
+   "body": "",
+   "example": "",
+   "methods": [
+    {
+     "name": "list",
+     "group": null,
+     "params": [],
+     "returns": "Promise<ApiResponse<RecordCategory[]>>",
+     "method": "GET",
+     "path": "/api/schema/categories",
+     "specPath": "/api/schema/categories",
+     "auth": [
+      "envToken",
+      "jwt",
+      "envMember"
+     ],
+     "moduleGate": null,
+     "throttle": null,
+     "status": "live",
+     "summary": "",
+     "body": "",
+     "example": "",
+     "names": {
+      "js": "list",
+      "php": "list",
+      "swift": "list",
+      "kotlin": "list"
+     }
+    },
+    {
+     "name": "create",
+     "group": null,
+     "params": [
+      {
+       "name": "payload",
+       "type": "{ name: string; slug?: string; parent_id?: number | null }",
+       "optional": true,
+       "default": null
+      }
+     ],
+     "returns": "Promise<ApiResponse<RecordCategory>>",
+     "method": "POST",
+     "path": "/api/schema/categories",
+     "specPath": "/api/schema/categories",
+     "auth": [
+      "envToken",
+      "jwt",
+      "envMember"
+     ],
+     "moduleGate": null,
+     "throttle": null,
+     "status": "live",
+     "summary": "",
+     "body": "",
+     "example": "",
+     "names": {
+      "js": "create",
+      "php": "create",
+      "swift": "create",
+      "kotlin": "create"
+     }
+    },
+    {
+     "name": "update",
+     "group": null,
+     "params": [
+      {
+       "name": "id",
+       "type": "number",
+       "optional": false,
+       "default": null
+      },
+      {
+       "name": "payload",
+       "type": "Partial<{ name: string; slug: string; parent_id: number | null }>",
+       "optional": false,
+       "default": null
+      }
+     ],
+     "returns": "Promise< ApiResponse<RecordCategory> >",
+     "method": "PUT",
+     "path": "/api/schema/categories/${id}",
+     "specPath": "/api/schema/categories/{id}",
+     "auth": [
+      "envToken",
+      "jwt",
+      "envMember"
+     ],
+     "moduleGate": null,
+     "throttle": null,
+     "status": "live",
+     "summary": "",
+     "body": "",
+     "example": "",
+     "names": {
+      "js": "update",
+      "php": "update",
+      "swift": "update",
+      "kotlin": "update"
+     }
+    },
+    {
+     "name": "delete",
+     "group": null,
+     "params": [
+      {
+       "name": "id",
+       "type": "number",
+       "optional": false,
+       "default": null
+      }
+     ],
+     "returns": "Promise<ApiResponse<null>>",
+     "method": "DELETE",
+     "path": "/api/schema/categories/${id}",
+     "specPath": "/api/schema/categories/{id}",
+     "auth": [
+      "envToken",
+      "jwt",
+      "envMember"
+     ],
+     "moduleGate": null,
+     "throttle": null,
+     "status": "live",
+     "summary": "",
+     "body": "",
+     "example": "",
+     "names": {
+      "js": "delete",
+      "php": "delete",
+      "swift": "delete",
+      "kotlin": "delete"
+     }
+    }
+   ],
+   "accessor": "categories"
+  },
+  {
+   "class": "ContentTypeModule",
+   "file": "content-types.ts",
+   "summary": "İçerik tipleri — sitenin veri şeması.",
+   "body": "Bir tip tanımlarsınız (örn. `blog`, alanları: başlık, görsel, içerik), sonra\n`sdk.records` ile o tipte kayıt açarsınız. Şema değişiklikleri sürümlenir;\neski kayıtlar hangi sürümle yazıldıysa onu taşır.",
+   "example": "await sdk.contentTypes.create({\n    code: 'blog',\n    label: 'Blog Yazısı',\n    kind: 'content',\n    fields: [\n      { code: 'baslik', label: 'Başlık', type: 'text', required: true },\n      { code: 'icerik', label: 'İçerik', type: 'richtext' },\n    ],\n  })",
+   "methods": [
+    {
+     "name": "list",
+     "group": null,
+     "params": [],
+     "returns": "Promise<ApiResponse<ContentType[]>>",
+     "method": "GET",
+     "path": "/api/schema/types",
+     "specPath": "/api/schema/types",
+     "auth": [
+      "envToken",
+      "jwt",
+      "envMember"
+     ],
+     "moduleGate": null,
+     "throttle": null,
+     "status": "live",
+     "summary": "",
+     "body": "",
+     "example": "",
+     "names": {
+      "js": "list",
+      "php": "list",
+      "swift": "list",
+      "kotlin": "list"
+     }
+    },
+    {
+     "name": "get",
+     "group": null,
+     "params": [
+      {
+       "name": "code",
+       "type": "string",
+       "optional": false,
+       "default": null
+      }
+     ],
+     "returns": "Promise<ApiResponse<ContentType>>",
+     "method": "GET",
+     "path": "/api/schema/types/${encodeURIComponent(code)}",
+     "specPath": "/api/schema/types/{code}",
+     "auth": [
+      "envToken",
+      "jwt",
+      "envMember"
+     ],
+     "moduleGate": null,
+     "throttle": null,
+     "status": "live",
+     "summary": "",
+     "body": "",
+     "example": "",
+     "names": {
+      "js": "get",
+      "php": "get",
+      "swift": "get",
+      "kotlin": "get"
+     }
+    },
+    {
+     "name": "create",
+     "group": null,
+     "params": [
+      {
+       "name": "payload",
+       "type": "ContentTypePayload",
+       "optional": false,
+       "default": null
+      }
+     ],
+     "returns": "Promise<ApiResponse<ContentType>>",
+     "method": "POST",
+     "path": "/api/schema/types",
+     "specPath": "/api/schema/types",
+     "auth": [
+      "envToken",
+      "jwt",
+      "envMember"
+     ],
+     "moduleGate": null,
+     "throttle": null,
+     "status": "live",
+     "summary": "",
+     "body": "",
+     "example": "",
+     "names": {
+      "js": "create",
+      "php": "create",
+      "swift": "create",
+      "kotlin": "create"
+     }
+    },
+    {
+     "name": "update",
+     "group": null,
+     "params": [
+      {
+       "name": "code",
+       "type": "string",
+       "optional": false,
+       "default": null
+      },
+      {
+       "name": "payload",
+       "type": "Partial<ContentTypePayload>",
+       "optional": false,
+       "default": null
+      }
+     ],
+     "returns": "Promise<ApiResponse<ContentType>>",
+     "method": "PUT",
+     "path": "/api/schema/types/${encodeURIComponent(code)}",
+     "specPath": "/api/schema/types/{code}",
+     "auth": [
+      "envToken",
+      "jwt",
+      "envMember"
+     ],
+     "moduleGate": null,
+     "throttle": null,
+     "status": "live",
+     "summary": "Tipi günceller ve sürümü artırır.",
+     "body": "Alan silmek eski kayıtlardaki değerleri düşürür — önce\n`revisions()` ile geçmişi kontrol etmek iyi fikirdir.",
+     "example": "",
+     "names": {
+      "js": "update",
+      "php": "update",
+      "swift": "update",
+      "kotlin": "update"
+     }
+    },
+    {
+     "name": "delete",
+     "group": null,
+     "params": [
+      {
+       "name": "code",
+       "type": "string",
+       "optional": false,
+       "default": null
+      }
+     ],
+     "returns": "Promise<ApiResponse<null>>",
+     "method": "DELETE",
+     "path": "/api/schema/types/${encodeURIComponent(code)}",
+     "specPath": "/api/schema/types/{code}",
+     "auth": [
+      "envToken",
+      "jwt",
+      "envMember"
+     ],
+     "moduleGate": null,
+     "throttle": null,
+     "status": "live",
+     "summary": "",
+     "body": "",
+     "example": "",
+     "names": {
+      "js": "delete",
+      "php": "delete",
+      "swift": "delete",
+      "kotlin": "delete"
+     }
+    },
+    {
+     "name": "form",
+     "group": null,
+     "params": [
+      {
+       "name": "code",
+       "type": "string",
+       "optional": false,
+       "default": null
+      }
+     ],
+     "returns": "Promise<ApiResponse<Record<string, unknown>>>",
+     "method": "GET",
+     "path": "/api/schema/types/${encodeURIComponent(code)}/form",
+     "specPath": "/api/schema/types/{code}/form",
+     "auth": [
+      "envToken",
+      "jwt",
+      "envMember"
+     ],
+     "moduleGate": null,
+     "throttle": null,
+     "status": "live",
+     "summary": "Tipin form tanımı — panelin kayıt formunu bu çıktıdan çizer. Kendi arayüzünüzü kuruyorsanız alan sırası ve doğrulama kuralları burada.",
+     "body": "",
+     "example": "",
+     "names": {
+      "js": "form",
+      "php": "form",
+      "swift": "form",
+      "kotlin": "form"
+     }
+    },
+    {
+     "name": "revisions",
+     "group": null,
+     "params": [
+      {
+       "name": "code",
+       "type": "string",
+       "optional": false,
+       "default": null
+      }
+     ],
+     "returns": "Promise<ApiResponse<Array<",
+     "method": "GET",
+     "path": "/api/schema/types/${encodeURIComponent(code)}/revisions",
+     "specPath": "/api/schema/types/{code}/revisions",
+     "auth": [
+      "envToken",
+      "jwt",
+      "envMember"
+     ],
+     "moduleGate": null,
+     "throttle": null,
+     "status": "live",
+     "summary": "Şema sürüm geçmişi.",
+     "body": "",
+     "example": "",
+     "names": {
+      "js": "revisions",
+      "php": "revisions",
+      "swift": "revisions",
+      "kotlin": "revisions"
+     }
+    },
+    {
+     "name": "integration",
+     "group": null,
+     "params": [
+      {
+       "name": "code",
+       "type": "string",
+       "optional": false,
+       "default": null
+      }
+     ],
+     "returns": "Promise<ApiResponse<Record<string, unknown>>>",
+     "method": "GET",
+     "path": "/api/schema/types/${encodeURIComponent(code)}/integration",
+     "specPath": "/api/schema/types/{code}/integration",
+     "auth": [
+      "envToken",
+      "jwt",
+      "envMember"
+     ],
+     "moduleGate": null,
+     "throttle": null,
+     "status": "live",
+     "summary": "Bu tipe özel, siteye göre kişiselleştirilmiş entegrasyon örnekleri (cURL / SDK / fetch kod parçaları).",
+     "body": "",
+     "example": "",
+     "names": {
+      "js": "integration",
+      "php": "integration",
+      "swift": "integration",
+      "kotlin": "integration"
+     }
+    },
+    {
+     "name": "aiGenerate",
+     "group": null,
+     "params": [
+      {
+       "name": "code",
+       "type": "string",
+       "optional": false,
+       "default": null
+      },
+      {
+       "name": "payload",
+       "type": "Record<string, unknown>",
+       "optional": false,
+       "default": null
+      }
+     ],
+     "returns": "Promise<ApiResponse<ContentType>>",
+     "method": "POST",
+     "path": "/api/schema/types/${encodeURIComponent(code)}/ai/generate",
+     "specPath": "/api/schema/types/{typeCode}/ai/generate",
+     "auth": [
+      "envToken",
+      "jwt",
+      "envMember"
+     ],
+     "moduleGate": null,
+     "throttle": "20,1",
+     "status": "live",
+     "summary": "Şemayı yapay zekâ ile üretir — doğal dille anlatın, alanları çıkarsın.",
+     "body": "",
+     "example": "",
+     "names": {
+      "js": "aiGenerate",
+      "php": "aiGenerate",
+      "swift": "aiGenerate",
+      "kotlin": "aiGenerate"
+     }
+    }
+   ],
+   "accessor": "contentTypes"
+  },
+  {
+   "class": "DeliveryModule",
+   "file": "delivery.ts",
+   "summary": "Genel teslimat — sitenizin ziyaretçilere gösterdiği her şey.",
+   "body": "Bu modülün tamamı **yalnızca site token'ı** ister; oturum gerekmez. Sunucuda\nönbelleklenir ve **yalnızca yayımlanmış** içeriği döndürür. Bir sitenin\nönyüzünü kuruyorsanız neredeyse tek ihtiyacınız budur.",
+   "example": "const sdk = new SubmitCms({ mode: 'production', token: process.env.SUBMIT_TOKEN! })\n  const { data } = await sdk.delivery.records('blog', { per_page: 10, locale: 'tr' })",
+   "methods": [
+    {
+     "name": "records",
+     "group": null,
+     "params": [
+      {
+       "name": "typeCode",
+       "type": "string",
+       "optional": false,
+       "default": null
+      },
+      {
+       "name": "params",
+       "type": "Omit<RecordListParams, 'status'>",
+       "optional": true,
+       "default": "{}"
+      }
+     ],
+     "returns": "Promise<ApiResponse<SubmitRecord[]> &",
+     "method": "GET",
+     "path": "/api/public/records/${encodeURIComponent(typeCode)}",
+     "specPath": "/api/public/records/{typeCode}",
+     "auth": [
+      "envToken"
+     ],
+     "moduleGate": null,
+     "throttle": null,
+     "status": "live",
+     "summary": "Yayımlanmış kayıtları listeler. Filtre/sıralama seçenekleri panel tarafıyla aynıdır; `status` gönderilse bile taslak dönmez.",
+     "body": "",
+     "example": "",
+     "names": {
+      "js": "records",
+      "php": "records",
+      "swift": "records",
+      "kotlin": "records"
+     }
+    },
+    {
+     "name": "record",
+     "group": null,
+     "params": [
+      {
+       "name": "typeCode",
+       "type": "string",
+       "optional": false,
+       "default": null
+      },
+      {
+       "name": "slug",
+       "type": "string",
+       "optional": false,
+       "default": null
+      },
+      {
+       "name": "params",
+       "type": "{ locale?: string }",
+       "optional": true,
+       "default": "{}"
+      }
+     ],
+     "returns": "Promise<ApiResponse<SubmitRecord>>",
+     "method": "GET",
+     "path": "/api/public/records/${encodeURIComponent(typeCode)}/item/${encodeURIComponent(slug)}",
+     "specPath": "/api/public/records/{typeCode}/item/{slug}",
+     "auth": [
+      "envToken"
+     ],
+     "moduleGate": null,
+     "throttle": null,
+     "status": "live",
+     "summary": "Slug ile tek kayıt. Aynı slug birden çok dilde varsa `locale` verin.",
+     "body": "",
+     "example": "",
+     "names": {
+      "js": "record",
+      "php": "record",
+      "swift": "record",
+      "kotlin": "record"
+     }
+    },
+    {
+     "name": "alsoRead",
+     "group": null,
+     "params": [
+      {
+       "name": "typeCode",
+       "type": "string",
+       "optional": false,
+       "default": null
+      },
+      {
+       "name": "slug",
+       "type": "string",
+       "optional": false,
+       "default": null
+      }
+     ],
+     "returns": "Promise<ApiResponse<SubmitRecord[]>>",
+     "method": "GET",
+     "path": "/api/public/records/${encodeURIComponent(typeCode)}/item/${encodeURIComponent(slug)}/also-read",
+     "specPath": "/api/public/records/{typeCode}/item/{slug}/also-read",
+     "auth": [
+      "envToken"
+     ],
+     "moduleGate": null,
+     "throttle": null,
+     "status": "live",
+     "summary": "\"Bunlar da ilginizi çekebilir\" — aynı kategoriden ilgili kayıtlar.",
+     "body": "",
+     "example": "",
+     "names": {
+      "js": "alsoRead",
+      "php": "alsoRead",
+      "swift": "alsoRead",
+      "kotlin": "alsoRead"
+     }
+    },
+    {
+     "name": "ping",
+     "group": null,
+     "params": [
+      {
+       "name": "typeCode",
+       "type": "string",
+       "optional": false,
+       "default": null
+      },
+      {
+       "name": "slug",
+       "type": "string",
+       "optional": false,
+       "default": null
+      },
+      {
+       "name": "duration",
+       "type": "unknown",
+       "optional": true,
+       "default": "0"
+      }
+     ],
+     "returns": "Promise<ApiResponse<null>>",
+     "method": "POST",
+     "path": "/api/public/records/${encodeURIComponent(typeCode)}/item/${encodeURIComponent(slug)}/ping",
+     "specPath": "/api/public/records/{typeCode}/item/{slug}/ping",
+     "auth": [
+      "envToken"
+     ],
+     "moduleGate": null,
+     "throttle": "60,1",
+     "status": "live",
+     "summary": "Görüntülenme kaydeder. `duration` saniye cinsinden okuma süresidir. Sayfa kapanırken göndermek için `navigator.sendBeacon` da kullanılabilir.",
+     "body": "",
+     "example": "",
+     "names": {
+      "js": "ping",
+      "php": "ping",
+      "swift": "ping",
+      "kotlin": "ping"
+     }
+    },
+    {
+     "name": "schema",
+     "group": null,
+     "params": [
+      {
+       "name": "typeCode",
+       "type": "string",
+       "optional": false,
+       "default": null
+      }
+     ],
+     "returns": "Promise<ApiResponse<Record<string, unknown>>>",
+     "method": "GET",
+     "path": "/api/public/records/${encodeURIComponent(typeCode)}/schema",
+     "specPath": "/api/public/records/{typeCode}/schema",
+     "auth": [
+      "envToken"
+     ],
+     "moduleGate": null,
+     "throttle": null,
+     "status": "live",
+     "summary": "Tipin genel şeması — alan adları ve tipleri. Kendi arayüzünüzü kurarken.",
+     "body": "",
+     "example": "",
+     "names": {
+      "js": "schema",
+      "php": "schema",
+      "swift": "schema",
+      "kotlin": "schema"
+     }
+    },
+    {
+     "name": "categories",
+     "group": null,
+     "params": [],
+     "returns": "Promise<ApiResponse<Array<",
+     "method": "GET",
+     "path": "/api/public/categories",
+     "specPath": "/api/public/categories",
+     "auth": [
+      "envToken"
+     ],
+     "moduleGate": null,
+     "throttle": null,
+     "status": "live",
+     "summary": "",
+     "body": "",
+     "example": "",
+     "names": {
+      "js": "categories",
+      "php": "categories",
+      "swift": "categories",
+      "kotlin": "categories"
+     }
+    },
+    {
+     "name": "category",
+     "group": null,
+     "params": [
+      {
+       "name": "slug",
+       "type": "string",
+       "optional": false,
+       "default": null
+      }
+     ],
+     "returns": "Promise<ApiResponse<Record<string, unknown>>>",
+     "method": "GET",
+     "path": "/api/public/categories/${encodeURIComponent(slug)}",
+     "specPath": "/api/public/categories/{slug}",
+     "auth": [
+      "envToken"
+     ],
+     "moduleGate": null,
+     "throttle": null,
+     "status": "live",
+     "summary": "",
+     "body": "",
+     "example": "",
+     "names": {
+      "js": "category",
+      "php": "category",
+      "swift": "category",
+      "kotlin": "category"
+     }
+    },
+    {
+     "name": "menu",
+     "group": null,
+     "params": [
+      {
+       "name": "code",
+       "type": "string",
+       "optional": false,
+       "default": null
+      }
+     ],
+     "returns": "Promise<ApiResponse<Record<string, unknown>>>",
+     "method": "GET",
+     "path": "/api/public/menus/${encodeURIComponent(code)}",
+     "specPath": "/api/public/menus/{code}",
+     "auth": [
+      "envToken"
+     ],
+     "moduleGate": null,
+     "throttle": null,
+     "status": "live",
+     "summary": "Menüyü çözülmüş ağaç olarak döner — bağlantı hedefleri hesaplanmıştır.",
+     "body": "",
+     "example": "",
+     "names": {
+      "js": "menu",
+      "php": "menu",
+      "swift": "menu",
+      "kotlin": "menu"
+     }
+    },
+    {
+     "name": "init",
+     "group": null,
+     "params": [],
+     "returns": "Promise<ApiResponse<Record<string, unknown>>>",
+     "method": "GET",
+     "path": "/api/public/init",
+     "specPath": "/api/public/init",
+     "auth": [
+      "envToken"
+     ],
+     "moduleGate": null,
+     "throttle": null,
+     "status": "live",
+     "summary": "Önyüzün açılışta ihtiyaç duyduğu her şey tek istekte: site bilgileri, tasarım, diller, menüler. İlk yüklemede bunu çağırmak birkaç isteği birleştirir.",
+     "body": "",
+     "example": "",
+     "names": {
+      "js": "init",
+      "php": "init",
+      "swift": "initSite",
+      "kotlin": "init"
+     }
+    },
+    {
+     "name": "environment",
+     "group": null,
+     "params": [
+      {
+       "name": "token",
+       "type": "string",
+       "optional": false,
+       "default": null
+      }
+     ],
+     "returns": "Promise<ApiResponse<Record<string, unknown>>>",
+     "method": "GET",
+     "path": "/api/public/environment/${encodeURIComponent(token)}",
+     "specPath": "/api/public/environment/{token}",
+     "auth": [
+      "envToken"
+     ],
+     "moduleGate": null,
+     "throttle": null,
+     "status": "live",
+     "summary": "",
+     "body": "",
+     "example": "",
+     "names": {
+      "js": "environment",
+      "php": "environment",
+      "swift": "environment",
+      "kotlin": "environment"
+     }
+    },
+    {
+     "name": "navigation",
+     "group": null,
+     "params": [
+      {
+       "name": "slug",
+       "type": "string",
+       "optional": false,
+       "default": null
+      }
+     ],
+     "returns": "Promise<ApiResponse<Record<string, unknown>>>",
+     "method": "GET",
+     "path": "/api/public/navigation/${encodeURIComponent(slug)}",
+     "specPath": "/api/public/navigation/{slug}",
+     "auth": [
+      "envToken"
+     ],
+     "moduleGate": null,
+     "throttle": null,
+     "status": "live",
+     "summary": "",
+     "body": "",
+     "example": "",
+     "names": {
+      "js": "navigation",
+      "php": "navigation",
+      "swift": "navigation",
+      "kotlin": "navigation"
+     }
+    },
+    {
+     "name": "banners",
+     "group": null,
+     "params": [],
+     "returns": "Promise<ApiResponse<Array<Record<string, unknown>>>>",
+     "method": "GET",
+     "path": "/api/public/banners",
+     "specPath": "/api/public/banners",
+     "auth": [
+      "envToken"
+     ],
+     "moduleGate": null,
+     "throttle": null,
+     "status": "live",
+     "summary": "",
+     "body": "",
+     "example": "",
+     "names": {
+      "js": "banners",
+      "php": "banners",
+      "swift": "banners",
+      "kotlin": "banners"
+     }
+    },
+    {
+     "name": "gallery",
+     "group": null,
+     "params": [
+      {
+       "name": "slug",
+       "type": "string",
+       "optional": false,
+       "default": null
+      }
+     ],
+     "returns": "Promise<ApiResponse<Record<string, unknown>>>",
+     "method": "GET",
+     "path": "/api/public/gallery/${encodeURIComponent(slug)}",
+     "specPath": "/api/public/gallery/{slug}",
+     "auth": [
+      "envToken"
+     ],
+     "moduleGate": null,
+     "throttle": null,
+     "status": "live",
+     "summary": "",
+     "body": "",
+     "example": "",
+     "names": {
+      "js": "gallery",
+      "php": "gallery",
+      "swift": "gallery",
+      "kotlin": "gallery"
+     }
+    },
+    {
+     "name": "products",
+     "group": null,
+     "params": [
+      {
+       "name": "params",
+       "type": "Record<string, unknown>",
+       "optional": true,
+       "default": "{}"
+      }
+     ],
+     "returns": "Promise<ApiResponse<Array<Record<string, unknown>>>>",
+     "method": "GET",
+     "path": "/api/public/products",
+     "specPath": "/api/public/products",
+     "auth": [
+      "envToken"
+     ],
+     "moduleGate": null,
+     "throttle": null,
+     "status": "live",
+     "summary": "",
+     "body": "",
+     "example": "",
+     "names": {
+      "js": "products",
+      "php": "products",
+      "swift": "products",
+      "kotlin": "products"
+     }
+    },
+    {
+     "name": "product",
+     "group": null,
+     "params": [
+      {
+       "name": "slug",
+       "type": "string",
+       "optional": false,
+       "default": null
+      }
+     ],
+     "returns": "Promise<ApiResponse<Record<string, unknown>>>",
+     "method": "GET",
+     "path": "/api/public/product/${encodeURIComponent(slug)}",
+     "specPath": "/api/public/product/{slug}",
+     "auth": [
+      "envToken"
+     ],
+     "moduleGate": null,
+     "throttle": null,
+     "status": "live",
+     "summary": "",
+     "body": "",
+     "example": "",
+     "names": {
+      "js": "product",
+      "php": "product",
+      "swift": "product",
+      "kotlin": "product"
+     }
+    },
+    {
+     "name": "productCategory",
+     "group": null,
+     "params": [
+      {
+       "name": "slug",
+       "type": "string",
+       "optional": false,
+       "default": null
+      }
+     ],
+     "returns": "Promise<ApiResponse<Record<string, unknown>>>",
+     "method": "GET",
+     "path": "/api/public/product-categories/${encodeURIComponent(slug)}",
+     "specPath": "/api/public/product-categories/{slug}",
+     "auth": [
+      "envToken"
+     ],
+     "moduleGate": null,
+     "throttle": null,
+     "status": "live",
+     "summary": "",
+     "body": "",
+     "example": "",
+     "names": {
+      "js": "productCategory",
+      "php": "productCategory",
+      "swift": "productCategory",
+      "kotlin": "productCategory"
+     }
+    },
+    {
+     "name": "productCollection",
+     "group": null,
+     "params": [
+      {
+       "name": "id",
+       "type": "number | string",
+       "optional": false,
+       "default": null
+      }
+     ],
+     "returns": "Promise<ApiResponse<Record<string, unknown>>>",
+     "method": "GET",
+     "path": "/api/public/product-collection/${encodeURIComponent(String(id))}",
+     "specPath": "/api/public/product-collection/{id}",
+     "auth": [
+      "envToken"
+     ],
+     "moduleGate": null,
+     "throttle": null,
+     "status": "live",
+     "summary": "",
+     "body": "",
+     "example": "",
+     "names": {
+      "js": "productCollection",
+      "php": "productCollection",
+      "swift": "productCollection",
+      "kotlin": "productCollection"
+     }
+    },
+    {
+     "name": "canvas.list",
+     "group": "canvas",
+     "params": [
+      {
+       "name": "params",
+       "type": "Record<string, unknown>",
+       "optional": true,
+       "default": "{}"
+      }
+     ],
+     "returns": "Promise<ApiResponse<Array<Record<string, unknown>>>>",
+     "method": "GET",
+     "path": "/api/public/canvas",
+     "specPath": "/api/public/canvas",
+     "auth": [
+      "envToken"
+     ],
+     "moduleGate": null,
+     "throttle": null,
+     "status": "live",
+     "summary": "",
+     "body": "",
+     "example": "",
+     "names": {
+      "js": "canvas.list",
+      "php": "canvasList",
+      "swift": "canvasList",
+      "kotlin": "canvasList"
+     }
+    },
+    {
+     "name": "canvas.show",
+     "group": "canvas",
+     "params": [
+      {
+       "name": "slug",
+       "type": "string",
+       "optional": false,
+       "default": null
+      }
+     ],
+     "returns": "Promise<ApiResponse<Record<string, unknown>>>",
+     "method": "GET",
+     "path": "/api/public/canvas/${encodeURIComponent(slug)}",
+     "specPath": "/api/public/canvas/{slug}",
+     "auth": [
+      "envToken"
+     ],
+     "moduleGate": null,
+     "throttle": null,
+     "status": "live",
+     "summary": "",
+     "body": "",
+     "example": "",
+     "names": {
+      "js": "canvas.show",
+      "php": "canvas",
+      "swift": "canvas",
+      "kotlin": "canvas"
+     }
+    },
+    {
+     "name": "canvas.collection",
+     "group": "canvas",
+     "params": [
+      {
+       "name": "id",
+       "type": "number | string",
+       "optional": false,
+       "default": null
+      }
+     ],
+     "returns": "Promise<ApiResponse<Record<string, unknown>>>",
+     "method": "GET",
+     "path": "/api/public/collection/${encodeURIComponent(String(id))}",
+     "specPath": "/api/public/collection/{id}",
+     "auth": [
+      "envToken"
+     ],
+     "moduleGate": null,
+     "throttle": null,
+     "status": "live",
+     "summary": "",
+     "body": "",
+     "example": "",
+     "names": {
+      "js": "canvas.collection",
+      "php": "canvasCollection",
+      "swift": "canvasCollection",
+      "kotlin": "canvasCollection"
+     }
+    },
+    {
+     "name": "canvas.ticketForm",
+     "group": "canvas",
+     "params": [
+      {
+       "name": "payload",
+       "type": "Record<string, unknown>",
+       "optional": true,
+       "default": "{}"
+      }
+     ],
+     "returns": "Promise<ApiResponse<Record<string, unknown>>>",
+     "method": "POST",
+     "path": "/api/public/ticket-content",
+     "specPath": "/api/public/ticket-content",
+     "auth": [
+      "envToken"
+     ],
+     "moduleGate": null,
+     "throttle": null,
+     "status": "live",
+     "summary": "İletişim formu alanlarını döner — formu şemadan çizmek için.",
+     "body": "",
+     "example": "",
+     "names": {
+      "js": "canvas.ticketForm",
+      "php": "ticketForm",
+      "swift": "ticketForm",
+      "kotlin": "ticketForm"
+     }
+    },
+    {
+     "name": "canvas.submitTicket",
+     "group": "canvas",
+     "params": [
+      {
+       "name": "payload",
+       "type": "Record<string, unknown>",
+       "optional": false,
+       "default": null
+      }
+     ],
+     "returns": "Promise<ApiResponse<Record<string, unknown>>>",
+     "method": "POST",
+     "path": "/api/public/ticket-submit",
+     "specPath": "/api/public/ticket-submit",
+     "auth": [
+      "envToken"
+     ],
+     "moduleGate": null,
+     "throttle": null,
+     "status": "live",
+     "summary": "İletişim/destek formunu gönderir.",
+     "body": "",
+     "example": "",
+     "names": {
+      "js": "canvas.submitTicket",
+      "php": "submitTicket",
+      "swift": "submitTicket",
+      "kotlin": "submitTicket"
+     }
+    },
+    {
+     "name": "canvas.notifications",
+     "group": "canvas",
+     "params": [
+      {
+       "name": "token",
+       "type": "string",
+       "optional": false,
+       "default": null
+      }
+     ],
+     "returns": "Promise<ApiResponse<Array<Record<string, unknown>>>>",
+     "method": "GET",
+     "path": "/api/public/notification/${encodeURIComponent(token)}",
+     "specPath": "/api/public/notification/{token}",
+     "auth": [
+      "envToken"
+     ],
+     "moduleGate": null,
+     "throttle": null,
+     "status": "live",
+     "summary": "",
+     "body": "",
+     "example": "",
+     "names": {
+      "js": "canvas.notifications",
+      "php": "notifications",
+      "swift": "notifications",
+      "kotlin": "notifications"
+     }
+    },
+    {
+     "name": "documents.list",
+     "group": "documents",
+     "params": [
+      {
+       "name": "params",
+       "type": "Record<string, unknown>",
+       "optional": true,
+       "default": "{}"
+      }
+     ],
+     "returns": "Promise<ApiResponse<Array<Record<string, unknown>>>>",
+     "method": "GET",
+     "path": "/api/documents",
+     "specPath": "/api/documents",
+     "auth": [],
+     "moduleGate": null,
+     "throttle": null,
+     "status": "live",
+     "summary": "",
+     "body": "",
+     "example": "",
+     "names": {
+      "js": "documents.list",
+      "php": "documents",
+      "swift": "documents",
+      "kotlin": "documents"
+     }
+    },
+    {
+     "name": "documents.show",
+     "group": "documents",
+     "params": [
+      {
+       "name": "slug",
+       "type": "string",
+       "optional": false,
+       "default": null
+      }
+     ],
+     "returns": "Promise<ApiResponse<Record<string, unknown>>>",
+     "method": "GET",
+     "path": "/api/documents/${encodeURIComponent(slug)}",
+     "specPath": "/api/documents/{slug}",
+     "auth": [],
+     "moduleGate": null,
+     "throttle": null,
+     "status": "live",
+     "summary": "",
+     "body": "",
+     "example": "",
+     "names": {
+      "js": "documents.show",
+      "php": "document",
+      "swift": "document",
+      "kotlin": "document"
+     }
+    },
+    {
+     "name": "documents.collection",
+     "group": "documents",
+     "params": [
+      {
+       "name": "id",
+       "type": "number | string",
+       "optional": false,
+       "default": null
+      }
+     ],
+     "returns": "Promise<ApiResponse<Record<string, unknown>>>",
+     "method": "GET",
+     "path": "/api/documents/collection/${encodeURIComponent(String(id))}",
+     "specPath": "/api/documents/collection/{id}",
+     "auth": [],
+     "moduleGate": null,
+     "throttle": null,
+     "status": "live",
+     "summary": "",
+     "body": "",
+     "example": "",
+     "names": {
+      "js": "documents.collection",
+      "php": "documentCollection",
+      "swift": "documentCollection",
+      "kotlin": "documentCollection"
+     }
+    },
+    {
+     "name": "documents.products",
+     "group": "documents",
+     "params": [
+      {
+       "name": "params",
+       "type": "Record<string, unknown>",
+       "optional": true,
+       "default": "{}"
+      }
+     ],
+     "returns": "Promise<ApiResponse<Array<Record<string, unknown>>>>",
+     "method": "GET",
+     "path": "/api/documents/products",
+     "specPath": "/api/documents/{slug}",
+     "auth": [],
+     "moduleGate": null,
+     "throttle": null,
+     "status": "live",
+     "summary": "",
+     "body": "",
+     "example": "",
+     "names": {
+      "js": "documents.products",
+      "php": "documentProducts",
+      "swift": "documentProducts",
+      "kotlin": "documentProducts"
+     }
+    },
+    {
+     "name": "documents.sitemapUrl",
+     "group": "documents",
+     "params": [
+      {
+       "name": "envToken",
+       "type": "string",
+       "optional": false,
+       "default": null
+      }
+     ],
+     "returns": "string",
+     "method": "GET",
+     "path": "/api/public/manifest",
+     "specPath": "/api/public/manifest",
+     "auth": [
+      "envToken"
+     ],
+     "moduleGate": null,
+     "throttle": null,
+     "status": "live",
+     "summary": "Sitemap **adresi**. XML olduğu için SDK içeriği ayrıştırmaz — bu adresi Search Console'a verin ya da `robots.txt`'e yazın.",
+     "body": "Token sorguda taşınır; böylece başlık ekleyemeyen araçlar da kullanabilir.",
+     "example": "",
+     "names": {
+      "js": "documents.sitemapUrl",
+      "php": "manifest",
+      "swift": "manifest",
+      "kotlin": "manifest"
+     }
+    },
+    {
+     "name": "documents.manifest",
+     "group": "documents",
+     "params": [],
+     "returns": "Promise<ApiResponse<Record<string, unknown>>>",
+     "method": "GET",
+     "path": "/api/public/manifest",
+     "specPath": "/api/public/manifest",
+     "auth": [
+      "envToken"
+     ],
+     "moduleGate": null,
+     "throttle": null,
+     "status": "live",
+     "summary": "Siteye özel, her zaman güncel entegrasyon rehberi (insan okur).",
+     "body": "",
+     "example": "",
+     "names": {
+      "js": "documents.manifest",
+      "php": "manifest",
+      "swift": "manifest",
+      "kotlin": "manifest"
+     }
+    },
+    {
+     "name": "documents.llmsTxt",
+     "group": "documents",
+     "params": [],
+     "returns": "Promise<string>",
+     "method": "GET",
+     "path": "/api/public/llms.txt",
+     "specPath": "/api/public/llms.txt",
+     "auth": [
+      "envToken"
+     ],
+     "moduleGate": null,
+     "throttle": null,
+     "status": "live",
+     "summary": "`llms.txt` — yapay zekâ araçlarının siteyi anlaması için düz metin. JSON zarfına sarılmaz, string döner.",
+     "body": "",
+     "example": "",
+     "names": {
+      "js": "documents.llmsTxt",
+      "php": "llmsTxt",
+      "swift": "llmsTxt",
+      "kotlin": "llmsTxt"
+     }
+    }
+   ],
+   "accessor": "delivery"
+  },
+  {
+   "class": "LocaleModule",
+   "file": "content-types.ts",
+   "summary": "Sitenin dilleri.",
+   "body": "Bir dil burada tanımlı değilse o dilde kayıt yazılamaz (422) — bu, panelde\nhiç görünmeyen \"hayalet\" çevirileri engeller.",
+   "example": "",
+   "methods": [
+    {
+     "name": "list",
+     "group": null,
+     "params": [],
+     "returns": "Promise<ApiResponse<Array<",
+     "method": "GET",
+     "path": "/api/schema/locales",
+     "specPath": "/api/schema/locales",
+     "auth": [
+      "envToken",
+      "jwt",
+      "envMember"
+     ],
+     "moduleGate": null,
+     "throttle": null,
+     "status": "live",
+     "summary": "",
+     "body": "",
+     "example": "",
+     "names": {
+      "js": "list",
+      "php": "list",
+      "swift": "list",
+      "kotlin": "list"
+     }
+    },
+    {
+     "name": "add",
+     "group": null,
+     "params": [
+      {
+       "name": "code",
+       "type": "string",
+       "optional": false,
+       "default": null
+      },
+      {
+       "name": "payload",
+       "type": "Record<string, unknown>",
+       "optional": true,
+       "default": null
+      }
+     ],
+     "returns": "Promise<ApiResponse<null>>",
+     "method": "POST",
+     "path": "/api/schema/locales",
+     "specPath": "/api/schema/locales",
+     "auth": [
+      "envToken",
+      "jwt",
+      "envMember"
+     ],
+     "moduleGate": null,
+     "throttle": null,
+     "status": "live",
+     "summary": "",
+     "body": "",
+     "example": "",
+     "names": {
+      "js": "add",
+      "php": "add",
+      "swift": "add",
+      "kotlin": "add"
+     }
+    },
+    {
+     "name": "remove",
+     "group": null,
+     "params": [
+      {
+       "name": "code",
+       "type": "string",
+       "optional": false,
+       "default": null
+      }
+     ],
+     "returns": "Promise<ApiResponse<null>>",
+     "method": "DELETE",
+     "path": "/api/schema/locales/${encodeURIComponent(code)}",
+     "specPath": "/api/schema/locales/{code}",
+     "auth": [
+      "envToken",
+      "jwt",
+      "envMember"
+     ],
+     "moduleGate": null,
+     "throttle": null,
+     "status": "live",
+     "summary": "",
+     "body": "",
+     "example": "",
+     "names": {
+      "js": "remove",
+      "php": "remove",
+      "swift": "remove",
+      "kotlin": "remove"
+     }
+    }
+   ],
+   "accessor": "locales"
+  },
+  {
+   "class": "MenuModule",
+   "file": "menus.ts",
+   "summary": "Menüler — site gezinmesi.",
+   "body": "Ağaç `items` içinde iç içe tutulur. Panelde yazarsınız, ziyaretçiye\n`sdk.delivery.menu(code)` ile **çözülmüş** hâlini verirsiniz (bağlantı\nhedefleri hesaplanmış, yayımlanmamış kayıtlar ayıklanmış olarak).",
+   "example": "await sdk.menus.update('ana-menu', {\n    items: [\n      { label: 'Anasayfa', url: '/' },\n      { label: 'Blog', type: 'blog', children: [{ label: 'Tümü', url: '/blog' }] },\n    ],\n  })",
+   "methods": [
+    {
+     "name": "list",
+     "group": null,
+     "params": [],
+     "returns": "Promise<ApiResponse<Menu[]>>",
+     "method": "GET",
+     "path": "/api/menus",
+     "specPath": "/api/menus",
+     "auth": [
+      "envToken",
+      "jwt",
+      "envMember"
+     ],
+     "moduleGate": null,
+     "throttle": null,
+     "status": "live",
+     "summary": "",
+     "body": "",
+     "example": "",
+     "names": {
+      "js": "list",
+      "php": "list",
+      "swift": "list",
+      "kotlin": "list"
+     }
+    },
+    {
+     "name": "get",
+     "group": null,
+     "params": [
+      {
+       "name": "code",
+       "type": "string",
+       "optional": false,
+       "default": null
+      }
+     ],
+     "returns": "Promise<ApiResponse<Menu>>",
+     "method": "GET",
+     "path": "/api/menus/${encodeURIComponent(code)}",
+     "specPath": "/api/menus/{code}",
+     "auth": [
+      "envToken",
+      "jwt",
+      "envMember"
+     ],
+     "moduleGate": null,
+     "throttle": null,
+     "status": "live",
+     "summary": "",
+     "body": "",
+     "example": "",
+     "names": {
+      "js": "get",
+      "php": "get",
+      "swift": "get",
+      "kotlin": "get"
+     }
+    },
+    {
+     "name": "create",
+     "group": null,
+     "params": [
+      {
+       "name": "payload",
+       "type": "{ code: string; label: string; items?: MenuItem[] }",
+       "optional": true,
+       "default": null
+      }
+     ],
+     "returns": "Promise<ApiResponse<Menu>>",
+     "method": "POST",
+     "path": "/api/menus",
+     "specPath": "/api/menus",
+     "auth": [
+      "envToken",
+      "jwt",
+      "envMember"
+     ],
+     "moduleGate": null,
+     "throttle": null,
+     "status": "live",
+     "summary": "",
+     "body": "",
+     "example": "",
+     "names": {
+      "js": "create",
+      "php": "create",
+      "swift": "create",
+      "kotlin": "create"
+     }
+    },
+    {
+     "name": "update",
+     "group": null,
+     "params": [
+      {
+       "name": "code",
+       "type": "string",
+       "optional": false,
+       "default": null
+      },
+      {
+       "name": "payload",
+       "type": "Partial<{ label: string; items: MenuItem[] }>",
+       "optional": false,
+       "default": null
+      }
+     ],
+     "returns": "Promise<ApiResponse<Menu>>",
+     "method": "PUT",
+     "path": "/api/menus/${encodeURIComponent(code)}",
+     "specPath": "/api/menus/{code}",
+     "auth": [
+      "envToken",
+      "jwt",
+      "envMember"
+     ],
+     "moduleGate": null,
+     "throttle": null,
+     "status": "live",
+     "summary": "Menüyü günceller ve yeni bir sürüm yazar.",
+     "body": "",
+     "example": "",
+     "names": {
+      "js": "update",
+      "php": "update",
+      "swift": "update",
+      "kotlin": "update"
+     }
+    },
+    {
+     "name": "delete",
+     "group": null,
+     "params": [
+      {
+       "name": "code",
+       "type": "string",
+       "optional": false,
+       "default": null
+      }
+     ],
+     "returns": "Promise<ApiResponse<null>>",
+     "method": "DELETE",
+     "path": "/api/menus/${encodeURIComponent(code)}",
+     "specPath": "/api/menus/{code}",
+     "auth": [
+      "envToken",
+      "jwt",
+      "envMember"
+     ],
+     "moduleGate": null,
+     "throttle": null,
+     "status": "live",
+     "summary": "",
+     "body": "",
+     "example": "",
+     "names": {
+      "js": "delete",
+      "php": "delete",
+      "swift": "delete",
+      "kotlin": "delete"
+     }
+    },
+    {
+     "name": "preview",
+     "group": null,
+     "params": [
+      {
+       "name": "code",
+       "type": "string",
+       "optional": false,
+       "default": null
+      }
+     ],
+     "returns": "Promise<ApiResponse<Record<string, unknown>>>",
+     "method": "GET",
+     "path": "/api/menus/${encodeURIComponent(code)}/preview",
+     "specPath": "/api/menus/{code}/preview",
+     "auth": [
+      "envToken",
+      "jwt",
+      "envMember"
+     ],
+     "moduleGate": null,
+     "throttle": null,
+     "status": "live",
+     "summary": "Ağacı kaydetmeden çözer — kırık bağlantıları ve geçersiz derinliği yayına almadan görmek için.",
+     "body": "",
+     "example": "",
+     "names": {
+      "js": "preview",
+      "php": "preview",
+      "swift": "preview",
+      "kotlin": "preview"
+     }
+    },
+    {
+     "name": "revisions",
+     "group": null,
+     "params": [
+      {
+       "name": "code",
+       "type": "string",
+       "optional": false,
+       "default": null
+      }
+     ],
+     "returns": "Promise<ApiResponse<Array<",
+     "method": "GET",
+     "path": "/api/menus/${encodeURIComponent(code)}/revisions",
+     "specPath": "/api/menus/{code}/revisions",
+     "auth": [
+      "envToken",
+      "jwt",
+      "envMember"
+     ],
+     "moduleGate": null,
+     "throttle": null,
+     "status": "live",
+     "summary": "",
+     "body": "",
+     "example": "",
+     "names": {
+      "js": "revisions",
+      "php": "revisions",
+      "swift": "revisions",
+      "kotlin": "revisions"
+     }
+    },
+    {
+     "name": "restore",
+     "group": null,
+     "params": [
+      {
+       "name": "code",
+       "type": "string",
+       "optional": false,
+       "default": null
+      },
+      {
+       "name": "version",
+       "type": "number",
+       "optional": false,
+       "default": null
+      }
+     ],
+     "returns": "Promise<ApiResponse<Menu>>",
+     "method": "POST",
+     "path": "/api/menus/${encodeURIComponent(code)}/restore/${version}",
+     "specPath": "/api/menus/{code}/restore/{version}",
+     "auth": [
+      "envToken",
+      "jwt",
+      "envMember"
+     ],
+     "moduleGate": null,
+     "throttle": null,
+     "status": "live",
+     "summary": "",
+     "body": "",
+     "example": "",
+     "names": {
+      "js": "restore",
+      "php": "restore",
+      "swift": "restore",
+      "kotlin": "restore"
+     }
+    }
+   ],
+   "accessor": "menus"
+  },
+  {
+   "class": "CustomerOrderModule",
+   "file": "commerce.ts",
+   "summary": "Müşterinin kendi siparişleri — son kullanıcı hesabı için.",
+   "body": "",
+   "example": "",
+   "methods": [
+    {
+     "name": "list",
+     "group": null,
+     "params": [
+      {
+       "name": "params",
+       "type": "Record<string, unknown>",
+       "optional": true,
+       "default": "{}"
+      }
+     ],
+     "returns": "Promise<ApiResponse<Order[]>>",
+     "method": "GET",
+     "path": "/api/my-orders",
+     "specPath": "/api/my-orders",
+     "auth": [
+      "envToken",
+      "jwt"
+     ],
+     "moduleGate": null,
+     "throttle": null,
+     "status": "live",
+     "summary": "",
+     "body": "",
+     "example": "",
+     "names": {
+      "js": "list",
+      "php": "list",
+      "swift": "list",
+      "kotlin": "list"
+     }
+    },
+    {
+     "name": "get",
+     "group": null,
+     "params": [
+      {
+       "name": "id",
+       "type": "number",
+       "optional": false,
+       "default": null
+      }
+     ],
+     "returns": "Promise<ApiResponse<Order>>",
+     "method": "GET",
+     "path": "/api/my-orders/${id}",
+     "specPath": "/api/my-orders/{id}",
+     "auth": [
+      "envToken",
+      "jwt"
+     ],
+     "moduleGate": null,
+     "throttle": null,
+     "status": "live",
+     "summary": "",
+     "body": "",
+     "example": "",
+     "names": {
+      "js": "get",
+      "php": "get",
+      "swift": "get",
+      "kotlin": "get"
+     }
+    },
+    {
+     "name": "cancel",
+     "group": null,
+     "params": [
+      {
+       "name": "id",
+       "type": "number",
+       "optional": false,
+       "default": null
+      },
+      {
+       "name": "payload",
+       "type": "Record<string, unknown>",
+       "optional": true,
+       "default": "{}"
+      }
+     ],
+     "returns": "Promise<ApiResponse<Order>>",
+     "method": "POST",
+     "path": "/api/my-orders/${id}/cancel",
+     "specPath": "/api/my-orders/{id}/cancel",
+     "auth": [
+      "envToken",
+      "jwt"
+     ],
+     "moduleGate": null,
+     "throttle": null,
+     "status": "live",
+     "summary": "",
+     "body": "",
+     "example": "",
+     "names": {
+      "js": "cancel",
+      "php": "cancel",
+      "swift": "cancel",
+      "kotlin": "cancel"
+     }
+    },
+    {
+     "name": "message",
+     "group": null,
+     "params": [
+      {
+       "name": "id",
+       "type": "number",
+       "optional": false,
+       "default": null
+      },
+      {
+       "name": "message",
+       "type": "string",
+       "optional": false,
+       "default": null
+      }
+     ],
+     "returns": "Promise<ApiResponse<Record<string, unknown>>>",
+     "method": "POST",
+     "path": "/api/my-orders/${id}/message",
+     "specPath": "/api/my-orders/{id}/message",
+     "auth": [
+      "envToken",
+      "jwt"
+     ],
+     "moduleGate": null,
+     "throttle": null,
+     "status": "live",
+     "summary": "Satıcıya sipariş üzerinden mesaj yazar.",
+     "body": "",
+     "example": "",
+     "names": {
+      "js": "message",
+      "php": "message",
+      "swift": "message",
+      "kotlin": "message"
+     }
+    }
+   ],
+   "accessor": "myOrders"
+  },
+  {
+   "class": "OrderModule",
+   "file": "commerce.ts",
+   "summary": "Sipariş yönetimi (satıcı tarafı).",
+   "body": "`orders` modülü açık olmalıdır — kapalıysa 403. Oturum ve site üyeliği ister.",
+   "example": "",
+   "methods": [
+    {
+     "name": "list",
+     "group": null,
+     "params": [
+      {
+       "name": "params",
+       "type": "Record<string, unknown>",
+       "optional": true,
+       "default": "{}"
+      }
+     ],
+     "returns": "Promise<ApiResponse<Order[]>>",
+     "method": "GET",
+     "path": "/api/commerce/orders",
+     "specPath": "/api/commerce/orders",
+     "auth": [
+      "envToken",
+      "jwt",
+      "envMember"
+     ],
+     "moduleGate": "orders",
+     "throttle": null,
+     "status": "live",
+     "summary": "",
+     "body": "",
+     "example": "",
+     "names": {
+      "js": "list",
+      "php": "list",
+      "swift": "list",
+      "kotlin": "list"
+     }
+    },
+    {
+     "name": "get",
+     "group": null,
+     "params": [
+      {
+       "name": "id",
+       "type": "number",
+       "optional": false,
+       "default": null
+      }
+     ],
+     "returns": "Promise<ApiResponse<Order>>",
+     "method": "GET",
+     "path": "/api/commerce/orders/${id}",
+     "specPath": "/api/commerce/orders/{id}",
+     "auth": [
+      "envToken",
+      "jwt",
+      "envMember"
+     ],
+     "moduleGate": "orders",
+     "throttle": null,
+     "status": "live",
+     "summary": "",
+     "body": "",
+     "example": "",
+     "names": {
+      "js": "get",
+      "php": "get",
+      "swift": "get",
+      "kotlin": "get"
+     }
+    },
+    {
+     "name": "update",
+     "group": null,
+     "params": [
+      {
+       "name": "id",
+       "type": "number",
+       "optional": false,
+       "default": null
+      },
+      {
+       "name": "payload",
+       "type": "Record<string, unknown>",
+       "optional": false,
+       "default": null
+      }
+     ],
+     "returns": "Promise<ApiResponse<Order>>",
+     "method": "PUT",
+     "path": "/api/commerce/orders/${id}",
+     "specPath": "/api/commerce/orders/{id}",
+     "auth": [
+      "envToken",
+      "jwt",
+      "envMember"
+     ],
+     "moduleGate": "orders",
+     "throttle": null,
+     "status": "live",
+     "summary": "",
+     "body": "",
+     "example": "",
+     "names": {
+      "js": "update",
+      "php": "update",
+      "swift": "update",
+      "kotlin": "update"
+     }
+    },
+    {
+     "name": "updateStatus",
+     "group": null,
+     "params": [
+      {
+       "name": "id",
+       "type": "number",
+       "optional": false,
+       "default": null
+      },
+      {
+       "name": "status",
+       "type": "string",
+       "optional": false,
+       "default": null
+      },
+      {
+       "name": "payload",
+       "type": "Record<string, unknown>",
+       "optional": true,
+       "default": "{}"
+      }
+     ],
+     "returns": "Promise<ApiResponse<Order>>",
+     "method": "PUT",
+     "path": "/api/commerce/orders/${id}/status",
+     "specPath": "/api/commerce/orders/{id}/status",
+     "auth": [
+      "envToken",
+      "jwt",
+      "envMember"
+     ],
+     "moduleGate": "orders",
+     "throttle": null,
+     "status": "live",
+     "summary": "Durum geçişi. Geçersiz geçişler 422 döner.",
+     "body": "",
+     "example": "",
+     "names": {
+      "js": "updateStatus",
+      "php": "updateStatus",
+      "swift": "updateStatus",
+      "kotlin": "updateStatus"
+     }
+    },
+    {
+     "name": "cancel",
+     "group": null,
+     "params": [
+      {
+       "name": "id",
+       "type": "number",
+       "optional": false,
+       "default": null
+      },
+      {
+       "name": "payload",
+       "type": "Record<string, unknown>",
+       "optional": true,
+       "default": "{}"
+      }
+     ],
+     "returns": "Promise<ApiResponse<Order>>",
+     "method": "POST",
+     "path": "/api/commerce/orders/${id}/cancel",
+     "specPath": "/api/commerce/orders/{id}/cancel",
+     "auth": [
+      "envToken",
+      "jwt",
+      "envMember"
+     ],
+     "moduleGate": "orders",
+     "throttle": null,
+     "status": "live",
+     "summary": "",
+     "body": "",
+     "example": "",
+     "names": {
+      "js": "cancel",
+      "php": "cancel",
+      "swift": "cancel",
+      "kotlin": "cancel"
+     }
+    },
+    {
+     "name": "report",
+     "group": null,
+     "params": [
+      {
+       "name": "params",
+       "type": "Record<string, unknown>",
+       "optional": true,
+       "default": "{}"
+      }
+     ],
+     "returns": "Promise<ApiResponse<Record<string, unknown>>>",
+     "method": "GET",
+     "path": "/api/commerce/orders/report",
+     "specPath": "/api/commerce/orders/{id}",
+     "auth": [
+      "envToken",
+      "jwt",
+      "envMember"
+     ],
+     "moduleGate": "orders",
+     "throttle": null,
+     "status": "live",
+     "summary": "Satış raporu — ciro, adet, dönem kırılımı.",
+     "body": "",
+     "example": "",
+     "names": {
+      "js": "report",
+      "php": "report",
+      "swift": "report",
+      "kotlin": "report"
+     }
+    },
+    {
+     "name": "invoice.create",
+     "group": "invoice",
+     "params": [
+      {
+       "name": "orderId",
+       "type": "number",
+       "optional": false,
+       "default": null
+      },
+      {
+       "name": "payload",
+       "type": "Record<string, unknown>",
+       "optional": true,
+       "default": "{}"
+      }
+     ],
+     "returns": "Promise<ApiResponse<Record<string, unknown>>>",
+     "method": "POST",
+     "path": "/api/commerce/orders/${orderId}/invoice",
+     "specPath": "/api/commerce/orders/{id}/invoice",
+     "auth": [
+      "envToken",
+      "jwt",
+      "envMember"
+     ],
+     "moduleGate": "orders",
+     "throttle": null,
+     "status": "live",
+     "summary": "Faturayı üretir.",
+     "body": "",
+     "example": "",
+     "names": {
+      "js": "invoice.create",
+      "php": "createInvoice",
+      "swift": "createInvoice",
+      "kotlin": "createInvoice"
+     }
+    },
+    {
+     "name": "invoice.get",
+     "group": "invoice",
+     "params": [
+      {
+       "name": "orderId",
+       "type": "number",
+       "optional": false,
+       "default": null
+      }
+     ],
+     "returns": "Promise<ApiResponse<Record<string, unknown>>>",
+     "method": "GET",
+     "path": "/api/commerce/orders/${orderId}/invoice",
+     "specPath": "/api/commerce/orders/{id}/invoice",
+     "auth": [
+      "envToken",
+      "jwt",
+      "envMember"
+     ],
+     "moduleGate": "orders",
+     "throttle": null,
+     "status": "live",
+     "summary": "",
+     "body": "",
+     "example": "",
+     "names": {
+      "js": "invoice.get",
+      "php": "invoice",
+      "swift": "invoice",
+      "kotlin": "invoice"
+     }
+    },
+    {
+     "name": "mailSettings.get",
+     "group": "mailSettings",
+     "params": [],
+     "returns": "Promise<ApiResponse<Record<string, unknown>>>",
+     "method": "GET",
+     "path": "/api/commerce/orders/mail-settings",
+     "specPath": "/api/commerce/orders/{id}",
+     "auth": [
+      "envToken",
+      "jwt",
+      "envMember"
+     ],
+     "moduleGate": "orders",
+     "throttle": null,
+     "status": "live",
+     "summary": "",
+     "body": "",
+     "example": "",
+     "names": {
+      "js": "mailSettings.get",
+      "php": "mailSettings",
+      "swift": "mailSettings",
+      "kotlin": "mailSettings"
+     }
+    },
+    {
+     "name": "mailSettings.update",
+     "group": "mailSettings",
+     "params": [
+      {
+       "name": "payload",
+       "type": "Record<string, unknown>",
+       "optional": false,
+       "default": null
+      }
+     ],
+     "returns": "Promise<ApiResponse<Record<string, unknown>>>",
+     "method": "PUT",
+     "path": "/api/commerce/orders/mail-settings",
+     "specPath": "/api/commerce/orders/{id}",
+     "auth": [
+      "envToken",
+      "jwt",
+      "envMember"
+     ],
+     "moduleGate": "orders",
+     "throttle": null,
+     "status": "live",
+     "summary": "",
+     "body": "",
+     "example": "",
+     "names": {
+      "js": "mailSettings.update",
+      "php": "updateMailSettings",
+      "swift": "updateMailSettings",
+      "kotlin": "updateMailSettings"
+     }
+    }
+   ],
+   "accessor": "orders"
+  },
+  {
+   "class": "PartnerModule",
+   "file": "platform.ts",
+   "summary": "Partner paneli — bayi/ajans tarafı.",
+   "body": "Partner kendi müşterilerini, paketlerini ve tahsilatını yönetir.\nBu uçlar partner rolündeki oturum ister.",
+   "example": "",
+   "methods": [
+    {
+     "name": "dashboard",
+     "group": null,
+     "params": [],
+     "returns": "Promise<ApiResponse<Record<string, unknown>>>",
+     "method": "GET",
+     "path": "/api/platform/partner/dashboard",
+     "specPath": "/api/platform/partner/dashboard",
+     "auth": [
+      "jwt"
+     ],
+     "moduleGate": null,
+     "throttle": "60,1",
+     "status": "live",
+     "summary": "",
+     "body": "",
+     "example": "",
+     "names": {
+      "js": "dashboard",
+      "php": "dashboard",
+      "swift": "dashboard",
+      "kotlin": "dashboard"
+     }
+    },
+    {
+     "name": "settings",
+     "group": null,
+     "params": [],
+     "returns": "Promise<ApiResponse<Record<string, unknown>>>",
+     "method": "GET",
+     "path": "/api/platform/partner/settings",
+     "specPath": "/api/platform/partner/settings",
+     "auth": [
+      "jwt"
+     ],
+     "moduleGate": null,
+     "throttle": "60,1",
+     "status": "live",
+     "summary": "",
+     "body": "",
+     "example": "",
+     "names": {
+      "js": "settings",
+      "php": "settings",
+      "swift": "settings",
+      "kotlin": "settings"
+     }
+    },
+    {
+     "name": "updateSettings",
+     "group": null,
+     "params": [
+      {
+       "name": "payload",
+       "type": "Record<string, unknown>",
+       "optional": false,
+       "default": null
+      }
+     ],
+     "returns": "Promise<ApiResponse<Record<string, unknown>>>",
+     "method": "PUT",
+     "path": "/api/platform/partner/settings",
+     "specPath": "/api/platform/partner/settings",
+     "auth": [
+      "jwt"
+     ],
+     "moduleGate": null,
+     "throttle": "60,1",
+     "status": "live",
+     "summary": "",
+     "body": "",
+     "example": "",
+     "names": {
+      "js": "updateSettings",
+      "php": "updateSettings",
+      "swift": "updateSettings",
+      "kotlin": "updateSettings"
+     }
+    },
+    {
+     "name": "modules",
+     "group": null,
+     "params": [],
+     "returns": "Promise<ApiResponse<Array<Record<string, unknown>>>>",
+     "method": "GET",
+     "path": "/api/platform/partner/modules",
+     "specPath": "/api/platform/partner/modules",
+     "auth": [
+      "jwt"
+     ],
+     "moduleGate": null,
+     "throttle": "60,1",
+     "status": "live",
+     "summary": "",
+     "body": "",
+     "example": "",
+     "names": {
+      "js": "modules",
+      "php": "modules",
+      "swift": "modules",
+      "kotlin": "modules"
+     }
+    },
+    {
+     "name": "customers.list",
+     "group": "customers",
+     "params": [
+      {
+       "name": "params",
+       "type": "Record<string, unknown>",
+       "optional": true,
+       "default": "{}"
+      }
+     ],
+     "returns": "Promise<ApiResponse<Array<Record<string, unknown>>>>",
+     "method": "GET",
+     "path": "/api/platform/partner/customers",
+     "specPath": "/api/platform/partner/customers",
+     "auth": [
+      "jwt"
+     ],
+     "moduleGate": null,
+     "throttle": "60,1",
+     "status": "live",
+     "summary": "",
+     "body": "",
+     "example": "",
+     "names": {
+      "js": "customers.list",
+      "php": "customers",
+      "swift": "customers",
+      "kotlin": "customers"
+     }
+    },
+    {
+     "name": "customers.get",
+     "group": "customers",
+     "params": [
+      {
+       "name": "id",
+       "type": "number",
+       "optional": false,
+       "default": null
+      }
+     ],
+     "returns": "Promise<ApiResponse<Record<string, unknown>>>",
+     "method": "GET",
+     "path": "/api/platform/partner/customers/${id}",
+     "specPath": "/api/platform/partner/customers/{id}",
+     "auth": [
+      "jwt"
+     ],
+     "moduleGate": null,
+     "throttle": "60,1",
+     "status": "live",
+     "summary": "",
+     "body": "",
+     "example": "",
+     "names": {
+      "js": "customers.get",
+      "php": "customer",
+      "swift": "customer",
+      "kotlin": "customer"
+     }
+    },
+    {
+     "name": "customers.setPrices",
+     "group": "customers",
+     "params": [
+      {
+       "name": "id",
+       "type": "number",
+       "optional": false,
+       "default": null
+      },
+      {
+       "name": "payload",
+       "type": "Record<string, unknown>",
+       "optional": false,
+       "default": null
+      }
+     ],
+     "returns": "Promise<ApiResponse<Record<string, unknown>>>",
+     "method": "POST",
+     "path": "/api/platform/partner/customers/${id}/prices",
+     "specPath": "/api/platform/partner/customers/{id}/prices",
+     "auth": [
+      "jwt"
+     ],
+     "moduleGate": null,
+     "throttle": "60,1",
+     "status": "live",
+     "summary": "Müşteriye özel fiyat tanımlar.",
+     "body": "",
+     "example": "",
+     "names": {
+      "js": "customers.setPrices",
+      "php": "setCustomerPrices",
+      "swift": "setCustomerPrices",
+      "kotlin": "setCustomerPrices"
+     }
+    },
+    {
+     "name": "packages.list",
+     "group": "packages",
+     "params": [],
+     "returns": "Promise<ApiResponse<Array<Record<string, unknown>>>>",
+     "method": "GET",
+     "path": "/api/platform/partner/packages",
+     "specPath": "/api/platform/partner/packages",
+     "auth": [
+      "jwt"
+     ],
+     "moduleGate": null,
+     "throttle": "60,1",
+     "status": "live",
+     "summary": "",
+     "body": "",
+     "example": "",
+     "names": {
+      "js": "packages.list",
+      "php": "packages",
+      "swift": "packages",
+      "kotlin": "packages"
+     }
+    },
+    {
+     "name": "packages.create",
+     "group": "packages",
+     "params": [
+      {
+       "name": "payload",
+       "type": "Record<string, unknown>",
+       "optional": false,
+       "default": null
+      }
+     ],
+     "returns": "Promise<ApiResponse<Record<string, unknown>>>",
+     "method": "POST",
+     "path": "/api/platform/partner/packages",
+     "specPath": "/api/platform/partner/packages",
+     "auth": [
+      "jwt"
+     ],
+     "moduleGate": null,
+     "throttle": "60,1",
+     "status": "live",
+     "summary": "",
+     "body": "",
+     "example": "",
+     "names": {
+      "js": "packages.create",
+      "php": "createPackage",
+      "swift": "createPackage",
+      "kotlin": "createPackage"
+     }
+    },
+    {
+     "name": "packages.update",
+     "group": "packages",
+     "params": [
+      {
+       "name": "id",
+       "type": "number",
+       "optional": false,
+       "default": null
+      },
+      {
+       "name": "payload",
+       "type": "Record<string, unknown>",
+       "optional": false,
+       "default": null
+      }
+     ],
+     "returns": "Promise<ApiResponse<Record<string, unknown>>>",
+     "method": "PUT",
+     "path": "/api/platform/partner/packages/${id}",
+     "specPath": "/api/platform/partner/packages/{id}",
+     "auth": [
+      "jwt"
+     ],
+     "moduleGate": null,
+     "throttle": "60,1",
+     "status": "live",
+     "summary": "",
+     "body": "",
+     "example": "",
+     "names": {
+      "js": "packages.update",
+      "php": "updatePackage",
+      "swift": "updatePackage",
+      "kotlin": "updatePackage"
+     }
+    },
+    {
+     "name": "packages.delete",
+     "group": "packages",
+     "params": [
+      {
+       "name": "id",
+       "type": "number",
+       "optional": false,
+       "default": null
+      }
+     ],
+     "returns": "Promise<ApiResponse<null>>",
+     "method": "DELETE",
+     "path": "/api/platform/partner/packages/${id}",
+     "specPath": "/api/platform/partner/packages/{id}",
+     "auth": [
+      "jwt"
+     ],
+     "moduleGate": null,
+     "throttle": "60,1",
+     "status": "live",
+     "summary": "",
+     "body": "",
+     "example": "",
+     "names": {
+      "js": "packages.delete",
+      "php": "deletePackage",
+      "swift": "deletePackage",
+      "kotlin": "deletePackage"
+     }
+    },
+    {
+     "name": "checkoutLinks.list",
+     "group": "checkoutLinks",
+     "params": [],
+     "returns": "Promise<ApiResponse<Array<Record<string, unknown>>>>",
+     "method": "GET",
+     "path": "/api/platform/partner/checkout-links",
+     "specPath": "/api/platform/partner/checkout-links",
+     "auth": [
+      "jwt"
+     ],
+     "moduleGate": null,
+     "throttle": "60,1",
+     "status": "live",
+     "summary": "",
+     "body": "",
+     "example": "",
+     "names": {
+      "js": "checkoutLinks.list",
+      "php": "checkoutLinks",
+      "swift": "checkoutLinks",
+      "kotlin": "checkoutLinks"
+     }
+    },
+    {
+     "name": "checkoutLinks.create",
+     "group": "checkoutLinks",
+     "params": [
+      {
+       "name": "payload",
+       "type": "Record<string, unknown>",
+       "optional": false,
+       "default": null
+      }
+     ],
+     "returns": "Promise<ApiResponse<Record<string, unknown>>>",
+     "method": "POST",
+     "path": "/api/platform/partner/checkout-links",
+     "specPath": "/api/platform/partner/checkout-links",
+     "auth": [
+      "jwt"
+     ],
+     "moduleGate": null,
+     "throttle": "60,1",
+     "status": "live",
+     "summary": "",
+     "body": "",
+     "example": "",
+     "names": {
+      "js": "checkoutLinks.create",
+      "php": "createCheckoutLink",
+      "swift": "createCheckoutLink",
+      "kotlin": "createCheckoutLink"
+     }
+    },
+    {
+     "name": "checkoutLinks.send",
+     "group": "checkoutLinks",
+     "params": [
+      {
+       "name": "id",
+       "type": "number",
+       "optional": false,
+       "default": null
+      }
+     ],
+     "returns": "Promise<ApiResponse<null>>",
+     "method": "POST",
+     "path": "/api/platform/partner/checkout-links/${id}/send",
+     "specPath": "/api/platform/partner/checkout-links/{id}/send",
+     "auth": [
+      "jwt"
+     ],
+     "moduleGate": null,
+     "throttle": "60,1",
+     "status": "live",
+     "summary": "Bağlantıyı müşteriye e-postayla yollar.",
+     "body": "",
+     "example": "",
+     "names": {
+      "js": "checkoutLinks.send",
+      "php": "sendCheckoutLink",
+      "swift": "sendCheckoutLink",
+      "kotlin": "sendCheckoutLink"
+     }
+    },
+    {
+     "name": "checkoutLinks.cancel",
+     "group": "checkoutLinks",
+     "params": [
+      {
+       "name": "id",
+       "type": "number",
+       "optional": false,
+       "default": null
+      }
+     ],
+     "returns": "Promise<ApiResponse<null>>",
+     "method": "POST",
+     "path": "/api/platform/partner/checkout-links/${id}/cancel",
+     "specPath": "/api/platform/partner/checkout-links/{id}/cancel",
+     "auth": [
+      "jwt"
+     ],
+     "moduleGate": null,
+     "throttle": "60,1",
+     "status": "live",
+     "summary": "",
+     "body": "",
+     "example": "",
+     "names": {
+      "js": "checkoutLinks.cancel",
+      "php": "cancelCheckoutLink",
+      "swift": "cancelCheckoutLink",
+      "kotlin": "cancelCheckoutLink"
+     }
+    },
+    {
+     "name": "gateways.list",
+     "group": "gateways",
+     "params": [],
+     "returns": "Promise<ApiResponse<Array<Record<string, unknown>>>>",
+     "method": "GET",
+     "path": "/api/platform/partner/gateways",
+     "specPath": "/api/platform/partner/gateways",
+     "auth": [
+      "jwt"
+     ],
+     "moduleGate": null,
+     "throttle": "60,1",
+     "status": "live",
+     "summary": "",
+     "body": "",
+     "example": "",
+     "names": {
+      "js": "gateways.list",
+      "php": "gateways",
+      "swift": "gateways",
+      "kotlin": "gateways"
+     }
+    },
+    {
+     "name": "gateways.create",
+     "group": "gateways",
+     "params": [
+      {
+       "name": "payload",
+       "type": "Record<string, unknown>",
+       "optional": false,
+       "default": null
+      }
+     ],
+     "returns": "Promise<ApiResponse<Record<string, unknown>>>",
+     "method": "POST",
+     "path": "/api/platform/partner/gateways",
+     "specPath": "/api/platform/partner/gateways",
+     "auth": [
+      "jwt"
+     ],
+     "moduleGate": null,
+     "throttle": "60,1",
+     "status": "live",
+     "summary": "",
+     "body": "",
+     "example": "",
+     "names": {
+      "js": "gateways.create",
+      "php": "createGateway",
+      "swift": "createGateway",
+      "kotlin": "createGateway"
+     }
+    },
+    {
+     "name": "gateways.update",
+     "group": "gateways",
+     "params": [
+      {
+       "name": "id",
+       "type": "number",
+       "optional": false,
+       "default": null
+      },
+      {
+       "name": "payload",
+       "type": "Record<string, unknown>",
+       "optional": false,
+       "default": null
+      }
+     ],
+     "returns": "Promise<ApiResponse<Record<string, unknown>>>",
+     "method": "PUT",
+     "path": "/api/platform/partner/gateways/${id}",
+     "specPath": "/api/platform/partner/gateways/{id}",
+     "auth": [
+      "jwt"
+     ],
+     "moduleGate": null,
+     "throttle": "60,1",
+     "status": "live",
+     "summary": "",
+     "body": "",
+     "example": "",
+     "names": {
+      "js": "gateways.update",
+      "php": "updateGateway",
+      "swift": "updateGateway",
+      "kotlin": "updateGateway"
+     }
+    },
+    {
+     "name": "gateways.delete",
+     "group": "gateways",
+     "params": [
+      {
+       "name": "id",
+       "type": "number",
+       "optional": false,
+       "default": null
+      }
+     ],
+     "returns": "Promise<ApiResponse<null>>",
+     "method": "DELETE",
+     "path": "/api/platform/partner/gateways/${id}",
+     "specPath": "/api/platform/partner/gateways/{id}",
+     "auth": [
+      "jwt"
+     ],
+     "moduleGate": null,
+     "throttle": "60,1",
+     "status": "live",
+     "summary": "",
+     "body": "",
+     "example": "",
+     "names": {
+      "js": "gateways.delete",
+      "php": "deleteGateway",
+      "swift": "deleteGateway",
+      "kotlin": "deleteGateway"
+     }
+    },
+    {
+     "name": "gateways.verify",
+     "group": "gateways",
+     "params": [
+      {
+       "name": "id",
+       "type": "number",
+       "optional": false,
+       "default": null
+      }
+     ],
+     "returns": "Promise<ApiResponse<Record<string, unknown>>>",
+     "method": "POST",
+     "path": "/api/platform/partner/gateways/${id}/verify",
+     "specPath": "/api/platform/partner/gateways/{id}/verify",
+     "auth": [
+      "jwt"
+     ],
+     "moduleGate": null,
+     "throttle": "60,1",
+     "status": "live",
+     "summary": "Anahtarları test eder — kaydetmeden önce doğrulama.",
+     "body": "",
+     "example": "",
+     "names": {
+      "js": "gateways.verify",
+      "php": "verifyGateway",
+      "swift": "verifyGateway",
+      "kotlin": "verifyGateway"
+     }
+    },
+    {
+     "name": "bankTransfers.list",
+     "group": "bankTransfers",
+     "params": [],
+     "returns": "Promise<ApiResponse<Array<Record<string, unknown>>>>",
+     "method": "GET",
+     "path": "/api/platform/partner/bank-transfers",
+     "specPath": "/api/platform/partner/bank-transfers",
+     "auth": [
+      "jwt"
+     ],
+     "moduleGate": null,
+     "throttle": "60,1",
+     "status": "live",
+     "summary": "",
+     "body": "",
+     "example": "",
+     "names": {
+      "js": "bankTransfers.list",
+      "php": "bankTransfers",
+      "swift": "bankTransfers",
+      "kotlin": "bankTransfers"
+     }
+    },
+    {
+     "name": "bankTransfers.review",
+     "group": "bankTransfers",
+     "params": [
+      {
+       "name": "id",
+       "type": "number",
+       "optional": false,
+       "default": null
+      },
+      {
+       "name": "payload",
+       "type": "Record<string, unknown>",
+       "optional": false,
+       "default": null
+      }
+     ],
+     "returns": "Promise<ApiResponse<Record<string, unknown>>>",
+     "method": "POST",
+     "path": "/api/platform/partner/bank-transfers/${id}/review",
+     "specPath": "/api/platform/partner/bank-transfers/{id}/review",
+     "auth": [
+      "jwt"
+     ],
+     "moduleGate": null,
+     "throttle": "60,1",
+     "status": "live",
+     "summary": "Havale bildirimini onaylar ya da reddeder.",
+     "body": "",
+     "example": "",
+     "names": {
+      "js": "bankTransfers.review",
+      "php": "reviewBankTransfer",
+      "swift": "reviewBankTransfer",
+      "kotlin": "reviewBankTransfer"
+     }
+    },
+    {
+     "name": "transfers.list",
+     "group": "transfers",
+     "params": [],
+     "returns": "Promise<ApiResponse<Array<Record<string, unknown>>>>",
+     "method": "GET",
+     "path": "/api/platform/partner/transfers",
+     "specPath": "/api/platform/partner/transfers",
+     "auth": [
+      "jwt"
+     ],
+     "moduleGate": null,
+     "throttle": "60,1",
+     "status": "live",
+     "summary": "",
+     "body": "",
+     "example": "",
+     "names": {
+      "js": "transfers.list",
+      "php": "transfers",
+      "swift": "transfers",
+      "kotlin": "transfers"
+     }
+    },
+    {
+     "name": "transfers.create",
+     "group": "transfers",
+     "params": [
+      {
+       "name": "payload",
+       "type": "Record<string, unknown>",
+       "optional": false,
+       "default": null
+      }
+     ],
+     "returns": "Promise<ApiResponse<Record<string, unknown>>>",
+     "method": "POST",
+     "path": "/api/platform/partner/transfers",
+     "specPath": "/api/platform/partner/transfers",
+     "auth": [
+      "jwt"
+     ],
+     "moduleGate": null,
+     "throttle": "60,1",
+     "status": "live",
+     "summary": "",
+     "body": "",
+     "example": "",
+     "names": {
+      "js": "transfers.create",
+      "php": "createTransfer",
+      "swift": "createTransfer",
+      "kotlin": "createTransfer"
+     }
+    },
+    {
+     "name": "transfers.respond",
+     "group": "transfers",
+     "params": [
+      {
+       "name": "id",
+       "type": "number",
+       "optional": false,
+       "default": null
+      },
+      {
+       "name": "payload",
+       "type": "Record<string, unknown>",
+       "optional": false,
+       "default": null
+      }
+     ],
+     "returns": "Promise<ApiResponse<Record<string, unknown>>>",
+     "method": "POST",
+     "path": "/api/platform/partner/transfers/${id}/respond",
+     "specPath": "/api/platform/partner/transfers/{id}/respond",
+     "auth": [
+      "jwt"
+     ],
+     "moduleGate": null,
+     "throttle": "60,1",
+     "status": "live",
+     "summary": "",
+     "body": "",
+     "example": "",
+     "names": {
+      "js": "transfers.respond",
+      "php": "respondTransfer",
+      "swift": "respondTransfer",
+      "kotlin": "respondTransfer"
+     }
+    }
+   ],
+   "accessor": "partner"
+  },
+  {
+   "class": "PaymentModule",
+   "file": "commerce.ts",
+   "summary": "Ödemeler. Stripe/Tami webhook uçları sunucu-sunucu olduğu için SDK'da yoktur.",
+   "body": "",
+   "example": "",
+   "methods": [
+    {
+     "name": "list",
+     "group": null,
+     "params": [
+      {
+       "name": "params",
+       "type": "Record<string, unknown>",
+       "optional": true,
+       "default": "{}"
+      }
+     ],
+     "returns": "Promise<ApiResponse<Array<Record<string, unknown>>>>",
+     "method": "GET",
+     "path": "/api/payments",
+     "specPath": "/api/payments",
+     "auth": [
+      "envToken",
+      "jwt"
+     ],
+     "moduleGate": null,
+     "throttle": null,
+     "status": "live",
+     "summary": "",
+     "body": "",
+     "example": "",
+     "names": {
+      "js": "list",
+      "php": "list",
+      "swift": "list",
+      "kotlin": "list"
+     }
+    },
+    {
+     "name": "get",
+     "group": null,
+     "params": [
+      {
+       "name": "id",
+       "type": "number",
+       "optional": false,
+       "default": null
+      }
+     ],
+     "returns": "Promise<ApiResponse<Record<string, unknown>>>",
+     "method": "GET",
+     "path": "/api/payments/${id}",
+     "specPath": "/api/payments/{id}",
+     "auth": [
+      "envToken",
+      "jwt"
+     ],
+     "moduleGate": null,
+     "throttle": null,
+     "status": "live",
+     "summary": "",
+     "body": "",
+     "example": "",
+     "names": {
+      "js": "get",
+      "php": "get",
+      "swift": "get",
+      "kotlin": "get"
+     }
+    },
+    {
+     "name": "create",
+     "group": null,
+     "params": [
+      {
+       "name": "payload",
+       "type": "Record<string, unknown>",
+       "optional": false,
+       "default": null
+      }
+     ],
+     "returns": "Promise<ApiResponse<Record<string, unknown>>>",
+     "method": "POST",
+     "path": "/api/payments",
+     "specPath": "/api/payments",
+     "auth": [
+      "envToken",
+      "jwt"
+     ],
+     "moduleGate": null,
+     "throttle": "10,1",
+     "status": "live",
+     "summary": "",
+     "body": "",
+     "example": "",
+     "names": {
+      "js": "create",
+      "php": "create",
+      "swift": "create",
+      "kotlin": "create"
+     }
+    },
+    {
+     "name": "createStripeIntent",
+     "group": null,
+     "params": [
+      {
+       "name": "payload",
+       "type": "Record<string, unknown>",
+       "optional": false,
+       "default": null
+      }
+     ],
+     "returns": "Promise<ApiResponse<",
+     "method": "POST",
+     "path": "/api/payments/stripe/create-intent",
+     "specPath": "/api/payments/stripe/create-intent",
+     "auth": [
+      "envToken",
+      "jwt"
+     ],
+     "moduleGate": null,
+     "throttle": "10,1",
+     "status": "live",
+     "summary": "Stripe PaymentIntent açar — `client_secret` ile Stripe.js'e devredin.",
+     "body": "",
+     "example": "",
+     "names": {
+      "js": "createStripeIntent",
+      "php": "createStripeIntent",
+      "swift": "createStripeIntent",
+      "kotlin": "createStripeIntent"
+     }
+    }
+   ],
+   "accessor": "payments"
+  },
+  {
+   "class": "PlatformModule",
+   "file": "platform.ts",
+   "summary": "Müşterinin kendi sitesini yönettiği self-servis uçlar (`platform/my`).",
+   "body": "Site üyeliği zorunludur — başka bir sitenin verisine erişilemez.",
+   "example": "const { data } = await sdk.platform.overview()\n  await sdk.platform.domains.add('magazam.com')",
+   "methods": [
+    {
+     "name": "overview",
+     "group": null,
+     "params": [],
+     "returns": "Promise<ApiResponse<Record<string, unknown>>>",
+     "method": "GET",
+     "path": "/api/platform/my/overview",
+     "specPath": "/api/platform/my/overview",
+     "auth": [
+      "envToken",
+      "jwt",
+      "envMember"
+     ],
+     "moduleGate": null,
+     "throttle": null,
+     "status": "live",
+     "summary": "Plan, kota kullanımı ve site durumu tek bakışta.",
+     "body": "",
+     "example": "",
+     "names": {
+      "js": "overview",
+      "php": "overview",
+      "swift": "overview",
+      "kotlin": "overview"
+     }
+    },
+    {
+     "name": "analytics",
+     "group": null,
+     "params": [
+      {
+       "name": "params",
+       "type": "Record<string, unknown>",
+       "optional": true,
+       "default": "{}"
+      }
+     ],
+     "returns": "Promise<ApiResponse<Record<string, unknown>>>",
+     "method": "GET",
+     "path": "/api/platform/my/analytics",
+     "specPath": "/api/platform/my/analytics",
+     "auth": [
+      "envToken",
+      "jwt",
+      "envMember"
+     ],
+     "moduleGate": null,
+     "throttle": null,
+     "status": "live",
+     "summary": "Trafik ve istek özeti (telemetriden).",
+     "body": "",
+     "example": "",
+     "names": {
+      "js": "analytics",
+      "php": "analytics",
+      "swift": "analytics",
+      "kotlin": "analytics"
+     }
+    },
+    {
+     "name": "payments",
+     "group": null,
+     "params": [
+      {
+       "name": "params",
+       "type": "Record<string, unknown>",
+       "optional": true,
+       "default": "{}"
+      }
+     ],
+     "returns": "Promise<ApiResponse<Array<Record<string, unknown>>>>",
+     "method": "GET",
+     "path": "/api/platform/my/payments",
+     "specPath": "/api/platform/my/payments",
+     "auth": [
+      "envToken",
+      "jwt",
+      "envMember"
+     ],
+     "moduleGate": null,
+     "throttle": null,
+     "status": "live",
+     "summary": "",
+     "body": "",
+     "example": "",
+     "names": {
+      "js": "payments",
+      "php": "payments",
+      "swift": "payments",
+      "kotlin": "payments"
+     }
+    },
+    {
+     "name": "receipts.list",
+     "group": "receipts",
+     "params": [],
+     "returns": "Promise<ApiResponse<Array<Record<string, unknown>>>>",
+     "method": "GET",
+     "path": "/api/platform/my/receipts",
+     "specPath": "/api/platform/my/receipts",
+     "auth": [
+      "envToken",
+      "jwt",
+      "envMember"
+     ],
+     "moduleGate": null,
+     "throttle": null,
+     "status": "live",
+     "summary": "",
+     "body": "",
+     "example": "",
+     "names": {
+      "js": "receipts.list",
+      "php": "receipts",
+      "swift": "receipts",
+      "kotlin": "receipts"
+     }
+    },
+    {
+     "name": "receipts.pdfUrl",
+     "group": "receipts",
+     "params": [
+      {
+       "name": "id",
+       "type": "number",
+       "optional": false,
+       "default": null
+      }
+     ],
+     "returns": "string",
+     "method": "GET",
+     "path": "/api/platform/my/modules",
+     "specPath": "/api/platform/my/modules",
+     "auth": [
+      "envToken",
+      "jwt",
+      "envMember"
+     ],
+     "moduleGate": null,
+     "throttle": null,
+     "status": "live",
+     "summary": "PDF adresi — indirme bağlantısı olarak verin, SDK ikili veri döndürmez.",
+     "body": "",
+     "example": "",
+     "names": {
+      "js": "receipts.pdfUrl",
+      "php": "modules",
+      "swift": "modules",
+      "kotlin": "modules"
+     }
+    },
+    {
+     "name": "modules.list",
+     "group": "modules",
+     "params": [],
+     "returns": "Promise<ApiResponse<Array<Record<string, unknown>>>>",
+     "method": "GET",
+     "path": "/api/platform/my/modules",
+     "specPath": "/api/platform/my/modules",
+     "auth": [
+      "envToken",
+      "jwt",
+      "envMember"
+     ],
+     "moduleGate": null,
+     "throttle": null,
+     "status": "live",
+     "summary": "",
+     "body": "",
+     "example": "",
+     "names": {
+      "js": "modules.list",
+      "php": "modules",
+      "swift": "modules",
+      "kotlin": "modules"
+     }
+    },
+    {
+     "name": "modules.purchase",
+     "group": "modules",
+     "params": [
+      {
+       "name": "code",
+       "type": "string",
+       "optional": false,
+       "default": null
+      },
+      {
+       "name": "payload",
+       "type": "Record<string, unknown>",
+       "optional": true,
+       "default": "{}"
+      }
+     ],
+     "returns": "Promise<ApiResponse<Record<string, unknown>>>",
+     "method": "POST",
+     "path": "/api/platform/my/modules/${encodeURIComponent(code)}/purchase",
+     "specPath": "/api/platform/my/modules/{code}/purchase",
+     "auth": [
+      "envToken",
+      "jwt",
+      "envMember"
+     ],
+     "moduleGate": null,
+     "throttle": "10,1",
+     "status": "live",
+     "summary": "Modülü satın alır — ödeme gerekiyorsa yanıtta yönlendirme döner.",
+     "body": "",
+     "example": "",
+     "names": {
+      "js": "modules.purchase",
+      "php": "purchaseModule",
+      "swift": "purchaseModule",
+      "kotlin": "purchaseModule"
+     }
+    },
+    {
+     "name": "domains.list",
+     "group": "domains",
+     "params": [],
+     "returns": "Promise<ApiResponse<Array<Record<string, unknown>>>>",
+     "method": "GET",
+     "path": "/api/platform/my/domains",
+     "specPath": "/api/platform/my/domains",
+     "auth": [
+      "envToken",
+      "jwt",
+      "envMember"
+     ],
+     "moduleGate": null,
+     "throttle": null,
+     "status": "live",
+     "summary": "",
+     "body": "",
+     "example": "",
+     "names": {
+      "js": "domains.list",
+      "php": "domains",
+      "swift": "domains",
+      "kotlin": "domains"
+     }
+    },
+    {
+     "name": "domains.add",
+     "group": "domains",
+     "params": [
+      {
+       "name": "domain",
+       "type": "string",
+       "optional": false,
+       "default": null
+      }
+     ],
+     "returns": "Promise<ApiResponse<",
+     "method": "POST",
+     "path": "/api/platform/my/domains",
+     "specPath": "/api/platform/my/domains",
+     "auth": [
+      "envToken",
+      "jwt",
+      "envMember"
+     ],
+     "moduleGate": null,
+     "throttle": null,
+     "status": "live",
+     "summary": "",
+     "body": "",
+     "example": "",
+     "names": {
+      "js": "domains.add",
+      "php": "addDomain",
+      "swift": "addDomain",
+      "kotlin": "addDomain"
+     }
+    },
+    {
+     "name": "domains.verify",
+     "group": "domains",
+     "params": [
+      {
+       "name": "id",
+       "type": "number",
+       "optional": false,
+       "default": null
+      }
+     ],
+     "returns": "Promise<ApiResponse<Record<string, unknown>>>",
+     "method": "POST",
+     "path": "/api/platform/my/domains/${id}/verify",
+     "specPath": "/api/platform/my/domains/{id}/verify",
+     "auth": [
+      "envToken",
+      "jwt",
+      "envMember"
+     ],
+     "moduleGate": null,
+     "throttle": null,
+     "status": "live",
+     "summary": "",
+     "body": "",
+     "example": "",
+     "names": {
+      "js": "domains.verify",
+      "php": "verifyDomain",
+      "swift": "verifyDomain",
+      "kotlin": "verifyDomain"
+     }
+    },
+    {
+     "name": "domains.remove",
+     "group": "domains",
+     "params": [
+      {
+       "name": "id",
+       "type": "number",
+       "optional": false,
+       "default": null
+      }
+     ],
+     "returns": "Promise<ApiResponse<null>>",
+     "method": "DELETE",
+     "path": "/api/platform/my/domains/${id}",
+     "specPath": "/api/platform/my/domains/{id}",
+     "auth": [
+      "envToken",
+      "jwt",
+      "envMember"
+     ],
+     "moduleGate": null,
+     "throttle": null,
+     "status": "live",
+     "summary": "",
+     "body": "",
+     "example": "",
+     "names": {
+      "js": "domains.remove",
+      "php": "removeDomain",
+      "swift": "removeDomain",
+      "kotlin": "removeDomain"
+     }
+    },
+    {
+     "name": "team.list",
+     "group": "team",
+     "params": [],
+     "returns": "Promise<ApiResponse<Record<string, unknown>>>",
+     "method": "GET",
+     "path": "/api/platform/my/team",
+     "specPath": "/api/platform/my/team",
+     "auth": [
+      "envToken",
+      "jwt",
+      "envMember"
+     ],
+     "moduleGate": null,
+     "throttle": null,
+     "status": "live",
+     "summary": "",
+     "body": "",
+     "example": "",
+     "names": {
+      "js": "team.list",
+      "php": "team",
+      "swift": "team",
+      "kotlin": "team"
+     }
+    },
+    {
+     "name": "team.invite",
+     "group": "team",
+     "params": [
+      {
+       "name": "payload",
+       "type": "{ email: string; role?: string }",
+       "optional": true,
+       "default": null
+      }
+     ],
+     "returns": "Promise<ApiResponse<Record<string, unknown>>>",
+     "method": "POST",
+     "path": "/api/platform/my/team/invite",
+     "specPath": "/api/platform/my/team/invite",
+     "auth": [
+      "envToken",
+      "jwt",
+      "envMember"
+     ],
+     "moduleGate": null,
+     "throttle": null,
+     "status": "live",
+     "summary": "",
+     "body": "",
+     "example": "",
+     "names": {
+      "js": "team.invite",
+      "php": "inviteTeamMember",
+      "swift": "inviteTeamMember",
+      "kotlin": "inviteTeamMember"
+     }
+    },
+    {
+     "name": "team.cancelInvitation",
+     "group": "team",
+     "params": [
+      {
+       "name": "id",
+       "type": "number",
+       "optional": false,
+       "default": null
+      }
+     ],
+     "returns": "Promise<ApiResponse<null>>",
+     "method": "DELETE",
+     "path": "/api/platform/my/team/invitations/${id}",
+     "specPath": "/api/platform/my/team/invitations/{id}",
+     "auth": [
+      "envToken",
+      "jwt",
+      "envMember"
+     ],
+     "moduleGate": null,
+     "throttle": null,
+     "status": "live",
+     "summary": "",
+     "body": "",
+     "example": "",
+     "names": {
+      "js": "team.cancelInvitation",
+      "php": "cancelInvitation",
+      "swift": "cancelInvitation",
+      "kotlin": "cancelInvitation"
+     }
+    },
+    {
+     "name": "team.removeMember",
+     "group": "team",
+     "params": [
+      {
+       "name": "id",
+       "type": "number",
+       "optional": false,
+       "default": null
+      }
+     ],
+     "returns": "Promise<ApiResponse<null>>",
+     "method": "DELETE",
+     "path": "/api/platform/my/team/members/${id}",
+     "specPath": "/api/platform/my/team/members/{id}",
+     "auth": [
+      "envToken",
+      "jwt",
+      "envMember"
+     ],
+     "moduleGate": null,
+     "throttle": null,
+     "status": "live",
+     "summary": "",
+     "body": "",
+     "example": "",
+     "names": {
+      "js": "team.removeMember",
+      "php": "removeTeamMember",
+      "swift": "removeTeamMember",
+      "kotlin": "removeTeamMember"
+     }
+    },
+    {
+     "name": "team.plans",
+     "group": "team",
+     "params": [],
+     "returns": "Promise<ApiResponse<Array<Record<string, unknown>>>>",
+     "method": "GET",
+     "path": "/api/platform/plans",
+     "specPath": "/api/platform/plans",
+     "auth": [
+      "envToken"
+     ],
+     "moduleGate": null,
+     "throttle": null,
+     "status": "live",
+     "summary": "Herkese açık paket listesi — fiyatlandırma sayfası için. Oturum gerekmez.",
+     "body": "",
+     "example": "",
+     "names": {
+      "js": "team.plans",
+      "php": "plans",
+      "swift": "plans",
+      "kotlin": "plans"
+     }
+    },
+    {
+     "name": "pay.get",
+     "group": "pay",
+     "params": [
+      {
+       "name": "token",
+       "type": "string",
+       "optional": false,
+       "default": null
+      }
+     ],
+     "returns": "Promise<ApiResponse<Record<string, unknown>>>",
+     "method": "GET",
+     "path": "/api/platform/pay/${encodeURIComponent(token)}",
+     "specPath": "/api/platform/pay/{token}",
+     "auth": [],
+     "moduleGate": null,
+     "throttle": null,
+     "status": "live",
+     "summary": "",
+     "body": "",
+     "example": "",
+     "names": {
+      "js": "pay.get",
+      "php": "payLink",
+      "swift": "payLink",
+      "kotlin": "payLink"
+     }
+    },
+    {
+     "name": "pay.card",
+     "group": "pay",
+     "params": [
+      {
+       "name": "token",
+       "type": "string",
+       "optional": false,
+       "default": null
+      },
+      {
+       "name": "payload",
+       "type": "Record<string, unknown>",
+       "optional": false,
+       "default": null
+      }
+     ],
+     "returns": "Promise<ApiResponse<Record<string, unknown>>>",
+     "method": "POST",
+     "path": "/api/platform/pay/${encodeURIComponent(token)}/card",
+     "specPath": "/api/platform/pay/{token}/card",
+     "auth": [],
+     "moduleGate": null,
+     "throttle": "5,1",
+     "status": "live",
+     "summary": "",
+     "body": "",
+     "example": "",
+     "names": {
+      "js": "pay.card",
+      "php": "payByCard",
+      "swift": "payByCard",
+      "kotlin": "payByCard"
+     }
+    },
+    {
+     "name": "pay.bankTransfer",
+     "group": "pay",
+     "params": [
+      {
+       "name": "token",
+       "type": "string",
+       "optional": false,
+       "default": null
+      },
+      {
+       "name": "payload",
+       "type": "Record<string, unknown>",
+       "optional": false,
+       "default": null
+      }
+     ],
+     "returns": "Promise<ApiResponse<Record<string, unknown>>>",
+     "method": "POST",
+     "path": "/api/platform/pay/${encodeURIComponent(token)}/bank-transfer",
+     "specPath": "/api/platform/pay/{token}/bank-transfer",
+     "auth": [],
+     "moduleGate": null,
+     "throttle": null,
+     "status": "live",
+     "summary": "",
+     "body": "",
+     "example": "",
+     "names": {
+      "js": "pay.bankTransfer",
+      "php": "payByBankTransfer",
+      "swift": "payByBankTransfer",
+      "kotlin": "payByBankTransfer"
+     }
+    },
+    {
+     "name": "site.get",
+     "group": "site",
+     "params": [
+      {
+       "name": "slug",
+       "type": "string",
+       "optional": false,
+       "default": null
+      }
+     ],
+     "returns": "Promise<ApiResponse<Record<string, unknown>>>",
+     "method": "GET",
+     "path": "/api/platform/site/${encodeURIComponent(slug)}",
+     "specPath": "/api/platform/site/{slug}",
+     "auth": [],
+     "moduleGate": null,
+     "throttle": null,
+     "status": "live",
+     "summary": "",
+     "body": "",
+     "example": "",
+     "names": {
+      "js": "site.get",
+      "php": "partnerSite",
+      "swift": "partnerSite",
+      "kotlin": "partnerSite"
+     }
+    },
+    {
+     "name": "site.buyPackage",
+     "group": "site",
+     "params": [
+      {
+       "name": "slug",
+       "type": "string",
+       "optional": false,
+       "default": null
+      },
+      {
+       "name": "packageId",
+       "type": "number",
+       "optional": false,
+       "default": null
+      },
+      {
+       "name": "payload",
+       "type": "Record<string, unknown>",
+       "optional": true,
+       "default": "{}"
+      }
+     ],
+     "returns": "Promise< ApiResponse<Record<string, unknown>> >",
+     "method": "POST",
+     "path": "/api/platform/site/${encodeURIComponent(slug)}/packages/${packageId}/buy",
+     "specPath": "/api/platform/site/{slug}/packages/{packageId}/buy",
+     "auth": [],
+     "moduleGate": null,
+     "throttle": "10,1",
+     "status": "live",
+     "summary": "",
+     "body": "",
+     "example": "",
+     "names": {
+      "js": "site.buyPackage",
+      "php": "buyPackage",
+      "swift": "buyPackage",
+      "kotlin": "buyPackage"
+     }
+    }
+   ],
+   "accessor": "platform"
+  },
+  {
+   "class": "RecordModule",
+   "file": "records.ts",
+   "summary": "İçerik kayıtları — v2 şema sisteminin ana modülü.",
+   "body": "Her kayıt bir **içerik tipine** (`typeCode`) bağlıdır; tipi\n`sdk.contentTypes` ile yönetirsiniz. Bu modül panel/yazma tarafıdır ve\noturum ister. Siteye içerik **yayınlamak** için `sdk.delivery` kullanın —\no taraf yalnızca site token'ı ile çalışır ve sadece yayımlanmışları döner.",
+   "example": "const { data, meta } = await sdk.records.list('blog', {\n    status: 'published',\n    locale: 'tr',\n    filter: { featured: { eq: true } },\n    sort: 'published_at',\n    dir: 'desc',\n  })",
+   "methods": [
+    {
+     "name": "list",
+     "group": null,
+     "params": [
+      {
+       "name": "typeCode",
+       "type": "string",
+       "optional": false,
+       "default": null
+      },
+      {
+       "name": "params",
+       "type": "RecordListParams",
+       "optional": true,
+       "default": "{}"
+      }
+     ],
+     "returns": "Promise<ApiResponse<SubmitRecord[]> &",
+     "method": "GET",
+     "path": "/api/schema/records/${encodeURIComponent(typeCode)}",
+     "specPath": "/api/schema/records/{typeCode}",
+     "auth": [
+      "envToken",
+      "jwt",
+      "envMember"
+     ],
+     "moduleGate": null,
+     "throttle": null,
+     "status": "live",
+     "summary": "Kayıtları listeler. Sayfalama bilgisi yanıtın `meta` alanındadır.",
+     "body": "`filter` iç içe nesnedir ve sorgu dizesine `filter[alan][işleç]=değer`\nbiçiminde açılır.",
+     "example": "",
+     "names": {
+      "js": "list",
+      "php": "list",
+      "swift": "list",
+      "kotlin": "list"
+     }
+    },
+    {
+     "name": "get",
+     "group": null,
+     "params": [
+      {
+       "name": "typeCode",
+       "type": "string",
+       "optional": false,
+       "default": null
+      },
+      {
+       "name": "id",
+       "type": "number",
+       "optional": false,
+       "default": null
+      }
+     ],
+     "returns": "Promise<ApiResponse<SubmitRecord>>",
+     "method": "GET",
+     "path": "/api/schema/records/${encodeURIComponent(typeCode)}/${id}",
+     "specPath": "/api/schema/records/{typeCode}/{id}",
+     "auth": [
+      "envToken",
+      "jwt",
+      "envMember"
+     ],
+     "moduleGate": null,
+     "throttle": null,
+     "status": "live",
+     "summary": "Tek kayıt — ilişkili kategoriler ve galeri alanları dahil döner.",
+     "body": "",
+     "example": "",
+     "names": {
+      "js": "get",
+      "php": "get",
+      "swift": "get",
+      "kotlin": "get"
+     }
+    },
+    {
+     "name": "create",
+     "group": null,
+     "params": [
+      {
+       "name": "typeCode",
+       "type": "string",
+       "optional": false,
+       "default": null
+      },
+      {
+       "name": "payload",
+       "type": "RecordPayload",
+       "optional": false,
+       "default": null
+      }
+     ],
+     "returns": "Promise<ApiResponse<SubmitRecord>>",
+     "method": "POST",
+     "path": "/api/schema/records/${encodeURIComponent(typeCode)}",
+     "specPath": "/api/schema/records/{typeCode}",
+     "auth": [
+      "envToken",
+      "jwt",
+      "envMember"
+     ],
+     "moduleGate": null,
+     "throttle": null,
+     "status": "live",
+     "summary": "Yeni kayıt.",
+     "body": "Plan limiti burada uygulanır: içerikler `record_limit`, ürünler\n`product_limit` kotasına sayılır. Kota dolduysa 403 döner.",
+     "example": "",
+     "names": {
+      "js": "create",
+      "php": "create",
+      "swift": "create",
+      "kotlin": "create"
+     }
+    },
+    {
+     "name": "update",
+     "group": null,
+     "params": [
+      {
+       "name": "typeCode",
+       "type": "string",
+       "optional": false,
+       "default": null
+      },
+      {
+       "name": "id",
+       "type": "number",
+       "optional": false,
+       "default": null
+      },
+      {
+       "name": "payload",
+       "type": "RecordPayload",
+       "optional": false,
+       "default": null
+      }
+     ],
+     "returns": "Promise<ApiResponse<SubmitRecord>>",
+     "method": "PUT",
+     "path": "/api/schema/records/${encodeURIComponent(typeCode)}/${id}",
+     "specPath": "/api/schema/records/{typeCode}/{id}",
+     "auth": [
+      "envToken",
+      "jwt",
+      "envMember"
+     ],
+     "moduleGate": null,
+     "throttle": null,
+     "status": "live",
+     "summary": "Kısmi güncelleme — yalnızca gönderdiğiniz alanlar değişir.",
+     "body": "",
+     "example": "",
+     "names": {
+      "js": "update",
+      "php": "update",
+      "swift": "update",
+      "kotlin": "update"
+     }
+    },
+    {
+     "name": "delete",
+     "group": null,
+     "params": [
+      {
+       "name": "typeCode",
+       "type": "string",
+       "optional": false,
+       "default": null
+      },
+      {
+       "name": "id",
+       "type": "number",
+       "optional": false,
+       "default": null
+      }
+     ],
+     "returns": "Promise<ApiResponse<null>>",
+     "method": "DELETE",
+     "path": "/api/schema/records/${encodeURIComponent(typeCode)}/${id}",
+     "specPath": "/api/schema/records/{typeCode}/{id}",
+     "auth": [
+      "envToken",
+      "jwt",
+      "envMember"
+     ],
+     "moduleGate": null,
+     "throttle": null,
+     "status": "live",
+     "summary": "",
+     "body": "",
+     "example": "",
+     "names": {
+      "js": "delete",
+      "php": "delete",
+      "swift": "delete",
+      "kotlin": "delete"
+     }
+    },
+    {
+     "name": "analytics",
+     "group": null,
+     "params": [
+      {
+       "name": "typeCode",
+       "type": "string",
+       "optional": false,
+       "default": null
+      },
+      {
+       "name": "id",
+       "type": "number",
+       "optional": false,
+       "default": null
+      }
+     ],
+     "returns": "Promise<ApiResponse<Record<string, unknown>>>",
+     "method": "GET",
+     "path": "/api/schema/records/${encodeURIComponent(typeCode)}/${id}/analytics",
+     "specPath": "/api/schema/records/{typeCode}/{id}/analytics",
+     "auth": [
+      "envToken",
+      "jwt",
+      "envMember"
+     ],
+     "moduleGate": null,
+     "throttle": null,
+     "status": "live",
+     "summary": "Görüntülenme ve etkileşim özeti.",
+     "body": "",
+     "example": "",
+     "names": {
+      "js": "analytics",
+      "php": "analytics",
+      "swift": "analytics",
+      "kotlin": "analytics"
+     }
+    },
+    {
+     "name": "revisions.list",
+     "group": "revisions",
+     "params": [
+      {
+       "name": "typeCode",
+       "type": "string",
+       "optional": false,
+       "default": null
+      },
+      {
+       "name": "id",
+       "type": "number",
+       "optional": false,
+       "default": null
+      }
+     ],
+     "returns": "Promise<ApiResponse<Array<",
+     "method": "GET",
+     "path": "/api/schema/records/${encodeURIComponent(typeCode)}/${id}/revisions",
+     "specPath": "/api/schema/records/{typeCode}/{id}/revisions",
+     "auth": [
+      "envToken",
+      "jwt",
+      "envMember"
+     ],
+     "moduleGate": null,
+     "throttle": null,
+     "status": "live",
+     "summary": "",
+     "body": "",
+     "example": "",
+     "names": {
+      "js": "revisions.list",
+      "php": "revisions",
+      "swift": "revisions",
+      "kotlin": "revisions"
+     }
+    },
+    {
+     "name": "revisions.get",
+     "group": "revisions",
+     "params": [
+      {
+       "name": "typeCode",
+       "type": "string",
+       "optional": false,
+       "default": null
+      },
+      {
+       "name": "id",
+       "type": "number",
+       "optional": false,
+       "default": null
+      },
+      {
+       "name": "version",
+       "type": "number",
+       "optional": false,
+       "default": null
+      }
+     ],
+     "returns": "Promise<ApiResponse<SubmitRecord>>",
+     "method": "GET",
+     "path": "/api/schema/records/${encodeURIComponent(typeCode)}/${id}/revisions/${version}",
+     "specPath": "/api/schema/records/{typeCode}/{id}/revisions/{version}",
+     "auth": [
+      "envToken",
+      "jwt",
+      "envMember"
+     ],
+     "moduleGate": null,
+     "throttle": null,
+     "status": "live",
+     "summary": "",
+     "body": "",
+     "example": "",
+     "names": {
+      "js": "revisions.get",
+      "php": "revision",
+      "swift": "revision",
+      "kotlin": "revision"
+     }
+    },
+    {
+     "name": "revisions.restore",
+     "group": "revisions",
+     "params": [
+      {
+       "name": "typeCode",
+       "type": "string",
+       "optional": false,
+       "default": null
+      },
+      {
+       "name": "id",
+       "type": "number",
+       "optional": false,
+       "default": null
+      },
+      {
+       "name": "version",
+       "type": "number",
+       "optional": false,
+       "default": null
+      }
+     ],
+     "returns": "Promise<ApiResponse<SubmitRecord>>",
+     "method": "POST",
+     "path": "/api/schema/records/${encodeURIComponent(typeCode)}/${id}/revisions/${version}/restore",
+     "specPath": "/api/schema/records/{typeCode}/{id}/revisions/{version}/restore",
+     "auth": [
+      "envToken",
+      "jwt",
+      "envMember"
+     ],
+     "moduleGate": null,
+     "throttle": null,
+     "status": "live",
+     "summary": "Kaydı o sürüme döndürür. Mevcut hâl önce anlık görüntüye alınır.",
+     "body": "",
+     "example": "",
+     "names": {
+      "js": "revisions.restore",
+      "php": "restoreRevision",
+      "swift": "restoreRevision",
+      "kotlin": "restoreRevision"
+     }
+    },
+    {
+     "name": "gallery.list",
+     "group": "gallery",
+     "params": [
+      {
+       "name": "typeCode",
+       "type": "string",
+       "optional": false,
+       "default": null
+      },
+      {
+       "name": "id",
+       "type": "number",
+       "optional": false,
+       "default": null
+      },
+      {
+       "name": "field",
+       "type": "string",
+       "optional": false,
+       "default": null
+      }
+     ],
+     "returns": "Promise<ApiResponse<Array<Record<string, unknown>>>>",
+     "method": "GET",
+     "path": "/api/schema/records/${encodeURIComponent(typeCode)}/${id}/gallery/${encodeURIComponent(field)}",
+     "specPath": "/api/schema/records/{typeCode}/{id}/gallery/{field}",
+     "auth": [
+      "envToken",
+      "jwt",
+      "envMember"
+     ],
+     "moduleGate": null,
+     "throttle": null,
+     "status": "live",
+     "summary": "",
+     "body": "",
+     "example": "",
+     "names": {
+      "js": "gallery.list",
+      "php": "gallery",
+      "swift": "gallery",
+      "kotlin": "gallery"
+     }
+    },
+    {
+     "name": "gallery.add",
+     "group": "gallery",
+     "params": [
+      {
+       "name": "typeCode",
+       "type": "string",
+       "optional": false,
+       "default": null
+      },
+      {
+       "name": "id",
+       "type": "number",
+       "optional": false,
+       "default": null
+      },
+      {
+       "name": "field",
+       "type": "string",
+       "optional": false,
+       "default": null
+      },
+      {
+       "name": "payload",
+       "type": "Record<string, unknown>",
+       "optional": false,
+       "default": null
+      }
+     ],
+     "returns": "Promise<ApiResponse<Record<string, unknown>>>",
+     "method": "POST",
+     "path": "/api/schema/records/${encodeURIComponent(typeCode)}/${id}/gallery/${encodeURIComponent(field)}",
+     "specPath": "/api/schema/records/{typeCode}/{id}/gallery/{field}",
+     "auth": [
+      "envToken",
+      "jwt",
+      "envMember"
+     ],
+     "moduleGate": null,
+     "throttle": null,
+     "status": "live",
+     "summary": "",
+     "body": "",
+     "example": "",
+     "names": {
+      "js": "gallery.add",
+      "php": "addGalleryImage",
+      "swift": "addGalleryImage",
+      "kotlin": "addGalleryImage"
+     }
+    },
+    {
+     "name": "gallery.reorder",
+     "group": "gallery",
+     "params": [
+      {
+       "name": "typeCode",
+       "type": "string",
+       "optional": false,
+       "default": null
+      },
+      {
+       "name": "id",
+       "type": "number",
+       "optional": false,
+       "default": null
+      },
+      {
+       "name": "field",
+       "type": "string",
+       "optional": false,
+       "default": null
+      },
+      {
+       "name": "order",
+       "type": "number[]",
+       "optional": false,
+       "default": null
+      }
+     ],
+     "returns": "Promise<ApiResponse<null>>",
+     "method": "PUT",
+     "path": "/api/schema/records/${encodeURIComponent(typeCode)}/${id}/gallery/${encodeURIComponent(field)}/order",
+     "specPath": "/api/schema/records/{typeCode}/{id}/gallery/{field}/{imageId}",
+     "auth": [
+      "envToken",
+      "jwt",
+      "envMember"
+     ],
+     "moduleGate": null,
+     "throttle": null,
+     "status": "live",
+     "summary": "Görsel sırasını topluca günceller — verilen id dizisi yeni sıradır.",
+     "body": "",
+     "example": "",
+     "names": {
+      "js": "gallery.reorder",
+      "php": "reorderGallery",
+      "swift": "reorderGallery",
+      "kotlin": "reorderGallery"
+     }
+    },
+    {
+     "name": "gallery.update",
+     "group": "gallery",
+     "params": [
+      {
+       "name": "typeCode",
+       "type": "string",
+       "optional": false,
+       "default": null
+      },
+      {
+       "name": "id",
+       "type": "number",
+       "optional": false,
+       "default": null
+      },
+      {
+       "name": "field",
+       "type": "string",
+       "optional": false,
+       "default": null
+      },
+      {
+       "name": "imageId",
+       "type": "number",
+       "optional": false,
+       "default": null
+      },
+      {
+       "name": "payload",
+       "type": "Record<string, unknown>",
+       "optional": false,
+       "default": null
+      }
+     ],
+     "returns": "Promise<ApiResponse<Record<string, unknown>>>",
+     "method": "PUT",
+     "path": "/api/schema/records/${encodeURIComponent(typeCode)}/${id}/gallery/${encodeURIComponent(field)}/${imageId}",
+     "specPath": "/api/schema/records/{typeCode}/{id}/gallery/{field}/{imageId}",
+     "auth": [
+      "envToken",
+      "jwt",
+      "envMember"
+     ],
+     "moduleGate": null,
+     "throttle": null,
+     "status": "live",
+     "summary": "Tek görselin başlık/alt metin gibi bilgilerini günceller.",
+     "body": "",
+     "example": "",
+     "names": {
+      "js": "gallery.update",
+      "php": "updateGalleryImage",
+      "swift": "updateGalleryImage",
+      "kotlin": "updateGalleryImage"
+     }
+    },
+    {
+     "name": "gallery.remove",
+     "group": "gallery",
+     "params": [
+      {
+       "name": "typeCode",
+       "type": "string",
+       "optional": false,
+       "default": null
+      },
+      {
+       "name": "id",
+       "type": "number",
+       "optional": false,
+       "default": null
+      },
+      {
+       "name": "field",
+       "type": "string",
+       "optional": false,
+       "default": null
+      },
+      {
+       "name": "imageId",
+       "type": "number",
+       "optional": false,
+       "default": null
+      }
+     ],
+     "returns": "Promise<ApiResponse<null>>",
+     "method": "DELETE",
+     "path": "/api/schema/records/${encodeURIComponent(typeCode)}/${id}/gallery/${encodeURIComponent(field)}/${imageId}",
+     "specPath": "/api/schema/records/{typeCode}/{id}/gallery/{field}/{imageId}",
+     "auth": [
+      "envToken",
+      "jwt",
+      "envMember"
+     ],
+     "moduleGate": null,
+     "throttle": null,
+     "status": "live",
+     "summary": "",
+     "body": "",
+     "example": "",
+     "names": {
+      "js": "gallery.remove",
+      "php": "removeGalleryImage",
+      "swift": "removeGalleryImage",
+      "kotlin": "removeGalleryImage"
+     }
+    },
+    {
+     "name": "ai.improve",
+     "group": "ai",
+     "params": [
+      {
+       "name": "typeCode",
+       "type": "string",
+       "optional": false,
+       "default": null
+      },
+      {
+       "name": "id",
+       "type": "number",
+       "optional": false,
+       "default": null
+      },
+      {
+       "name": "payload",
+       "type": "Record<string, unknown>",
+       "optional": true,
+       "default": null
+      }
+     ],
+     "returns": "Promise<ApiResponse<Record<string, unknown>>>",
+     "method": "POST",
+     "path": "/api/schema/records/${encodeURIComponent(typeCode)}/${id}/ai/improve",
+     "specPath": "/api/schema/records/{typeCode}/{id}/ai/improve",
+     "auth": [
+      "envToken",
+      "jwt",
+      "envMember"
+     ],
+     "moduleGate": null,
+     "throttle": "20,1",
+     "status": "live",
+     "summary": "Metni akıcılık/ton açısından iyileştirir.",
+     "body": "",
+     "example": "",
+     "names": {
+      "js": "ai.improve",
+      "php": "aiImprove",
+      "swift": "aiImprove",
+      "kotlin": "aiImprove"
+     }
+    },
+    {
+     "name": "ai.seo",
+     "group": "ai",
+     "params": [
+      {
+       "name": "typeCode",
+       "type": "string",
+       "optional": false,
+       "default": null
+      },
+      {
+       "name": "id",
+       "type": "number",
+       "optional": false,
+       "default": null
+      },
+      {
+       "name": "payload",
+       "type": "Record<string, unknown>",
+       "optional": true,
+       "default": null
+      }
+     ],
+     "returns": "Promise<ApiResponse<SeoPayload>>",
+     "method": "POST",
+     "path": "/api/schema/records/${encodeURIComponent(typeCode)}/${id}/ai/seo",
+     "specPath": "/api/schema/records/{typeCode}/{id}/ai/seo",
+     "auth": [
+      "envToken",
+      "jwt",
+      "envMember"
+     ],
+     "moduleGate": null,
+     "throttle": "20,1",
+     "status": "live",
+     "summary": "Meta başlık/açıklama ve anahtar kelime önerir.",
+     "body": "",
+     "example": "",
+     "names": {
+      "js": "ai.seo",
+      "php": "aiSeo",
+      "swift": "aiSeo",
+      "kotlin": "aiSeo"
+     }
+    },
+    {
+     "name": "ai.translate",
+     "group": "ai",
+     "params": [
+      {
+       "name": "typeCode",
+       "type": "string",
+       "optional": false,
+       "default": null
+      },
+      {
+       "name": "id",
+       "type": "number",
+       "optional": false,
+       "default": null
+      },
+      {
+       "name": "payload",
+       "type": "{ locale: string } & Record<string, unknown>",
+       "optional": false,
+       "default": null
+      }
+     ],
+     "returns": "Promise<ApiResponse<SubmitRecord>>",
+     "method": "POST",
+     "path": "/api/schema/records/${encodeURIComponent(typeCode)}/${id}/ai/translate",
+     "specPath": "/api/schema/records/{typeCode}/{id}/ai/translate",
+     "auth": [
+      "envToken",
+      "jwt",
+      "envMember"
+     ],
+     "moduleGate": null,
+     "throttle": "20,1",
+     "status": "live",
+     "summary": "Kaydı hedef dile çevirip kardeş kayıt olarak bağlar.",
+     "body": "",
+     "example": "",
+     "names": {
+      "js": "ai.translate",
+      "php": "aiTranslate",
+      "swift": "aiTranslate",
+      "kotlin": "aiTranslate"
+     }
+    }
+   ],
+   "accessor": "records"
+  },
+  {
+   "class": "SchemaModule",
+   "file": "content-types.ts",
+   "summary": "Şema sistemine dair yardımcı uçlar.",
+   "body": "",
+   "example": "",
+   "methods": [
+    {
+     "name": "fieldTypes",
+     "group": null,
+     "params": [],
+     "returns": "Promise<ApiResponse<Array<",
+     "method": "GET",
+     "path": "/api/schema/field-types",
+     "specPath": "/api/schema/field-types",
+     "auth": [
+      "envToken",
+      "jwt",
+      "envMember"
+     ],
+     "moduleGate": null,
+     "throttle": null,
+     "status": "live",
+     "summary": "Desteklenen alan tipleri ve her birinin ayar şeması.",
+     "body": "",
+     "example": "",
+     "names": {
+      "js": "fieldTypes",
+      "php": "fieldTypes",
+      "swift": "fieldTypes",
+      "kotlin": "fieldTypes"
+     }
+    },
+    {
+     "name": "presets",
+     "group": null,
+     "params": [],
+     "returns": "Promise<ApiResponse<Array<Record<string, unknown>>>>",
+     "method": "GET",
+     "path": "/api/schema/presets",
+     "specPath": "/api/schema/presets",
+     "auth": [
+      "envToken",
+      "jwt",
+      "envMember"
+     ],
+     "moduleGate": null,
+     "throttle": null,
+     "status": "live",
+     "summary": "Hazır şema şablonları (blog, ürün, portföy…) — tek tıkla tip kurmak için.",
+     "body": "",
+     "example": "",
+     "names": {
+      "js": "presets",
+      "php": "presets",
+      "swift": "presets",
+      "kotlin": "presets"
+     }
+    },
+    {
+     "name": "modules",
+     "group": null,
+     "params": [],
+     "returns": "Promise<ApiResponse<Record<string, boolean>>>",
+     "method": "GET",
+     "path": "/api/schema/modules",
+     "specPath": "/api/schema/modules",
+     "auth": [
+      "envToken",
+      "jwt",
+      "envMember"
+     ],
+     "moduleGate": null,
+     "throttle": null,
+     "status": "live",
+     "summary": "Sitede hangi modüller açık — ticaret, sipariş, AI vb.",
+     "body": "",
+     "example": "",
+     "names": {
+      "js": "modules",
+      "php": "modules",
+      "swift": "modules",
+      "kotlin": "modules"
+     }
+    },
+    {
+     "name": "sitemap",
+     "group": null,
+     "params": [],
+     "returns": "Promise<ApiResponse<Record<string, unknown>>>",
+     "method": "GET",
+     "path": "/api/schema/sitemap",
+     "specPath": "/api/schema/sitemap",
+     "auth": [
+      "envToken",
+      "jwt",
+      "envMember"
+     ],
+     "moduleGate": null,
+     "throttle": null,
+     "status": "live",
+     "summary": "Site haritası özeti: yayımlanmış içerik sayıları ve sitemap.xml adresi. Haritanın kendisi `sdk.delivery.sitemapUrl()` ile alınır.",
+     "body": "",
+     "example": "",
+     "names": {
+      "js": "sitemap",
+      "php": "sitemap",
+      "swift": "sitemap",
+      "kotlin": "sitemap"
+     }
+    }
+   ],
+   "accessor": "schema"
+  },
+  {
+   "class": "LegacyShoppingModule",
+   "file": "commerce.ts",
+   "summary": "Eski sepet/checkout uçları (`/api/shopping/*`).",
+   "body": "Yeni entegrasyonlarda `sdk.cart` kullanın. Bunlar hâlen canlıdır ve eski\nmağazalar için ayaktadır; kupon ve kargo seçenekleri şu an yalnızca burada.",
+   "example": "",
+   "methods": [
+    {
+     "name": "cart",
+     "group": null,
+     "params": [],
+     "returns": "Promise<ApiResponse<Cart>>",
+     "method": "GET",
+     "path": "/api/shopping/cart",
+     "specPath": "/api/shopping/cart",
+     "auth": [
+      "envToken"
+     ],
+     "moduleGate": null,
+     "throttle": null,
+     "status": "live",
+     "summary": "",
+     "body": "",
+     "example": "",
+     "names": {
+      "js": "cart",
+      "php": "cart",
+      "swift": "cart",
+      "kotlin": "cart"
+     }
+    },
+    {
+     "name": "addToCart",
+     "group": null,
+     "params": [
+      {
+       "name": "payload",
+       "type": "Record<string, unknown>",
+       "optional": false,
+       "default": null
+      }
+     ],
+     "returns": "Promise<ApiResponse<Cart>>",
+     "method": "POST",
+     "path": "/api/shopping/cart",
+     "specPath": "/api/shopping/cart",
+     "auth": [
+      "envToken"
+     ],
+     "moduleGate": null,
+     "throttle": null,
+     "status": "live",
+     "summary": "",
+     "body": "",
+     "example": "",
+     "names": {
+      "js": "addToCart",
+      "php": "addToCart",
+      "swift": "addToCart",
+      "kotlin": "addToCart"
+     }
+    },
+    {
+     "name": "updateCartItem",
+     "group": null,
+     "params": [
+      {
+       "name": "itemId",
+       "type": "number",
+       "optional": false,
+       "default": null
+      },
+      {
+       "name": "payload",
+       "type": "Record<string, unknown>",
+       "optional": false,
+       "default": null
+      }
+     ],
+     "returns": "Promise<ApiResponse<Cart>>",
+     "method": "PUT",
+     "path": "/api/shopping/cart/${itemId}",
+     "specPath": "/api/shopping/cart/{itemId}",
+     "auth": [
+      "envToken"
+     ],
+     "moduleGate": null,
+     "throttle": null,
+     "status": "live",
+     "summary": "",
+     "body": "",
+     "example": "",
+     "names": {
+      "js": "updateCartItem",
+      "php": "updateCartItem",
+      "swift": "updateCartItem",
+      "kotlin": "updateCartItem"
+     }
+    },
+    {
+     "name": "removeCartItem",
+     "group": null,
+     "params": [
+      {
+       "name": "itemId",
+       "type": "number",
+       "optional": false,
+       "default": null
+      }
+     ],
+     "returns": "Promise<ApiResponse<Cart>>",
+     "method": "DELETE",
+     "path": "/api/shopping/cart/${itemId}",
+     "specPath": "/api/shopping/cart/{itemId}",
+     "auth": [
+      "envToken"
+     ],
+     "moduleGate": null,
+     "throttle": null,
+     "status": "live",
+     "summary": "",
+     "body": "",
+     "example": "",
+     "names": {
+      "js": "removeCartItem",
+      "php": "removeCartItem",
+      "swift": "removeCartItem",
+      "kotlin": "removeCartItem"
+     }
+    },
+    {
+     "name": "clearCart",
+     "group": null,
+     "params": [],
+     "returns": "Promise<ApiResponse<null>>",
+     "method": "DELETE",
+     "path": "/api/shopping/cart/clear",
+     "specPath": "/api/shopping/cart/{itemId}",
+     "auth": [
+      "envToken"
+     ],
+     "moduleGate": null,
+     "throttle": null,
+     "status": "live",
+     "summary": "",
+     "body": "",
+     "example": "",
+     "names": {
+      "js": "clearCart",
+      "php": "clearCart",
+      "swift": "clearCart",
+      "kotlin": "clearCart"
+     }
+    },
+    {
+     "name": "checkout",
+     "group": null,
+     "params": [
+      {
+       "name": "payload",
+       "type": "Record<string, unknown>",
+       "optional": false,
+       "default": null
+      }
+     ],
+     "returns": "Promise<ApiResponse<Record<string, unknown>>>",
+     "method": "POST",
+     "path": "/api/shopping/checkout",
+     "specPath": "/api/shopping/checkout",
+     "auth": [
+      "envToken"
+     ],
+     "moduleGate": null,
+     "throttle": null,
+     "status": "live",
+     "summary": "",
+     "body": "",
+     "example": "",
+     "names": {
+      "js": "checkout",
+      "php": "checkout",
+      "swift": "checkout",
+      "kotlin": "checkout"
+     }
+    },
+    {
+     "name": "checkoutOptions",
+     "group": null,
+     "params": [],
+     "returns": "Promise<ApiResponse<Record<string, unknown>>>",
+     "method": "GET",
+     "path": "/api/shopping/checkout/options",
+     "specPath": "/api/shopping/checkout/options",
+     "auth": [
+      "envToken"
+     ],
+     "moduleGate": null,
+     "throttle": null,
+     "status": "live",
+     "summary": "Ödeme ve teslimat seçenekleri — checkout formunu doldurmadan önce.",
+     "body": "",
+     "example": "",
+     "names": {
+      "js": "checkoutOptions",
+      "php": "checkoutOptions",
+      "swift": "checkoutOptions",
+      "kotlin": "checkoutOptions"
+     }
+    },
+    {
+     "name": "applyCoupon",
+     "group": null,
+     "params": [
+      {
+       "name": "code",
+       "type": "string",
+       "optional": false,
+       "default": null
+      }
+     ],
+     "returns": "Promise<ApiResponse<Record<string, unknown>>>",
+     "method": "POST",
+     "path": "/api/shopping/checkout/coupon",
+     "specPath": "/api/shopping/checkout/coupon",
+     "auth": [
+      "envToken"
+     ],
+     "moduleGate": null,
+     "throttle": null,
+     "status": "live",
+     "summary": "Kupon uygular ve yeni toplamı döner.",
+     "body": "",
+     "example": "",
+     "names": {
+      "js": "applyCoupon",
+      "php": "applyCoupon",
+      "swift": "applyCoupon",
+      "kotlin": "applyCoupon"
+     }
+    },
+    {
+     "name": "carriers",
+     "group": null,
+     "params": [],
+     "returns": "Promise<ApiResponse<Array<Record<string, unknown>>>>",
+     "method": "GET",
+     "path": "/api/shopping/carriers",
+     "specPath": "/api/shopping/carriers",
+     "auth": [
+      "envToken"
+     ],
+     "moduleGate": null,
+     "throttle": null,
+     "status": "live",
+     "summary": "",
+     "body": "",
+     "example": "",
+     "names": {
+      "js": "carriers",
+      "php": "carriers",
+      "swift": "carriers",
+      "kotlin": "carriers"
+     }
+    }
+   ],
+   "accessor": "shopping"
+  },
+  {
+   "class": "StorageModule",
+   "file": "misc.ts",
+   "summary": "Dosya yükleme.",
+   "body": "`File`/`Blob` verirseniz SDK `multipart/form-data` kurar. Node tarafında\n`Buffer` yerine `Blob` ya da bir stream sarmalayıcı kullanın.",
+   "example": "const input = document.querySelector('input[type=file]')!\n  await sdk.storage.uploadImage(input.files![0])",
+   "methods": [
+    {
+     "name": "uploadImage",
+     "group": null,
+     "params": [
+      {
+       "name": "file",
+       "type": "File | Blob",
+       "optional": false,
+       "default": null
+      },
+      {
+       "name": "extra",
+       "type": "Record<string, string>",
+       "optional": true,
+       "default": "{}"
+      }
+     ],
+     "returns": "Promise<ApiResponse<Record<string, unknown>>>",
+     "method": "POST",
+     "path": "/api/storage-image",
+     "specPath": "/api/storage-image",
+     "auth": [
+      "envToken",
+      "jwt",
+      "envMember"
+     ],
+     "moduleGate": null,
+     "throttle": null,
+     "status": "live",
+     "summary": "Tek görsel yükler.",
+     "body": "",
+     "example": "",
+     "names": {
+      "js": "uploadImage",
+      "php": "uploadImage",
+      "swift": "uploadImage",
+      "kotlin": "uploadImage"
+     }
+    },
+    {
+     "name": "uploadImages",
+     "group": null,
+     "params": [
+      {
+       "name": "files",
+       "type": "Array<File | Blob>",
+       "optional": false,
+       "default": null
+      },
+      {
+       "name": "extra",
+       "type": "Record<string, string>",
+       "optional": true,
+       "default": "{}"
+      }
+     ],
+     "returns": "Promise< ApiResponse<Array<Record<string, unknown>>> >",
+     "method": "POST",
+     "path": "/api/storage-images",
+     "specPath": "/api/storage-images",
+     "auth": [
+      "envToken",
+      "jwt",
+      "envMember"
+     ],
+     "moduleGate": null,
+     "throttle": null,
+     "status": "live",
+     "summary": "Birden çok görseli tek istekte yükler.",
+     "body": "",
+     "example": "",
+     "names": {
+      "js": "uploadImages",
+      "php": "uploadImages",
+      "swift": "uploadImages",
+      "kotlin": "uploadImages"
+     }
+    }
+   ],
+   "accessor": "storage"
+  },
+  {
+   "class": "SystemModule",
+   "file": "misc.ts",
+   "summary": "Servis durumu. İzleme (uptime) kontrolleri için.",
+   "body": "",
+   "example": "",
+   "methods": [
+    {
+     "name": "health",
+     "group": null,
+     "params": [],
+     "returns": "Promise<ApiResponse<Record<string, unknown>>>",
+     "method": "GET",
+     "path": "/api/health",
+     "specPath": "/api/health",
+     "auth": [],
+     "moduleGate": null,
+     "throttle": null,
+     "status": "live",
+     "summary": "",
+     "body": "",
+     "example": "",
+     "names": {
+      "js": "health",
+      "php": "health",
+      "swift": "health",
+      "kotlin": "health"
+     }
+    }
+   ],
+   "accessor": "system"
+  },
+  {
+   "class": "TrackingModule",
+   "file": "misc.ts",
+   "summary": "Ziyaretçi takibi ve hata bildirimi.",
+   "body": "Site token'ı yeter, oturum gerekmez. Yolculuk kayıtları panelde\nAdmin → Site Hareketleri ekranında görünür.",
+   "example": "",
+   "methods": [
+    {
+     "name": "track",
+     "group": null,
+     "params": [
+      {
+       "name": "payload",
+       "type": "Record<string, unknown>",
+       "optional": false,
+       "default": null
+      }
+     ],
+     "returns": "Promise<ApiResponse<null>>",
+     "method": "POST",
+     "path": "/api/track",
+     "specPath": "/api/track",
+     "auth": [
+      "envToken"
+     ],
+     "moduleGate": null,
+     "throttle": "120,1",
+     "status": "live",
+     "summary": "Ziyaretçi hareketi kaydeder (sayfa görüntüleme, tıklama, sepete ekleme…). Sayfa kapanışında göndermek için `navigator.sendBeacon` tercih edin.",
+     "body": "",
+     "example": "",
+     "names": {
+      "js": "track",
+      "php": "track",
+      "swift": "track",
+      "kotlin": "track"
+     }
+    },
+    {
+     "name": "reportError",
+     "group": null,
+     "params": [
+      {
+       "name": "payload",
+       "type": "Record<string, unknown>",
+       "optional": false,
+       "default": null
+      }
+     ],
+     "returns": "Promise<ApiResponse<null>>",
+     "method": "POST",
+     "path": "/api/public/client-error",
+     "specPath": "/api/public/client-error",
+     "auth": [
+      "envToken"
+     ],
+     "moduleGate": null,
+     "throttle": null,
+     "status": "live",
+     "summary": "İstemci tarafı JS hatasını bildirir.",
+     "body": "",
+     "example": "",
+     "names": {
+      "js": "reportError",
+      "php": "reportError",
+      "swift": "reportError",
+      "kotlin": "reportError"
+     }
+    }
+   ],
+   "accessor": "tracking"
+  }
+ ]
+}
