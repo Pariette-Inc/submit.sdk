@@ -12,8 +12,8 @@
  },
  "packages": {
   "js": {
-   "name": "@submitcms/sdk",
-   "install": "npm i @submitcms/sdk",
+   "name": "submitcms",
+   "install": "npm i submitcms",
    "registry": "npm"
   },
   "php": {

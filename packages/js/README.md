@@ -1,13 +1,13 @@
-# @submitcms/sdk
+# submitcms
 
 SubmitCMS'in resmî JavaScript/TypeScript istemcisi. Node.js 18+ ve tarayıcı.
 
 ```bash
-npm i @submitcms/sdk
+npm i submitcms
 ```
 
 ```ts
-import { SubmitCms } from '@submitcms/sdk'
+import { SubmitCms } from 'submitcms'
 
 const sdk = new SubmitCms({
   mode: 'production',           // ya da 'test'

@@ -20,7 +20,7 @@ import { AiModule, StorageModule, TrackingModule, SystemModule } from './modules
  * SubmitCMS SDK giriş noktası.
  *
  * ```ts
- * import { SubmitCms } from '@submitcms/sdk'
+ * import { SubmitCms } from 'submitcms'
  *
  * const sdk = new SubmitCms({
  *   mode: 'production',

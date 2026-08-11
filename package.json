@@ -5,7 +5,7 @@
   "packageManager": "pnpm@9.12.0",
   "scripts": {
     "spec:generate": "node scripts/generate-spec.mjs",
-    "build": "pnpm --filter @submitcms/sdk build",
+    "build": "pnpm --filter submitcms build",
     "typecheck": "pnpm -r typecheck",
     "test:contract": "pnpm --filter @submitcms/contract-tests test",
     "docs:generate": "node scripts/generate-reference.mjs",

@@ -4,7 +4,7 @@ SubmitCMS platformunun resmî SDK'ları. Tek repo, çok dil — hepsi aynı API 
 
 | Paket | Dil | Registry | Kurulum |
 |---|---|---|---|
-| [`packages/js`](packages/js) | TypeScript | npm | `npm i @submitcms/sdk` |
+| [`packages/js`](packages/js) | TypeScript | npm | `npm i submitcms` |
 | [`packages/php`](packages/php) | PHP 8.2+ | Packagist | `composer require submitcms/sdk` |
 | [`packages/swift`](packages/swift) | Swift 5.9+ | SwiftPM | `.package(url: "…/submit.sdk-swift")` |
 | [`packages/kotlin`](packages/kotlin) | Kotlin | Maven Central | `com.submitcms:sdk` |

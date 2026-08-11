@@ -1,5 +1,5 @@
 {
-  "name": "@submitcms/sdk",
+  "name": "submitcms",
   "version": "1.0.0",
   "description": "SubmitCMS resmî SDK'sı — headless CMS, e-ticaret ve SaaS platformu için Node.js ve tarayıcı istemcisi",
   "main": "./dist/index.js",

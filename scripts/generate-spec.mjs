@@ -47,7 +47,7 @@ for (const r of JSON.parse(raw)) {
   if (mw.includes('SuperAdminMiddleware')) auth.push('superAdmin')
 
   // ── Operatör uçları public SDK'ya GİRMEZ (2026-08-07) ──────────────────
-  // submit.sdk public bir repo ve @submitcms/sdk müşteri istemcisi. Platform
+  // submit.sdk public bir repo ve submitcms müşteri istemcisi. Platform
   // ekibinin uçları (boss / superAdmin) müşteri uygulamasından zaten 403
   // döner; spec'te durmalarının tek etkisi tam bir operatör uç haritasını
   // yayınlamaktı. Bu filtre kaynaktadır ki bir daha elle geri sızmasın:

@@ -399,7 +399,7 @@ const doc = {
     liveEndpoints: SPEC.counts.live,
   },
   packages: {
-    js: { name: '@submitcms/sdk', install: 'npm i @submitcms/sdk', registry: 'npm' },
+    js: { name: 'submitcms', install: 'npm i submitcms', registry: 'npm' },
     php: { name: 'submitcms/sdk', install: 'composer require submitcms/sdk', registry: 'Packagist' },
     swift: { name: 'SubmitCMS', install: '.package(url: "https://github.com/Pariette-Inc/submit.sdk-swift", from: "1.0.0")', registry: 'SwiftPM' },
     kotlin: { name: 'com.submitcms:sdk', install: 'implementation("com.submitcms:sdk:1.0.0")', registry: 'Maven Central' },
