@@ -3,12 +3,12 @@
  "source": {
   "repo": "submit.api",
   "branch": "test",
-  "commit": "d0f2a18"
+  "commit": "966353d"
  },
  "counts": {
-  "total": 437,
-  "live": 236,
-  "retired": 201
+  "total": 455,
+  "live": 255,
+  "retired": 200
  },
  "authLegend": {
   "envToken": "SubmitToken başlığı (veya ?env=) — site kimliği. Neredeyse her uçta gerekir.",
@@ -2754,6 +2754,136 @@
    "status": "live"
   },
   {
+   "method": "GET",
+   "path": "/api/platform/my/roles",
+   "controller": "Platform\\CompanyRoleController@index",
+   "auth": [
+    "envToken",
+    "jwt",
+    "envMember"
+   ],
+   "moduleGate": null,
+   "throttle": null,
+   "status": "live"
+  },
+  {
+   "method": "POST",
+   "path": "/api/platform/my/roles",
+   "controller": "Platform\\CompanyRoleController@store",
+   "auth": [
+    "envToken",
+    "jwt",
+    "envMember"
+   ],
+   "moduleGate": null,
+   "throttle": null,
+   "status": "live"
+  },
+  {
+   "method": "DELETE",
+   "path": "/api/platform/my/roles/{id}",
+   "controller": "Platform\\CompanyRoleController@destroy",
+   "auth": [
+    "envToken",
+    "jwt",
+    "envMember"
+   ],
+   "moduleGate": null,
+   "throttle": null,
+   "status": "live"
+  },
+  {
+   "method": "PUT",
+   "path": "/api/platform/my/roles/{id}",
+   "controller": "Platform\\CompanyRoleController@update",
+   "auth": [
+    "envToken",
+    "jwt",
+    "envMember"
+   ],
+   "moduleGate": null,
+   "throttle": null,
+   "status": "live"
+  },
+  {
+   "method": "GET",
+   "path": "/api/platform/my/roles/{id}/rules",
+   "controller": "Platform\\CompanyRoleController@rules",
+   "auth": [
+    "envToken",
+    "jwt",
+    "envMember"
+   ],
+   "moduleGate": null,
+   "throttle": null,
+   "status": "live"
+  },
+  {
+   "method": "PUT",
+   "path": "/api/platform/my/roles/{id}/rules",
+   "controller": "Platform\\CompanyRoleController@setRules",
+   "auth": [
+    "envToken",
+    "jwt",
+    "envMember"
+   ],
+   "moduleGate": null,
+   "throttle": null,
+   "status": "live"
+  },
+  {
+   "method": "GET",
+   "path": "/api/platform/my/sites",
+   "controller": "Platform\\CompanySiteModuleController@index",
+   "auth": [
+    "envToken",
+    "jwt",
+    "envMember"
+   ],
+   "moduleGate": null,
+   "throttle": null,
+   "status": "live"
+  },
+  {
+   "method": "DELETE",
+   "path": "/api/platform/my/sites/{id}/modules",
+   "controller": "Platform\\CompanySiteModuleController@reset",
+   "auth": [
+    "envToken",
+    "jwt",
+    "envMember"
+   ],
+   "moduleGate": null,
+   "throttle": null,
+   "status": "live"
+  },
+  {
+   "method": "GET",
+   "path": "/api/platform/my/sites/{id}/modules",
+   "controller": "Platform\\CompanySiteModuleController@show",
+   "auth": [
+    "envToken",
+    "jwt",
+    "envMember"
+   ],
+   "moduleGate": null,
+   "throttle": null,
+   "status": "live"
+  },
+  {
+   "method": "PUT",
+   "path": "/api/platform/my/sites/{id}/modules",
+   "controller": "Platform\\CompanySiteModuleController@update",
+   "auth": [
+    "envToken",
+    "jwt",
+    "envMember"
+   ],
+   "moduleGate": null,
+   "throttle": null,
+   "status": "live"
+  },
+  {
    "method": "POST",
    "path": "/api/platform/my/subscription/change-plan",
    "controller": "Platform\\CustomerPlatformController@changePlan",
@@ -2848,6 +2978,19 @@
    "method": "DELETE",
    "path": "/api/platform/my/team/members/{id}",
    "controller": "Platform\\CustomerPlatformController@teamRemove",
+   "auth": [
+    "envToken",
+    "jwt",
+    "envMember"
+   ],
+   "moduleGate": null,
+   "throttle": null,
+   "status": "live"
+  },
+  {
+   "method": "POST",
+   "path": "/api/platform/my/team/users",
+   "controller": "Platform\\CustomerPlatformController@teamAddUser",
    "auth": [
     "envToken",
     "jwt",
@@ -4352,6 +4495,45 @@
    "status": "live"
   },
   {
+   "method": "POST",
+   "path": "/api/schema/records/{typeCode}/import",
+   "controller": "Schema\\RecordImportController@import",
+   "auth": [
+    "envToken",
+    "jwt",
+    "envMember"
+   ],
+   "moduleGate": null,
+   "throttle": "10,1",
+   "status": "live"
+  },
+  {
+   "method": "POST",
+   "path": "/api/schema/records/{typeCode}/import/preview",
+   "controller": "Schema\\RecordImportController@preview",
+   "auth": [
+    "envToken",
+    "jwt",
+    "envMember"
+   ],
+   "moduleGate": null,
+   "throttle": "20,1",
+   "status": "live"
+  },
+  {
+   "method": "GET",
+   "path": "/api/schema/records/{typeCode}/import/template",
+   "controller": "Schema\\RecordImportController@template",
+   "auth": [
+    "envToken",
+    "jwt",
+    "envMember"
+   ],
+   "moduleGate": null,
+   "throttle": null,
+   "status": "live"
+  },
+  {
    "method": "GET",
    "path": "/api/schema/sitemap",
    "controller": "Seo\\SitemapController@summary",
@@ -4479,6 +4661,32 @@
    ],
    "moduleGate": null,
    "throttle": "20,1",
+   "status": "live"
+  },
+  {
+   "method": "POST",
+   "path": "/api/schema/types/import/preview",
+   "controller": "Schema\\SchemaImportController@preview",
+   "auth": [
+    "envToken",
+    "jwt",
+    "envMember"
+   ],
+   "moduleGate": null,
+   "throttle": "20,1",
+   "status": "live"
+  },
+  {
+   "method": "GET",
+   "path": "/api/schema/types/import/template",
+   "controller": "Schema\\SchemaImportController@template",
+   "auth": [
+    "envToken",
+    "jwt",
+    "envMember"
+   ],
+   "moduleGate": null,
+   "throttle": null,
    "status": "live"
   },
   {
@@ -5413,16 +5621,41 @@
   {
    "method": "GET",
    "path": "/api/tickets",
-   "controller": "NotificationController@getTickets",
+   "controller": "Support\\TicketController@index",
    "auth": [
     "envToken",
-    "jwt"
+    "jwt",
+    "envMember"
    ],
-   "moduleGate": null,
+   "moduleGate": "tickets",
    "throttle": null,
-   "status": "retired",
-   "httpStatus": 410,
-   "reason": "PANEL_RETIRED — eski sahip-yönetim paneli (karar 2026-07-30). Yerine: schema/records, menus, platform/my, commerce."
+   "status": "live"
+  },
+  {
+   "method": "GET",
+   "path": "/api/tickets/{id}",
+   "controller": "Support\\TicketController@show",
+   "auth": [
+    "envToken",
+    "jwt",
+    "envMember"
+   ],
+   "moduleGate": "tickets",
+   "throttle": null,
+   "status": "live"
+  },
+  {
+   "method": "GET",
+   "path": "/api/tickets/subjects",
+   "controller": "Support\\TicketController@subjects",
+   "auth": [
+    "envToken",
+    "jwt",
+    "envMember"
+   ],
+   "moduleGate": "tickets",
+   "throttle": null,
+   "status": "live"
   },
   {
    "method": "POST",

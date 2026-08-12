@@ -3,6 +3,9 @@ dist/
 .DS_Store
 *.log
 
+# Yerel yayın script'i — public repoya girmez
+/release.sh
+
 # PHP
 packages/php/vendor/
 packages/php/composer.lock
