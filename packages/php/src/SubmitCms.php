@@ -23,6 +23,7 @@ use SubmitCms\Sdk\Modules\Records;
 use SubmitCms\Sdk\Modules\Schema;
 use SubmitCms\Sdk\Modules\Shopping;
 use SubmitCms\Sdk\Modules\Storage;
+use SubmitCms\Sdk\Modules\Tickets;
 use SubmitCms\Sdk\Modules\System;
 use SubmitCms\Sdk\Modules\Tracking;
 
@@ -73,6 +74,8 @@ final class SubmitCms
     public readonly Locales $locales;
     public readonly Schema $schema;
     public readonly Menus $menus;
+    /** Destek talepleri gelen kutusu (panel tarafı; gönderim `delivery`de). */
+    public readonly Tickets $tickets;
 
     public readonly Cart $cart;
     public readonly Shopping $shopping;
@@ -114,6 +117,7 @@ final class SubmitCms
         $this->locales = new Locales($this->client);
         $this->schema = new Schema($this->client);
         $this->menus = new Menus($this->client);
+        $this->tickets = new Tickets($this->client);
 
         $this->cart = new Cart($this->client);
         $this->shopping = new Shopping($this->client);

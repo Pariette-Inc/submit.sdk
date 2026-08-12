@@ -3,12 +3,12 @@
  "source": {
   "repo": "submit.api",
   "branch": "test",
-  "commit": "d0f2a18"
+  "commit": "966353d"
  },
  "counts": {
-  "modules": 21,
-  "methods": 207,
-  "liveEndpoints": 236
+  "modules": 22,
+  "methods": 210,
+  "liveEndpoints": 255
  },
  "packages": {
   "js": {
@@ -6820,6 +6820,108 @@
     }
    ],
    "accessor": "system"
+  },
+  {
+   "class": "TicketModule",
+   "file": "tickets.ts",
+   "summary": "Destek talepleri gelen kutusu — sitenizin iletişim/destek formlarına düşenler.",
+   "body": "OKUMA tarafıdır ve **oturum ister** (panel yetkisi): site token'ı tek başına\nyetmez, kullanıcı o sitenin üyesi olmalı ve `tickets` modülü açık olmalıdır.\nTalebi OLUŞTURAN taraf ziyaretçidir ve oturumsuzdur — bunun için\n`sdk.delivery.submitTicket()` / `sdk.delivery.ticketForm()` kullanılır.",
+   "example": "const { data, meta } = await sdk.tickets.list({ type: 'contact', per_page: 25 })\n  const detay = await sdk.tickets.get(data[0].id)\n  console.log(detay.data.thread.length, 'yanıt')",
+   "methods": [
+    {
+     "name": "list",
+     "group": null,
+     "params": [
+      {
+       "name": "params",
+       "type": "TicketListParams",
+       "optional": true,
+       "default": "{}"
+      }
+     ],
+     "returns": "Promise< ApiResponse<SupportTicket[]> &",
+     "method": "GET",
+     "path": "/api/tickets",
+     "specPath": "/api/tickets",
+     "auth": [
+      "envToken",
+      "jwt",
+      "envMember"
+     ],
+     "moduleGate": "tickets",
+     "throttle": null,
+     "status": "live",
+     "summary": "Sayfalı gelen kutusu. Yanıt ayrıca `meta` (sayfalama) ve `stats` taşır.",
+     "body": "",
+     "example": "",
+     "names": {
+      "js": "list",
+      "php": "list",
+      "swift": "list",
+      "kotlin": "list"
+     }
+    },
+    {
+     "name": "get",
+     "group": null,
+     "params": [
+      {
+       "name": "id",
+       "type": "number",
+       "optional": false,
+       "default": null
+      }
+     ],
+     "returns": "Promise<ApiResponse<SupportTicketDetail>>",
+     "method": "GET",
+     "path": "/api/tickets/${id}",
+     "specPath": "/api/tickets/{id}",
+     "auth": [
+      "envToken",
+      "jwt",
+      "envMember"
+     ],
+     "moduleGate": "tickets",
+     "throttle": null,
+     "status": "live",
+     "summary": "Tek talep: gövde + yazışma + onaylar (KVKK/ticari ileti/veri işleme) + IP.",
+     "body": "",
+     "example": "",
+     "names": {
+      "js": "get",
+      "php": "get",
+      "swift": "get",
+      "kotlin": "get"
+     }
+    },
+    {
+     "name": "subjects",
+     "group": null,
+     "params": [],
+     "returns": "Promise<ApiResponse<Array<",
+     "method": "GET",
+     "path": "/api/tickets/subjects",
+     "specPath": "/api/tickets/{id}",
+     "auth": [
+      "envToken",
+      "jwt",
+      "envMember"
+     ],
+     "moduleGate": "tickets",
+     "throttle": null,
+     "status": "live",
+     "summary": "Filtre için talep türleri. Panelde tanımlı konular ile gelen kutusunda gerçekten geçen türlerin birleşimidir; gönderene giden otomatik yanıt şablonları (`...Return`) listede yer almaz.",
+     "body": "",
+     "example": "",
+     "names": {
+      "js": "subjects",
+      "php": "subjects",
+      "swift": "subjects",
+      "kotlin": "subjects"
+     }
+    }
+   ],
+   "accessor": "tickets"
   },
   {
    "class": "TrackingModule",

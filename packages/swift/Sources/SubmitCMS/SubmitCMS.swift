@@ -45,6 +45,8 @@ public struct SubmitCMS: Sendable {
     public let locales: LocalesModule
     public let schema: SchemaModule
     public let menus: MenusModule
+    /// Destek talepleri gelen kutusu (panel tarafı; gönderim `delivery`de).
+    public let tickets: TicketsModule
 
     public let cart: CartModule
     public let shopping: ShoppingModule
@@ -78,6 +80,7 @@ public struct SubmitCMS: Sendable {
         locales = LocalesModule(client: client)
         schema = SchemaModule(client: client)
         menus = MenusModule(client: client)
+        tickets = TicketsModule(client: client)
 
         cart = CartModule(client: client)
         shopping = ShoppingModule(client: client)

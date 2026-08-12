@@ -69,6 +69,9 @@ class SubmitCms(val client: SubmitClient) {
     val schema = Schema(client)
     val menus = Menus(client)
 
+    /** Destek talepleri gelen kutusu (panel tarafı; gönderim `delivery`de). */
+    val tickets = Tickets(client)
+
     val cart = Cart(client)
     val shopping = Shopping(client)
     val orders = Orders(client)

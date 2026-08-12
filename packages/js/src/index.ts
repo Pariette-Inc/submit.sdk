@@ -30,6 +30,14 @@ export type {
   PageMeta,
 } from './modules/records'
 
+export { TicketModule } from './modules/tickets'
+export type {
+  SupportTicket,
+  SupportTicketDetail,
+  TicketListParams,
+  TicketMessageBody,
+} from './modules/tickets'
+
 export { ContentTypeModule, CategoryModule, LocaleModule, SchemaModule } from './modules/content-types'
 export type {
   ContentTypeKind,

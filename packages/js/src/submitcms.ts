@@ -3,6 +3,7 @@ import { AuthModule } from './modules/auth'
 import { RecordModule } from './modules/records'
 import { ContentTypeModule, CategoryModule, LocaleModule, SchemaModule } from './modules/content-types'
 import { MenuModule } from './modules/menus'
+import { TicketModule } from './modules/tickets'
 import { DeliveryModule } from './modules/delivery'
 import {
   CartModule,
@@ -89,6 +90,9 @@ export class SubmitCms {
   /** Bayi/ajans paneli. */
   readonly partner: PartnerModule
 
+  /** Destek talepleri gelen kutusu (panel tarafı; gönderim `delivery`de). */
+  readonly tickets: TicketModule
+
   /** Yapay zekâ kredileri ve görsel üretimi. */
   readonly ai: AiModule
   /** Dosya yükleme. */
@@ -121,6 +125,8 @@ export class SubmitCms {
 
     this.platform = new PlatformModule(this.client)
     this.partner = new PartnerModule(this.client)
+
+    this.tickets = new TicketModule(this.client)
 
     this.ai = new AiModule(this.client)
     this.storage = new StorageModule(this.client)
