@@ -9,7 +9,7 @@ SubmitCMS platformunun resmî SDK'ları. Tek repo, çok dil — hepsi aynı API 
 | [`packages/swift`](packages/swift) | Swift 5.9+ | SwiftPM | `.package(url: "…/submit.sdk-swift")` |
 | [`packages/kotlin`](packages/kotlin) | Kotlin | Maven Central | `com.submitcms:sdk` |
 
-Dokümantasyon: **https://submitcms.com/sdk**
+Dokümantasyon: **https://submitcms.com/Documents**
 
 ## Neden tek repo
 
