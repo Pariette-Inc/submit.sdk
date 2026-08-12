@@ -84,9 +84,21 @@ class Delivery(private val client: SubmitClient) {
     suspend fun documentProducts(params: Map<String, Any?> = emptyMap()): JsonObject =
         client.get("/api/documents/products", params)
 
+    /**
+     * Mevcut bir ticket'a mesaj ekler.
+     *
+     * Adı yanıltıcıdır ve sürüm uyumu için korunuyor: form şeması dönmez
+     * (`setTicketContent`); `ticket` ve `message` zorunludur. Yeni talep için
+     * [submitTicket] kullanın.
+     */
     suspend fun ticketForm(payload: Map<String, Any?> = emptyMap()): JsonObject =
         client.post("/api/public/ticket-content", payload)
 
+    /**
+     * Yeni iletişim/destek talebi açar.
+     *
+     * Zorunlu alanlar: type, subject, user, name, email, gdpr, advertising, drp.
+     */
     suspend fun submitTicket(payload: Map<String, Any?>): JsonObject =
         client.post("/api/public/ticket-submit", payload)
 

@@ -3,6 +3,40 @@ import type { ApiResponse } from '../types/common'
 import type { RecordListParams, SubmitRecord, PageMeta } from './records'
 
 /**
+ * Yeni ticket açarken gönderilen gövde (`submitTicket`).
+ *
+ * Alanların tamamı submit.api tarafından **zorunlu** tutulur; boş gövde
+ * gönderildiğinde dönen 422 tam olarak bu listeyi verir.
+ */
+export interface TicketPayload {
+  /** Talep türü — panelde tanımlı iletişim/destek türünün kodu. */
+  type: string
+  subject: string
+  /** Gönderen kimliği. Misafir gönderimlerinde de zorunludur. */
+  user: string | number
+  name: string
+  email: string
+  /** KVKK/GDPR aydınlatma onayı. */
+  gdpr: boolean
+  /** Ticari ileti (reklam) izni. */
+  advertising: boolean
+  /** Veri işleme onayı. */
+  drp: boolean
+  /** Talebin metni. Zorunlu alanlar arasında sayılmaz ama formlarda beklenir. */
+  message?: string
+  phone?: string
+  [key: string]: unknown
+}
+
+/** Mevcut bir ticket'a mesaj eklerken gönderilen gövde (`ticketForm`). */
+export interface TicketMessagePayload {
+  /** Mesajın ekleneceği ticket. */
+  ticket: string | number
+  message: string
+  [key: string]: unknown
+}
+
+/**
  * Genel teslimat — sitenizin ziyaretçilere gösterdiği her şey.
  *
  * Bu modülün tamamı **yalnızca site token'ı** ister; oturum gerekmez. Sunucuda
@@ -134,13 +168,42 @@ export class DeliveryModule extends BaseModule {
 
   // ── İletişim ──────────────────────────────────────────────────────────────
 
-  /** İletişim formu alanlarını döner — formu şemadan çizmek için. */
-  ticketForm(payload: Record<string, unknown> = {}): Promise<ApiResponse<Record<string, unknown>>> {
+  /**
+   * Mevcut bir ticket'a mesaj ekler.
+   *
+   * **Adı yanıltıcıdır ve sürüm uyumu için korunuyor:** bu uç form şeması
+   * *dönmez*. Arkasındaki denetleyici `NotificationController@setTicketContent`,
+   * yani yazma tarafıdır ve `ticket` ile `message` alanlarını zorunlu tutar.
+   * Yeni ticket açmak için `submitTicket()` kullanın.
+   *
+   * @example
+   *   await sdk.delivery.ticketForm({ ticket: 42, message: 'Ek bilgi: uçuşum ertelendi.' })
+   */
+  ticketForm(payload: TicketMessagePayload): Promise<ApiResponse<Record<string, unknown>>> {
     return this.client.post('/api/public/ticket-content', payload)
   }
 
-  /** İletişim/destek formunu gönderir. */
-  submitTicket(payload: Record<string, unknown>): Promise<ApiResponse<Record<string, unknown>>> {
+  /**
+   * Yeni iletişim/destek talebi açar.
+   *
+   * Zorunlu alanlar submit.api tarafından uygulanır; eksik gönderimde 422 döner
+   * ve `errors` içinde alan adları listelenir. Onay alanları (`gdpr`,
+   * `advertising`, `drp`) formda kullanıcıya sorulmalıdır — sunucu üçünü de bekler.
+   *
+   * @example
+   *   await sdk.delivery.submitTicket({
+   *     type: 'iletisim',
+   *     subject: 'Ulaşım',
+   *     message: 'Havalimanından transfer var mı?',
+   *     user: 'guest',
+   *     name: 'Deniz Aydın',
+   *     email: 'deniz@example.com',
+   *     gdpr: true,
+   *     advertising: false,
+   *     drp: true,
+   *   })
+   */
+  submitTicket(payload: TicketPayload): Promise<ApiResponse<Record<string, unknown>>> {
     return this.client.post('/api/public/ticket-submit', payload)
   }
 

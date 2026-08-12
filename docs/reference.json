@@ -2632,9 +2632,9 @@
      "params": [
       {
        "name": "payload",
-       "type": "Record<string, unknown>",
-       "optional": true,
-       "default": "{}"
+       "type": "TicketMessagePayload",
+       "optional": false,
+       "default": null
       }
      ],
      "returns": "Promise<ApiResponse<Record<string, unknown>>>",
@@ -2647,9 +2647,9 @@
      "moduleGate": null,
      "throttle": null,
      "status": "live",
-     "summary": "İletişim formu alanlarını döner — formu şemadan çizmek için.",
-     "body": "",
-     "example": "",
+     "summary": "Mevcut bir ticket'a mesaj ekler.",
+     "body": "**Adı yanıltıcıdır ve sürüm uyumu için korunuyor:** bu uç form şeması\n*dönmez*. Arkasındaki denetleyici `NotificationController@setTicketContent`,\nyani yazma tarafıdır ve `ticket` ile `message` alanlarını zorunlu tutar.\nYeni ticket açmak için `submitTicket()` kullanın.",
+     "example": "await sdk.delivery.ticketForm({ ticket: 42, message: 'Ek bilgi: uçuşum ertelendi.' })",
      "names": {
       "js": "canvas.ticketForm",
       "php": "ticketForm",
@@ -2663,7 +2663,7 @@
      "params": [
       {
        "name": "payload",
-       "type": "Record<string, unknown>",
+       "type": "TicketPayload",
        "optional": false,
        "default": null
       }
@@ -2678,9 +2678,9 @@
      "moduleGate": null,
      "throttle": null,
      "status": "live",
-     "summary": "İletişim/destek formunu gönderir.",
-     "body": "",
-     "example": "",
+     "summary": "Yeni iletişim/destek talebi açar.",
+     "body": "Zorunlu alanlar submit.api tarafından uygulanır; eksik gönderimde 422 döner\nve `errors` içinde alan adları listelenir. Onay alanları (`gdpr`,\n`advertising`, `drp`) formda kullanıcıya sorulmalıdır — sunucu üçünü de bekler.",
+     "example": "await sdk.delivery.submitTicket({\n    type: 'iletisim',\n    subject: 'Ulaşım',\n    message: 'Havalimanından transfer var mı?',\n    user: 'guest',\n    name: 'Deniz Aydın',\n    email: 'deniz@example.com',\n    gdpr: true,\n    advertising: false,\n    drp: true,\n  })",
      "names": {
       "js": "canvas.submitTicket",
       "php": "submitTicket",

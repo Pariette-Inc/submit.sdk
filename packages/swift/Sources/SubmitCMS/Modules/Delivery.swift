@@ -115,10 +115,18 @@ public struct DeliveryModule: Sendable {
         try await client.get("/api/documents/products", query: params, as: [JSONValue].self)
     }
 
+    /// Mevcut bir ticket'a mesaj ekler.
+    ///
+    /// Adı yanıltıcıdır ve sürüm uyumu için korunuyor: form şeması dönmez
+    /// (`setTicketContent`); `ticket` ve `message` zorunludur. Yeni talep için
+    /// `submitTicket` kullanın.
     public func ticketForm(_ payload: [String: Any] = [:]) async throws -> SubmitResponse<JSONValue> {
         try await client.post("/api/public/ticket-content", body: payload)
     }
 
+    /// Yeni iletişim/destek talebi açar.
+    ///
+    /// Zorunlu alanlar: type, subject, user, name, email, gdpr, advertising, drp.
     public func submitTicket(_ payload: [String: Any]) async throws -> SubmitResponse<JSONValue> {
         try await client.post("/api/public/ticket-submit", body: payload)
     }

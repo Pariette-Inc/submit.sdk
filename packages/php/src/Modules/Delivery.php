@@ -152,13 +152,28 @@ final class Delivery extends Module
         return $this->client->get('/api/documents/products', $params);
     }
 
-    /** @param array<string,mixed> $payload */
+    /**
+     * Mevcut bir ticket'a mesaj ekler.
+     *
+     * Adı yanıltıcıdır ve sürüm uyumu için korunuyor: bu uç form şeması dönmez
+     * (`NotificationController@setTicketContent`), `ticket` ve `message`
+     * alanlarını zorunlu tutar. Yeni talep açmak için submitTicket() kullanın.
+     *
+     * @param array{ticket:int|string,message:string} $payload
+     */
     public function ticketForm(array $payload = []): mixed
     {
         return $this->client->post('/api/public/ticket-content', $payload);
     }
 
-    /** @param array<string,mixed> $payload */
+    /**
+     * Yeni iletişim/destek talebi açar.
+     *
+     * Zorunlu alanlar: type, subject, user, name, email, gdpr, advertising, drp.
+     * Eksik gönderimde 422 döner ve errors içinde alan adları listelenir.
+     *
+     * @param array<string,mixed> $payload
+     */
     public function submitTicket(array $payload): mixed
     {
         return $this->client->post('/api/public/ticket-submit', $payload);

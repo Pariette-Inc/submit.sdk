@@ -16,6 +16,7 @@ export { AuthModule } from './modules/auth'
 export type { LoginPayload, LoginResult, AuthUser, RegisterPayload } from './modules/auth'
 
 export { DeliveryModule } from './modules/delivery'
+export type { TicketPayload, TicketMessagePayload } from './modules/delivery'
 
 export { RecordModule } from './modules/records'
 export type {
