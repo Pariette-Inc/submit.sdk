@@ -43,7 +43,7 @@
   "homepage": "https://submitcms.com/sdk",
   "repository": {
     "type": "git",
-    "url": "https://github.com/Pariette-Inc/submit.sdk.git",
+    "url": "git+https://github.com/Pariette-Inc/submit.sdk.git",
     "directory": "packages/js"
   },
   "bugs": {
