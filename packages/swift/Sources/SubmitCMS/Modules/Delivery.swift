@@ -135,6 +135,33 @@ public struct DeliveryModule: Sendable {
         try await client.get("/api/public/notification/\(esc(token))", as: [JSONValue].self)
     }
 
+    /// Bu tarihler müsait mi, kaça? Oturum GEREKMEZ.
+    ///
+    /// Yanıt bilerek DARDIR: kalan kapasite ve kapasite tavanı DÖNMEZ ("3 oda
+    /// kaldı" rakibin envanterini okuması demektir). `reason` reddin makine
+    /// okunur gerekçesidir (`full`, `outside_season`, `too_soon`…), `message`
+    /// ziyaretçiye gösterilecek metindir.
+    public func reservationAvailability(_ typeCode: String, slug: String, params: [String: Any]) async throws -> SubmitResponse<JSONValue> {
+        try await client.get("/api/public/reservations/\(esc(typeCode))/\(esc(slug))/availability", query: params)
+    }
+
+    /// Takvim: hangi günler müsait ve o günün fiyatı. Kalan adet dönmez.
+    ///
+    /// Gece sayan içeriklerde ÇIKIŞ GÜNÜ müsait görünür — 12'sinde öğlen çıkan
+    /// misafir 12 gecesini tutmaz.
+    public func reservationCalendar(_ typeCode: String, slug: String, params: [String: Any]) async throws -> SubmitResponse<[JSONValue]> {
+        try await client.get("/api/public/reservations/\(esc(typeCode))/\(esc(slug))/calendar", query: params, as: [JSONValue].self)
+    }
+
+    /// Rezervasyon talebi. Yalnız YAYIMLANMIŞ kayıtlar için çalışır.
+    ///
+    /// Çakışma ve kural ihlalleri 422 döner; `error.reason` hangi kuralın
+    /// takıldığını söyler. Otomatik onay kapalıysa talep `pending` durumunda
+    /// personelin önüne düşer. Dakikada en çok 10 istek.
+    public func book(_ typeCode: String, slug: String, payload: [String: Any]) async throws -> SubmitResponse<JSONValue> {
+        try await client.post("/api/public/reservations/\(esc(typeCode))/\(esc(slug))", body: payload)
+    }
+
     /// Sitemap adresi. XML olduğu için ayrıştırılmaz.
     public func sitemapURL(envToken: String) -> URL {
         var components = URLComponents(url: client.baseURL.appendingPathComponent("api/public/sitemap.xml"), resolvingAgainstBaseURL: false)!

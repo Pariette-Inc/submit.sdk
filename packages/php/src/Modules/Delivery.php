@@ -185,6 +185,57 @@ final class Delivery extends Module
     }
 
     /**
+     * Bu tarihler müsait mi, kaça? Oturum GEREKMEZ.
+     *
+     * Yanıt bilerek DARDIR: kalan kapasite ve kapasite tavanı DÖNMEZ ("3 oda
+     * kaldı" rakibin envanterini okuması demektir). `reason` reddin makine
+     * okunur gerekçesidir (`full`, `outside_season`, `too_soon`…), `message`
+     * ziyaretçiye gösterilecek metindir.
+     *
+     * @param array{starts_at:string,ends_at:string,quantity?:int} $params
+     */
+    public function reservationAvailability(string $typeCode, string $slug, array $params): mixed
+    {
+        return $this->client->get(
+            '/api/public/reservations/' . $this->seg($typeCode) . '/' . $this->seg($slug) . '/availability',
+            $params
+        );
+    }
+
+    /**
+     * Takvim: hangi günler müsait ve o günün fiyatı. Kalan adet dönmez.
+     *
+     * Gece sayan içeriklerde ÇIKIŞ GÜNÜ müsait görünür — 12'sinde öğlen çıkan
+     * misafir 12 gecesini tutmaz.
+     *
+     * @param array{from:string,to:string} $params
+     */
+    public function reservationCalendar(string $typeCode, string $slug, array $params): mixed
+    {
+        return $this->client->get(
+            '/api/public/reservations/' . $this->seg($typeCode) . '/' . $this->seg($slug) . '/calendar',
+            $params
+        );
+    }
+
+    /**
+     * Rezervasyon talebi. Yalnız YAYIMLANMIŞ kayıtlar için çalışır.
+     *
+     * Çakışma ve kural ihlalleri 422 döner; `error.reason` hangi kuralın
+     * takıldığını söyler. Otomatik onay kapalıysa talep `pending` durumunda
+     * personelin önüne düşer. Dakikada en çok 10 istek.
+     *
+     * @param array{starts_at:string,ends_at:string,guest_name:string,guest_email:string,quantity?:int,guests?:int,guest_phone?:string,note?:string} $payload
+     */
+    public function book(string $typeCode, string $slug, array $payload): mixed
+    {
+        return $this->client->post(
+            '/api/public/reservations/' . $this->seg($typeCode) . '/' . $this->seg($slug),
+            $payload
+        );
+    }
+
+    /**
      * Sitemap adresi. XML olduğu için ayrıştırılmaz — Search Console'a verin
      * ya da `robots.txt`'e yazın. Token sorguda taşınır ki başlık ekleyemeyen
      * araçlar da kullanabilsin.

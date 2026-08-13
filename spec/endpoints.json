@@ -3,11 +3,11 @@
  "source": {
   "repo": "submit.api",
   "branch": "test",
-  "commit": "966353d"
+  "commit": "502a041"
  },
  "counts": {
-  "total": 455,
-  "live": 255,
+  "total": 475,
+  "live": 275,
   "retired": 200
  },
  "authLegend": {
@@ -3968,6 +3968,39 @@
    "status": "live"
   },
   {
+   "method": "POST",
+   "path": "/api/public/reservations/{typeCode}/{slug}",
+   "controller": "Reservations\\PublicReservationController@store",
+   "auth": [
+    "envToken"
+   ],
+   "moduleGate": null,
+   "throttle": "10,1",
+   "status": "live"
+  },
+  {
+   "method": "GET",
+   "path": "/api/public/reservations/{typeCode}/{slug}/availability",
+   "controller": "Reservations\\PublicReservationController@availability",
+   "auth": [
+    "envToken"
+   ],
+   "moduleGate": null,
+   "throttle": null,
+   "status": "live"
+  },
+  {
+   "method": "GET",
+   "path": "/api/public/reservations/{typeCode}/{slug}/calendar",
+   "controller": "Reservations\\PublicReservationController@calendar",
+   "auth": [
+    "envToken"
+   ],
+   "moduleGate": null,
+   "throttle": null,
+   "status": "live"
+  },
+  {
    "method": "GET",
    "path": "/api/public/sitemap.xml",
    "controller": "Seo\\SitemapController@index",
@@ -3997,6 +4030,201 @@
     "envToken"
    ],
    "moduleGate": null,
+   "throttle": null,
+   "status": "live"
+  },
+  {
+   "method": "GET",
+   "path": "/api/reservations",
+   "controller": "Reservations\\ReservationController@index",
+   "auth": [
+    "envToken",
+    "jwt",
+    "envMember"
+   ],
+   "moduleGate": "reservations",
+   "throttle": null,
+   "status": "live"
+  },
+  {
+   "method": "POST",
+   "path": "/api/reservations",
+   "controller": "Reservations\\ReservationController@store",
+   "auth": [
+    "envToken",
+    "jwt",
+    "envMember"
+   ],
+   "moduleGate": "reservations",
+   "throttle": null,
+   "status": "live"
+  },
+  {
+   "method": "DELETE",
+   "path": "/api/reservations/{id}",
+   "controller": "Reservations\\ReservationController@destroy",
+   "auth": [
+    "envToken",
+    "jwt",
+    "envMember"
+   ],
+   "moduleGate": "reservations",
+   "throttle": null,
+   "status": "live"
+  },
+  {
+   "method": "GET",
+   "path": "/api/reservations/{id}",
+   "controller": "Reservations\\ReservationController@show",
+   "auth": [
+    "envToken",
+    "jwt",
+    "envMember"
+   ],
+   "moduleGate": "reservations",
+   "throttle": null,
+   "status": "live"
+  },
+  {
+   "method": "PUT",
+   "path": "/api/reservations/{id}",
+   "controller": "Reservations\\ReservationController@update",
+   "auth": [
+    "envToken",
+    "jwt",
+    "envMember"
+   ],
+   "moduleGate": "reservations",
+   "throttle": null,
+   "status": "live"
+  },
+  {
+   "method": "GET",
+   "path": "/api/reservations/calendar",
+   "controller": "Reservations\\ReservationController@calendar",
+   "auth": [
+    "envToken",
+    "jwt",
+    "envMember"
+   ],
+   "moduleGate": "reservations",
+   "throttle": null,
+   "status": "live"
+  },
+  {
+   "method": "GET",
+   "path": "/api/reservations/check",
+   "controller": "Reservations\\ReservationController@check",
+   "auth": [
+    "envToken",
+    "jwt",
+    "envMember"
+   ],
+   "moduleGate": "reservations",
+   "throttle": null,
+   "status": "live"
+  },
+  {
+   "method": "GET",
+   "path": "/api/reservations/settings",
+   "controller": "Reservations\\ReservationSettingController@index",
+   "auth": [
+    "envToken",
+    "jwt",
+    "envMember"
+   ],
+   "moduleGate": "reservations",
+   "throttle": null,
+   "status": "live"
+  },
+  {
+   "method": "DELETE",
+   "path": "/api/reservations/settings/{recordId}",
+   "controller": "Reservations\\ReservationSettingController@destroy",
+   "auth": [
+    "envToken",
+    "jwt",
+    "envMember"
+   ],
+   "moduleGate": "reservations",
+   "throttle": null,
+   "status": "live"
+  },
+  {
+   "method": "GET",
+   "path": "/api/reservations/settings/{recordId}",
+   "controller": "Reservations\\ReservationSettingController@show",
+   "auth": [
+    "envToken",
+    "jwt",
+    "envMember"
+   ],
+   "moduleGate": "reservations",
+   "throttle": null,
+   "status": "live"
+  },
+  {
+   "method": "PUT",
+   "path": "/api/reservations/settings/{recordId}",
+   "controller": "Reservations\\ReservationSettingController@update",
+   "auth": [
+    "envToken",
+    "jwt",
+    "envMember"
+   ],
+   "moduleGate": "reservations",
+   "throttle": null,
+   "status": "live"
+  },
+  {
+   "method": "POST",
+   "path": "/api/reservations/settings/{recordId}/blocks",
+   "controller": "Reservations\\ReservationSettingController@storeBlock",
+   "auth": [
+    "envToken",
+    "jwt",
+    "envMember"
+   ],
+   "moduleGate": "reservations",
+   "throttle": null,
+   "status": "live"
+  },
+  {
+   "method": "DELETE",
+   "path": "/api/reservations/settings/{recordId}/blocks/{blockId}",
+   "controller": "Reservations\\ReservationSettingController@destroyBlock",
+   "auth": [
+    "envToken",
+    "jwt",
+    "envMember"
+   ],
+   "moduleGate": "reservations",
+   "throttle": null,
+   "status": "live"
+  },
+  {
+   "method": "POST",
+   "path": "/api/reservations/settings/{recordId}/rates",
+   "controller": "Reservations\\ReservationSettingController@storeRate",
+   "auth": [
+    "envToken",
+    "jwt",
+    "envMember"
+   ],
+   "moduleGate": "reservations",
+   "throttle": null,
+   "status": "live"
+  },
+  {
+   "method": "DELETE",
+   "path": "/api/reservations/settings/{recordId}/rates/{rateId}",
+   "controller": "Reservations\\ReservationSettingController@destroyRate",
+   "auth": [
+    "envToken",
+    "jwt",
+    "envMember"
+   ],
+   "moduleGate": "reservations",
    "throttle": null,
    "status": "live"
   },
@@ -4456,6 +4684,19 @@
    "status": "live"
   },
   {
+   "method": "POST",
+   "path": "/api/schema/records/{typeCode}/{id}/restore",
+   "controller": "Schema\\RecordController@restore",
+   "auth": [
+    "envToken",
+    "jwt",
+    "envMember"
+   ],
+   "moduleGate": null,
+   "throttle": null,
+   "status": "live"
+  },
+  {
    "method": "GET",
    "path": "/api/schema/records/{typeCode}/{id}/revisions",
    "controller": "Schema\\RecordController@revisions",
@@ -4524,6 +4765,19 @@
    "method": "GET",
    "path": "/api/schema/records/{typeCode}/import/template",
    "controller": "Schema\\RecordImportController@template",
+   "auth": [
+    "envToken",
+    "jwt",
+    "envMember"
+   ],
+   "moduleGate": null,
+   "throttle": null,
+   "status": "live"
+  },
+  {
+   "method": "GET",
+   "path": "/api/schema/records/{typeCode}/trash",
+   "controller": "Schema\\RecordController@trash",
    "auth": [
     "envToken",
     "jwt",

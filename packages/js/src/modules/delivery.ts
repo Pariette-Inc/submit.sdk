@@ -228,6 +228,110 @@ export class DeliveryModule extends BaseModule {
       this.client.get('/api/documents/products', { params }),
   }
 
+  // ── Rezervasyon (ziyaretçi tarafı) ────────────────────────────────────────
+
+  /**
+   * Sitenin rezervasyon yüzü — oturum GEREKMEZ, yalnız site token'ı.
+   *
+   * Teslim edilen veri bilerek DARDIR: kalan kapasite ve kapasite tavanı
+   * DÖNMEZ ("3 oda kaldı" rakibin envanterini okuması demektir). Ziyaretçi
+   * yalnız müsait olup olmadığını ve fiyatı görür. Panel tarafı için
+   * `sdk.reservations` kullanın.
+   *
+   * @example
+   *   const { data } = await sdk.delivery.reservations.availability('otel_odasi', 'deniz-manzarali', {
+   *     starts_at: '2027-08-10', ends_at: '2027-08-14',
+   *   })
+   *
+   *   if (data.available) {
+   *     await sdk.delivery.reservations.book('otel_odasi', 'deniz-manzarali', {
+   *       starts_at: '2027-08-10 14:00',
+   *       ends_at: '2027-08-14 12:00',
+   *       guest_name: 'Ayşe Yılmaz',
+   *       guest_email: 'ayse@ornek.com',
+   *     })
+   *   }
+   */
+  readonly reservations = {
+    /**
+     * Bu tarihler müsait mi, kaça? `reason` reddin makine okunur gerekçesidir
+     * (`full`, `outside_season`, `too_soon`…), `message` gösterilecek metindir.
+     */
+    availability: (
+      typeCode: string,
+      slug: string,
+      params: { starts_at: string; ends_at: string; quantity?: number }
+    ): Promise<
+      ApiResponse<{
+        available: boolean
+        reason: string | null
+        message: string | null
+        units: number
+        price: number
+        currency: string
+        breakdown: Array<{ date: string; price: number }>
+      }>
+    > =>
+      this.client.get(
+        `/api/public/reservations/${encodeURIComponent(typeCode)}/${encodeURIComponent(slug)}/availability`,
+        { params }
+      ),
+
+    /**
+     * Takvim: hangi günler müsait ve o günün fiyatı. Kalan adet dönmez.
+     *
+     * Gece sayan içeriklerde ÇIKIŞ GÜNÜ müsait görünür — 12'sinde öğlen çıkan
+     * misafir 12 gecesini tutmaz.
+     */
+    calendar: (
+      typeCode: string,
+      slug: string,
+      params: { from: string; to: string }
+    ): Promise<ApiResponse<Array<{ date: string; available: boolean; price: number }>>> =>
+      this.client.get(
+        `/api/public/reservations/${encodeURIComponent(typeCode)}/${encodeURIComponent(slug)}/calendar`,
+        { params }
+      ),
+
+    /**
+     * Rezervasyon talebi. Yalnız YAYIMLANMIŞ kayıtlar için çalışır.
+     *
+     * Çakışma ve kural ihlalleri 422 döner; `error.reason` ile hangi kuralın
+     * takıldığı ayırt edilebilir. Otomatik onay kapalıysa talep `pending`
+     * durumunda personelin önüne düşer.
+     *
+     * Dakikada en çok 10 istek.
+     */
+    book: (
+      typeCode: string,
+      slug: string,
+      payload: {
+        starts_at: string
+        ends_at: string
+        guest_name: string
+        guest_email: string
+        quantity?: number
+        guests?: number
+        guest_phone?: string
+        note?: string
+      }
+    ): Promise<
+      ApiResponse<{
+        code: string
+        status: string
+        starts_at: string
+        ends_at: string
+        quantity: number
+        price: number
+        currency: string
+      }>
+    > =>
+      this.client.post(
+        `/api/public/reservations/${encodeURIComponent(typeCode)}/${encodeURIComponent(slug)}`,
+        payload
+      ),
+  }
+
   // ── SEO / yapay zekâ keşfi ────────────────────────────────────────────────
 
   /**

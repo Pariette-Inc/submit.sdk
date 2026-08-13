@@ -105,36 +105,6 @@ class Delivery(private val client: SubmitClient) {
     suspend fun notifications(token: String): JsonObject =
         client.get("/api/public/notification/${esc(token)}")
 
-    /**
-     * Bu tarihler müsait mi, kaça? Oturum GEREKMEZ.
-     *
-     * Yanıt bilerek DARDIR: kalan kapasite ve kapasite tavanı DÖNMEZ ("3 oda
-     * kaldı" rakibin envanterini okuması demektir). `reason` reddin makine
-     * okunur gerekçesidir (`full`, `outside_season`, `too_soon`…), `message`
-     * ziyaretçiye gösterilecek metindir.
-     */
-    suspend fun reservationAvailability(typeCode: String, slug: String, params: Map<String, Any?>): JsonObject =
-        client.get("/api/public/reservations/${esc(typeCode)}/${esc(slug)}/availability", params)
-
-    /**
-     * Takvim: hangi günler müsait ve o günün fiyatı. Kalan adet dönmez.
-     *
-     * Gece sayan içeriklerde ÇIKIŞ GÜNÜ müsait görünür — 12'sinde öğlen çıkan
-     * misafir 12 gecesini tutmaz.
-     */
-    suspend fun reservationCalendar(typeCode: String, slug: String, params: Map<String, Any?>): JsonObject =
-        client.get("/api/public/reservations/${esc(typeCode)}/${esc(slug)}/calendar", params)
-
-    /**
-     * Rezervasyon talebi. Yalnız YAYIMLANMIŞ kayıtlar için çalışır.
-     *
-     * Çakışma ve kural ihlalleri 422 döner; `error.reason` hangi kuralın
-     * takıldığını söyler. Otomatik onay kapalıysa talep `pending` durumunda
-     * personelin önüne düşer. Dakikada en çok 10 istek.
-     */
-    suspend fun book(typeCode: String, slug: String, payload: Map<String, Any?>): JsonObject =
-        client.post("/api/public/reservations/${esc(typeCode)}/${esc(slug)}", payload)
-
     /** Sitemap adresi. XML olduğu için ayrıştırılmaz. */
     fun sitemapUrl(envToken: String): String =
         "${client.baseUrl}/api/public/sitemap.xml?env=${esc(envToken)}"

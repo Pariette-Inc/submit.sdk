@@ -4,6 +4,7 @@ import { RecordModule } from './modules/records'
 import { ContentTypeModule, CategoryModule, LocaleModule, SchemaModule } from './modules/content-types'
 import { MenuModule } from './modules/menus'
 import { TicketModule } from './modules/tickets'
+import { ReservationModule } from './modules/reservations'
 import { DeliveryModule } from './modules/delivery'
 import {
   CartModule,
@@ -47,6 +48,8 @@ import { AiModule, StorageModule, TrackingModule, SystemModule } from './modules
  * | Sipariş yönetimi | `orders` | token + oturum + `orders` modülü |
  * | Müşteri kendi sitesini yönetiyor | `platform` | token + oturum + üyelik |
  * | Bayi paneli | `partner` | partner oturumu |
+ * | Rezervasyon gelen kutusu | `reservations` | token + oturum + `reservations` modülü |
+ * | Sitede müsaitlik / talep | `delivery.reservations` | site token'ı |
  */
 export class SubmitCms {
   /** Alt seviye HTTP istemcisi — başlık, event ve iptal denetimi için. */
@@ -92,6 +95,8 @@ export class SubmitCms {
 
   /** Destek talepleri gelen kutusu (panel tarafı; gönderim `delivery`de). */
   readonly tickets: TicketModule
+  /** Rezervasyon yönetimi (panel tarafı; talep gönderimi `delivery.reservations`de). */
+  readonly reservations: ReservationModule
 
   /** Yapay zekâ kredileri ve görsel üretimi. */
   readonly ai: AiModule
@@ -127,6 +132,7 @@ export class SubmitCms {
     this.partner = new PartnerModule(this.client)
 
     this.tickets = new TicketModule(this.client)
+    this.reservations = new ReservationModule(this.client)
 
     this.ai = new AiModule(this.client)
     this.storage = new StorageModule(this.client)

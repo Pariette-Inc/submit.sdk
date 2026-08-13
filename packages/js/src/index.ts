@@ -27,8 +27,26 @@ export type {
   RecordPayload,
   RecordListParams,
   SubmitRecord,
+  TrashedRecord,
   PageMeta,
 } from './modules/records'
+
+export { ReservationModule } from './modules/reservations'
+export type {
+  Reservation,
+  ReservationDetail,
+  ReservationStatus,
+  ReservationUnit,
+  ReservationUnavailableReason,
+  ReservationSettings,
+  ReservationSettingsPayload,
+  ReservationBlock,
+  ReservationRate,
+  ReservationListParams,
+  ReservationPayload,
+  ReservationCalendarDay,
+  ReservationCheckResult,
+} from './modules/reservations'
 
 export { TicketModule } from './modules/tickets'
 export type {

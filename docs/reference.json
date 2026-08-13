@@ -3,12 +3,12 @@
  "source": {
   "repo": "submit.api",
   "branch": "test",
-  "commit": "966353d"
+  "commit": "502a041"
  },
  "counts": {
-  "modules": 22,
-  "methods": 210,
-  "liveEndpoints": 255
+  "modules": 23,
+  "methods": 227,
+  "liveEndpoints": 275
  },
  "packages": {
   "js": {
@@ -943,31 +943,6 @@
       "php": "completeInvitation",
       "swift": "completeInvitation",
       "kotlin": "completeInvitation"
-     }
-    },
-    {
-     "name": "googleRedirectUrl",
-     "group": null,
-     "params": [],
-     "returns": "string",
-     "method": "POST",
-     "path": "/api/auth/2fa/setup",
-     "specPath": "/api/auth/2fa/setup",
-     "auth": [
-      "envToken",
-      "jwt"
-     ],
-     "moduleGate": null,
-     "throttle": null,
-     "status": "live",
-     "summary": "Google ile giriş akışı tarayıcı yönlendirmesiyle yürür — XHR ile çağrılamaz. Kullanıcıyı bu adrese gönderin; dönüşte `callback` sizin sitenize yönlendirir.",
-     "body": "",
-     "example": "",
-     "names": {
-      "js": "googleRedirectUrl",
-      "php": "setupTwoFactor",
-      "swift": "setupTwoFactor",
-      "kotlin": "setupTwoFactor"
      }
     },
     {
@@ -2627,8 +2602,8 @@
      }
     },
     {
-     "name": "canvas.ticketForm",
-     "group": "canvas",
+     "name": "ticketForm",
+     "group": null,
      "params": [
       {
        "name": "payload",
@@ -2651,15 +2626,15 @@
      "body": "**Adı yanıltıcıdır ve sürüm uyumu için korunuyor:** bu uç form şeması\n*dönmez*. Arkasındaki denetleyici `NotificationController@setTicketContent`,\nyani yazma tarafıdır ve `ticket` ile `message` alanlarını zorunlu tutar.\nYeni ticket açmak için `submitTicket()` kullanın.",
      "example": "await sdk.delivery.ticketForm({ ticket: 42, message: 'Ek bilgi: uçuşum ertelendi.' })",
      "names": {
-      "js": "canvas.ticketForm",
+      "js": "ticketForm",
       "php": "ticketForm",
       "swift": "ticketForm",
       "kotlin": "ticketForm"
      }
     },
     {
-     "name": "canvas.submitTicket",
-     "group": "canvas",
+     "name": "submitTicket",
+     "group": null,
      "params": [
       {
        "name": "payload",
@@ -2682,15 +2657,15 @@
      "body": "Zorunlu alanlar submit.api tarafından uygulanır; eksik gönderimde 422 döner\nve `errors` içinde alan adları listelenir. Onay alanları (`gdpr`,\n`advertising`, `drp`) formda kullanıcıya sorulmalıdır — sunucu üçünü de bekler.",
      "example": "await sdk.delivery.submitTicket({\n    type: 'iletisim',\n    subject: 'Ulaşım',\n    message: 'Havalimanından transfer var mı?',\n    user: 'guest',\n    name: 'Deniz Aydın',\n    email: 'deniz@example.com',\n    gdpr: true,\n    advertising: false,\n    drp: true,\n  })",
      "names": {
-      "js": "canvas.submitTicket",
+      "js": "submitTicket",
       "php": "submitTicket",
       "swift": "submitTicket",
       "kotlin": "submitTicket"
      }
     },
     {
-     "name": "canvas.notifications",
-     "group": "canvas",
+     "name": "notifications",
+     "group": null,
      "params": [
       {
        "name": "token",
@@ -2713,7 +2688,7 @@
      "body": "",
      "example": "",
      "names": {
-      "js": "canvas.notifications",
+      "js": "notifications",
       "php": "notifications",
       "swift": "notifications",
       "kotlin": "notifications"
@@ -2836,39 +2811,137 @@
      }
     },
     {
-     "name": "documents.sitemapUrl",
-     "group": "documents",
+     "name": "reservations.availability",
+     "group": "reservations",
      "params": [
       {
-       "name": "envToken",
+       "name": "typeCode",
        "type": "string",
        "optional": false,
        "default": null
+      },
+      {
+       "name": "slug",
+       "type": "string",
+       "optional": false,
+       "default": null
+      },
+      {
+       "name": "params",
+       "type": "{ starts_at: string; ends_at: string; quantity?: number }",
+       "optional": true,
+       "default": null
       }
      ],
-     "returns": "string",
+     "returns": "Promise< ApiResponse<",
      "method": "GET",
-     "path": "/api/public/manifest",
-     "specPath": "/api/public/manifest",
+     "path": "/api/public/reservations/${encodeURIComponent(typeCode)}/${encodeURIComponent(slug)}/availability",
+     "specPath": "/api/public/reservations/{typeCode}/{slug}/availability",
      "auth": [
       "envToken"
      ],
      "moduleGate": null,
      "throttle": null,
      "status": "live",
-     "summary": "Sitemap **adresi**. XML olduğu için SDK içeriği ayrıştırmaz — bu adresi Search Console'a verin ya da `robots.txt`'e yazın.",
-     "body": "Token sorguda taşınır; böylece başlık ekleyemeyen araçlar da kullanabilir.",
+     "summary": "Bu tarihler müsait mi, kaça? `reason` reddin makine okunur gerekçesidir (`full`, `outside_season`, `too_soon`…), `message` gösterilecek metindir.",
+     "body": "",
      "example": "",
      "names": {
-      "js": "documents.sitemapUrl",
-      "php": "manifest",
-      "swift": "manifest",
-      "kotlin": "manifest"
+      "js": "reservations.availability",
+      "php": "reservationAvailability",
+      "swift": "reservationAvailability",
+      "kotlin": "reservationAvailability"
      }
     },
     {
-     "name": "documents.manifest",
-     "group": "documents",
+     "name": "reservations.calendar",
+     "group": "reservations",
+     "params": [
+      {
+       "name": "typeCode",
+       "type": "string",
+       "optional": false,
+       "default": null
+      },
+      {
+       "name": "slug",
+       "type": "string",
+       "optional": false,
+       "default": null
+      },
+      {
+       "name": "params",
+       "type": "{ from: string; to: string }",
+       "optional": false,
+       "default": null
+      }
+     ],
+     "returns": "Promise<ApiResponse<Array<",
+     "method": "GET",
+     "path": "/api/public/reservations/${encodeURIComponent(typeCode)}/${encodeURIComponent(slug)}/calendar",
+     "specPath": "/api/public/reservations/{typeCode}/{slug}/calendar",
+     "auth": [
+      "envToken"
+     ],
+     "moduleGate": null,
+     "throttle": null,
+     "status": "live",
+     "summary": "Takvim: hangi günler müsait ve o günün fiyatı. Kalan adet dönmez.",
+     "body": "Gece sayan içeriklerde ÇIKIŞ GÜNÜ müsait görünür — 12'sinde öğlen çıkan\nmisafir 12 gecesini tutmaz.",
+     "example": "",
+     "names": {
+      "js": "reservations.calendar",
+      "php": "reservationCalendar",
+      "swift": "reservationCalendar",
+      "kotlin": "reservationCalendar"
+     }
+    },
+    {
+     "name": "reservations.book",
+     "group": "reservations",
+     "params": [
+      {
+       "name": "typeCode",
+       "type": "string",
+       "optional": false,
+       "default": null
+      },
+      {
+       "name": "slug",
+       "type": "string",
+       "optional": false,
+       "default": null
+      },
+      {
+       "name": "payload",
+       "type": "{ starts_at: string ends_at: string guest_name: string guest_email: string quantity?: number guests?: number guest_phone?: string note?: string }",
+       "optional": true,
+       "default": null
+      }
+     ],
+     "returns": "Promise< ApiResponse<",
+     "method": "POST",
+     "path": "/api/public/reservations/${encodeURIComponent(typeCode)}/${encodeURIComponent(slug)}",
+     "specPath": "/api/public/reservations/{typeCode}/{slug}",
+     "auth": [
+      "envToken"
+     ],
+     "moduleGate": null,
+     "throttle": "10,1",
+     "status": "live",
+     "summary": "Rezervasyon talebi. Yalnız YAYIMLANMIŞ kayıtlar için çalışır.",
+     "body": "Çakışma ve kural ihlalleri 422 döner; `error.reason` ile hangi kuralın\ntakıldığı ayırt edilebilir. Otomatik onay kapalıysa talep `pending`\ndurumunda personelin önüne düşer.\n\nDakikada en çok 10 istek.",
+     "example": "",
+     "names": {
+      "js": "reservations.book",
+      "php": "book",
+      "swift": "book",
+      "kotlin": "book"
+     }
+    },
+    {
+     "name": "manifest",
+     "group": null,
      "params": [],
      "returns": "Promise<ApiResponse<Record<string, unknown>>>",
      "method": "GET",
@@ -2884,15 +2957,15 @@
      "body": "",
      "example": "",
      "names": {
-      "js": "documents.manifest",
+      "js": "manifest",
       "php": "manifest",
       "swift": "manifest",
       "kotlin": "manifest"
      }
     },
     {
-     "name": "documents.llmsTxt",
-     "group": "documents",
+     "name": "llmsTxt",
+     "group": null,
      "params": [],
      "returns": "Promise<string>",
      "method": "GET",
@@ -2908,7 +2981,7 @@
      "body": "",
      "example": "",
      "names": {
-      "js": "documents.llmsTxt",
+      "js": "llmsTxt",
       "php": "llmsTxt",
       "swift": "llmsTxt",
       "kotlin": "llmsTxt"
@@ -4840,39 +4913,6 @@
      }
     },
     {
-     "name": "receipts.pdfUrl",
-     "group": "receipts",
-     "params": [
-      {
-       "name": "id",
-       "type": "number",
-       "optional": false,
-       "default": null
-      }
-     ],
-     "returns": "string",
-     "method": "POST",
-     "path": "/api/platform/my/subscription/renew",
-     "specPath": "/api/platform/my/subscription/renew",
-     "auth": [
-      "envToken",
-      "jwt",
-      "envMember"
-     ],
-     "moduleGate": null,
-     "throttle": "10,1",
-     "status": "live",
-     "summary": "PDF adresi — indirme bağlantısı olarak verin, SDK ikili veri döndürmez.",
-     "body": "",
-     "example": "",
-     "names": {
-      "js": "receipts.pdfUrl",
-      "php": "renewSubscription",
-      "swift": "renewSubscription",
-      "kotlin": "renewSubscription"
-     }
-    },
-    {
      "name": "subscription.renew",
      "group": "subscription",
      "params": [
@@ -5319,8 +5359,8 @@
      }
     },
     {
-     "name": "team.plans",
-     "group": "team",
+     "name": "plans",
+     "group": null,
      "params": [],
      "returns": "Promise<ApiResponse<Array<Record<string, unknown>>>>",
      "method": "GET",
@@ -5336,15 +5376,15 @@
      "body": "",
      "example": "",
      "names": {
-      "js": "team.plans",
+      "js": "plans",
       "php": "plans",
       "swift": "plans",
       "kotlin": "plans"
      }
     },
     {
-     "name": "team.plan",
-     "group": "team",
+     "name": "plan",
+     "group": null,
      "params": [
       {
        "name": "code",
@@ -5373,7 +5413,7 @@
      "body": "",
      "example": "",
      "names": {
-      "js": "team.plan",
+      "js": "plan",
       "php": "plan",
       "swift": "plan",
       "kotlin": "plan"
@@ -5554,9 +5594,9 @@
   {
    "class": "RecordModule",
    "file": "records.ts",
-   "summary": "İçerik kayıtları — v2 şema sisteminin ana modülü.",
-   "body": "Her kayıt bir **içerik tipine** (`typeCode`) bağlıdır; tipi\n`sdk.contentTypes` ile yönetirsiniz. Bu modül panel/yazma tarafıdır ve\noturum ister. Siteye içerik **yayınlamak** için `sdk.delivery` kullanın —\no taraf yalnızca site token'ı ile çalışır ve sadece yayımlanmışları döner.",
-   "example": "const { data, meta } = await sdk.records.list('blog', {\n    status: 'published',\n    locale: 'tr',\n    filter: { featured: { eq: true } },\n    sort: 'published_at',\n    dir: 'desc',\n  })",
+   "summary": "",
+   "body": "",
+   "example": "",
    "methods": [
     {
      "name": "list",
@@ -5735,9 +5775,15 @@
        "type": "number",
        "optional": false,
        "default": null
+      },
+      {
+       "name": "options",
+       "type": "{ force?: boolean }",
+       "optional": true,
+       "default": "{}"
       }
      ],
-     "returns": "Promise<ApiResponse<null>>",
+     "returns": "Promise<ApiResponse<",
      "method": "DELETE",
      "path": "/api/schema/records/${encodeURIComponent(typeCode)}/${id}",
      "specPath": "/api/schema/records/{typeCode}/{id}",
@@ -5749,14 +5795,92 @@
      "moduleGate": null,
      "throttle": null,
      "status": "live",
-     "summary": "",
-     "body": "",
+     "summary": "Kaydı ÇÖP KUTUSUNA taşır (2026-08-13'ten beri iki aşamalı).",
+     "body": "Varsayılan silme kalıcı DEĞİLDİR: kayıt siteden düşer, index'i temizlenir\nve 30 gün içinde `restore()` ile geri alınabilir; süre dolunca sunucudaki\n`records:prune` görevi kalıcı siler.\n\n`{ force: true }` kalıcı siler ve YALNIZ şirket yöneticisinde çalışır;\nyetkisi olmayan çağrı 403 döner (sessizce çöpe düşmez).",
      "example": "",
      "names": {
       "js": "delete",
-      "php": "delete",
-      "swift": "delete",
+      "php": null,
+      "swift": null,
       "kotlin": "delete"
+     }
+    },
+    {
+     "name": "trash",
+     "group": null,
+     "params": [
+      {
+       "name": "typeCode",
+       "type": "string",
+       "optional": false,
+       "default": null
+      },
+      {
+       "name": "params",
+       "type": "{ page?: number; per_page?: number }",
+       "optional": true,
+       "default": "{}"
+      }
+     ],
+     "returns": "Promise< ApiResponse<TrashedRecord[]> &",
+     "method": "GET",
+     "path": "/api/schema/records/${encodeURIComponent(typeCode)}/trash",
+     "specPath": "/api/schema/records/{typeCode}/{id}",
+     "auth": [
+      "envToken",
+      "jwt",
+      "envMember"
+     ],
+     "moduleGate": null,
+     "throttle": null,
+     "status": "live",
+     "summary": "Çöp kutusu: silinmiş ama henüz kalıcı silinmemiş kayıtlar.",
+     "body": "`meta.can_purge` çağıran kullanıcının kalıcı silme yetkisi olup olmadığını\nsöyler — arayüz \"Kalıcı sil\" düğmesini buna bakarak çizmelidir.",
+     "example": "",
+     "names": {
+      "js": "trash",
+      "php": "trash",
+      "swift": "trash",
+      "kotlin": "trash"
+     }
+    },
+    {
+     "name": "restoreFromTrash",
+     "group": null,
+     "params": [
+      {
+       "name": "typeCode",
+       "type": "string",
+       "optional": false,
+       "default": null
+      },
+      {
+       "name": "id",
+       "type": "number",
+       "optional": false,
+       "default": null
+      }
+     ],
+     "returns": "Promise<ApiResponse<SubmitRecord>>",
+     "method": "POST",
+     "path": "/api/schema/records/${encodeURIComponent(typeCode)}/${id}/restore",
+     "specPath": "/api/schema/records/{typeCode}/{id}/restore",
+     "auth": [
+      "envToken",
+      "jwt",
+      "envMember"
+     ],
+     "moduleGate": null,
+     "throttle": null,
+     "status": "live",
+     "summary": "Kaydı çöp kutusundan geri getirir.",
+     "body": "Adres çakışması sunucuda çözülür: kayıt çöpteyken slug'ı başka bir kayda\nverilmiş olabilir; geri gelen kayıt CANLI sayfanın adresini almaz, kendine\nyeni bir adres alır. Filtre indeksi de bu sırada yeniden kurulur.",
+     "example": "",
+     "names": {
+      "js": "restoreFromTrash",
+      "php": "restoreFromTrash",
+      "swift": "restoreFromTrash",
+      "kotlin": "restoreFromTrash"
      }
     },
     {
@@ -6319,6 +6443,552 @@
     }
    ],
    "accessor": "records"
+  },
+  {
+   "class": "ReservationModule",
+   "file": "reservations.ts",
+   "summary": "Rezervasyon yönetimi (panel tarafı).",
+   "body": "**Oturum ister** ve `reservations` modülü açık olmalıdır. Ziyaretçi tarafı\n(müsaitlik sorgusu ve talep gönderme) oturumsuzdur ve\n`sdk.delivery.reservations` altındadır.\n\nRezerve edilen şey bir KAYITTIR: otel odası, doktor, masa, tur — hepsi kendi\niçerik tipinde birer kayıt. Bir kaydı rezervasyona AÇAN şey `settings.save()`\nçağrısıdır; ayarı olmayan kayıtta müsaitlik `not_reservable` döner.",
+   "example": "// 1. Odayı rezervasyona aç\n  await sdk.reservations.settings.save(42, {\n    capacity: 3, unit: 'night', min_units: 2, base_price: 1500, auto_confirm: true,\n  })\n\n  // 2. Sezon fiyatı\n  await sdk.reservations.rates.add(42, {\n    name: 'Yüksek sezon', starts_on: '2027-07-01', ends_on: '2027-08-31', price: 2500,\n  })\n\n  // 3. Gelen kutusu\n  const { data } = await sdk.reservations.list({ status: 'pending' })",
+   "methods": [
+    {
+     "name": "list",
+     "group": null,
+     "params": [
+      {
+       "name": "params",
+       "type": "ReservationListParams",
+       "optional": true,
+       "default": "{}"
+      }
+     ],
+     "returns": "Promise< ApiResponse<Reservation[]> &",
+     "method": "GET",
+     "path": "/api/reservations",
+     "specPath": "/api/reservations",
+     "auth": [
+      "envToken",
+      "jwt",
+      "envMember"
+     ],
+     "moduleGate": "reservations",
+     "throttle": null,
+     "status": "live",
+     "summary": "Rezervasyon gelen kutusu. `meta.counts` durum başına sayaç taşır — sekmeleri bununla çizin.",
+     "body": "",
+     "example": "",
+     "names": {
+      "js": "list",
+      "php": "list",
+      "swift": "list",
+      "kotlin": "list"
+     }
+    },
+    {
+     "name": "get",
+     "group": null,
+     "params": [
+      {
+       "name": "id",
+       "type": "number",
+       "optional": false,
+       "default": null
+      }
+     ],
+     "returns": "Promise<ApiResponse<ReservationDetail>>",
+     "method": "GET",
+     "path": "/api/reservations/${id}",
+     "specPath": "/api/reservations/{id}",
+     "auth": [
+      "envToken",
+      "jwt",
+      "envMember"
+     ],
+     "moduleGate": "reservations",
+     "throttle": null,
+     "status": "live",
+     "summary": "",
+     "body": "",
+     "example": "",
+     "names": {
+      "js": "get",
+      "php": "get",
+      "swift": "get",
+      "kotlin": "get"
+     }
+    },
+    {
+     "name": "create",
+     "group": null,
+     "params": [
+      {
+       "name": "payload",
+       "type": "ReservationPayload",
+       "optional": false,
+       "default": null
+      }
+     ],
+     "returns": "Promise<ApiResponse<ReservationDetail>>",
+     "method": "POST",
+     "path": "/api/reservations",
+     "specPath": "/api/reservations",
+     "auth": [
+      "envToken",
+      "jwt",
+      "envMember"
+     ],
+     "moduleGate": "reservations",
+     "throttle": null,
+     "status": "live",
+     "summary": "Elle rezervasyon (telefonla gelen talep).",
+     "body": "Site formuyla AYNI kapıdan geçer: çakışan tarihler 422 ile reddedilir,\ngerekçe `errors` alanında insan diliyle döner.",
+     "example": "",
+     "names": {
+      "js": "create",
+      "php": "create",
+      "swift": "create",
+      "kotlin": "create"
+     }
+    },
+    {
+     "name": "update",
+     "group": null,
+     "params": [
+      {
+       "name": "id",
+       "type": "number",
+       "optional": false,
+       "default": null
+      },
+      {
+       "name": "payload",
+       "type": "Partial<ReservationPayload> & { status?: ReservationStatus }",
+       "optional": true,
+       "default": null
+      }
+     ],
+     "returns": "Promise<ApiResponse<ReservationDetail>>",
+     "method": "PUT",
+     "path": "/api/reservations/${id}",
+     "specPath": "/api/reservations/{id}",
+     "auth": [
+      "envToken",
+      "jwt",
+      "envMember"
+     ],
+     "moduleGate": "reservations",
+     "throttle": null,
+     "status": "live",
+     "summary": "Durum değişikliği ve tarih taşıma.",
+     "body": "`starts_at` / `ends_at` / `quantity` gönderilirse çakışma kontrolü yeniden\nçalışır; kaydın KENDİ eski aralığı engel sayılmaz.\n\nİptal silme değildir: `status: 'cancelled'` kaydı bırakır, yalnız\nkapasiteyi serbest eder.",
+     "example": "",
+     "names": {
+      "js": "update",
+      "php": "update",
+      "swift": "update",
+      "kotlin": "update"
+     }
+    },
+    {
+     "name": "delete",
+     "group": null,
+     "params": [
+      {
+       "name": "id",
+       "type": "number",
+       "optional": false,
+       "default": null
+      }
+     ],
+     "returns": "Promise<ApiResponse<",
+     "method": "DELETE",
+     "path": "/api/reservations/${id}",
+     "specPath": "/api/reservations/{id}",
+     "auth": [
+      "envToken",
+      "jwt",
+      "envMember"
+     ],
+     "moduleGate": "reservations",
+     "throttle": null,
+     "status": "live",
+     "summary": "Rezervasyonu çöp kutusuna taşır (kayıtlarla aynı soft-delete kuralı).",
+     "body": "",
+     "example": "",
+     "names": {
+      "js": "delete",
+      "php": "delete",
+      "swift": "delete",
+      "kotlin": "delete"
+     }
+    },
+    {
+     "name": "calendar",
+     "group": null,
+     "params": [
+      {
+       "name": "recordId",
+       "type": "number",
+       "optional": false,
+       "default": null
+      },
+      {
+       "name": "from",
+       "type": "string",
+       "optional": false,
+       "default": null
+      },
+      {
+       "name": "to",
+       "type": "string",
+       "optional": false,
+       "default": null
+      }
+     ],
+     "returns": "Promise<ApiResponse<ReservationCalendarDay[]> &",
+     "method": "GET",
+     "path": "/api/reservations/calendar",
+     "specPath": "/api/reservations/{id}",
+     "auth": [
+      "envToken",
+      "jwt",
+      "envMember"
+     ],
+     "moduleGate": "reservations",
+     "throttle": null,
+     "status": "live",
+     "summary": "Doluluk takvimi — gün gün kalan kapasite ve o günün fiyatı.",
+     "body": "Gece sayan birimlerde ÇIKIŞ GÜNÜ boş görünür: 12'sinde öğlen çıkan misafir\n12 gecesini tutmaz, o akşam oda yeniden satılır.\n\nTek çağrıda en çok 120 gün döner.",
+     "example": "",
+     "names": {
+      "js": "calendar",
+      "php": "calendar",
+      "swift": "calendar",
+      "kotlin": "calendar"
+     }
+    },
+    {
+     "name": "check",
+     "group": null,
+     "params": [
+      {
+       "name": "params",
+       "type": "{ record_id: number starts_at: string ends_at: string quantity?: number }",
+       "optional": true,
+       "default": null
+      }
+     ],
+     "returns": "Promise<ApiResponse<ReservationCheckResult>>",
+     "method": "GET",
+     "path": "/api/reservations/check",
+     "specPath": "/api/reservations/{id}",
+     "auth": [
+      "envToken",
+      "jwt",
+      "envMember"
+     ],
+     "moduleGate": "reservations",
+     "throttle": null,
+     "status": "live",
+     "summary": "\"Bu tarihlerde açık mı, kaça?\" — yazmadan önce kontrol.",
+     "body": "",
+     "example": "",
+     "names": {
+      "js": "check",
+      "php": "check",
+      "swift": "check",
+      "kotlin": "check"
+     }
+    },
+    {
+     "name": "settings.list",
+     "group": "settings",
+     "params": [],
+     "returns": "Promise<ApiResponse<ReservationSettings[]>>",
+     "method": "GET",
+     "path": "/api/reservations/settings",
+     "specPath": "/api/reservations/{id}",
+     "auth": [
+      "envToken",
+      "jwt",
+      "envMember"
+     ],
+     "moduleGate": "reservations",
+     "throttle": null,
+     "status": "live",
+     "summary": "Sitedeki rezerve edilebilir kayıtlar.",
+     "body": "",
+     "example": "",
+     "names": {
+      "js": "settings.list",
+      "php": "settings",
+      "swift": "settings",
+      "kotlin": "settings"
+     }
+    },
+    {
+     "name": "settings.get",
+     "group": "settings",
+     "params": [
+      {
+       "name": "recordId",
+       "type": "number",
+       "optional": false,
+       "default": null
+      }
+     ],
+     "returns": "Promise< ApiResponse<",
+     "method": "GET",
+     "path": "/api/reservations/settings/${recordId}",
+     "specPath": "/api/reservations/settings/{recordId}",
+     "auth": [
+      "envToken",
+      "jwt",
+      "envMember"
+     ],
+     "moduleGate": "reservations",
+     "throttle": null,
+     "status": "live",
+     "summary": "Kaydın ayarları + kapalı tarihleri + sezon fiyatları tek yanıtta.",
+     "body": "",
+     "example": "",
+     "names": {
+      "js": "settings.get",
+      "php": "recordSettings",
+      "swift": "recordSettings",
+      "kotlin": "recordSettings"
+     }
+    },
+    {
+     "name": "settings.save",
+     "group": "settings",
+     "params": [
+      {
+       "name": "recordId",
+       "type": "number",
+       "optional": false,
+       "default": null
+      },
+      {
+       "name": "payload",
+       "type": "ReservationSettingsPayload",
+       "optional": false,
+       "default": null
+      }
+     ],
+     "returns": "Promise<ApiResponse<ReservationSettings>>",
+     "method": "PUT",
+     "path": "/api/reservations/settings/${recordId}",
+     "specPath": "/api/reservations/settings/{recordId}",
+     "auth": [
+      "envToken",
+      "jwt",
+      "envMember"
+     ],
+     "moduleGate": "reservations",
+     "throttle": null,
+     "status": "live",
+     "summary": "Kur ya da güncelle — kaydı rezervasyona AÇAN çağrı budur.",
+     "body": "",
+     "example": "",
+     "names": {
+      "js": "settings.save",
+      "php": "saveSettings",
+      "swift": "saveSettings",
+      "kotlin": "saveSettings"
+     }
+    },
+    {
+     "name": "settings.close",
+     "group": "settings",
+     "params": [
+      {
+       "name": "recordId",
+       "type": "number",
+       "optional": false,
+       "default": null
+      }
+     ],
+     "returns": "Promise<ApiResponse<",
+     "method": "DELETE",
+     "path": "/api/reservations/settings/${recordId}",
+     "specPath": "/api/reservations/settings/{recordId}",
+     "auth": [
+      "envToken",
+      "jwt",
+      "envMember"
+     ],
+     "moduleGate": "reservations",
+     "throttle": null,
+     "status": "live",
+     "summary": "Rezervasyona kapatır: yeni talep alınmaz, geçmiş kayıtlar durur.",
+     "body": "",
+     "example": "",
+     "names": {
+      "js": "settings.close",
+      "php": "closeSettings",
+      "swift": "closeSettings",
+      "kotlin": "closeSettings"
+     }
+    },
+    {
+     "name": "blocks.add",
+     "group": "blocks",
+     "params": [
+      {
+       "name": "recordId",
+       "type": "number",
+       "optional": false,
+       "default": null
+      },
+      {
+       "name": "payload",
+       "type": "{ starts_at: string; ends_at: string; quantity?: number; reason?: string }",
+       "optional": true,
+       "default": null
+      }
+     ],
+     "returns": "Promise<ApiResponse<ReservationBlock>>",
+     "method": "POST",
+     "path": "/api/reservations/settings/${recordId}/blocks",
+     "specPath": "/api/reservations/settings/{recordId}/blocks",
+     "auth": [
+      "envToken",
+      "jwt",
+      "envMember"
+     ],
+     "moduleGate": "reservations",
+     "throttle": null,
+     "status": "live",
+     "summary": "",
+     "body": "",
+     "example": "",
+     "names": {
+      "js": "blocks.add",
+      "php": "addBlock",
+      "swift": "addBlock",
+      "kotlin": "addBlock"
+     }
+    },
+    {
+     "name": "blocks.remove",
+     "group": "blocks",
+     "params": [
+      {
+       "name": "recordId",
+       "type": "number",
+       "optional": false,
+       "default": null
+      },
+      {
+       "name": "blockId",
+       "type": "number",
+       "optional": false,
+       "default": null
+      }
+     ],
+     "returns": "Promise<ApiResponse<",
+     "method": "DELETE",
+     "path": "/api/reservations/settings/${recordId}/blocks/${blockId}",
+     "specPath": "/api/reservations/settings/{recordId}/blocks/{blockId}",
+     "auth": [
+      "envToken",
+      "jwt",
+      "envMember"
+     ],
+     "moduleGate": "reservations",
+     "throttle": null,
+     "status": "live",
+     "summary": "",
+     "body": "",
+     "example": "",
+     "names": {
+      "js": "blocks.remove",
+      "php": "removeBlock",
+      "swift": "removeBlock",
+      "kotlin": "removeBlock"
+     }
+    },
+    {
+     "name": "rates.add",
+     "group": "rates",
+     "params": [
+      {
+       "name": "recordId",
+       "type": "number",
+       "optional": false,
+       "default": null
+      },
+      {
+       "name": "payload",
+       "type": "{ starts_on: string ends_on: string price: number name?: string min_units?: number priority?: number }",
+       "optional": true,
+       "default": null
+      }
+     ],
+     "returns": "Promise<ApiResponse<ReservationRate>>",
+     "method": "POST",
+     "path": "/api/reservations/settings/${recordId}/rates",
+     "specPath": "/api/reservations/settings/{recordId}/rates",
+     "auth": [
+      "envToken",
+      "jwt",
+      "envMember"
+     ],
+     "moduleGate": "reservations",
+     "throttle": null,
+     "status": "live",
+     "summary": "",
+     "body": "",
+     "example": "",
+     "names": {
+      "js": "rates.add",
+      "php": "addRate",
+      "swift": "addRate",
+      "kotlin": "addRate"
+     }
+    },
+    {
+     "name": "rates.remove",
+     "group": "rates",
+     "params": [
+      {
+       "name": "recordId",
+       "type": "number",
+       "optional": false,
+       "default": null
+      },
+      {
+       "name": "rateId",
+       "type": "number",
+       "optional": false,
+       "default": null
+      }
+     ],
+     "returns": "Promise<ApiResponse<",
+     "method": "DELETE",
+     "path": "/api/reservations/settings/${recordId}/rates/${rateId}",
+     "specPath": "/api/reservations/settings/{recordId}/rates/{rateId}",
+     "auth": [
+      "envToken",
+      "jwt",
+      "envMember"
+     ],
+     "moduleGate": "reservations",
+     "throttle": null,
+     "status": "live",
+     "summary": "",
+     "body": "",
+     "example": "",
+     "names": {
+      "js": "rates.remove",
+      "php": "removeRate",
+      "swift": "removeRate",
+      "kotlin": "removeRate"
+     }
+    }
+   ],
+   "accessor": "reservations"
   },
   {
    "class": "SchemaModule",

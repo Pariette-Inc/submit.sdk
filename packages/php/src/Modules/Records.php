@@ -62,9 +62,46 @@ final class Records extends Module
         return $this->client->put('/api/schema/records/' . $this->seg($typeCode) . '/' . $id, $payload);
     }
 
-    public function delete(string $typeCode, int $id): mixed
+    /**
+     * Kaydı ÇÖP KUTUSUNA taşır (2026-08-13'ten beri iki aşamalı).
+     *
+     * Varsayılan silme kalıcı DEĞİLDİR: kayıt siteden düşer, 30 gün içinde
+     * `restoreFromTrash()` ile geri alınabilir, süre dolunca sunucudaki
+     * `records:prune` görevi kalıcı siler.
+     *
+     * `$force = true` kalıcı siler ve YALNIZ şirket yöneticisinde çalışır;
+     * yetkisi olmayan çağrı 403 döner (sessizce çöpe düşmez).
+     */
+    public function delete(string $typeCode, int $id, bool $force = false): mixed
     {
-        return $this->client->delete('/api/schema/records/' . $this->seg($typeCode) . '/' . $id);
+        $path = '/api/schema/records/' . $this->seg($typeCode) . '/' . $id;
+
+        return $this->client->delete($force ? $path . '?force=1' : $path);
+    }
+
+    /**
+     * Çöp kutusu: silinmiş ama henüz kalıcı silinmemiş kayıtlar.
+     *
+     * `meta.can_purge` çağıran kullanıcının kalıcı silme yetkisi olup olmadığını
+     * söyler; arayüz "Kalıcı sil" düğmesini buna bakarak çizmelidir.
+     *
+     * @param array{page?:int,per_page?:int} $params
+     */
+    public function trash(string $typeCode, array $params = []): mixed
+    {
+        return $this->client->get('/api/schema/records/' . $this->seg($typeCode) . '/trash', $params);
+    }
+
+    /**
+     * Kaydı çöp kutusundan geri getirir.
+     *
+     * Adres çakışması sunucuda çözülür: kayıt çöpteyken slug'ı başkasına
+     * verilmiş olabilir; geri gelen kayıt CANLI sayfanın adresini almaz,
+     * kendine yeni adres alır. Filtre indeksi de bu sırada yeniden kurulur.
+     */
+    public function restoreFromTrash(string $typeCode, int $id): mixed
+    {
+        return $this->client->post('/api/schema/records/' . $this->seg($typeCode) . '/' . $id . '/restore', []);
     }
 
     public function analytics(string $typeCode, int $id): mixed

@@ -43,8 +43,8 @@ Her endpoint için metod, yol, kimlik doğrulama zinciri, modül kapısı, rate 
 bilgisi tutar. Emekli uçlar (`status: "retired"`) 410 `PANEL_RETIRED` döner — SDK'lar bunları çağırmaz.
 
 > Bu ayrım kozmetik değil: 2026-07-30 panel emekliliği kararıyla eski sahip-yönetim uçlarının tamamı
-> kapatıldı, yerine `schema/records`, `menus`, `platform/my` ve `commerce` geldi. 507 endpoint'in
-> 201'i bu durumda.
+> kapatıldı, yerine `schema/records`, `menus`, `platform/my` ve `commerce` geldi. 475 endpoint'in
+> 200'ü bu durumda.
 
 ## Geliştirme
 

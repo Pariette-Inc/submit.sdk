@@ -76,6 +76,95 @@ function normalize(raw) {
   return out.replace(/\?.*$/, '')
 }
 
+/**
+ * `openAt` konumundaki `{`'ın eşleşen kapanışının konumu.
+ *
+ * Naif bir sayaç yetmiyor: yorumlar ve dizeler içindeki süslü parantezler
+ * dengeyi bozar. Daha sinsisi, TÜRKÇE YORUMLARDAKİ KESME İŞARETİ ("12'sinde",
+ * "sdk'nın") — tek tırnağı dize başlangıcı sanan bir tarayıcı araya giren
+ * kodu yutar ve eşleşme hiç bulunamaz. Bu yüzden yorum ve dize durumları
+ * açıkça izleniyor; şablon dizelerinde yalnız `${…}` içi kod sayılıyor.
+ */
+function closingBrace(text, openAt) {
+  let depth = 0
+  // Şablon dizesi yığını: `${` içindeyken kod, dışındayken düz metin.
+  const templates = []
+
+  for (let i = openAt; i < text.length; i++) {
+    const ch = text[i]
+    const next = text[i + 1]
+
+    if (ch === '/' && next === '/') {
+      i = text.indexOf('\n', i)
+      if (i === -1) return text.length
+      continue
+    }
+
+    if (ch === '/' && next === '*') {
+      const close = text.indexOf('*/', i + 2)
+      if (close === -1) return text.length
+      i = close + 1
+      continue
+    }
+
+    if (ch === "'" || ch === '"') {
+      const quote = ch
+      i++
+      while (i < text.length && text[i] !== quote) {
+        if (text[i] === '\\') i++
+        if (text[i] === '\n') break // kapanmamış tırnak: yorumdaki kesme işareti
+        i++
+      }
+      continue
+    }
+
+    if (ch === '`') {
+      // Şablonun düz metin kısmını atla; `${` görürsek koda dönülür.
+      i++
+      while (i < text.length) {
+        if (text[i] === '\\') { i += 2; continue }
+        if (text[i] === '`') break
+        if (text[i] === '$' && text[i + 1] === '{') {
+          templates.push(depth)
+          depth++
+          i += 2
+          break
+        }
+        i++
+      }
+      // Şablon kapandıysa döngü `i` backtick'te; devam.
+      continue
+    }
+
+    if (ch === '{') depth++
+    else if (ch === '}') {
+      depth--
+
+      // `${…}` kapandı: şablonun düz metin kısmına geri dönülür.
+      if (templates.length > 0 && depth === templates[templates.length - 1]) {
+        templates.pop()
+        i++
+        while (i < text.length) {
+          if (text[i] === '\\') { i += 2; continue }
+          if (text[i] === '`') break
+          if (text[i] === '$' && text[i + 1] === '{') {
+            templates.push(depth)
+            depth++
+            i += 1
+            break
+          }
+          i++
+        }
+        continue
+      }
+
+      if (depth === 0) return i
+    }
+  }
+
+  return text.length
+}
+
 /** Yolu spec'teki rota kaydıyla eşler (metot da uyuşmalı). */
 function lookup(verb, rawPath) {
   const normalized = normalize(rawPath)
@@ -200,25 +289,41 @@ function parseModule(file) {
         String.raw`(?:readonly (\w+) = \{|(\w+)\s*(?:\(([^)]*)\)|:\s*(?:async\s*)?\(([^)]*)\))\s*(?::\s*([^{=]*?))?\s*[={])`,
       'g'
     )
-    let member
+    // Önce TÜM üyelerin konumu toplanır; her üyenin gövdesi bir SONRAKİ üyeye
+    // kadar sürer. Eskiden sabit 900 karakterlik bir pencereye bakılıyordu ve
+    // uzun JSDoc + çok satırlı parametre tipi olan metotlar (ör.
+    // `delivery.reservations.book`) çağrı satırına ulaşamadan pencereyi
+    // doldurup dokümandan sessizce düşüyordu. `methodNamesByPath` bu dersi
+    // zaten almıştı; burası geride kalmıştı.
+    const members = [...body.matchAll(memberRe)]
 
-    while ((member = memberRe.exec(body))) {
+    members.forEach((member, memberIndex) => {
       const [, doc, groupName, methodName, paramsA, paramsB, returns] = member
 
       if (groupName) {
-        group = { name: groupName, ...cleanDoc(doc) }
-        continue
+        // Grup, nesne değişmezinin kapanışına kadar sürer. Eskiden bir kez
+        // atandıktan sonra sınıfın SONUNA kadar yapışıyordu: `readonly
+        // documents = {…}` bloğundan sonra gelen `manifest()` dokümana
+        // `documents.manifest` diye giriyordu. Süslü parantez dengesi sayılıp
+        // grubun bittiği konum işaretleniyor.
+        group = { name: groupName, ...cleanDoc(doc), endsAt: closingBrace(body, member.index + member[0].length - 1) }
+        return
       }
-      if (!methodName) continue
+
+      // Grup bitmişse üye artık ona ait değil.
+      if (group && member.index > group.endsAt) {
+        group = null
+      }
+
+      if (!methodName) return
 
       const params = parseParams(paramsA ?? paramsB ?? '')
 
-      // Metot gövdesini bul: sonraki 800 karakter içindeki ilk çağrı yeterli.
-      const tail = body.slice(member.index, member.index + 900)
+      const tail = body.slice(member.index, members[memberIndex + 1]?.index ?? body.length)
       const call = /this\.client\.(get|post|put|patch|delete|raw|upload)\s*[<(]/.exec(tail)
       const pathMatch = /['"`](\/api\/[^'"`]*)['"`]/.exec(tail)
 
-      if (!call || !pathMatch) continue
+      if (!call || !pathMatch) return
 
       // `raw` gövdeyi ham döndüren bir GET, `upload` çok parçalı bir POST.
       const verb = { raw: 'get', upload: 'post' }[call[1]] ?? call[1]
@@ -238,7 +343,7 @@ function parseModule(file) {
         status: route?.status ?? 'unknown',
         ...cleanDoc(doc),
       })
-    }
+    })
 
     modules.push({ class: className, file, ...cleanDoc(doc), methods })
   }

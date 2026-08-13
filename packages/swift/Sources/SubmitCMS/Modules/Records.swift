@@ -45,8 +45,35 @@ public struct RecordsModule: Sendable {
     }
 
     @discardableResult
-    public func delete(_ typeCode: String, id: Int) async throws -> SubmitResponse<JSONValue> {
-        try await client.delete("/api/schema/records/\(esc(typeCode))/\(id)")
+    /// Kaydı ÇÖP KUTUSUNA taşır (2026-08-13'ten beri iki aşamalı).
+    ///
+    /// Varsayılan silme kalıcı DEĞİLDİR: kayıt siteden düşer, 30 gün içinde
+    /// `restoreFromTrash` ile geri alınabilir, süre dolunca sunucudaki
+    /// `records:prune` görevi kalıcı siler.
+    ///
+    /// `force: true` kalıcı siler ve YALNIZ şirket yöneticisinde çalışır;
+    /// yetkisi olmayan çağrı 403 döner (sessizce çöpe düşmez).
+    public func delete(_ typeCode: String, id: Int, force: Bool = false) async throws -> SubmitResponse<JSONValue> {
+        let path = "/api/schema/records/\(esc(typeCode))/\(id)"
+
+        return try await client.delete(force ? path + "?force=1" : path)
+    }
+
+    /// Çöp kutusu: silinmiş ama henüz kalıcı silinmemiş kayıtlar.
+    ///
+    /// `meta.can_purge` çağıran kullanıcının kalıcı silme yetkisi olup
+    /// olmadığını söyler; arayüz "Kalıcı sil" düğmesini buna bakarak çizmelidir.
+    public func trash(_ typeCode: String, params: [String: Any] = [:]) async throws -> SubmitResponse<[JSONValue]> {
+        try await client.get("/api/schema/records/\(esc(typeCode))/trash", query: params, as: [JSONValue].self)
+    }
+
+    /// Kaydı çöp kutusundan geri getirir.
+    ///
+    /// Adres çakışması sunucuda çözülür: kayıt çöpteyken slug'ı başkasına
+    /// verilmiş olabilir; geri gelen kayıt CANLI sayfanın adresini almaz,
+    /// kendine yeni adres alır. Filtre indeksi de bu sırada yeniden kurulur.
+    public func restoreFromTrash(_ typeCode: String, id: Int) async throws -> SubmitResponse<JSONValue> {
+        try await client.post("/api/schema/records/\(esc(typeCode))/\(id)/restore", body: [:])
     }
 
     public func analytics(_ typeCode: String, id: Int) async throws -> SubmitResponse<JSONValue> {

@@ -45,40 +45,8 @@ class Records(private val client: SubmitClient) {
     suspend fun update(typeCode: String, id: Int, payload: Map<String, Any?>): JsonObject =
         client.put("/api/schema/records/${esc(typeCode)}/$id", payload)
 
-    /**
-     * Kaydı ÇÖP KUTUSUNA taşır (2026-08-13'ten beri iki aşamalı).
-     *
-     * Varsayılan silme kalıcı DEĞİLDİR: kayıt siteden düşer, 30 gün içinde
-     * [restoreFromTrash] ile geri alınabilir, süre dolunca sunucudaki
-     * `records:prune` görevi kalıcı siler.
-     *
-     * [force] kalıcı siler ve YALNIZ şirket yöneticisinde çalışır; yetkisi
-     * olmayan çağrı 403 döner (sessizce çöpe düşmez).
-     */
-    suspend fun delete(typeCode: String, id: Int, force: Boolean = false): JsonObject {
-        val path = "/api/schema/records/${esc(typeCode)}/$id"
-
-        return client.delete(if (force) "$path?force=1" else path)
-    }
-
-    /**
-     * Çöp kutusu: silinmiş ama henüz kalıcı silinmemiş kayıtlar.
-     *
-     * `meta.can_purge` çağıran kullanıcının kalıcı silme yetkisi olup
-     * olmadığını söyler; arayüz "Kalıcı sil" düğmesini buna bakarak çizmelidir.
-     */
-    suspend fun trash(typeCode: String, params: Map<String, Any?> = emptyMap()): JsonObject =
-        client.get("/api/schema/records/${esc(typeCode)}/trash", params)
-
-    /**
-     * Kaydı çöp kutusundan geri getirir.
-     *
-     * Adres çakışması sunucuda çözülür: kayıt çöpteyken slug'ı başkasına
-     * verilmiş olabilir; geri gelen kayıt CANLI sayfanın adresini almaz,
-     * kendine yeni adres alır. Filtre indeksi de bu sırada yeniden kurulur.
-     */
-    suspend fun restoreFromTrash(typeCode: String, id: Int): JsonObject =
-        client.post("/api/schema/records/${esc(typeCode)}/$id/restore", emptyMap())
+    suspend fun delete(typeCode: String, id: Int): JsonObject =
+        client.delete("/api/schema/records/${esc(typeCode)}/$id")
 
     suspend fun analytics(typeCode: String, id: Int): JsonObject =
         client.get("/api/schema/records/${esc(typeCode)}/$id/analytics")

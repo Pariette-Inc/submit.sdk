@@ -16,7 +16,6 @@ import com.submitcms.sdk.modules.Partner
 import com.submitcms.sdk.modules.Payments
 import com.submitcms.sdk.modules.Platform
 import com.submitcms.sdk.modules.Records
-import com.submitcms.sdk.modules.Reservations
 import com.submitcms.sdk.modules.Schema
 import com.submitcms.sdk.modules.Shopping
 import com.submitcms.sdk.modules.Storage
@@ -72,9 +71,6 @@ class SubmitCms(val client: SubmitClient) {
 
     /** Destek talepleri gelen kutusu (panel tarafı; gönderim `delivery`de). */
     val tickets = Tickets(client)
-
-    /** Rezervasyon yönetimi (panel tarafı; talep gönderimi `delivery`de). */
-    val reservations = Reservations(client)
 
     val cart = Cart(client)
     val shopping = Shopping(client)

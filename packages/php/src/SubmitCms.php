@@ -20,6 +20,7 @@ use SubmitCms\Sdk\Modules\Partner;
 use SubmitCms\Sdk\Modules\Payments;
 use SubmitCms\Sdk\Modules\Platform;
 use SubmitCms\Sdk\Modules\Records;
+use SubmitCms\Sdk\Modules\Reservations;
 use SubmitCms\Sdk\Modules\Schema;
 use SubmitCms\Sdk\Modules\Shopping;
 use SubmitCms\Sdk\Modules\Storage;
@@ -60,6 +61,8 @@ use SubmitCms\Sdk\Modules\Tracking;
  * | Sipariş yönetimi             | `orders`                         | token + oturum + `orders` modülü |
  * | Müşteri kendi sitesini yönetiyor | `platform`                   | token + oturum + üyelik         |
  * | Bayi paneli                  | `partner`                        | partner oturumu                 |
+ * | Rezervasyon gelen kutusu     | `reservations`                   | token + oturum + `reservations` |
+ * | Sitede müsaitlik / talep     | `delivery`                       | site token'ı                    |
  */
 final class SubmitCms
 {
@@ -76,6 +79,8 @@ final class SubmitCms
     public readonly Menus $menus;
     /** Destek talepleri gelen kutusu (panel tarafı; gönderim `delivery`de). */
     public readonly Tickets $tickets;
+    /** Rezervasyon yönetimi (panel tarafı; talep gönderimi `delivery`de). */
+    public readonly Reservations $reservations;
 
     public readonly Cart $cart;
     public readonly Shopping $shopping;
@@ -118,6 +123,7 @@ final class SubmitCms
         $this->schema = new Schema($this->client);
         $this->menus = new Menus($this->client);
         $this->tickets = new Tickets($this->client);
+        $this->reservations = new Reservations($this->client);
 
         $this->cart = new Cart($this->client);
         $this->shopping = new Shopping($this->client);

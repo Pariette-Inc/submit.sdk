@@ -127,6 +127,18 @@ export interface PageMeta {
  *     dir: 'desc',
  *   })
  */
+/** Çöp kutusundaki kayıt — gövde değil, ne zaman silindiği ve kaç gün kaldığı. */
+export interface TrashedRecord {
+  id: number
+  slug: string | null
+  locale: string | null
+  status: string
+  data: Record<string, unknown>
+  deleted_at: string
+  /** Kalıcı silinmesine kaç gün kaldığı; 0 ise sıradaki temizlikte gider. */
+  purges_in_days: number
+}
+
 export class RecordModule extends BaseModule {
   /**
    * Kayıtları listeler. Sayfalama bilgisi yanıtın `meta` alanındadır.
@@ -161,8 +173,54 @@ export class RecordModule extends BaseModule {
     return this.client.put(`/api/schema/records/${encodeURIComponent(typeCode)}/${id}`, payload)
   }
 
-  delete(typeCode: string, id: number): Promise<ApiResponse<null>> {
-    return this.client.delete(`/api/schema/records/${encodeURIComponent(typeCode)}/${id}`)
+  /**
+   * Kaydı ÇÖP KUTUSUNA taşır (2026-08-13'ten beri iki aşamalı).
+   *
+   * Varsayılan silme kalıcı DEĞİLDİR: kayıt siteden düşer, index'i temizlenir
+   * ve 30 gün içinde `restore()` ile geri alınabilir; süre dolunca sunucudaki
+   * `records:prune` görevi kalıcı siler.
+   *
+   * `{ force: true }` kalıcı siler ve YALNIZ şirket yöneticisinde çalışır;
+   * yetkisi olmayan çağrı 403 döner (sessizce çöpe düşmez).
+   */
+  delete(
+    typeCode: string,
+    id: number,
+    options: { force?: boolean } = {}
+  ): Promise<ApiResponse<{ deleted: boolean; permanent: boolean; retention_days: number | null }>> {
+    const path = `/api/schema/records/${encodeURIComponent(typeCode)}/${id}`
+
+    return this.client.delete(options.force ? `${path}?force=1` : path)
+  }
+
+  /**
+   * Çöp kutusu: silinmiş ama henüz kalıcı silinmemiş kayıtlar.
+   *
+   * `meta.can_purge` çağıran kullanıcının kalıcı silme yetkisi olup olmadığını
+   * söyler — arayüz "Kalıcı sil" düğmesini buna bakarak çizmelidir.
+   */
+  trash(
+    typeCode: string,
+    params: { page?: number; per_page?: number } = {}
+  ): Promise<
+    ApiResponse<TrashedRecord[]> & {
+      meta?: PageMeta & { retention_days: number; can_purge: boolean }
+    }
+  > {
+    return this.client.get(`/api/schema/records/${encodeURIComponent(typeCode)}/trash`, {
+      params,
+    })
+  }
+
+  /**
+   * Kaydı çöp kutusundan geri getirir.
+   *
+   * Adres çakışması sunucuda çözülür: kayıt çöpteyken slug'ı başka bir kayda
+   * verilmiş olabilir; geri gelen kayıt CANLI sayfanın adresini almaz, kendine
+   * yeni bir adres alır. Filtre indeksi de bu sırada yeniden kurulur.
+   */
+  restoreFromTrash(typeCode: string, id: number): Promise<ApiResponse<SubmitRecord>> {
+    return this.client.post(`/api/schema/records/${encodeURIComponent(typeCode)}/${id}/restore`, {})
   }
 
   /** Görüntülenme ve etkileşim özeti. */
