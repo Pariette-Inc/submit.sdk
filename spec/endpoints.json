@@ -3,11 +3,11 @@
  "source": {
   "repo": "submit.api",
   "branch": "test",
-  "commit": "502a041"
+  "commit": "f86dda8"
  },
  "counts": {
-  "total": 475,
-  "live": 275,
+  "total": 488,
+  "live": 288,
   "retired": 200
  },
  "authLegend": {
@@ -1021,9 +1021,35 @@
    "status": "live"
   },
   {
+   "method": "GET",
+   "path": "/api/commerce/orders/{id}/payments",
+   "controller": "Commerce\\ExternalPaymentController@index",
+   "auth": [
+    "envToken",
+    "jwt",
+    "envMember"
+   ],
+   "moduleGate": "orders",
+   "throttle": null,
+   "status": "live"
+  },
+  {
    "method": "PUT",
    "path": "/api/commerce/orders/{id}/status",
    "controller": "Commerce\\OrderAdminController@updateStatus",
+   "auth": [
+    "envToken",
+    "jwt",
+    "envMember"
+   ],
+   "moduleGate": "orders",
+   "throttle": null,
+   "status": "live"
+  },
+  {
+   "method": "GET",
+   "path": "/api/commerce/orders/carriers",
+   "controller": "Commerce\\OrderAdminController@carriers",
    "auth": [
     "envToken",
     "jwt",
@@ -1060,6 +1086,19 @@
    "status": "live"
   },
   {
+   "method": "POST",
+   "path": "/api/commerce/orders/mail-settings/preview",
+   "controller": "Commerce\\OrderAdminController@previewMailTemplate",
+   "auth": [
+    "envToken",
+    "jwt",
+    "envMember"
+   ],
+   "moduleGate": "orders",
+   "throttle": null,
+   "status": "live"
+  },
+  {
    "method": "GET",
    "path": "/api/commerce/orders/report",
    "controller": "Commerce\\OrderAdminController@report",
@@ -1070,6 +1109,32 @@
    ],
    "moduleGate": "orders",
    "throttle": null,
+   "status": "live"
+  },
+  {
+   "method": "GET",
+   "path": "/api/commerce/payment-webhook",
+   "controller": "Commerce\\ExternalPaymentController@secretStatus",
+   "auth": [
+    "envToken",
+    "jwt",
+    "envMember"
+   ],
+   "moduleGate": "orders",
+   "throttle": null,
+   "status": "live"
+  },
+  {
+   "method": "POST",
+   "path": "/api/commerce/payment-webhook/rotate",
+   "controller": "Commerce\\ExternalPaymentController@rotateSecret",
+   "auth": [
+    "envToken",
+    "jwt",
+    "envMember"
+   ],
+   "moduleGate": "orders",
+   "throttle": "5,1",
    "status": "live"
   },
   {
@@ -2832,6 +2897,32 @@
    "status": "live"
   },
   {
+   "method": "POST",
+   "path": "/api/platform/my/signalbird/embed",
+   "controller": "Platform\\SignalbirdController@embed",
+   "auth": [
+    "envToken",
+    "jwt",
+    "envMember"
+   ],
+   "moduleGate": null,
+   "throttle": "60,1",
+   "status": "live"
+  },
+  {
+   "method": "GET",
+   "path": "/api/platform/my/signalbird/uptime",
+   "controller": "Platform\\SignalbirdController@uptime",
+   "auth": [
+    "envToken",
+    "jwt",
+    "envMember"
+   ],
+   "moduleGate": null,
+   "throttle": null,
+   "status": "live"
+  },
+  {
    "method": "GET",
    "path": "/api/platform/my/sites",
    "controller": "Platform\\CompanySiteModuleController@index",
@@ -2978,6 +3069,19 @@
    "method": "DELETE",
    "path": "/api/platform/my/team/members/{id}",
    "controller": "Platform\\CustomerPlatformController@teamRemove",
+   "auth": [
+    "envToken",
+    "jwt",
+    "envMember"
+   ],
+   "moduleGate": null,
+   "throttle": null,
+   "status": "live"
+  },
+  {
+   "method": "PUT",
+   "path": "/api/platform/my/team/members/{id}",
+   "controller": "Platform\\CustomerPlatformController@teamUpdateMember",
    "auth": [
     "envToken",
     "jwt",
@@ -3759,6 +3863,39 @@
    "status": "live"
   },
   {
+   "method": "GET",
+   "path": "/api/public/checkout/config",
+   "controller": "CheckoutIdentityController@config",
+   "auth": [
+    "envToken"
+   ],
+   "moduleGate": null,
+   "throttle": null,
+   "status": "live"
+  },
+  {
+   "method": "POST",
+   "path": "/api/public/checkout/guest-subscribe",
+   "controller": "GuestCheckoutController@subscribe",
+   "auth": [
+    "envToken"
+   ],
+   "moduleGate": null,
+   "throttle": "5,1",
+   "status": "live"
+  },
+  {
+   "method": "POST",
+   "path": "/api/public/checkout/identity",
+   "controller": "CheckoutIdentityController@identity",
+   "auth": [
+    "envToken"
+   ],
+   "moduleGate": null,
+   "throttle": "10,1",
+   "status": "live"
+  },
+  {
    "method": "POST",
    "path": "/api/public/client-error",
    "controller": "JourneyController@clientError",
@@ -3855,6 +3992,17 @@
    ],
    "moduleGate": null,
    "throttle": null,
+   "status": "live"
+  },
+  {
+   "method": "POST",
+   "path": "/api/public/newsletter/subscribe",
+   "controller": "NewsletterController@subscribe",
+   "auth": [
+    "envToken"
+   ],
+   "moduleGate": null,
+   "throttle": "5,1",
    "status": "live"
   },
   {
@@ -5016,6 +5164,17 @@
    ],
    "moduleGate": "ecommerce",
    "throttle": "10,1",
+   "status": "live"
+  },
+  {
+   "method": "POST",
+   "path": "/api/shop/orders/{number}/payments",
+   "controller": "Commerce\\ExternalPaymentController@report",
+   "auth": [
+    "envToken"
+   ],
+   "moduleGate": "ecommerce",
+   "throttle": "60,1",
    "status": "live"
   },
   {
