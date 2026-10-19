@@ -3,6 +3,13 @@
 > Her ekran/servis geliştirmesinden sonra güncellenir. En yeni bölüm en üstte.
 > Format: development-log skill'i (Claude) tarafından otomatik bakılır.
 
+## 2026-10-19 — Kurallar meta repoda (`../submitcms/`)
+
+- `CLAUDE.md` artık yalnız `../submitcms/AGENTS.md` ve `../submitcms/submit.sdk/RULES.md`'yi yükler.
+- Bu repoda `test` dalı yok: görev dalı `main`'den açılır, `submit ship` `main`'e PR açar.
+- `AGENTS.md` (Codex), `.claude/settings.json` (push koruma kancası, yasak dal listesi), PR şablonu eklendi.
+- Deploy adımı: yok.
+
 ## 2026-08-13 — Rezervasyon modülü + çöp kutusu uçları (dört dil)
 
 > `submit.api`'ye gelen rezervasyon modülü ve iki aşamalı içerik silme SDK'lara
