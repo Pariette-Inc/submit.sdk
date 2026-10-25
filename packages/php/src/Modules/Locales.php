@@ -17,7 +17,17 @@ final class Locales extends Module
         return $this->client->get('/api/schema/locales');
     }
 
-    /** @param array<string,mixed> $extra */
+    /** Dünya dilleri kataloğu: doğru kod (tr_TR), kısa kod, ad, yerel ad, bayrak. */
+    public function catalog(): mixed
+    {
+        return $this->client->get('/api/schema/locales/catalog');
+    }
+
+    /**
+     * Dil ekler. Kod her yazımda kabul edilir (tr, tr-TR, tr_TR, us); `label` verilmezse dilin kendi adı.
+     *
+     * @param array<string,mixed> $extra
+     */
     public function add(string $code, array $extra = []): mixed
     {
         return $this->client->post('/api/schema/locales', compact('code') + $extra);

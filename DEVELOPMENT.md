@@ -3,6 +3,15 @@
 > Her ekran/servis geliştirmesinden sonra güncellenir. En yeni bölüm en üstte.
 > Format: development-log skill'i (Claude) tarafından otomatik bakılır.
 
+## 2026-10-25 — Dil kataloğu: `locales.catalog()`, takma kodlar
+
+- Yeni uç: `GET /api/schema/locales/catalog` → `locales.catalog()` (js, php, swift, kotlin). Dünya dilleri: doğru kod (`tr_TR`), web biçimi (`tr-TR`), kısa kod (`tr`), ad, yerel ad, bayrak, kabul edilen yazımlar.
+- `locales.add(code, { label? })`: kod her yazımda kabul edilir (`tr_TR`, `us`…), API kısa koda çevirir; `label` isteğe bağlı.
+- `locales.list()` tipi düzeltildi: yanıt `{ locales: SiteLocale[], default }` (js tipi diziydi; swift `[JSONValue]` çözümü bu yanıtta başarısızdı). `SiteLocale` yeni alanlar: `locale`, `bcp47`, `flag`, `native`.
+- `spec/endpoints.json` submit.api `feat/pariette-migration-users`'tan (test tabanı) yeniden üretildi: önceki üretim `test@f86dda8` idi, `test`'teki 21 uç spec'te yoktu.
+- README (4 paket): "Diller" bölümü. `pnpm test:contract` 14/14, `submit check sdk` geçti.
+- Sürüm: sahibi yayınlar (`release.sh`).
+
 ## 2026-10-19 — Kurallar meta repoda (`../submitcms/`)
 
 - `CLAUDE.md` artık yalnız `../submitcms/AGENTS.md` ve `../submitcms/submit.sdk/RULES.md`'yi yükler.

@@ -59,7 +59,12 @@ class Categories(private val client: SubmitClient) {
 class Locales(private val client: SubmitClient) {
     suspend fun list(): JsonObject = client.get("/api/schema/locales")
 
-    suspend fun add(code: String): JsonObject = client.post("/api/schema/locales", mapOf("code" to code))
+    /** Dünya dilleri kataloğu: doğru kod (tr_TR), kısa kod, ad, yerel ad, bayrak. */
+    suspend fun catalog(): JsonObject = client.get("/api/schema/locales/catalog")
+
+    /** Kod her yazımda kabul edilir (tr, tr-TR, tr_TR, us); [label] verilmezse dilin kendi adı. */
+    suspend fun add(code: String, label: String? = null): JsonObject =
+        client.post("/api/schema/locales", if (label == null) mapOf("code" to code) else mapOf("code" to code, "label" to label))
 
     suspend fun remove(code: String): JsonObject = client.delete("/api/schema/locales/${esc(code)}")
 }

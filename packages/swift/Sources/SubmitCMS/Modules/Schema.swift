@@ -79,12 +79,21 @@ public struct CategoriesModule: Sendable {
 public struct LocalesModule: Sendable {
     let client: SubmitClient
 
-    public func list() async throws -> SubmitResponse<[JSONValue]> {
-        try await client.get("/api/schema/locales", as: [JSONValue].self)
+    /// `{ locales: [...], default: "tr" }`
+    public func list() async throws -> SubmitResponse<JSONValue> {
+        try await client.get("/api/schema/locales", as: JSONValue.self)
     }
 
-    public func add(code: String) async throws -> SubmitResponse<JSONValue> {
-        try await client.post("/api/schema/locales", body: ["code": code])
+    /// Dünya dilleri kataloğu: doğru kod (tr_TR), kısa kod, ad, yerel ad, bayrak.
+    public func catalog() async throws -> SubmitResponse<JSONValue> {
+        try await client.get("/api/schema/locales/catalog", as: JSONValue.self)
+    }
+
+    /// Kod her yazımda kabul edilir (tr, tr-TR, tr_TR, us); `label` verilmezse dilin kendi adı.
+    public func add(code: String, label: String? = nil) async throws -> SubmitResponse<JSONValue> {
+        var body = ["code": code]
+        if let label { body["label"] = label }
+        return try await client.post("/api/schema/locales", body: body)
     }
 
     @discardableResult

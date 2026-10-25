@@ -143,18 +143,54 @@ export class CategoryModule extends BaseModule {
   }
 }
 
+/** Sitenin bir dili. `code` kayıtlı koddur; `locale` doğru kod (tr_TR), `flag` bayrak emojisi. */
+export interface SiteLocale {
+  code: string
+  label: string
+  image?: string | null
+  locale?: string | null
+  bcp47?: string | null
+  flag?: string | null
+  native?: string | null
+}
+
+/** Dünya dilleri kataloğundan bir kayıt. */
+export interface CatalogLocale {
+  /** Doğru kod: tr_TR */
+  code: string
+  /** Web biçimi: tr-TR */
+  bcp47: string
+  /** Kısa kod: tr (bölge varyantında en-GB) */
+  short: string
+  language: string
+  region: string | null
+  name: string
+  native: string
+  country: string | null
+  flag: string | null
+  /** Kabul edilen yazımlar: tr, tr-TR, tur… ; en_US için us de */
+  aliases: string[]
+}
+
 /**
  * Sitenin dilleri.
  *
  * Bir dil burada tanımlı değilse o dilde kayıt yazılamaz (422) — bu, panelde
- * hiç görünmeyen "hayalet" çevirileri engeller.
+ * hiç görünmeyen "hayalet" çevirileri engeller. Kod her yazımda kabul edilir
+ * (tr, tr-TR, tr_TR, us…); API kısa koda çevirir.
  */
 export class LocaleModule extends BaseModule {
-  list(): Promise<ApiResponse<Array<{ code: string; label?: string; is_default?: boolean }>>> {
+  list(): Promise<ApiResponse<{ locales: SiteLocale[]; default: string }>> {
     return this.client.get('/api/schema/locales')
   }
 
-  add(code: string, payload?: Record<string, unknown>): Promise<ApiResponse<null>> {
+  /** Dünya dilleri kataloğu (doğru kod, kısa kod, ad, yerel ad, bayrak). */
+  catalog(): Promise<ApiResponse<{ locales: CatalogLocale[] }>> {
+    return this.client.get('/api/schema/locales/catalog')
+  }
+
+  /** Dil ekler. `label` verilmezse dilin kendi adı kullanılır. */
+  add(code: string, payload?: { label?: string; image?: string }): Promise<ApiResponse<{ locales: SiteLocale[] }>> {
     return this.client.post('/api/schema/locales', { code, ...payload })
   }
 
