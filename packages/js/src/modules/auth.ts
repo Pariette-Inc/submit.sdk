@@ -136,7 +136,7 @@ export class AuthModule extends BaseModule {
 
   /** Sıfırlama bağlantısındaki token hâlâ geçerli mi — formu göstermeden önce. */
   checkResetToken(token: string): Promise<ApiResponse<{ valid: boolean }>> {
-    return this.client.get('/api/auth/check-reset-token', { params: { token } })
+    return this.client.get('/api/auth/check-reset-token', { token })
   }
 
   resetPassword(payload: {

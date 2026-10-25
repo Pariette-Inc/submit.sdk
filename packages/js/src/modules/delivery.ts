@@ -58,15 +58,13 @@ export class DeliveryModule extends BaseModule {
     typeCode: string,
     params: Omit<RecordListParams, 'status'> = {}
   ): Promise<ApiResponse<SubmitRecord[]> & { meta?: PageMeta }> {
-    return this.client.get(`/api/public/records/${encodeURIComponent(typeCode)}`, { params })
+    return this.client.get(`/api/public/records/${encodeURIComponent(typeCode)}`, params)
   }
 
   /** Slug ile tek kayıt. Aynı slug birden çok dilde varsa `locale` verin. */
   record(typeCode: string, slug: string, params: { locale?: string } = {}): Promise<ApiResponse<SubmitRecord>> {
     return this.client.get(
-      `/api/public/records/${encodeURIComponent(typeCode)}/item/${encodeURIComponent(slug)}`,
-      { params }
-    )
+      `/api/public/records/${encodeURIComponent(typeCode)}/item/${encodeURIComponent(slug)}`, params)
   }
 
   /** "Bunlar da ilginizi çekebilir" — aynı kategoriden ilgili kayıtlar. */
@@ -134,7 +132,7 @@ export class DeliveryModule extends BaseModule {
   // ── Katalog (okuma) ───────────────────────────────────────────────────────
 
   products(params: Record<string, unknown> = {}): Promise<ApiResponse<Array<Record<string, unknown>>>> {
-    return this.client.get('/api/public/products', { params })
+    return this.client.get('/api/public/products', params)
   }
 
   product(slug: string): Promise<ApiResponse<Record<string, unknown>>> {
@@ -157,7 +155,7 @@ export class DeliveryModule extends BaseModule {
    */
   readonly canvas = {
     list: (params: Record<string, unknown> = {}): Promise<ApiResponse<Array<Record<string, unknown>>>> =>
-      this.client.get('/api/public/canvas', { params }),
+      this.client.get('/api/public/canvas', params),
 
     show: (slug: string): Promise<ApiResponse<Record<string, unknown>>> =>
       this.client.get(`/api/public/canvas/${encodeURIComponent(slug)}`),
@@ -216,7 +214,7 @@ export class DeliveryModule extends BaseModule {
   /** Yayımlanmış dokümanlar (katalog, kılavuz, PDF eki vb.). */
   readonly documents = {
     list: (params: Record<string, unknown> = {}): Promise<ApiResponse<Array<Record<string, unknown>>>> =>
-      this.client.get('/api/documents', { params }),
+      this.client.get('/api/documents', params),
 
     show: (slug: string): Promise<ApiResponse<Record<string, unknown>>> =>
       this.client.get(`/api/documents/${encodeURIComponent(slug)}`),
@@ -225,7 +223,7 @@ export class DeliveryModule extends BaseModule {
       this.client.get(`/api/documents/collection/${encodeURIComponent(String(id))}`),
 
     products: (params: Record<string, unknown> = {}): Promise<ApiResponse<Array<Record<string, unknown>>>> =>
-      this.client.get('/api/documents/products', { params }),
+      this.client.get('/api/documents/products', params),
   }
 
   // ── Rezervasyon (ziyaretçi tarafı) ────────────────────────────────────────
@@ -273,9 +271,7 @@ export class DeliveryModule extends BaseModule {
       }>
     > =>
       this.client.get(
-        `/api/public/reservations/${encodeURIComponent(typeCode)}/${encodeURIComponent(slug)}/availability`,
-        { params }
-      ),
+        `/api/public/reservations/${encodeURIComponent(typeCode)}/${encodeURIComponent(slug)}/availability`, params),
 
     /**
      * Takvim: hangi günler müsait ve o günün fiyatı. Kalan adet dönmez.
@@ -289,9 +285,7 @@ export class DeliveryModule extends BaseModule {
       params: { from: string; to: string }
     ): Promise<ApiResponse<Array<{ date: string; available: boolean; price: number }>>> =>
       this.client.get(
-        `/api/public/reservations/${encodeURIComponent(typeCode)}/${encodeURIComponent(slug)}/calendar`,
-        { params }
-      ),
+        `/api/public/reservations/${encodeURIComponent(typeCode)}/${encodeURIComponent(slug)}/calendar`, params),
 
     /**
      * Rezervasyon talebi. Yalnız YAYIMLANMIŞ kayıtlar için çalışır.

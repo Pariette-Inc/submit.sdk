@@ -23,7 +23,7 @@ export class AiModule extends BaseModule {
 
   /** Harcama geçmişi — hangi işlem ne kadar kredi yaktı. */
   transactions(params: Record<string, unknown> = {}): Promise<ApiResponse<Array<Record<string, unknown>>>> {
-    return this.client.get('/api/ai/credits/transactions', { params })
+    return this.client.get('/api/ai/credits/transactions', params)
   }
 
   /** Kullanılabilir görsel üretim modelleri ve kredi maliyetleri. */

@@ -18,11 +18,11 @@ export class PlatformModule extends BaseModule {
 
   /** Trafik ve istek özeti (telemetriden). */
   analytics(params: Record<string, unknown> = {}): Promise<ApiResponse<Record<string, unknown>>> {
-    return this.client.get('/api/platform/my/analytics', { params })
+    return this.client.get('/api/platform/my/analytics', params)
   }
 
   payments(params: Record<string, unknown> = {}): Promise<ApiResponse<Array<Record<string, unknown>>>> {
-    return this.client.get('/api/platform/my/payments', { params })
+    return this.client.get('/api/platform/my/payments', params)
   }
 
   readonly receipts = {
@@ -48,7 +48,7 @@ export class PlatformModule extends BaseModule {
 
     /** Geçilebilecek planlar: her biri için şimdi ödenecek fark ve dönem fiyatı. */
     plans: (params: Record<string, unknown> = {}): Promise<ApiResponse<Record<string, unknown>>> =>
-      this.client.get('/api/platform/my/subscription/plans', { params }),
+      this.client.get('/api/platform/my/subscription/plans', params),
 
     changePlan: (packageId: number, period: 'monthly' | 'yearly'): Promise<ApiResponse<Record<string, unknown>>> =>
       this.client.post('/api/platform/my/subscription/change-plan', { package_id: packageId, period }),
@@ -113,7 +113,7 @@ export class PlatformModule extends BaseModule {
    * taşınan fiyata ya da sepette kalmış eski kayda güvenilmez.
    */
   plan(code: string, params: Record<string, unknown> = {}): Promise<ApiResponse<Record<string, unknown>>> {
-    return this.client.get(`/api/platform/plans/${encodeURIComponent(code)}`, { params })
+    return this.client.get(`/api/platform/plans/${encodeURIComponent(code)}`, params)
   }
 
   /**
@@ -171,7 +171,7 @@ export class PartnerModule extends BaseModule {
 
   readonly customers = {
     list: (params: Record<string, unknown> = {}): Promise<ApiResponse<Array<Record<string, unknown>>>> =>
-      this.client.get('/api/platform/partner/customers', { params }),
+      this.client.get('/api/platform/partner/customers', params),
 
     get: (id: number): Promise<ApiResponse<Record<string, unknown>>> =>
       this.client.get(`/api/platform/partner/customers/${id}`),

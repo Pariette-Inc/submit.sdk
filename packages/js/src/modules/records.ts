@@ -150,7 +150,7 @@ export class RecordModule extends BaseModule {
     typeCode: string,
     params: RecordListParams = {}
   ): Promise<ApiResponse<SubmitRecord[]> & { meta?: PageMeta }> {
-    return this.client.get(`/api/schema/records/${encodeURIComponent(typeCode)}`, { params })
+    return this.client.get(`/api/schema/records/${encodeURIComponent(typeCode)}`, params)
   }
 
   /** Tek kayıt — ilişkili kategoriler ve galeri alanları dahil döner. */
@@ -207,9 +207,7 @@ export class RecordModule extends BaseModule {
       meta?: PageMeta & { retention_days: number; can_purge: boolean }
     }
   > {
-    return this.client.get(`/api/schema/records/${encodeURIComponent(typeCode)}/trash`, {
-      params,
-    })
+    return this.client.get(`/api/schema/records/${encodeURIComponent(typeCode)}/trash`, params)
   }
 
   /**

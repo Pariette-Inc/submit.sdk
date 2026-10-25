@@ -194,7 +194,7 @@ export class ReservationModule extends BaseModule {
       }
     }
   > {
-    return this.client.get('/api/reservations', { params })
+    return this.client.get('/api/reservations', params)
   }
 
   get(id: number): Promise<ApiResponse<ReservationDetail>> {
@@ -245,9 +245,7 @@ export class ReservationModule extends BaseModule {
     from: string,
     to: string
   ): Promise<ApiResponse<ReservationCalendarDay[]> & { meta?: { max_days: number } }> {
-    return this.client.get('/api/reservations/calendar', {
-      params: { record_id: recordId, from, to },
-    })
+    return this.client.get('/api/reservations/calendar', { record_id: recordId, from, to })
   }
 
   /** "Bu tarihlerde açık mı, kaça?" — yazmadan önce kontrol. */
@@ -257,7 +255,7 @@ export class ReservationModule extends BaseModule {
     ends_at: string
     quantity?: number
   }): Promise<ApiResponse<ReservationCheckResult>> {
-    return this.client.get('/api/reservations/check', { params })
+    return this.client.get('/api/reservations/check', params)
   }
 
   /**
