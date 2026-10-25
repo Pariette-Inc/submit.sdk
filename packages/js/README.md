@@ -26,6 +26,16 @@ await sdk.records.create('blog', {
 })
 ```
 
+## Diller
+
+`locale` her yazımda kabul edilir: `tr`, `tr-TR`, `tr_TR`; `en`, `en-US`, `us`. API onu sitenin
+kayıtlı koduna çevirir (sitede `en` varsa `en-US` → `en`). Doğru kodlar ve bayraklar için katalog:
+
+```ts
+const { data } = await sdk.locales.catalog()      // [{ code: 'tr_TR', bcp47: 'tr-TR', short: 'tr', flag: '🇹🇷', native: 'Türkçe', aliases: [...] }, ...]
+await sdk.locales.add('en_US')                     // sitede "en" olarak kaydedilir, adı "English"
+```
+
 ## İki tür kimlik
 
 **Site token'ı** hangi siteye bağlandığınızı söyler; gizli değildir, her istekte

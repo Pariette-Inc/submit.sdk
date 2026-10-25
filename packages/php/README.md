@@ -87,3 +87,13 @@ kimlik gereksinimleri ve dört dilde çalışan örnekler.
 ## Lisans
 
 MIT
+
+## Diller
+
+`locale` her yazımda kabul edilir: `tr`, `tr-TR`, `tr_TR`; `en`, `en-US`, `us`. API onu sitenin
+kayıtlı koduna çevirir. Doğru kodlar ve bayraklar için katalog:
+
+```php
+$catalog = $sdk->locales->catalog();   // code tr_TR, bcp47 tr-TR, short tr, flag 🇹🇷, native Türkçe, aliases
+$sdk->locales->add('en_US');           // sitede "en" olarak kaydedilir
+```

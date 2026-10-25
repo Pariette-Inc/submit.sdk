@@ -2,12 +2,12 @@
  "$comment": "submit.api'nin gerçek rota tablosundan üretildi (php artisan route:list). Elle düzenlemeyin — `pnpm spec:generate` ile yenileyin.",
  "source": {
   "repo": "submit.api",
-  "branch": "test",
-  "commit": "f86dda8"
+  "branch": "feat/pariette-migration-users",
+  "commit": "b0b31fb"
  },
  "counts": {
-  "total": 488,
-  "live": 288,
+  "total": 509,
+  "live": 309,
   "retired": 200
  },
  "authLegend": {
@@ -85,6 +85,15 @@
    "status": "retired",
    "httpStatus": 410,
    "reason": "PANEL_RETIRED — eski sahip-yönetim paneli (karar 2026-07-30). Yerine: schema/records, menus, platform/my, commerce."
+  },
+  {
+   "method": "POST",
+   "path": "/api/agent/tools",
+   "controller": "Support\\AgentToolController",
+   "auth": [],
+   "moduleGate": null,
+   "throttle": "300,1",
+   "status": "live"
   },
   {
    "method": "POST",
@@ -2589,7 +2598,7 @@
    "controller": "PaymentsController@stripeWebhook",
    "auth": [],
    "moduleGate": null,
-   "throttle": null,
+   "throttle": "300,1",
    "status": "live"
   },
   {
@@ -2611,6 +2620,89 @@
    "status": "live"
   },
   {
+   "method": "POST",
+   "path": "/api/platform/checkout/cancel",
+   "controller": "Platform\\SelfServeCheckoutController@cancel",
+   "auth": [
+    "envToken",
+    "jwt"
+   ],
+   "moduleGate": null,
+   "throttle": "10,1",
+   "status": "live"
+  },
+  {
+   "method": "POST",
+   "path": "/api/platform/checkout/free",
+   "controller": "Platform\\SelfServeCheckoutController@free",
+   "auth": [
+    "envToken",
+    "jwt"
+   ],
+   "moduleGate": null,
+   "throttle": "5,1",
+   "status": "live"
+  },
+  {
+   "method": "GET",
+   "path": "/api/platform/checkout/one-time/{linkToken}",
+   "controller": "Platform\\SelfServeCheckoutController@oneTime",
+   "auth": [
+    "envToken",
+    "jwt"
+   ],
+   "moduleGate": null,
+   "throttle": "60,1",
+   "status": "live"
+  },
+  {
+   "method": "GET",
+   "path": "/api/platform/checkout/quote",
+   "controller": "Platform\\SelfServeCheckoutController@quote",
+   "auth": [
+    "envToken"
+   ],
+   "moduleGate": null,
+   "throttle": "60,1",
+   "status": "live"
+  },
+  {
+   "method": "POST",
+   "path": "/api/platform/checkout/session",
+   "controller": "Platform\\SelfServeCheckoutController@store",
+   "auth": [
+    "envToken",
+    "jwt"
+   ],
+   "moduleGate": null,
+   "throttle": "10,1",
+   "status": "live"
+  },
+  {
+   "method": "GET",
+   "path": "/api/platform/checkout/session/{id}",
+   "controller": "Platform\\SelfServeCheckoutController@show",
+   "auth": [
+    "envToken",
+    "jwt"
+   ],
+   "moduleGate": null,
+   "throttle": "60,1",
+   "status": "live"
+  },
+  {
+   "method": "POST",
+   "path": "/api/platform/checkout/session/{id}/timeout",
+   "controller": "Platform\\SelfServeCheckoutController@timeout",
+   "auth": [
+    "envToken",
+    "jwt"
+   ],
+   "moduleGate": null,
+   "throttle": "5,1",
+   "status": "live"
+  },
+  {
    "method": "GET",
    "path": "/api/platform/my/analytics",
    "controller": "Platform\\CustomerPlatformController@analytics",
@@ -2621,6 +2713,45 @@
    ],
    "moduleGate": null,
    "throttle": null,
+   "status": "live"
+  },
+  {
+   "method": "POST",
+   "path": "/api/platform/my/billing/portal",
+   "controller": "Platform\\BillingPortalController",
+   "auth": [
+    "envToken",
+    "jwt",
+    "envMember"
+   ],
+   "moduleGate": null,
+   "throttle": "10,1",
+   "status": "live"
+  },
+  {
+   "method": "GET",
+   "path": "/api/platform/my/checkout/intent",
+   "controller": "Platform\\PanelCheckoutController@show",
+   "auth": [
+    "envToken",
+    "jwt",
+    "envMember"
+   ],
+   "moduleGate": null,
+   "throttle": "60,1",
+   "status": "live"
+  },
+  {
+   "method": "POST",
+   "path": "/api/platform/my/checkout/intent",
+   "controller": "Platform\\PanelCheckoutController@store",
+   "auth": [
+    "envToken",
+    "jwt",
+    "envMember"
+   ],
+   "moduleGate": null,
+   "throttle": "10,1",
    "status": "live"
   },
   {
@@ -2768,6 +2899,71 @@
   },
   {
    "method": "GET",
+   "path": "/api/platform/my/onboarding",
+   "controller": "Platform\\SelfServeOnboardingController@show",
+   "auth": [
+    "envToken",
+    "jwt",
+    "envMember"
+   ],
+   "moduleGate": null,
+   "throttle": null,
+   "status": "live"
+  },
+  {
+   "method": "PUT",
+   "path": "/api/platform/my/onboarding/company",
+   "controller": "Platform\\SelfServeOnboardingController@updateCompany",
+   "auth": [
+    "envToken",
+    "jwt",
+    "envMember"
+   ],
+   "moduleGate": null,
+   "throttle": null,
+   "status": "live"
+  },
+  {
+   "method": "POST",
+   "path": "/api/platform/my/onboarding/complete",
+   "controller": "Platform\\SelfServeOnboardingController@complete",
+   "auth": [
+    "envToken",
+    "jwt",
+    "envMember"
+   ],
+   "moduleGate": null,
+   "throttle": null,
+   "status": "live"
+  },
+  {
+   "method": "POST",
+   "path": "/api/platform/my/onboarding/start",
+   "controller": "Platform\\SelfServeOnboardingController@start",
+   "auth": [
+    "envToken",
+    "jwt",
+    "envMember"
+   ],
+   "moduleGate": null,
+   "throttle": "5,1",
+   "status": "live"
+  },
+  {
+   "method": "PUT",
+   "path": "/api/platform/my/onboarding/team",
+   "controller": "Platform\\SelfServeOnboardingController@team",
+   "auth": [
+    "envToken",
+    "jwt",
+    "envMember"
+   ],
+   "moduleGate": null,
+   "throttle": "10,1",
+   "status": "live"
+  },
+  {
+   "method": "GET",
    "path": "/api/platform/my/overview",
    "controller": "Platform\\CustomerPlatformController@overview",
    "auth": [
@@ -2897,6 +3093,19 @@
    "status": "live"
   },
   {
+   "method": "GET",
+   "path": "/api/platform/my/signalbird/communications",
+   "controller": "Platform\\SignalbirdController@communications",
+   "auth": [
+    "envToken",
+    "jwt",
+    "envMember"
+   ],
+   "moduleGate": null,
+   "throttle": null,
+   "status": "live"
+  },
+  {
    "method": "POST",
    "path": "/api/platform/my/signalbird/embed",
    "controller": "Platform\\SignalbirdController@embed",
@@ -2907,6 +3116,32 @@
    ],
    "moduleGate": null,
    "throttle": "60,1",
+   "status": "live"
+  },
+  {
+   "method": "GET",
+   "path": "/api/platform/my/signalbird/integration",
+   "controller": "Platform\\SignalbirdController@integration",
+   "auth": [
+    "envToken",
+    "jwt",
+    "envMember"
+   ],
+   "moduleGate": null,
+   "throttle": null,
+   "status": "live"
+  },
+  {
+   "method": "POST",
+   "path": "/api/platform/my/signalbird/rotate-key",
+   "controller": "Platform\\SignalbirdController@rotateKey",
+   "auth": [
+    "envToken",
+    "jwt",
+    "envMember"
+   ],
+   "moduleGate": null,
+   "throttle": null,
    "status": "live"
   },
   {
@@ -2933,6 +3168,19 @@
    ],
    "moduleGate": null,
    "throttle": null,
+   "status": "live"
+  },
+  {
+   "method": "POST",
+   "path": "/api/platform/my/sites",
+   "controller": "Platform\\SelfServeOnboardingController@storeSite",
+   "auth": [
+    "envToken",
+    "jwt",
+    "envMember"
+   ],
+   "moduleGate": null,
+   "throttle": "10,1",
    "status": "live"
   },
   {
@@ -3903,7 +4151,7 @@
     "envToken"
    ],
    "moduleGate": null,
-   "throttle": null,
+   "throttle": "client-error",
    "status": "live"
   },
   {
@@ -4601,6 +4849,19 @@
    "method": "DELETE",
    "path": "/api/schema/locales/{code}",
    "controller": "Schema\\SiteLocaleController@destroy",
+   "auth": [
+    "envToken",
+    "jwt",
+    "envMember"
+   ],
+   "moduleGate": null,
+   "throttle": null,
+   "status": "live"
+  },
+  {
+   "method": "GET",
+   "path": "/api/schema/locales/catalog",
+   "controller": "Schema\\SiteLocaleController@catalog",
    "auth": [
     "envToken",
     "jwt",
@@ -5409,7 +5670,7 @@
     "envToken",
     "jwt"
    ],
-   "moduleGate": null,
+   "moduleGate": "ecommerce",
    "throttle": null,
    "status": "live"
   },
@@ -5421,7 +5682,7 @@
     "envToken",
     "jwt"
    ],
-   "moduleGate": null,
+   "moduleGate": "ecommerce",
    "throttle": null,
    "status": "live"
   },
@@ -5433,7 +5694,7 @@
     "envToken",
     "jwt"
    ],
-   "moduleGate": null,
+   "moduleGate": "ecommerce",
    "throttle": null,
    "status": "live"
   },
@@ -5445,7 +5706,7 @@
     "envToken",
     "jwt"
    ],
-   "moduleGate": null,
+   "moduleGate": "ecommerce",
    "throttle": null,
    "status": "live"
   },
@@ -5596,7 +5857,7 @@
    "auth": [
     "envToken"
    ],
-   "moduleGate": null,
+   "moduleGate": "ecommerce",
    "throttle": null,
    "status": "live"
   },
@@ -5607,7 +5868,7 @@
    "auth": [
     "envToken"
    ],
-   "moduleGate": null,
+   "moduleGate": "ecommerce",
    "throttle": null,
    "status": "live"
   },
@@ -5618,7 +5879,7 @@
    "auth": [
     "envToken"
    ],
-   "moduleGate": null,
+   "moduleGate": "ecommerce",
    "throttle": null,
    "status": "live"
   },
@@ -5629,7 +5890,7 @@
    "auth": [
     "envToken"
    ],
-   "moduleGate": null,
+   "moduleGate": "ecommerce",
    "throttle": null,
    "status": "live"
   },
@@ -5640,7 +5901,7 @@
    "auth": [
     "envToken"
    ],
-   "moduleGate": null,
+   "moduleGate": "ecommerce",
    "throttle": null,
    "status": "live"
   },
@@ -5651,7 +5912,7 @@
    "auth": [
     "envToken"
    ],
-   "moduleGate": null,
+   "moduleGate": "ecommerce",
    "throttle": null,
    "status": "live"
   },
@@ -5662,7 +5923,7 @@
    "auth": [
     "envToken"
    ],
-   "moduleGate": null,
+   "moduleGate": "ecommerce",
    "throttle": null,
    "status": "live"
   },
@@ -5673,7 +5934,7 @@
    "auth": [
     "envToken"
    ],
-   "moduleGate": null,
+   "moduleGate": "ecommerce",
    "throttle": null,
    "status": "live"
   },
@@ -5684,7 +5945,7 @@
    "auth": [
     "envToken"
    ],
-   "moduleGate": null,
+   "moduleGate": "ecommerce",
    "throttle": null,
    "status": "live"
   },
@@ -6024,11 +6285,13 @@
   },
   {
    "method": "GET",
-   "path": "/api/test-suspicious",
-   "controller": "Closure",
-   "auth": [],
+   "path": "/api/support/chat",
+   "controller": "Support\\ChatConfigController",
+   "auth": [
+    "envToken"
+   ],
    "moduleGate": null,
-   "throttle": null,
+   "throttle": "60,1",
    "status": "live"
   },
   {
@@ -6078,7 +6341,7 @@
     "envToken"
    ],
    "moduleGate": null,
-   "throttle": "120,1",
+   "throttle": "journey-beacon",
    "status": "live"
   },
   {

@@ -63,6 +63,8 @@ export type {
   ContentType,
   ContentTypePayload,
   RecordCategory,
+  SiteLocale,
+  CatalogLocale,
 } from './modules/content-types'
 
 export { MenuModule } from './modules/menus'

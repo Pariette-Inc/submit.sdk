@@ -71,3 +71,7 @@ kimlik gereksinimleri ve dört dilde çalışan örnekler.
 ## Lisans
 
 MIT
+
+## Diller
+
+`locale` her yazımda kabul edilir (`tr`, `tr-TR`, `tr_TR`, `us`); API sitenin kayıtlı koduna çevirir. `locales.catalog()` dünya dillerini doğru kod (`tr_TR`), kısa kod, yerel ad ve bayrakla verir; `locales.add(code:)` her yazımı kabul eder.
