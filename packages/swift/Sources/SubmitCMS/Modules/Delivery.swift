@@ -16,6 +16,8 @@ public struct DeliveryModule: Sendable {
         try await client.get("/api/public/records/\(esc(typeCode))", query: params, as: [JSONValue].self)
     }
 
+    /// Slug ile tek kayıt; her dilin kendi adresi var, `locale` verin. Adres o dilde
+    /// yoksa ana dil adresi (`canonical_slug`) olarak da aranır ve o dilin çevirisi döner.
     public func record(_ typeCode: String, slug: String, params: [String: Any] = [:]) async throws -> SubmitResponse<JSONValue> {
         try await client.get("/api/public/records/\(esc(typeCode))/item/\(esc(slug))", query: params)
     }
