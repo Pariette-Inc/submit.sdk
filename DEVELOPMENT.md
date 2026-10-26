@@ -3,6 +3,12 @@
 > Her ekran/servis geliştirmesinden sonra güncellenir. En yeni bölüm en üstte.
 > Format: development-log skill'i (Claude) tarafından otomatik bakılır.
 
+## 2026-10-26 — GET sorgu parametreleri ve dil başına adres
+
+- **Hata (JS):** 21 modül çağrısı sorgu nesnesini `{ params }` diye sarıyordu; `client.get()` ikinci argümanı zaten sorgu olduğu için istek `params[per_page]=…` gidiyor, `per_page`, `locale`, `category`, `filter`, `sort` sunucuda yok sayılıyordu (`delivery.records`, `records.list`, sipariş, ödeme, rezervasyon, platform listeleri). Düzeltildi; kontrat testine "GET çağrıları sorgu parametrelerini sarmaz" eklendi. PHP, Swift, Kotlin paketlerinde hata yok.
+- **Belge:** `delivery.record` (dört paket) — her dilin kendi adresi var; adres o dilde yoksa `canonical_slug` olarak aranır (submit.api 2026-10-26).
+- Sürüm: patch (kırıcı değişiklik yok).
+
 ## 2026-10-25 — Dil kataloğu: `locales.catalog()`, takma kodlar
 
 - Yeni uç: `GET /api/schema/locales/catalog` → `locales.catalog()` (js, php, swift, kotlin). Dünya dilleri: doğru kod (`tr_TR`), web biçimi (`tr-TR`), kısa kod (`tr`), ad, yerel ad, bayrak, kabul edilen yazımlar.
