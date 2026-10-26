@@ -2,13 +2,13 @@
  "$comment": "SDK kaynağından üretildi (scripts/generate-reference.mjs). Elle düzenlemeyin — kaynak değişince yeniden üretin.",
  "source": {
   "repo": "submit.api",
-  "branch": "test",
-  "commit": "502a041"
+  "branch": "feat/pariette-migration-users",
+  "commit": "b0b31fb"
  },
  "counts": {
   "modules": 23,
-  "methods": 227,
-  "liveEndpoints": 275
+  "methods": 228,
+  "liveEndpoints": 309
  },
  "packages": {
   "js": {
@@ -2036,9 +2036,9 @@
      "moduleGate": null,
      "throttle": null,
      "status": "live",
-     "summary": "Slug ile tek kayıt. Aynı slug birden çok dilde varsa `locale` verin.",
-     "body": "",
-     "example": "",
+     "summary": "Slug ile tek kayıt. Her dilin kendi adresi vardır (SUBMIT-6); `locale` verin.",
+     "body": "Adres o dilde yoksa ana dil adresi (`canonical_slug`) olarak da aranır ve o\ndilin çevirisi döner: ortak adresle paylaşılmış eski bağlantılar kırılmaz.\nYanıttaki `slug` dilin kendi adresidir; farklıysa sayfayı oraya yönlendirin.",
+     "example": "const { data } = await sdk.delivery.record('page', 'hakkimizda', { locale: 'en' })\n  // data.slug === 'about-us', data.canonical_slug === 'hakkimizda'",
      "names": {
       "js": "record",
       "php": "record",
@@ -2994,14 +2994,14 @@
    "class": "LocaleModule",
    "file": "content-types.ts",
    "summary": "Sitenin dilleri.",
-   "body": "Bir dil burada tanımlı değilse o dilde kayıt yazılamaz (422) — bu, panelde\nhiç görünmeyen \"hayalet\" çevirileri engeller.",
+   "body": "Bir dil burada tanımlı değilse o dilde kayıt yazılamaz (422) — bu, panelde\nhiç görünmeyen \"hayalet\" çevirileri engeller. Kod her yazımda kabul edilir\n(tr, tr-TR, tr_TR, us…); API kısa koda çevirir.",
    "example": "",
    "methods": [
     {
      "name": "list",
      "group": null,
      "params": [],
-     "returns": "Promise<ApiResponse<Array<",
+     "returns": "Promise<ApiResponse<",
      "method": "GET",
      "path": "/api/schema/locales",
      "specPath": "/api/schema/locales",
@@ -3024,6 +3024,32 @@
      }
     },
     {
+     "name": "catalog",
+     "group": null,
+     "params": [],
+     "returns": "Promise<ApiResponse<",
+     "method": "GET",
+     "path": "/api/schema/locales/catalog",
+     "specPath": "/api/schema/locales/catalog",
+     "auth": [
+      "envToken",
+      "jwt",
+      "envMember"
+     ],
+     "moduleGate": null,
+     "throttle": null,
+     "status": "live",
+     "summary": "Dünya dilleri kataloğu (doğru kod, kısa kod, ad, yerel ad, bayrak).",
+     "body": "",
+     "example": "",
+     "names": {
+      "js": "catalog",
+      "php": "catalog",
+      "swift": "catalog",
+      "kotlin": "catalog"
+     }
+    },
+    {
      "name": "add",
      "group": null,
      "params": [
@@ -3035,12 +3061,12 @@
       },
       {
        "name": "payload",
-       "type": "Record<string, unknown>",
+       "type": "{ label?: string; image?: string }",
        "optional": true,
        "default": null
       }
      ],
-     "returns": "Promise<ApiResponse<null>>",
+     "returns": "Promise<ApiResponse<",
      "method": "POST",
      "path": "/api/schema/locales",
      "specPath": "/api/schema/locales",
@@ -3052,7 +3078,7 @@
      "moduleGate": null,
      "throttle": null,
      "status": "live",
-     "summary": "",
+     "summary": "Dil ekler. `label` verilmezse dilin kendi adı kullanılır.",
      "body": "",
      "example": "",
      "names": {
@@ -5802,7 +5828,7 @@
       "js": "delete",
       "php": null,
       "swift": null,
-      "kotlin": "delete"
+      "kotlin": null
      }
     },
     {
@@ -7122,7 +7148,7 @@
      "auth": [
       "envToken"
      ],
-     "moduleGate": null,
+     "moduleGate": "ecommerce",
      "throttle": null,
      "status": "live",
      "summary": "",
@@ -7153,7 +7179,7 @@
      "auth": [
       "envToken"
      ],
-     "moduleGate": null,
+     "moduleGate": "ecommerce",
      "throttle": null,
      "status": "live",
      "summary": "",
@@ -7190,7 +7216,7 @@
      "auth": [
       "envToken"
      ],
-     "moduleGate": null,
+     "moduleGate": "ecommerce",
      "throttle": null,
      "status": "live",
      "summary": "",
@@ -7221,7 +7247,7 @@
      "auth": [
       "envToken"
      ],
-     "moduleGate": null,
+     "moduleGate": "ecommerce",
      "throttle": null,
      "status": "live",
      "summary": "",
@@ -7245,7 +7271,7 @@
      "auth": [
       "envToken"
      ],
-     "moduleGate": null,
+     "moduleGate": "ecommerce",
      "throttle": null,
      "status": "live",
      "summary": "",
@@ -7276,7 +7302,7 @@
      "auth": [
       "envToken"
      ],
-     "moduleGate": null,
+     "moduleGate": "ecommerce",
      "throttle": null,
      "status": "live",
      "summary": "",
@@ -7300,7 +7326,7 @@
      "auth": [
       "envToken"
      ],
-     "moduleGate": null,
+     "moduleGate": "ecommerce",
      "throttle": null,
      "status": "live",
      "summary": "Ödeme ve teslimat seçenekleri — checkout formunu doldurmadan önce.",
@@ -7331,7 +7357,7 @@
      "auth": [
       "envToken"
      ],
-     "moduleGate": null,
+     "moduleGate": "ecommerce",
      "throttle": null,
      "status": "live",
      "summary": "Kupon uygular ve yeni toplamı döner.",
@@ -7355,7 +7381,7 @@
      "auth": [
       "envToken"
      ],
-     "moduleGate": null,
+     "moduleGate": "ecommerce",
      "throttle": null,
      "status": "live",
      "summary": "",
@@ -7619,7 +7645,7 @@
       "envToken"
      ],
      "moduleGate": null,
-     "throttle": "120,1",
+     "throttle": "journey-beacon",
      "status": "live",
      "summary": "Ziyaretçi hareketi kaydeder (sayfa görüntüleme, tıklama, sepete ekleme…). Sayfa kapanışında göndermek için `navigator.sendBeacon` tercih edin.",
      "body": "",
@@ -7650,7 +7676,7 @@
       "envToken"
      ],
      "moduleGate": null,
-     "throttle": null,
+     "throttle": "client-error",
      "status": "live",
      "summary": "İstemci tarafı JS hatasını bildirir.",
      "body": "",
