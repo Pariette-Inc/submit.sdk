@@ -283,3 +283,19 @@ test('kapsam raporu', () => {
   // Kapsam bilgilendirmedir; bilinçli olarak dışarıda bıraktığımız uçlar var
   // (cron, webhook alıcıları, OAuth yönlendirmeleri) — bu yüzden assert yok.
 })
+
+/**
+ * `client.get(url, params)` ikinci argümanı DOĞRUDAN sorgu parametresidir.
+ * `{ params }` ile sarmak sorguyu `params[per_page]=…` yapar; sunucu görmez
+ * (2026-10-26: delivery.records `per_page` ve `locale` yok sayılıyordu).
+ */
+test('GET çağrıları sorgu parametrelerini sarmaz', () => {
+  const offenders = []
+  for (const file of reachableFiles(join(SRC, 'index.ts'))) {
+    const text = readFileSync(file, 'utf8')
+    for (const m of text.matchAll(/client\.get\([^;]*?,\s*\{\s*params\b/gs)) {
+      offenders.push(`${file.replace(ROOT + '/', '')}: ${m[0].split('\n')[0]}`)
+    }
+  }
+  assert.deepEqual(offenders, [], `Sarılmış params:\n${offenders.join('\n')}`)
+})

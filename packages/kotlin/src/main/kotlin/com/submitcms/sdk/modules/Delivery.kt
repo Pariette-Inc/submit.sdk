@@ -19,6 +19,10 @@ class Delivery(private val client: SubmitClient) {
     suspend fun records(typeCode: String, params: Map<String, Any?> = emptyMap()): JsonObject =
         client.get("/api/public/records/${esc(typeCode)}", params)
 
+    /**
+     * Slug ile tek kayıt; her dilin kendi adresi var, `locale` verin. Adres o dilde
+     * yoksa ana dil adresi (`canonical_slug`) olarak da aranır ve o dilin çevirisi döner.
+     */
     suspend fun record(typeCode: String, slug: String, params: Map<String, Any?> = emptyMap()): JsonObject =
         client.get("/api/public/records/${esc(typeCode)}/item/${esc(slug)}", params)
 

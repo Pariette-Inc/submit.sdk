@@ -126,7 +126,7 @@ export interface Order {
  */
 export class OrderModule extends BaseModule {
   list(params: Record<string, unknown> = {}): Promise<ApiResponse<Order[]>> {
-    return this.client.get('/api/commerce/orders', { params })
+    return this.client.get('/api/commerce/orders', params)
   }
 
   get(id: number): Promise<ApiResponse<Order>> {
@@ -148,7 +148,7 @@ export class OrderModule extends BaseModule {
 
   /** Satış raporu — ciro, adet, dönem kırılımı. */
   report(params: Record<string, unknown> = {}): Promise<ApiResponse<Record<string, unknown>>> {
-    return this.client.get('/api/commerce/orders/report', { params })
+    return this.client.get('/api/commerce/orders/report', params)
   }
 
   readonly invoice = {
@@ -173,7 +173,7 @@ export class OrderModule extends BaseModule {
 /** Müşterinin kendi siparişleri — son kullanıcı hesabı için. */
 export class CustomerOrderModule extends BaseModule {
   list(params: Record<string, unknown> = {}): Promise<ApiResponse<Order[]>> {
-    return this.client.get('/api/my-orders', { params })
+    return this.client.get('/api/my-orders', params)
   }
 
   get(id: number): Promise<ApiResponse<Order>> {
@@ -231,7 +231,7 @@ export class AddressModule extends BaseModule {
 /** Ödemeler. Stripe/Tami webhook uçları sunucu-sunucu olduğu için SDK'da yoktur. */
 export class PaymentModule extends BaseModule {
   list(params: Record<string, unknown> = {}): Promise<ApiResponse<Array<Record<string, unknown>>>> {
-    return this.client.get('/api/payments', { params })
+    return this.client.get('/api/payments', params)
   }
 
   get(id: number): Promise<ApiResponse<Record<string, unknown>>> {

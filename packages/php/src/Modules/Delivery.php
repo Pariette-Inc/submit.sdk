@@ -23,7 +23,12 @@ final class Delivery extends Module
         return $this->client->get('/api/public/records/' . $this->seg($typeCode), $params);
     }
 
-    /** @param array<string,mixed> $params */
+    /**
+     * Slug ile tek kayıt; her dilin kendi adresi var, `locale` verin. Adres o dilde
+     * yoksa ana dil adresi (`canonical_slug`) olarak da aranır ve o dilin çevirisi döner.
+     *
+     * @param array<string,mixed> $params
+     */
     public function record(string $typeCode, string $slug, array $params = []): mixed
     {
         return $this->client->get('/api/public/records/' . $this->seg($typeCode) . '/item/' . $this->seg($slug), $params);
