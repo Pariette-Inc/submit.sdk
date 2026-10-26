@@ -61,7 +61,17 @@ export class DeliveryModule extends BaseModule {
     return this.client.get(`/api/public/records/${encodeURIComponent(typeCode)}`, params)
   }
 
-  /** Slug ile tek kayıt. Aynı slug birden çok dilde varsa `locale` verin. */
+  /**
+   * Slug ile tek kayıt. Her dilin kendi adresi vardır (SUBMIT-6); `locale` verin.
+   *
+   * Adres o dilde yoksa ana dil adresi (`canonical_slug`) olarak da aranır ve o
+   * dilin çevirisi döner: ortak adresle paylaşılmış eski bağlantılar kırılmaz.
+   * Yanıttaki `slug` dilin kendi adresidir; farklıysa sayfayı oraya yönlendirin.
+   *
+   * @example
+   *   const { data } = await sdk.delivery.record('page', 'hakkimizda', { locale: 'en' })
+   *   // data.slug === 'about-us', data.canonical_slug === 'hakkimizda'
+   */
   record(typeCode: string, slug: string, params: { locale?: string } = {}): Promise<ApiResponse<SubmitRecord>> {
     return this.client.get(
       `/api/public/records/${encodeURIComponent(typeCode)}/item/${encodeURIComponent(slug)}`, params)
