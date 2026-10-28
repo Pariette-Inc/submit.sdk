@@ -2,13 +2,13 @@
  "$comment": "SDK kaynağından üretildi (scripts/generate-reference.mjs). Elle düzenlemeyin — kaynak değişince yeniden üretin.",
  "source": {
   "repo": "submit.api",
-  "branch": "feat/pariette-migration-users",
-  "commit": "b0b31fb"
+  "branch": "feat/public-batch",
+  "commit": "41f9e22"
  },
  "counts": {
   "modules": 23,
-  "methods": 228,
-  "liveEndpoints": 309
+  "methods": 229,
+  "liveEndpoints": 310
  },
  "packages": {
   "js": {
@@ -2296,6 +2296,37 @@
       "php": "environment",
       "swift": "environment",
       "kotlin": "environment"
+     }
+    },
+    {
+     "name": "batch",
+     "group": null,
+     "params": [
+      {
+       "name": "items",
+       "type": "BatchItem[]",
+       "optional": false,
+       "default": null
+      }
+     ],
+     "returns": "Promise<ApiResponse<BatchItemResult[]>>",
+     "method": "POST",
+     "path": "/api/public/batch",
+     "specPath": "/api/public/batch",
+     "auth": [
+      "envToken"
+     ],
+     "moduleGate": null,
+     "throttle": null,
+     "status": "live",
+     "summary": "Birden çok public okumayı tek istekte gönderir (`POST /api/public/batch`, en fazla 25 parça).",
+     "body": "Çoğu durumda gerek yok: SDK aynı anda yapılan `records`, `record`,\n`environment`… çağrılarını kendiliğinden gruplar (`batch` ayarı).\nHer parça ayrı gösterim sayılır; hata parça başınadır, istisna atılmaz.",
+     "example": "const { data } = await sdk.delivery.batch([\n    { id: 'footer', path: 'records/page/item/footer', query: { locale: 'tr' } },\n    { id: 'news', path: 'records/blog', query: { per_page: 3 } },\n  ])\n  const footer = data.find((r) => r.id === 'footer')",
+     "names": {
+      "js": "batch",
+      "php": "batch",
+      "swift": "batch",
+      "kotlin": "batch"
      }
     },
     {
