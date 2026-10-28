@@ -49,6 +49,16 @@ class Delivery(private val client: SubmitClient) {
 
     suspend fun environment(token: String): JsonObject = client.get("/api/public/environment/${esc(token)}")
 
+    /**
+     * Birden çok public okumayı tek istekte gönderir (en fazla 25 parça).
+     *
+     * Her parça: `id` (isteğe bağlı), `path` (ör. `records/page/item/footer`), `query`.
+     * Yanıtta her parça `{ id, status, body }` olarak döner; hata parça başınadır.
+     * Her parça ayrı gösterim sayılır.
+     */
+    suspend fun batch(items: List<Map<String, Any?>>): JsonObject =
+        client.post("/api/public/batch", mapOf("requests" to items))
+
     suspend fun navigation(slug: String): JsonObject = client.get("/api/public/navigation/${esc(slug)}")
 
     suspend fun banners(): JsonObject = client.get("/api/public/banners")

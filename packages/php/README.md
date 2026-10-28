@@ -69,6 +69,17 @@ try {
 }
 ```
 
+## Toplu okuma
+
+Birden çok public okumayı tek istekte gönderin (en çok 25 parça). Her parça `{ id, status, body }` olarak döner ve ayrı gösterim sayılır.
+
+```php
+$result = $sdk->delivery->batch([
+    ['id' => 'footer', 'path' => 'records/page/item/footer'],
+    ['id' => 'news',   'path' => 'records/blog', 'query' => ['per_page' => 3]],
+]);
+```
+
 ## Neler dahil değil
 
 SDK yalnızca **canlı** uçları çağırır. submit.api'deki 507 endpoint'in 201'i

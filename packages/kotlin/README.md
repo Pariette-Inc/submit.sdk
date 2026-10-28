@@ -57,6 +57,17 @@ try {
 
 kotlinx.serialization kuralları kütüphaneyle birlikte gelir; ek yapılandırma gerekmez.
 
+## Toplu okuma
+
+Birden çok public okumayı tek istekte gönderin (en çok 25 parça). Her parça `{ id, status, body }` olarak döner ve ayrı gösterim sayılır.
+
+```kotlin
+val result = sdk.delivery.batch(listOf(
+    mapOf("id" to "footer", "path" to "records/page/item/footer"),
+    mapOf("id" to "news", "path" to "records/blog", "query" to mapOf("per_page" to 3)),
+))
+```
+
 ## Neler dahil değil
 
 SDK yalnızca **canlı** uçları çağırır. submit.api'deki 507 endpoint'in 201'i
