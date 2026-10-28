@@ -3,6 +3,16 @@
 > Her ekran/servis geliştirmesinden sonra güncellenir. En yeni bölüm en üstte.
 > Format: development-log skill'i (Claude) tarafından otomatik bakılır.
 
+## 2026-10-28 — Toplu okuma: aynı anda yapılan public GET'ler tek istekte
+
+- **JS (otomatik):** `/api/public/*` GET'leri kısa pencerede birikir, `POST /api/public/batch` ile en fazla 25'lik paketlerde gider. Ayar `batch: { wait: 5, max: 25 } | false` (varsayılan açık). Her çağrı kendi sonucunu alır; parça hatası `SubmitError` (ör. 404) olarak yalnız o çağrıya düşer. Tek çağrı, `signal` verilen çağrı ve mock modu gruplanmaz. API toplu ucu tanımazsa (404/405/410) istemci tek isteklere döner.
+- **Yeni metot:** `delivery.batch(items)` (js, php, swift, kotlin) — elle toplu okuma, yanıt `{ id, status, body }[]`.
+- **Yeni tipler (js):** `BatchConfig`, `BatchItem`, `BatchItemResult`.
+- **Test:** `packages/js/test/batch.test.mjs` (6 test, `npm test`: derler + `node --test`). `pnpm test:contract` 15/15.
+- `spec/endpoints.json` submit.api `feat/public-batch`'ten yeniden üretildi (+1 uç).
+- Kotlin derlenmedi (makinede gradle yok); Swift `swift build` geçti, PHP `php -l` geçti.
+- Sürüm: minor (yeni özellik, kırıcı değişiklik yok). Sahibi yayınlar; API önce yayına çıkmalı.
+
 ## 2026-10-26 — GET sorgu parametreleri ve dil başına adres
 
 - **Hata (JS):** 21 modül çağrısı sorgu nesnesini `{ params }` diye sarıyordu; `client.get()` ikinci argümanı zaten sorgu olduğu için istek `params[per_page]=…` gidiyor, `per_page`, `locale`, `category`, `filter`, `sort` sunucuda yok sayılıyordu (`delivery.records`, `records.list`, sipariş, ödeme, rezervasyon, platform listeleri). Düzeltildi; kontrat testine "GET çağrıları sorgu parametrelerini sarmaz" eklendi. PHP, Swift, Kotlin paketlerinde hata yok.

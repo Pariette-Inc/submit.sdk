@@ -113,6 +113,59 @@ export interface SubmitClientConfig extends SubmitConfig {
    *   await sdk.products.list()  // → fixture döner, network'e gitmez
    */
   mock?: boolean
+  /**
+   * Toplu okuma — aynı anda yapılan public GET'leri tek istekte gönderir.
+   *
+   * Sitede 10 dosyada 50 çağrı olsa da ziyaretçi 50 istek atmaz: kısa bir
+   * pencerede biriken `/api/public/*` GET'leri `POST /api/public/batch` ile
+   * en fazla `max` parçalık paketlerde gider. Her çağrı kendi sonucunu alır.
+   * Varsayılan açık (`wait: 5`, `max: 25`); `false` kapatır.
+   *
+   * @example
+   *   new SubmitCms({ mode: 'production', token: 't', batch: { wait: 10 } })
+   */
+  batch?: Partial<BatchConfig> | false
+}
+
+/** Toplu okuma ayarları. */
+export interface BatchConfig {
+  /** Çağrıların biriktiği pencere (ms, varsayılan: 5). 0 = aynı turdaki çağrılar. */
+  wait: number
+  /** Bir toplu istekteki en fazla parça (varsayılan ve API sınırı: 25). */
+  max: number
+}
+
+const DEFAULT_BATCH: BatchConfig = { wait: 5, max: 25 }
+
+/** API'nin bir toplu istekte kabul ettiği en fazla parça. */
+const MAX_BATCH_ITEMS = 25
+
+const BATCH_PATH = '/api/public/batch'
+
+/** Toplanabilen yolların öneki. Ayrı dize değil: kontrat testi her '/api/…' dizesini rota sayar. */
+const PUBLIC_PREFIX = BATCH_PATH.slice(0, -'batch'.length)
+
+/** Toplu yanıtta bir parçanın sonucu: tek isteğin durum kodu ve gövdesi. */
+export interface BatchItemResult<T = unknown> {
+  id: string
+  status: number
+  body: T
+}
+
+/** Toplu isteğe giren bir parça. */
+export interface BatchItem {
+  /** Yanıtta parçayı eşleştirir; verilmezse sıra numarası kullanılır. */
+  id?: string
+  /** Public okuma yolu: `records/page/item/footer` ya da `/api/public/records/page`. */
+  path: string
+  query?: Record<string, unknown>
+}
+
+interface QueuedGet {
+  path: string
+  query: Record<string, unknown>
+  resolve: (data: unknown) => void
+  reject: (error: unknown) => void
 }
 
 // ── Request Queue (Token Refresh) ─────────────────────────────────────────────
@@ -162,7 +215,14 @@ export class SubmitClient {
   private listeners: Map<SubmitEvent, Set<EventHandler<SubmitEvent>>> = new Map()
 
   // ── GET deduplication ──
-  private inflightGets: Map<string, Promise<AxiosResponse>> = new Map()
+  private inflightGets: Map<string, Promise<unknown>> = new Map()
+
+  // ── Toplu okuma ──
+  private batchConfig: BatchConfig | null
+  private batchQueue: QueuedGet[] = []
+  private batchTimer: ReturnType<typeof setTimeout> | null = null
+  /** API toplu ucu tanımazsa (eski sürüm) false olur; istemci tek isteklere döner. */
+  private batchSupported = true
 
   constructor(private config: SubmitClientConfig) {
     const baseURL = config.baseUrl ?? API_URLS[config.mode]
@@ -171,6 +231,12 @@ export class SubmitClient {
     this.onTokenRefresh = config.onTokenRefresh ?? null
     this.retryConfig =
       config.retry === false ? null : { ...DEFAULT_RETRY, ...(config.retry ?? {}) }
+    this.batchConfig =
+      config.batch === false ? null : { ...DEFAULT_BATCH, ...(config.batch ?? {}) }
+    if (this.batchConfig) {
+      this.batchConfig.max = Math.min(Math.max(1, this.batchConfig.max), MAX_BATCH_ITEMS)
+      this.batchConfig.wait = Math.max(0, this.batchConfig.wait)
+    }
 
     this.http = axios.create({
       baseURL,
@@ -485,7 +551,10 @@ export class SubmitClient {
   }
 
   /**
-   * GET isteği — retry ve deduplication destekli. `signal` ile iptal edilebilir.
+   * GET isteği — retry, deduplication ve toplu okuma destekli. `signal` ile iptal edilebilir.
+   *
+   * `/api/public/*` okumaları toplu okumaya girer (bkz. `batch` ayarı);
+   * `signal` verilen istek tek başına gider ki iptal başka çağrıyı etkilemesin.
    *
    * @typeParam T - Beklenen yanıt tipi
    * @param url - API endpoint yolu (ör. '/shopping/products')
@@ -512,24 +581,115 @@ export class SubmitClient {
     if (!signal) {
       const inflight = this.inflightGets.get(cacheKey)
       if (inflight) {
-        const response = await inflight
-        return response.data as T
+        return (await inflight) as T
       }
     }
 
-    const requestPromise = this.retryRequest(
-      () => this.http.get<T>(url, { params, signal }),
-      'get'
-    )
-      .then((response) => response as unknown as AxiosResponse)
-      .finally(() => {
-        if (!signal) this.inflightGets.delete(cacheKey)
-      })
+    const requestPromise = (
+      !signal && this.isBatchable(url)
+        ? this.enqueueBatch(url, (params ?? {}) as Record<string, unknown>)
+        : this.singleGet<T>(url, params, signal)
+    ).finally(() => {
+      if (!signal) this.inflightGets.delete(cacheKey)
+    })
 
     if (!signal) this.inflightGets.set(cacheKey, requestPromise)
 
-    const response = await requestPromise
-    return response.data as T
+    return (await requestPromise) as T
+  }
+
+  /**
+   * Biriken parçaları `POST /api/public/batch` ile gönderir. Elle kullanım: `sdk.delivery.batch()`.
+   * Toplu istek salt okumadır: tek GET'ler gibi yeniden denenebilir.
+   */
+  private async postBatch(items: BatchItem[]): Promise<ApiResponse<BatchItemResult[]>> {
+    return this.retryRequest(
+      async () => (await this.http.post<ApiResponse<BatchItemResult[]>>(BATCH_PATH, { requests: items })).data,
+      'get'
+    )
+  }
+
+  // ── Toplu okuma iç işleri ──
+
+  private singleGet<T>(url: string, params?: Record<string, unknown> | object, signal?: AbortSignal): Promise<T> {
+    return this.retryRequest(() => this.http.get<T>(url, { params, signal }), 'get').then(
+      (response) => response.data
+    )
+  }
+
+  private isBatchable(url: string): boolean {
+    return (
+      this.batchConfig !== null &&
+      this.batchSupported &&
+      url.startsWith(PUBLIC_PREFIX) &&
+      !url.startsWith(BATCH_PATH)
+    )
+  }
+
+  private enqueueBatch(url: string, params: Record<string, unknown>): Promise<unknown> {
+    return new Promise((resolve, reject) => {
+      this.batchQueue.push({ path: url, query: toQuery(params), resolve, reject })
+      if (this.batchConfig && this.batchQueue.length >= this.batchConfig.max) {
+        this.flushBatch()
+      } else if (!this.batchTimer) {
+        this.batchTimer = setTimeout(() => this.flushBatch(), this.batchConfig?.wait ?? 0)
+      }
+    })
+  }
+
+  private flushBatch(): void {
+    if (this.batchTimer) {
+      clearTimeout(this.batchTimer)
+      this.batchTimer = null
+    }
+    const max = this.batchConfig?.max ?? MAX_BATCH_ITEMS
+    while (this.batchQueue.length > 0) {
+      void this.sendBatch(this.batchQueue.splice(0, max))
+    }
+  }
+
+  private async sendBatch(chunk: QueuedGet[]): Promise<void> {
+    // Tek çağrı için toplu zarfa gerek yok.
+    if (chunk.length === 1 || !this.batchSupported) {
+      chunk.forEach((item) => this.singleGet(item.path, item.query).then(item.resolve, item.reject))
+      return
+    }
+
+    let results: BatchItemResult[]
+    try {
+      const response = await this.postBatch(chunk.map((item, i) => ({ id: String(i), path: item.path, query: item.query })))
+      results = response.data ?? []
+    } catch (err) {
+      // Eski API toplu ucu tanımaz: bir daha denemeden tek isteklere dön.
+      if (err instanceof SubmitError && [404, 405, 410].includes(err.code)) {
+        this.batchSupported = false
+        if (this.debugMode) console.log('[SubmitCms SDK] Toplu uç yok, tek isteklere dönülüyor')
+        chunk.forEach((item) => this.singleGet(item.path, item.query).then(item.resolve, item.reject))
+        return
+      }
+      chunk.forEach((item) => item.reject(err))
+      return
+    }
+
+    const byId = new Map(results.map((result) => [result.id, result]))
+    chunk.forEach((item, i) => {
+      const result = byId.get(String(i))
+      if (!result) {
+        item.reject(new SubmitError('Toplu yanıtta parça eksik', 0))
+      } else if (result.status >= 200 && result.status < 300) {
+        item.resolve(result.body)
+      } else {
+        const body = (result.body ?? {}) as Record<string, unknown>
+        const nested = body['error'] as Record<string, unknown> | undefined
+        item.reject(
+          new SubmitError(
+            (body['message'] as string) ?? (nested?.['message'] as string) ?? `HTTP ${result.status}`,
+            result.status,
+            body['errors'] as Record<string, string[]> | undefined
+          )
+        )
+      }
+    })
   }
 
   /** POST isteği — retry destekli, AbortSignal ile iptal edilebilir. */
@@ -794,4 +954,26 @@ export class SubmitClient {
     this.emit('request:end', { url, method, duration: 0, status: 200 })
     return data
   }
+}
+
+/**
+ * Sorgu değerlerini tek GET'teki biçime getirir: boş değer atılır, sayı ve
+ * mantıksal değer metin olur. Böylece API toplu parçayı ve tek isteği aynı
+ * görür (aynı önbellek anahtarı, aynı doğrulama).
+ */
+function toQuery(params: Record<string, unknown>): Record<string, unknown> {
+  const out: Record<string, unknown> = {}
+  for (const [key, value] of Object.entries(params)) {
+    const converted = toQueryValue(value)
+    if (converted !== undefined) out[key] = converted
+  }
+  return out
+}
+
+function toQueryValue(value: unknown): unknown {
+  if (value === undefined || value === null) return undefined
+  if (value instanceof Date) return value.toISOString()
+  if (Array.isArray(value)) return value.map(toQueryValue).filter((v) => v !== undefined)
+  if (typeof value === 'object') return toQuery(value as Record<string, unknown>)
+  return String(value)
 }

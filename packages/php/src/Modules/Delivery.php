@@ -78,6 +78,20 @@ final class Delivery extends Module
         return $this->client->get('/api/public/environment/' . $this->seg($token));
     }
 
+    /**
+     * Birden çok public okumayı tek istekte gönderir (en fazla 25 parça).
+     *
+     * Her parça: id (isteğe bağlı), path (ör. records/page/item/footer), query.
+     * Yanıtta her parça { id, status, body } olarak döner; hata parça başınadır.
+     * Her parça ayrı gösterim sayılır.
+     *
+     * @param array<int,array{id?:string,path:string,query?:array<string,mixed>}> $items
+     */
+    public function batch(array $items): mixed
+    {
+        return $this->client->post('/api/public/batch', ['requests' => $items]);
+    }
+
     public function navigation(string $slug): mixed
     {
         return $this->client->get('/api/public/navigation/' . $this->seg($slug));

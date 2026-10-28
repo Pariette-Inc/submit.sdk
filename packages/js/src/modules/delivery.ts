@@ -1,6 +1,7 @@
 import { BaseModule } from './base'
 import type { ApiResponse } from '../types/common'
 import type { RecordListParams, SubmitRecord, PageMeta } from './records'
+import type { BatchItem, BatchItemResult } from '../client'
 
 /**
  * Yeni ticket açarken gönderilen gövde (`submitTicket`).
@@ -125,6 +126,24 @@ export class DeliveryModule extends BaseModule {
 
   environment(token: string): Promise<ApiResponse<Record<string, unknown>>> {
     return this.client.get(`/api/public/environment/${encodeURIComponent(token)}`)
+  }
+
+  /**
+   * Birden çok public okumayı tek istekte gönderir (`POST /api/public/batch`, en fazla 25 parça).
+   *
+   * Çoğu durumda gerek yok: SDK aynı anda yapılan `records`, `record`,
+   * `environment`… çağrılarını kendiliğinden gruplar (`batch` ayarı).
+   * Her parça ayrı gösterim sayılır; hata parça başınadır, istisna atılmaz.
+   *
+   * @example
+   *   const { data } = await sdk.delivery.batch([
+   *     { id: 'footer', path: 'records/page/item/footer', query: { locale: 'tr' } },
+   *     { id: 'news', path: 'records/blog', query: { per_page: 3 } },
+   *   ])
+   *   const footer = data.find((r) => r.id === 'footer')
+   */
+  batch(items: BatchItem[]): Promise<ApiResponse<BatchItemResult[]>> {
+    return this.client.post('/api/public/batch', { requests: items })
   }
 
   navigation(slug: string): Promise<ApiResponse<Record<string, unknown>>> {

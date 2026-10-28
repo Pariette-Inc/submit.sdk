@@ -54,6 +54,22 @@ await sdk.locales.add('en_US')                     // sitede "en" olarak kaydedi
 - `sdk.client.on('auth:expired' | 'error:rate-limit' | …)` olayları
 - `mock: true` ile ağa çıkmadan fixture yanıt
 
+## Toplu okuma
+
+Aynı anda yapılan `sdk.delivery` okumaları kendiliğinden gruplanır: 50 çağrı 50 istek değil, en çok 25 parçalık birkaç `POST /api/public/batch` isteği olur. Kod değişmez.
+
+```ts
+const [footer, news] = await Promise.all([
+  sdk.delivery.record('page', 'footer'),     // ikisi tek istekte gider
+  sdk.delivery.records('blog', { per_page: 3 }),
+])
+```
+
+- Her çağrı kendi sonucunu alır; bulunamayan kayıt yalnız kendi çağrısında `SubmitError` (404) verir.
+- Her parça ayrı gösterim sayılır.
+- Ayar: `batch: { wait: 5, max: 25 }` (varsayılan), `batch: false` kapatır. `signal` verilen istek tek başına gider.
+- Elle: `sdk.delivery.batch([{ id, path, query }])` → `{ id, status, body }[]`.
+
 ## Neler dahil değil
 
 SDK yalnızca **canlı** uçları çağırır. submit.api'deki 507 endpoint'in 201'i

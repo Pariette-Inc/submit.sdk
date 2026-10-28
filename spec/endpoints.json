@@ -2,12 +2,12 @@
  "$comment": "submit.api'nin gerçek rota tablosundan üretildi (php artisan route:list). Elle düzenlemeyin — `pnpm spec:generate` ile yenileyin.",
  "source": {
   "repo": "submit.api",
-  "branch": "feat/pariette-migration-users",
-  "commit": "b0b31fb"
+  "branch": "feat/public-batch",
+  "commit": "41f9e22"
  },
  "counts": {
-  "total": 509,
-  "live": 309,
+  "total": 510,
+  "live": 310,
   "retired": 200
  },
  "authLegend": {
@@ -4059,6 +4059,17 @@
    "method": "GET",
    "path": "/api/public/banners",
    "controller": "ComponentController@getBanners",
+   "auth": [
+    "envToken"
+   ],
+   "moduleGate": null,
+   "throttle": null,
+   "status": "live"
+  },
+  {
+   "method": "POST",
+   "path": "/api/public/batch",
+   "controller": "PublicBatchController",
    "auth": [
     "envToken"
    ],

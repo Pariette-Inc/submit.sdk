@@ -59,6 +59,15 @@ public struct DeliveryModule: Sendable {
         try await client.get("/api/public/environment/\(esc(token))")
     }
 
+    /// Birden çok public okumayı tek istekte gönderir (en fazla 25 parça).
+    ///
+    /// Her parça: `id` (isteğe bağlı), `path` (ör. `records/page/item/footer`), `query`.
+    /// Yanıtta her parça `{ id, status, body }` olarak döner; hata parça başınadır.
+    /// Her parça ayrı gösterim sayılır.
+    public func batch(_ items: [[String: Any]]) async throws -> SubmitResponse<[JSONValue]> {
+        try await client.post("/api/public/batch", body: ["requests": items], as: [JSONValue].self)
+    }
+
     public func navigation(_ slug: String) async throws -> SubmitResponse<JSONValue> {
         try await client.get("/api/public/navigation/\(esc(slug))")
     }

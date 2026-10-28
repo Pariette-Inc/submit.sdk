@@ -1,6 +1,14 @@
 export { SubmitCms } from './submitcms'
 export { SubmitClient } from './client'
-export type { SubmitClientConfig, RetryConfig, SubmitEvent, SubmitEventPayload } from './client'
+export type {
+  SubmitClientConfig,
+  RetryConfig,
+  BatchConfig,
+  BatchItem,
+  BatchItemResult,
+  SubmitEvent,
+  SubmitEventPayload,
+} from './client'
 
 export {
   API_URLS,
