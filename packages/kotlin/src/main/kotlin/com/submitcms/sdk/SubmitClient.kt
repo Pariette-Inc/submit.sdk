@@ -36,6 +36,8 @@ data class SubmitConfig(
     val timeoutSeconds: Long = 30,
     /** Yerel geliştirme ya da self-hosted kurulum için API kökü. */
     val baseUrl: String? = null,
+    /** Medya CDN kökü (varsayılan: [SubmitClient.CDN_URL]). Yerel kopya veya kendi CDN'iniz için verin. */
+    val cdnUrl: String? = null,
     /** Ağ ve 5xx hatalarında kaç kez yeniden denensin. */
     val retries: Int = 3,
 )
@@ -77,6 +79,8 @@ class SubmitClient(private val config: SubmitConfig, http: OkHttpClient? = null)
     companion object {
         const val ENV_HEADER = "SubmitToken"
         const val ENV_OVERRIDE_HEADER = "EnvToken"
+        /** SubmitCMS medya CDN'i. Yüklenen dosyaların yolu bu kökün altındadır. */
+        const val CDN_URL = "https://cdn.submitcms.com"
         private const val MAX_RATE_LIMIT_RETRIES = 3
         private val RETRYABLE = setOf(408, 500, 502, 503, 504)
 
@@ -98,6 +102,22 @@ class SubmitClient(private val config: SubmitConfig, http: OkHttpClient? = null)
     }
 
     val baseUrl: String = (config.baseUrl ?: config.mode.baseUrl).trimEnd('/')
+
+    /** Medya CDN kökü (sonunda `/` yok). */
+    val cdnUrl: String = (config.cdnUrl ?: CDN_URL).trimEnd('/')
+
+    /**
+     * Medya yolunu CDN adresine çevirir: `media("site/a.webp")` → `https://cdn.submitcms.com/site/a.webp`.
+     * Boş yol boş metin döner; tam adres (`https://`, `//`, `data:`) değişmeden döner.
+     */
+    fun media(path: String?): String {
+        if (path.isNullOrEmpty()) return ""
+        val lower = path.lowercase()
+        if (lower.startsWith("http://") || lower.startsWith("https://") || path.startsWith("//") || path.startsWith("data:")) {
+            return path
+        }
+        return cdnUrl + "/" + path.trimStart('/')
+    }
 
     private val json = Json { ignoreUnknownKeys = true; explicitNulls = false }
 

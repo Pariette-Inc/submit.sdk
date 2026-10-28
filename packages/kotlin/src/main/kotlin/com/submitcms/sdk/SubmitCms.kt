@@ -102,4 +102,10 @@ class SubmitCms(val client: SubmitClient) {
 
     /** Misafir sepeti kimliği. */
     fun setGuestId(guestId: String?) = client.setGuestId(guestId)
+
+    /** Medya CDN kökü. */
+    val cdnUrl: String get() = client.cdnUrl
+
+    /** Medya yolunu CDN adresine çevirir. Boş yol boş metin, tam adres aynen döner. */
+    fun media(path: String?): String = client.media(path)
 }

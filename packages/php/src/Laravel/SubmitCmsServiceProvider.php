@@ -38,6 +38,7 @@ final class SubmitCmsServiceProvider extends ServiceProvider implements Deferrab
                 'locale' => $config['locale'] ?? null,
                 'timeout' => (int) ($config['timeout'] ?? 30),
                 'baseUrl' => $config['base_url'] ?? null,
+                'cdnUrl' => $config['cdn_url'] ?? null,
                 'retries' => (int) ($config['retries'] ?? 3),
             ]);
         });

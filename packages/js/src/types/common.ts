@@ -3,15 +3,17 @@
  *
  * @example
  *   const sdk = new SubmitCms({
- *     mode: 'production',
  *     token: 'env_xxxxx',
  *     locale: 'tr',
  *     timeout: 15000,
  *   })
  */
 export interface SubmitConfig {
-  /** API ortamı — production veya test sunucusu. `baseUrl` verilirse yok sayılır. */
-  mode: 'production' | 'test'
+  /**
+   * API ortamı — production veya test sunucusu (varsayılan: production).
+   * `baseUrl` verilirse yok sayılır.
+   */
+  mode?: 'production' | 'test'
   /**
    * Site token'ı — `SubmitToken` başlığıyla gönderilir ve multi-tenant izolasyonunu sağlar.
    * Panelde site adı, konsolda "Entegrasyon" sekmesinde görünür.
@@ -26,12 +28,30 @@ export interface SubmitConfig {
    * Örn. `http://localhost:8000`. Verilirse `mode` yok sayılır.
    */
   baseUrl?: string
+  /**
+   * Medya dosyalarının CDN kökü (varsayılan: `CDN_URL`).
+   * Yerel kopya veya kendi CDN'iniz için verin.
+   */
+  cdnUrl?: string
 }
 
 export const API_URLS = {
   production: 'https://live.submitcms.com',
   test: 'https://dev.submitcms.com',
 } as const
+
+/** SubmitCMS medya CDN'i. Yüklenen dosyaların yolu bu kökün altındadır. */
+export const CDN_URL = 'https://cdn.submitcms.com'
+
+/**
+ * Medya yolunu tam adrese çevirir.
+ * Boş yol boş metin döner; tam adres (`https://`, `//`, `data:`) değişmeden döner.
+ */
+export function mediaUrl(cdnUrl: string, path: string | null | undefined): string {
+  if (!path) return ''
+  if (/^(https?:)?\/\//i.test(path) || path.startsWith('data:')) return path
+  return `${cdnUrl.replace(/\/+$/, '')}/${path.replace(/^\/+/, '')}`
+}
 
 /**
  * Backend'in site kimliğini çözme sırası (`SubmitCms::myenv`):
