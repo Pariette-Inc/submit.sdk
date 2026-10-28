@@ -17,6 +17,9 @@ public enum SubmitMode: String, Sendable {
     }
 }
 
+/// SubmitCMS medya CDN'i. Yüklenen dosyaların yolu bu kökün altındadır.
+public let submitCDNURL = URL(string: "https://cdn.submitcms.com")!
+
 public struct SubmitConfig: Sendable {
     /// `baseURL` verilirse yok sayılır.
     public var mode: SubmitMode
@@ -26,6 +29,8 @@ public struct SubmitConfig: Sendable {
     public var timeout: TimeInterval
     /// Yerel geliştirme ya da self-hosted kurulum için API kökü.
     public var baseURL: URL?
+    /// Medya CDN kökü (varsayılan: `submitCDNURL`). Yerel kopya veya kendi CDN'iniz için verin.
+    public var cdnURL: URL?
     /// Ağ ve 5xx hatalarında kaç kez yeniden denensin.
     public var retries: Int
 
@@ -35,6 +40,7 @@ public struct SubmitConfig: Sendable {
         locale: String? = nil,
         timeout: TimeInterval = 30,
         baseURL: URL? = nil,
+        cdnURL: URL? = nil,
         retries: Int = 3
     ) {
         self.mode = mode
@@ -42,6 +48,7 @@ public struct SubmitConfig: Sendable {
         self.locale = locale
         self.timeout = timeout
         self.baseURL = baseURL
+        self.cdnURL = cdnURL
         self.retries = retries
     }
 }
@@ -108,11 +115,14 @@ public actor SubmitClient {
     private var authToken: String?
 
     public nonisolated let baseURL: URL
+    /// Medya CDN kökü.
+    public nonisolated let cdnURL: URL
 
     public init(config: SubmitConfig, session: URLSession = .shared) {
         self.config = config
         self.session = session
         self.baseURL = config.baseURL ?? config.mode.baseURL
+        self.cdnURL = config.cdnURL ?? submitCDNURL
         self.decoder = JSONDecoder()
 
         var headers = [
@@ -121,6 +131,20 @@ public actor SubmitClient {
         ]
         if let locale = config.locale { headers["Locale"] = locale }
         self.headers = headers
+    }
+
+    /// Medya yolunu CDN adresine çevirir: `media("site/a.webp")` → `https://cdn.submitcms.com/site/a.webp`.
+    /// Boş yol boş metin döner; tam adres (`https://`, `//`, `data:`) değişmeden döner.
+    public nonisolated func media(_ path: String?) -> String {
+        guard let path, !path.isEmpty else { return "" }
+        let lower = path.lowercased()
+        if lower.hasPrefix("http://") || lower.hasPrefix("https://") || path.hasPrefix("//") || path.hasPrefix("data:") {
+            return path
+        }
+        var root = cdnURL.absoluteString
+        while root.hasSuffix("/") { root.removeLast() }
+        let relative = path.drop { $0 == "/" }
+        return root + "/" + relative
     }
 
     /// Oturum JWT'si — `auth.login` bunu kendisi yazar.

@@ -3,6 +3,17 @@
 > Her ekran/servis geliştirmesinden sonra güncellenir. En yeni bölüm en üstte.
 > Format: development-log skill'i (Claude) tarafından otomatik bakılır.
 
+## 2026-10-28 — Medya CDN varsayılanı: `media()`, `cdnUrl`; JS `mode` isteğe bağlı
+
+- **Amaç:** Siteye yalnız site token'ı yazılsın. API kökü ve medya CDN'i SDK'dan gelsin (Ahmet, 2026-10-28; WUX `NEXT_PUBLIC_SUBMITCMS_API_URL` ve `NEXT_PUBLIC_CDN_URL` ayarlarını elle istiyordu).
+- **Yeni sabit:** CDN kökü `https://cdn.submitcms.com` — js `CDN_URL`, php `Client::CDN_URL`, swift `submitCDNURL`, kotlin `SubmitClient.CDN_URL`.
+- **Yeni ayar:** `cdnUrl` (js, php, kotlin), `cdnURL` (swift); Laravel `cdn_url` / `SUBMITCMS_CDN_URL`. Yerel kopya veya kendi CDN'i için.
+- **Yeni metot:** `media(path)` ve `cdnUrl` (giriş sınıfı ve istemci, dört paket). Yol CDN köküne eklenir; boş yol boş metin, tam adres (`https://`, `//`, `data:`) aynen döner. js ayrıca `mediaUrl(cdnUrl, path)` dışa açık.
+- **JS:** `mode` artık isteğe bağlı (varsayılan `production`). PHP, Swift, Kotlin zaten varsayılan veriyordu.
+- **Test:** `packages/js/test/media.test.mjs` (4 test); `npm test` 10/10. PHP elle çalıştırılarak denendi; Swift `swift build` geçti; Kotlin derlenmedi (makinede gradle yok).
+- API değişikliği yok; `spec/endpoints.json` değişmedi.
+- Sürüm: minor (yeni özellik, kırıcı değişiklik yok). Sahibi yayınlar.
+
 ## 2026-10-28 — Toplu okuma: aynı anda yapılan public GET'ler tek istekte
 
 - **JS (otomatik):** `/api/public/*` GET'leri kısa pencerede birikir, `POST /api/public/batch` ile en fazla 25'lik paketlerde gider. Ayar `batch: { wait: 5, max: 25 } | false` (varsayılan açık). Her çağrı kendi sonucunu alır; parça hatası `SubmitError` (ör. 404) olarak yalnız o çağrıya düşer. Tek çağrı, `signal` verilen çağrı ve mock modu gruplanmaz. API toplu ucu tanımazsa (404/405/410) istemci tek isteklere döner.

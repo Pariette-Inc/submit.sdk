@@ -10,7 +10,7 @@ npm i submitcms
 import { SubmitCms } from 'submitcms'
 
 const sdk = new SubmitCms({
-  mode: 'production',           // ya da 'test'
+  mode: 'production',           // isteğe bağlı: varsayılan 'production', ya da 'test'
   token: process.env.SUBMIT_TOKEN!,
   locale: 'tr',
 })
@@ -53,6 +53,21 @@ await sdk.locales.add('en_US')                     // sitede "en" olarak kaydedi
 - Aynı GET'in paralel çağrılarını tekilleştirme
 - `sdk.client.on('auth:expired' | 'error:rate-limit' | …)` olayları
 - `mock: true` ile ağa çıkmadan fixture yanıt
+
+## Medya adresleri
+
+Yalnız `token` zorunludur. API kökü (`https://live.submitcms.com`) ve medya CDN'i
+(`https://cdn.submitcms.com`) SDK'dan gelir. Kayıtlardaki görsel alanları CDN'e göre yoldur;
+tam adres için `media()` kullanın:
+
+```ts
+sdk.media(record.data.image_web)   // 'site/a.webp' → 'https://cdn.submitcms.com/site/a.webp'
+sdk.media('')                      // ''  (boş yol boş kalır)
+sdk.media('https://x.test/a.png')  // tam adres aynen döner
+sdk.cdnUrl                         // 'https://cdn.submitcms.com'  (CDN_URL sabiti de dışa açık)
+
+new SubmitCms({ token, cdnUrl: 'http://localhost:9000' })  // yerel kopya veya kendi CDN'iniz
+```
 
 ## Toplu okuma
 

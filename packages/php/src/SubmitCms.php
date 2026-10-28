@@ -105,6 +105,7 @@ final class SubmitCms
      *     locale?: string,
      *     timeout?: int,
      *     baseUrl?: string,
+     *     cdnUrl?: string,
      *     retries?: int,
      *     retryBaseDelayMs?: int,
      * }|Client $config
@@ -163,6 +164,18 @@ final class SubmitCms
     public function setGuestId(?string $guestId): void
     {
         $this->client->setGuestId($guestId);
+    }
+
+    /** Medya CDN kökü (sonunda `/` yok). */
+    public function cdnUrl(): string
+    {
+        return $this->client->cdnUrl();
+    }
+
+    /** Medya yolunu CDN adresine çevirir. Boş yol boş metin, tam adres aynen döner. */
+    public function media(?string $path): string
+    {
+        return $this->client->media($path);
     }
 
     /**

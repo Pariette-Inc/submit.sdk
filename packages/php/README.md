@@ -69,6 +69,20 @@ try {
 }
 ```
 
+## Medya adresleri
+
+Yalnız `token` zorunludur. API kökü (`https://live.submitcms.com`) ve medya CDN'i
+(`https://cdn.submitcms.com`, `Client::CDN_URL`) SDK'dan gelir. Kayıtlardaki görsel alanları
+CDN'e göre yoldur; tam adres için `media()` kullanın:
+
+```php
+$sdk->media($record['data']['image_web']);  // 'site/a.webp' → 'https://cdn.submitcms.com/site/a.webp'
+$sdk->media('');                            // ''  (boş yol boş kalır)
+$sdk->cdnUrl();                             // 'https://cdn.submitcms.com'
+
+new SubmitCms(['token' => $token, 'cdnUrl' => 'http://localhost:9000']);  // Laravel: SUBMITCMS_CDN_URL
+```
+
 ## Toplu okuma
 
 Birden çok public okumayı tek istekte gönderin (en çok 25 parça). Her parça `{ id, status, body }` olarak döner ve ayrı gösterim sayılır.

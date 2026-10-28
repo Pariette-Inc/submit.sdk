@@ -25,7 +25,6 @@ import { AiModule, StorageModule, TrackingModule, SystemModule } from './modules
  * import { SubmitCms } from 'submitcms'
  *
  * const sdk = new SubmitCms({
- *   mode: 'production',
  *   token: process.env.SUBMIT_TOKEN!,
  *   locale: 'tr',
  * })
@@ -158,5 +157,15 @@ export class SubmitCms {
   /** Misafir sepeti kimliği. */
   setGuestId(guestId: string | null): void {
     this.client.setGuestId(guestId)
+  }
+
+  /** Medya CDN kökü (sonunda `/` yok). */
+  get cdnUrl(): string {
+    return this.client.cdnUrl
+  }
+
+  /** Medya yolunu CDN adresine çevirir. Boş yol boş metin, tam adres aynen döner. */
+  media(path: string | null | undefined): string {
+    return this.client.media(path)
   }
 }

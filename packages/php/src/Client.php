@@ -32,11 +32,15 @@ final class Client
         'test' => 'https://dev.submitcms.com',
     ];
 
+    /** SubmitCMS medya CDN'i. Yüklenen dosyaların yolu bu kökün altındadır. */
+    public const CDN_URL = 'https://cdn.submitcms.com';
+
     /** 429 için üst deneme sınırı — Retry-After beklenerek en çok bu kadar denenir. */
     private const MAX_RATE_LIMIT_RETRIES = 3;
 
     private Guzzle $http;
     private string $baseUrl;
+    private string $cdnUrl;
     private ?string $authToken = null;
 
     /** @var array<string,string> */
@@ -49,6 +53,7 @@ final class Client
      *     locale?: string,
      *     timeout?: int,
      *     baseUrl?: string,
+     *     cdnUrl?: string,
      *     retries?: int,
      *     retryBaseDelayMs?: int,
      * }  $config
@@ -56,6 +61,7 @@ final class Client
     public function __construct(private array $config)
     {
         $this->baseUrl = rtrim($config['baseUrl'] ?? self::URLS[$config['mode'] ?? 'production'], '/');
+        $this->cdnUrl = rtrim($config['cdnUrl'] ?? self::CDN_URL, '/');
 
         $this->headers = array_filter([
             'Accept' => 'application/json',
@@ -73,6 +79,28 @@ final class Client
     public function baseUrl(): string
     {
         return $this->baseUrl;
+    }
+
+    /** Medya CDN kökü (sonunda `/` yok). Varsayılan CDN_URL; `cdnUrl` ayarı değiştirir. */
+    public function cdnUrl(): string
+    {
+        return $this->cdnUrl;
+    }
+
+    /**
+     * Medya yolunu CDN adresine çevirir: `media('site/a.webp')` → `https://cdn.submitcms.com/site/a.webp`.
+     * Boş yol boş metin döner; tam adres (`https://`, `//`, `data:`) değişmeden döner.
+     */
+    public function media(?string $path): string
+    {
+        if ($path === null || $path === '') {
+            return '';
+        }
+        if (preg_match('#^(https?:)?//#i', $path) === 1 || str_starts_with($path, 'data:')) {
+            return $path;
+        }
+
+        return $this->cdnUrl . '/' . ltrim($path, '/');
     }
 
     /** Oturum JWT'si — `auth->login()` bunu kendisi yazar. */

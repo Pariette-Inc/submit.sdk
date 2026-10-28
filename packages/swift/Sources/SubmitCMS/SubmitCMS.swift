@@ -120,4 +120,12 @@ public struct SubmitCMS: Sendable {
     public func setGuestId(_ guestId: String?) async {
         await client.setGuestId(guestId)
     }
+
+    /// Medya CDN kökü.
+    public var cdnURL: URL { client.cdnURL }
+
+    /// Medya yolunu CDN adresine çevirir. Boş yol boş metin, tam adres aynen döner.
+    public func media(_ path: String?) -> String {
+        client.media(path)
+    }
 }

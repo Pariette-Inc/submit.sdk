@@ -29,6 +29,12 @@ return [
 
     'base_url' => env('SUBMITCMS_BASE_URL'),
 
+    /*
+    | Medya CDN kökü. Boş kalırsa https://cdn.submitcms.com kullanılır.
+    | `$sdk->media($yol)` bu kökü kullanır.
+    */
+    'cdn_url' => env('SUBMITCMS_CDN_URL'),
+
     'locale' => env('SUBMITCMS_LOCALE', 'tr'),
 
     'timeout' => env('SUBMITCMS_TIMEOUT', 30),

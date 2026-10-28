@@ -12,6 +12,8 @@ export type {
 
 export {
   API_URLS,
+  CDN_URL,
+  mediaUrl,
   ENV_HEADER,
   ENV_OVERRIDE_HEADER,
   SubmitError,

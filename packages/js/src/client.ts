@@ -8,6 +8,8 @@ import axios, {
 import {
   SubmitConfig,
   API_URLS,
+  CDN_URL,
+  mediaUrl,
   ApiResponse,
   SubmitError,
   ENV_HEADER,
@@ -225,7 +227,7 @@ export class SubmitClient {
   private batchSupported = true
 
   constructor(private config: SubmitClientConfig) {
-    const baseURL = config.baseUrl ?? API_URLS[config.mode]
+    const baseURL = config.baseUrl ?? API_URLS[config.mode ?? 'production']
     this.debugMode = config.debug ?? false
     this.mockMode = config.mock ?? false
     this.onTokenRefresh = config.onTokenRefresh ?? null
@@ -506,6 +508,16 @@ export class SubmitClient {
    */
   get baseUrl(): string {
     return (this.http.defaults.baseURL ?? '').replace(/\/$/, '')
+  }
+
+  /** Medya CDN kökü (sonunda `/` yok). Varsayılan `CDN_URL`; `cdnUrl` ayarı değiştirir. */
+  get cdnUrl(): string {
+    return (this.config.cdnUrl ?? CDN_URL).replace(/\/+$/, '')
+  }
+
+  /** Medya yolunu CDN adresine çevirir: `media('site/a.webp')` → `https://cdn.submitcms.com/site/a.webp`. */
+  media(path: string | null | undefined): string {
+    return mediaUrl(this.cdnUrl, path)
   }
 
   /**
