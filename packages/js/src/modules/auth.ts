@@ -34,6 +34,14 @@ export interface RegisterPayload {
   password: string
   password_confirmation: string
   phone?: string
+  /**
+   * Üyelik türü (yalnız platform kaydında anlamlı). Kayıt, kişiye bir şirket
+   * açar: kurumsal üyede şirket adı `company_name`, bireyselde kişinin adıdır.
+   * Verilmezse bireysel sayılır.
+   */
+  account_type?: 'individual' | 'corporate'
+  /** Ticari unvan. `account_type: 'corporate'` ise zorunludur. */
+  company_name?: string
 }
 
 /**
@@ -81,6 +89,10 @@ export class AuthModule extends BaseModule {
    * Hesabın doğrudan aktif olup olmayacağına **site** karar verir
    * (`environments.auto_activate`). Kapalıysa kullanıcı `waiting` grubuna düşer
    * ve onay bekler; bu davranış istemciden değiştirilemez.
+   *
+   * submitcms.com kaydında (platformun kök site token'ı) hesapla birlikte bir
+   * şirket de açılır ve kişi o şirketin yöneticisi olur; yanıt `company`
+   * alanını taşır. Müşteri sitelerinin kendi üye kayıtlarında şirket açılmaz.
    */
   register(payload: RegisterPayload): Promise<ApiResponse<LoginResult>> {
     return this.client.post('/api/auth/register', payload)

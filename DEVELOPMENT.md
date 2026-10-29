@@ -3,6 +3,17 @@
 > Her ekran/servis geliştirmesinden sonra güncellenir. En yeni bölüm en üstte.
 > Format: development-log skill'i (Claude) tarafından otomatik bakılır.
 
+## 2026-10-29 — Kayıt gövdesi: `account_type`, `company_name` (anayasa 13)
+
+- **Neden:** submit.api kayıt ucu artık üyeyle birlikte bir şirket açıyor (anayasa 13, Ahmet 2026-10-29). Gövde iki alan daha taşır; anayasa 9 gereği aynı işte SDK'ya işlendi.
+- **js:** `RegisterPayload` → `account_type?: 'individual' | 'corporate'`, `company_name?: string`. Kırıcı değişiklik değil: iki alan da isteğe bağlı, verilmezse API bireysel sayar.
+- **php, swift, kotlin:** `register` serbest gövde alır; metot açıklamaları iki alanı ve şirket kuralını anlatır.
+- `spec/endpoints.json` yenilendi (`pnpm spec:generate --api-path …`): kaynak `feat/company-at-register@c648b38`. Aynı yenilemede `public/ticket-submit` ve `public/ticket-content` satırlarının denetleyici ve `throttle` bilgisi de güncellendi — spec en son `feat/public-batch`'ten üretilmişti.
+- `submit.web/src/data/sdk-reference.json` yeniden üretildi (`docs:publish`).
+- Test: `pnpm test:contract` (15), `pnpm typecheck`. Sürüm yükseltilmedi; yayın sahibin işi.
+
+- Not: `submitcms/_shared/2026-10/2026-10-29-company-at-register.html`
+
 ## 2026-10-28 — Medya CDN varsayılanı: `media()`, `cdnUrl`; JS `mode` isteğe bağlı
 
 - **Amaç:** Siteye yalnız site token'ı yazılsın. API kökü ve medya CDN'i SDK'dan gelsin (Ahmet, 2026-10-28; WUX `NEXT_PUBLIC_SUBMITCMS_API_URL` ve `NEXT_PUBLIC_CDN_URL` ayarlarını elle istiyordu).

@@ -39,6 +39,10 @@ public struct AuthModule: Sendable {
 
     /// Yeni hesap. Hesabın doğrudan aktif olup olmayacağına site karar verir
     /// (`environments.auto_activate`); istemci bunu değiştiremez.
+    ///
+    /// submitcms.com kaydında hesapla birlikte bir şirket de açılır:
+    /// `account_type` ("individual" | "corporate") ve kurumsalda
+    /// `company_name` gönderilir; yanıt `company` alanını taşır.
     public func register(_ payload: [String: Any]) async throws -> SubmitResponse<JSONValue> {
         try await client.post("/api/auth/register", body: payload)
     }

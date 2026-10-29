@@ -36,6 +36,10 @@ class Auth(private val client: SubmitClient) {
     /**
      * Yeni hesap. Hesabın doğrudan aktif olup olmayacağına site karar verir
      * (`environments.auto_activate`); istemci bunu değiştiremez.
+     *
+     * submitcms.com kaydında hesapla birlikte bir şirket de açılır:
+     * `account_type` ("individual" | "corporate") ve kurumsalda
+     * `company_name` gönderilir; yanıt `company` alanını taşır.
      */
     suspend fun register(payload: Map<String, Any?>): JsonObject = client.post("/api/auth/register", payload)
 

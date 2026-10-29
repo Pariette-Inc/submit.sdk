@@ -42,6 +42,10 @@ final class Auth extends Module
      * Hesabın doğrudan aktif olup olmayacağına site karar verir
      * (`environments.auto_activate`); istemci bunu değiştiremez.
      *
+     * submitcms.com kaydında hesapla birlikte bir şirket de açılır:
+     * `account_type` ('individual' | 'corporate') ve kurumsalda `company_name`
+     * gönderilir; yanıt `company` alanını taşır.
+     *
      * @param array<string,mixed> $payload
      */
     public function register(array $payload): mixed
