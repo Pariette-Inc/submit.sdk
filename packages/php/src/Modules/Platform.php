@@ -129,7 +129,24 @@ final class Platform extends Module
         return $this->client->delete('/api/platform/my/team/members/' . $id);
     }
 
-    /** Herkese açık paket listesi — fiyatlandırma sayfası için. */
+    /**
+     * Satışa açık MODÜLLER — fiyatlandırma sayfası için. Oturum gerekmez.
+     *
+     * Satış paket değil, DOMAIN BAŞINA modül seçimidir (2026-10-29).
+     *
+     * @param array<string,mixed> $params
+     */
+    public function moduleCatalog(array $params = []): mixed
+    {
+        return $this->client->get('/api/platform/module-catalog', $params);
+    }
+
+    /**
+     * Herkese açık paket listesi — KORUNAN paket kayıtları.
+     *
+     * @deprecated Paket SATIŞI kapandı (2026-10-29); yeni satın alma
+     * `PACKAGE_SALES_CLOSED` (410) döner. Fiyatlandırma: moduleCatalog().
+     */
     public function plans(): mixed
     {
         return $this->client->get('/api/platform/plans');
@@ -137,6 +154,9 @@ final class Platform extends Module
 
     /**
      * Tek planın dökümü — modüller, limitler, dönem fiyatları, para birimleri.
+     *
+     * @deprecated Paket satışı kapandı (2026-10-29); uç eski abonelikler için
+     * duruyor. Yeni satış: moduleCatalog().
      *
      * @param array<string,mixed> $params
      */

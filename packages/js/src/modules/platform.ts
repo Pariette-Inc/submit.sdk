@@ -102,15 +102,33 @@ export class PlatformModule extends BaseModule {
       this.client.delete(`/api/platform/my/team/members/${id}`),
   }
 
-  /** Herkese açık paket listesi — fiyatlandırma sayfası için. Oturum gerekmez. */
+  /**
+   * Satışa açık MODÜLLER — fiyatlandırma sayfası için. Oturum gerekmez.
+   *
+   * Satış paket değil, DOMAIN BAŞINA modül seçimidir (2026-10-29): her modülün
+   * aylık ve yıllık fiyatı ile zorunlu olup olmadığı döner.
+   */
+  moduleCatalog(params: Record<string, unknown> = {}): Promise<ApiResponse<Record<string, unknown>>> {
+    return this.client.get('/api/platform/module-catalog', params)
+  }
+
+  /**
+   * Herkese açık paket listesi — KORUNAN paket kayıtları. Oturum gerekmez.
+   *
+   * @deprecated Paket SATIŞI kapandı (2026-10-29). Yeni satın alma denemesi
+   * `PACKAGE_SALES_CLOSED` (410) döner; fiyatlandırma için `moduleCatalog()`
+   * kullanın. Uç, eski abonelikleri okumak için duruyor.
+   */
   plans(): Promise<ApiResponse<Array<Record<string, unknown>>>> {
     return this.client.get('/api/platform/plans')
   }
 
   /**
    * Tek planın dökümü: modüller, limitler, iki dönem fiyatı ve satılabildiği
-   * para birimleri. Ödeme ekranı satın alınacak planı BURADAN okur — istemcide
-   * taşınan fiyata ya da sepette kalmış eski kayda güvenilmez.
+   * para birimleri.
+   *
+   * @deprecated Paket satışı kapandı (2026-10-29); uç eski abonelikler için
+   * duruyor. Yeni satış: `moduleCatalog()`.
    */
   plan(code: string, params: Record<string, unknown> = {}): Promise<ApiResponse<Record<string, unknown>>> {
     return this.client.get(`/api/platform/plans/${encodeURIComponent(code)}`, params)

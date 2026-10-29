@@ -66,10 +66,19 @@ class Platform(private val client: SubmitClient) {
 
     suspend fun removeTeamMember(id: Int): JsonObject = client.delete("/api/platform/my/team/members/$id")
 
-    /** Herkese açık paket listesi — fiyatlandırma ekranı için. */
+    /**
+     * Satışa açık MODÜLLER — fiyatlandırma ekranı için. Oturum gerekmez.
+     * Satış paket değil, DOMAIN BAŞINA modül seçimidir (2026-10-29).
+     */
+    suspend fun moduleCatalog(params: Map<String, Any?> = emptyMap()): JsonObject =
+        client.get("/api/platform/module-catalog", params)
+
+    /** Herkese açık paket listesi — KORUNAN paket kayıtları. */
+    @Deprecated("Paket satışı kapandı (2026-10-29); yeni satış için moduleCatalog() kullanın.")
     suspend fun plans(): JsonObject = client.get("/api/platform/plans")
 
     /** Tek planın dökümü — modüller, limitler, dönem fiyatları, para birimleri. */
+    @Deprecated("Paket satışı kapandı (2026-10-29); yeni satış için moduleCatalog() kullanın.")
     suspend fun plan(code: String, params: Map<String, Any?> = emptyMap()): JsonObject =
         client.get("/api/platform/plans/${esc(code)}", params)
 

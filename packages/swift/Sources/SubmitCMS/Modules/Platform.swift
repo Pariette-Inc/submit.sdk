@@ -93,12 +93,20 @@ public struct PlatformModule: Sendable {
         try await client.delete("/api/platform/my/team/members/\(id)")
     }
 
-    /// Herkese açık paket listesi — fiyatlandırma ekranı için.
+    /// Satışa açık MODÜLLER — fiyatlandırma ekranı için. Oturum gerekmez.
+    /// Satış paket değil, DOMAIN BAŞINA modül seçimidir (2026-10-29).
+    public func moduleCatalog(params: [String: Any] = [:]) async throws -> SubmitResponse<JSONValue> {
+        try await client.get("/api/platform/module-catalog", query: params, as: JSONValue.self)
+    }
+
+    /// Herkese açık paket listesi — KORUNAN paket kayıtları.
+    @available(*, deprecated, message: "Paket satışı kapandı (2026-10-29); yeni satış için moduleCatalog() kullanın.")
     public func plans() async throws -> SubmitResponse<[JSONValue]> {
         try await client.get("/api/platform/plans", as: [JSONValue].self)
     }
 
     /// Tek planın dökümü — modüller, limitler, dönem fiyatları, para birimleri.
+    @available(*, deprecated, message: "Paket satışı kapandı (2026-10-29); yeni satış için moduleCatalog() kullanın.")
     public func plan(code: String, params: [String: Any] = [:]) async throws -> SubmitResponse<JSONValue> {
         try await client.get("/api/platform/plans/\(esc(code))", query: params, as: JSONValue.self)
     }
