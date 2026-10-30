@@ -27,7 +27,7 @@ class Cart(private val client: SubmitClient) {
 }
 
 /**
- * Eski sepet/checkout uçları (`/api/shopping/*`).
+ * Eski sepet/checkout uçları (`/api/shopping` altı).
  *
  * Yeni entegrasyonlarda [Cart] kullanın. Kupon ve kargo seçenekleri şu an
  * yalnızca burada.

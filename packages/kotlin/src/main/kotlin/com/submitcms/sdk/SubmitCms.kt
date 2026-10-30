@@ -21,6 +21,7 @@ import com.submitcms.sdk.modules.Schema
 import com.submitcms.sdk.modules.Shopping
 import com.submitcms.sdk.modules.Storage
 import com.submitcms.sdk.modules.System
+import com.submitcms.sdk.modules.Tickets
 import com.submitcms.sdk.modules.Tracking
 
 /**

@@ -3,6 +3,18 @@
 > Her ekran/servis geliştirmesinden sonra güncellenir. En yeni bölüm en üstte.
 > Format: development-log skill'i (Claude) tarafından otomatik bakılır.
 
+## 2026-10-30 — Kotlin paketi derlenmiyordu: kapanmayan yorum
+
+- `gradle build` en az v1.3.0'dan beri kırmızıydı. CI'da yalnız Kotlin işi düşüyordu; js, php, swift ve kontrat testleri yeşildi. `submit check sdk` yalnız `packages/js` typecheck çalıştırdığı için hata yerelde hiç görünmedi.
+- Kök neden: `modules/Commerce.kt` içindeki KDoc metni `` `/api/shopping/*` `` yazıyordu. Kotlin blok yorumları iç içe geçer, bu yüzden `shopping/*` parçası yeni bir yorum açtı. Sonraki `*/` bu iç yorumu kapattı ve dış KDoc dosya sonuna kadar sürdü.
+- Sonuç: Commerce.kt tümüyle ayrıştırılamadı. İçindeki yedi sınıf (`Cart`, `Shopping`, `Orders`, `CustomerOrders`, `Addresses`, `Payments`, `Billing`) çözümlenemedi ve facade `SubmitCms.kt` altı "Unresolved reference" hatası verdi. Hatalar facade'de göründüğü için eksik modül dosyası sanıldı.
+- İkinci hata: `SubmitCms.kt` `Tickets(client)` kullanıyordu ama `import com.submitcms.sdk.modules.Tickets` satırı hiç yoktu. Yorum hatasından bağımsızdır.
+- Düzeltme: KDoc metni `` `/api/shopping` altı `` oldu; eksik `Tickets` import'u eklendi. İki satır. Modül eklenmedi, kaldırılmadı, taşınmadı.
+- **Hizalama kararı: değişiklik gerekmedi.** Kotlin dört paketin yüzeyiyle zaten aynıydı. js ve swift de kaba dosya + ince sınıf düzeni kullanır (`content-types.ts` dört sınıf, `Commerce.kt` yedi sınıf verir); yalnız php dosya başına bir sınıf tutar. Sınıf kümesi dört pakette birebir aynıdır: Kotlin'in 23 sınıfı php'nin 23 modülüne karşılık gelir. `Commerce`, `Misc` ve `Tickets` birer dosya adıdır, modül adı değil — facade'de geçmemeleri normaldir.
+- Yeni uç veya metot yok, bu yüzden `spec/endpoints.json` elle de üretimle de değişmedi. Public SDK yüzeyi aynı kaldı.
+- Doğrulama: `cd packages/kotlin && gradle build` yerelde geçti, `pnpm test:contract` 15/15, `pnpm -C packages/js typecheck` temiz.
+- Öneri (sahibin kararı, kural değiştirilmedi): `submit check sdk` Kotlin derlemesini de çalıştırsa bu sözdizimi hatası aylar önce yakalanırdı.
+
 ## 2026-10-30 — `platform.mailSetup`: kiracı kendi adresinden gönderir
 
 - Dört pakete de eklendi (js `platform.mailSetup`, php `mailSetup/ensureMailSetup/verifyMailSetup/setMailRelay`, kotlin ve swift aynı adlarla).
