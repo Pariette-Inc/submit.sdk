@@ -34,6 +34,17 @@
 - Test: `pnpm test:contract` (15), `pnpm typecheck`. Sürüm yükseltilmedi; yayın sahibin işi.
 
 - Not: `submitcms/_shared/2026-10/2026-10-29-company-at-register.html`
+## 2026-10-29 — Paket satışı kapandı: `platform.moduleCatalog()`
+
+- **Karar (Ahmet, 2026-10-29, constitution 13):** satış paket değil, domain başına modül seçimidir. SubmitCMS'te yeni paket satın alma uçları `PACKAGE_SALES_CLOSED` (410) döner.
+- **Yeni metot (dört paket):** `platform.moduleCatalog(params?)` → `GET /api/platform/module-catalog`. Satışa açık modüller: kod, ad, açıklama, `required` (çekirdek = zorunlu), aylık/yıllık fiyat, para birimi. Oturum gerekmez; fiyatlandırma ekranının kaynağıdır.
+  - js: `packages/js/src/modules/platform.ts` · php: `Platform::moduleCatalog()` · swift: `moduleCatalog(params:)` · kotlin: `moduleCatalog(params)`
+- **Deprecated:** `plans()` ve `plan(code)`. Uçlar DURUYOR (korunan paket kayıtlarını okur), ama paket SATIN ALMA denemesi 410 döner. Her dilde kendi işaretiyle: `@deprecated` (js/php), `@available(*, deprecated:)` (swift), `@Deprecated` (kotlin).
+- **Spec:** `platform/module-catalog` ve `platform/my/site-catalog` spec'e girdi. Dal `main` ile birleştirilirken spec dosyası `main`'inki alındı: 30 Ekim üretimi `test` dalından yapıldığı için bu uçları ZATEN taşıyor ve daha günceldir.
+- **Docs:** `pnpm docs:publish` → `submit.web/src/data/sdk-reference.json` (23 modül / 230 metot).
+- **Kontroller:** `packages/js` typecheck geçti, `pnpm test:contract` 15/15.
+
+- **Not:** `submitcms/_shared/2026-10/2026-10-29-close-package-sales.html`
 
 ## 2026-10-28 — Medya CDN varsayılanı: `media()`, `cdnUrl`; JS `mode` isteğe bağlı
 
