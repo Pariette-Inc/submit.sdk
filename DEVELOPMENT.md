@@ -24,6 +24,16 @@
 - `spec/endpoints.json` yeniden üretildi. Önceki üretim `feat/public-batch` dalındaydı ve `test`'teki 6 uç (module-catalog, my/company, my/site-catalog, my/sites-overview, my/sites/{id}/status) spec'e hiç girmemişti; bu üretim onları da getirdi.
 - `pnpm test:contract` 15/15, `packages/js` typecheck temiz.
 
+## 2026-10-29 — Kayıt gövdesi: `account_type`, `company_name` (anayasa 13)
+
+- **Neden:** submit.api kayıt ucu artık üyeyle birlikte bir şirket açıyor (anayasa 13, Ahmet 2026-10-29). Gövde iki alan daha taşır; anayasa 9 gereği aynı işte SDK'ya işlendi.
+- **js:** `RegisterPayload` → `account_type?: 'individual' | 'corporate'`, `company_name?: string`. Kırıcı değişiklik değil: iki alan da isteğe bağlı, verilmezse API bireysel sayar.
+- **php, swift, kotlin:** `register` serbest gövde alır; metot açıklamaları iki alanı ve şirket kuralını anlatır.
+- `spec/endpoints.json`: dal `main` ile birleştirilirken spec dosyası `main`'inki alındı. 30 Ekim üretimi `test` dalından yapıldığı için bu dalın getirdiği her satırı zaten taşıyor ve daha günceldir.
+- `submit.web/src/data/sdk-reference.json` yeniden üretildi (`docs:publish`).
+- Test: `pnpm test:contract` (15), `pnpm typecheck`. Sürüm yükseltilmedi; yayın sahibin işi.
+
+- Not: `submitcms/_shared/2026-10/2026-10-29-company-at-register.html`
 ## 2026-10-29 — Paket satışı kapandı: `platform.moduleCatalog()`
 
 - **Karar (Ahmet, 2026-10-29, constitution 13):** satış paket değil, domain başına modül seçimidir. SubmitCMS'te yeni paket satın alma uçları `PACKAGE_SALES_CLOSED` (410) döner.
