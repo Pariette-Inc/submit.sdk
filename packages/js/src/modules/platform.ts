@@ -88,6 +88,32 @@ export class PlatformModule extends BaseModule {
       this.client.delete(`/api/platform/my/domains/${id}`),
   }
 
+  /**
+   * "Kendi adresimden gönder" kurulumu (anayasa 14).
+   *
+   * Sitenin postası müşterinin KENDİ alan adından çıkar. `ensure()` hesabı
+   * açar, `status()` DNS kayıtlarını döner, müşteri onları kendi DNS'ine
+   * yazar ve `verify()` çağrılır. Doğrulanmadan o alan adı adına gönderim
+   * kapalıdır. Reddeden müşteri `preference('own_smtp')` ile kendi SMTP'sine
+   * döner ve postası Signalbird'e hiç uğramaz.
+   */
+  readonly mailSetup = {
+    status: (siteId: number): Promise<ApiResponse<Record<string, unknown>>> =>
+      this.client.get(`/api/platform/my/sites/${siteId}/mail-setup`),
+
+    ensure: (siteId: number): Promise<ApiResponse<Record<string, unknown>>> =>
+      this.client.post(`/api/platform/my/sites/${siteId}/mail-setup`, {}),
+
+    verify: (siteId: number): Promise<ApiResponse<Record<string, unknown>>> =>
+      this.client.post(`/api/platform/my/sites/${siteId}/mail-setup/verify`, {}),
+
+    preference: (
+      siteId: number,
+      relay: 'signalbird' | 'own_smtp',
+    ): Promise<ApiResponse<Record<string, unknown>>> =>
+      this.client.put(`/api/platform/my/sites/${siteId}/mail-setup`, { relay }),
+  }
+
   /** Site ekibi ve davetler. */
   readonly team = {
     list: (): Promise<ApiResponse<Record<string, unknown>>> => this.client.get('/api/platform/my/team'),

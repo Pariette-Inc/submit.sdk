@@ -108,6 +108,34 @@ final class Platform extends Module
         return $this->client->delete('/api/platform/my/domains/' . $id);
     }
 
+    /**
+     * "Kendi adresimden gönder" kurulumu (anayasa 14).
+     *
+     * Sitenin postası müşterinin KENDİ alan adından çıkar. `ensureMailSetup`
+     * hesabı açar, dönen DNS kayıtları müşterinin DNS'ine yazılır ve
+     * `verifyMailSetup` çağrılır. Doğrulanmadan gönderim kapalıdır.
+     */
+    public function mailSetup(int $siteId): mixed
+    {
+        return $this->client->get('/api/platform/my/sites/' . $siteId . '/mail-setup');
+    }
+
+    public function ensureMailSetup(int $siteId): mixed
+    {
+        return $this->client->post('/api/platform/my/sites/' . $siteId . '/mail-setup');
+    }
+
+    public function verifyMailSetup(int $siteId): mixed
+    {
+        return $this->client->post('/api/platform/my/sites/' . $siteId . '/mail-setup/verify');
+    }
+
+    /** `signalbird` ya da `own_smtp`: ikincisinde posta Signalbird'e uğramaz. */
+    public function setMailRelay(int $siteId, string $relay): mixed
+    {
+        return $this->client->put('/api/platform/my/sites/' . $siteId . '/mail-setup', compact('relay'));
+    }
+
     public function team(): mixed
     {
         return $this->client->get('/api/platform/my/team');

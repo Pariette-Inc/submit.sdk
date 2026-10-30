@@ -75,6 +75,28 @@ public struct PlatformModule: Sendable {
         try await client.delete("/api/platform/my/domains/\(id)")
     }
 
+    /// "Kendi adresimden gönder" kurulumu (anayasa 14).
+    ///
+    /// Sitenin postası müşterinin KENDİ alan adından çıkar. `ensureMailSetup`
+    /// hesabı açar, dönen DNS kayıtları müşterinin DNS'ine yazılır ve
+    /// `verifyMailSetup` çağrılır. Doğrulanmadan gönderim kapalıdır.
+    public func mailSetup(siteId: Int) async throws -> SubmitResponse<JSONValue> {
+        try await client.get("/api/platform/my/sites/\(siteId)/mail-setup")
+    }
+
+    public func ensureMailSetup(siteId: Int) async throws -> SubmitResponse<JSONValue> {
+        try await client.post("/api/platform/my/sites/\(siteId)/mail-setup")
+    }
+
+    public func verifyMailSetup(siteId: Int) async throws -> SubmitResponse<JSONValue> {
+        try await client.post("/api/platform/my/sites/\(siteId)/mail-setup/verify")
+    }
+
+    /// `signalbird` ya da `own_smtp`: ikincisinde posta Signalbird'e uğramaz.
+    public func setMailRelay(siteId: Int, relay: String) async throws -> SubmitResponse<JSONValue> {
+        try await client.put("/api/platform/my/sites/\(siteId)/mail-setup", body: ["relay": relay])
+    }
+
     public func team() async throws -> SubmitResponse<JSONValue> {
         try await client.get("/api/platform/my/team")
     }

@@ -2,12 +2,12 @@
  "$comment": "submit.api'nin gerçek rota tablosundan üretildi (php artisan route:list). Elle düzenlemeyin — `pnpm spec:generate` ile yenileyin.",
  "source": {
   "repo": "submit.api",
-  "branch": "feat/close-package-sales",
-  "commit": "0466ed0"
+  "branch": "HEAD",
+  "commit": "759cfed"
  },
  "counts": {
-  "total": 512,
-  "live": 312,
+  "total": 520,
+  "live": 320,
   "retired": 200
  },
  "authLegend": {
@@ -2767,6 +2767,32 @@
   },
   {
    "method": "GET",
+   "path": "/api/platform/my/company",
+   "controller": "Platform\\MyCompanyController@show",
+   "auth": [
+    "envToken",
+    "jwt",
+    "envMember"
+   ],
+   "moduleGate": null,
+   "throttle": null,
+   "status": "live"
+  },
+  {
+   "method": "PUT",
+   "path": "/api/platform/my/company/{id}",
+   "controller": "Platform\\MyCompanyController@update",
+   "auth": [
+    "envToken",
+    "jwt",
+    "envMember"
+   ],
+   "moduleGate": null,
+   "throttle": "20,1",
+   "status": "live"
+  },
+  {
+   "method": "GET",
    "path": "/api/platform/my/dashboard",
    "controller": "Platform\\ConsoleDashboardController",
    "auth": [
@@ -3208,6 +3234,71 @@
    "status": "live"
   },
   {
+   "method": "GET",
+   "path": "/api/platform/my/sites-overview",
+   "controller": "Platform\\MySitesOverviewController",
+   "auth": [
+    "envToken",
+    "jwt",
+    "envMember"
+   ],
+   "moduleGate": null,
+   "throttle": "60,1",
+   "status": "live"
+  },
+  {
+   "method": "GET",
+   "path": "/api/platform/my/sites/{id}/mail-setup",
+   "controller": "Platform\\SiteMailSetupController@show",
+   "auth": [
+    "envToken",
+    "jwt",
+    "envMember"
+   ],
+   "moduleGate": null,
+   "throttle": null,
+   "status": "live"
+  },
+  {
+   "method": "POST",
+   "path": "/api/platform/my/sites/{id}/mail-setup",
+   "controller": "Platform\\SiteMailSetupController@ensure",
+   "auth": [
+    "envToken",
+    "jwt",
+    "envMember"
+   ],
+   "moduleGate": null,
+   "throttle": "30,1",
+   "status": "live"
+  },
+  {
+   "method": "PUT",
+   "path": "/api/platform/my/sites/{id}/mail-setup",
+   "controller": "Platform\\SiteMailSetupController@update",
+   "auth": [
+    "envToken",
+    "jwt",
+    "envMember"
+   ],
+   "moduleGate": null,
+   "throttle": "30,1",
+   "status": "live"
+  },
+  {
+   "method": "POST",
+   "path": "/api/platform/my/sites/{id}/mail-setup/verify",
+   "controller": "Platform\\SiteMailSetupController@verify",
+   "auth": [
+    "envToken",
+    "jwt",
+    "envMember"
+   ],
+   "moduleGate": null,
+   "throttle": "20,1",
+   "status": "live"
+  },
+  {
    "method": "DELETE",
    "path": "/api/platform/my/sites/{id}/modules",
    "controller": "Platform\\CompanySiteModuleController@reset",
@@ -3244,6 +3335,19 @@
    ],
    "moduleGate": null,
    "throttle": null,
+   "status": "live"
+  },
+  {
+   "method": "POST",
+   "path": "/api/platform/my/sites/{id}/status",
+   "controller": "Platform\\CompanySiteModuleController@setStatus",
+   "auth": [
+    "envToken",
+    "jwt",
+    "envMember"
+   ],
+   "moduleGate": null,
+   "throttle": "30,1",
    "status": "live"
   },
   {
