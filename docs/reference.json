@@ -2,13 +2,13 @@
  "$comment": "SDK kaynağından üretildi (scripts/generate-reference.mjs). Elle düzenlemeyin — kaynak değişince yeniden üretin.",
  "source": {
   "repo": "submit.api",
-  "branch": "feat/public-batch",
-  "commit": "41f9e22"
+  "branch": "HEAD",
+  "commit": "759cfed"
  },
  "counts": {
   "modules": 23,
-  "methods": 229,
-  "liveEndpoints": 310
+  "methods": 234,
+  "liveEndpoints": 320
  },
  "packages": {
   "js": {
@@ -483,7 +483,7 @@
      "throttle": "register",
      "status": "live",
      "summary": "Yeni hesap açar.",
-     "body": "Hesabın doğrudan aktif olup olmayacağına **site** karar verir\n(`environments.auto_activate`). Kapalıysa kullanıcı `waiting` grubuna düşer\nve onay bekler; bu davranış istemciden değiştirilemez.",
+     "body": "Hesabın doğrudan aktif olup olmayacağına **site** karar verir\n(`environments.auto_activate`). Kapalıysa kullanıcı `waiting` grubuna düşer\nve onay bekler; bu davranış istemciden değiştirilemez.\n\nsubmitcms.com kaydında (platformun kök site token'ı) hesapla birlikte bir\nşirket de açılır ve kişi o şirketin yöneticisi olur; yanıt `company`\nalanını taşır. Müşteri sitelerinin kendi üye kayıtlarında şirket açılmaz.",
      "example": "",
      "names": {
       "js": "register",
@@ -2651,7 +2651,7 @@
       "envToken"
      ],
      "moduleGate": null,
-     "throttle": null,
+     "throttle": "ticket-submit",
      "status": "live",
      "summary": "Mevcut bir ticket'a mesaj ekler.",
      "body": "**Adı yanıltıcıdır ve sürüm uyumu için korunuyor:** bu uç form şeması\n*dönmez*. Arkasındaki denetleyici `NotificationController@setTicketContent`,\nyani yazma tarafıdır ve `ticket` ile `message` alanlarını zorunlu tutar.\nYeni ticket açmak için `submitTicket()` kullanın.",
@@ -2682,7 +2682,7 @@
       "envToken"
      ],
      "moduleGate": null,
-     "throttle": null,
+     "throttle": "ticket-submit",
      "status": "live",
      "summary": "Yeni iletişim/destek talebi açar.",
      "body": "Zorunlu alanlar submit.api tarafından uygulanır; eksik gönderimde 422 döner\nve `errors` içinde alan adları listelenir. Onay alanları (`gdpr`,\n`advertising`, `drp`) formda kullanıcıya sorulmalıdır — sunucu üçünü de bekler.",
@@ -5291,6 +5291,144 @@
      }
     },
     {
+     "name": "mailSetup.status",
+     "group": "mailSetup",
+     "params": [
+      {
+       "name": "siteId",
+       "type": "number",
+       "optional": false,
+       "default": null
+      }
+     ],
+     "returns": "Promise<ApiResponse<Record<string, unknown>>>",
+     "method": "GET",
+     "path": "/api/platform/my/sites/${siteId}/mail-setup",
+     "specPath": "/api/platform/my/sites/{id}/mail-setup",
+     "auth": [
+      "envToken",
+      "jwt",
+      "envMember"
+     ],
+     "moduleGate": null,
+     "throttle": null,
+     "status": "live",
+     "summary": "",
+     "body": "",
+     "example": "",
+     "names": {
+      "js": "mailSetup.status",
+      "php": "mailSetup",
+      "swift": "mailSetup",
+      "kotlin": "mailSetup"
+     }
+    },
+    {
+     "name": "mailSetup.ensure",
+     "group": "mailSetup",
+     "params": [
+      {
+       "name": "siteId",
+       "type": "number",
+       "optional": false,
+       "default": null
+      }
+     ],
+     "returns": "Promise<ApiResponse<Record<string, unknown>>>",
+     "method": "POST",
+     "path": "/api/platform/my/sites/${siteId}/mail-setup",
+     "specPath": "/api/platform/my/sites/{id}/mail-setup",
+     "auth": [
+      "envToken",
+      "jwt",
+      "envMember"
+     ],
+     "moduleGate": null,
+     "throttle": "30,1",
+     "status": "live",
+     "summary": "",
+     "body": "",
+     "example": "",
+     "names": {
+      "js": "mailSetup.ensure",
+      "php": "ensureMailSetup",
+      "swift": "ensureMailSetup",
+      "kotlin": "ensureMailSetup"
+     }
+    },
+    {
+     "name": "mailSetup.verify",
+     "group": "mailSetup",
+     "params": [
+      {
+       "name": "siteId",
+       "type": "number",
+       "optional": false,
+       "default": null
+      }
+     ],
+     "returns": "Promise<ApiResponse<Record<string, unknown>>>",
+     "method": "POST",
+     "path": "/api/platform/my/sites/${siteId}/mail-setup/verify",
+     "specPath": "/api/platform/my/sites/{id}/mail-setup/verify",
+     "auth": [
+      "envToken",
+      "jwt",
+      "envMember"
+     ],
+     "moduleGate": null,
+     "throttle": "20,1",
+     "status": "live",
+     "summary": "",
+     "body": "",
+     "example": "",
+     "names": {
+      "js": "mailSetup.verify",
+      "php": "verifyMailSetup",
+      "swift": "verifyMailSetup",
+      "kotlin": "verifyMailSetup"
+     }
+    },
+    {
+     "name": "mailSetup.preference",
+     "group": "mailSetup",
+     "params": [
+      {
+       "name": "siteId",
+       "type": "number",
+       "optional": false,
+       "default": null
+      },
+      {
+       "name": "relay",
+       "type": "'signalbird' | 'own_smtp'",
+       "optional": false,
+       "default": null
+      }
+     ],
+     "returns": "Promise<ApiResponse<Record<string, unknown>>>",
+     "method": "PUT",
+     "path": "/api/platform/my/sites/${siteId}/mail-setup",
+     "specPath": "/api/platform/my/sites/{id}/mail-setup",
+     "auth": [
+      "envToken",
+      "jwt",
+      "envMember"
+     ],
+     "moduleGate": null,
+     "throttle": "30,1",
+     "status": "live",
+     "summary": "",
+     "body": "",
+     "example": "",
+     "names": {
+      "js": "mailSetup.preference",
+      "php": "setMailRelay",
+      "swift": "setMailRelay",
+      "kotlin": "setMailRelay"
+     }
+    },
+    {
      "name": "team.list",
      "group": "team",
      "params": [],
@@ -5416,6 +5554,37 @@
      }
     },
     {
+     "name": "moduleCatalog",
+     "group": null,
+     "params": [
+      {
+       "name": "params",
+       "type": "Record<string, unknown>",
+       "optional": true,
+       "default": "{}"
+      }
+     ],
+     "returns": "Promise<ApiResponse<Record<string, unknown>>>",
+     "method": "GET",
+     "path": "/api/platform/module-catalog",
+     "specPath": "/api/platform/module-catalog",
+     "auth": [
+      "envToken"
+     ],
+     "moduleGate": null,
+     "throttle": null,
+     "status": "live",
+     "summary": "Satışa açık MODÜLLER — fiyatlandırma sayfası için. Oturum gerekmez.",
+     "body": "Satış paket değil, DOMAIN BAŞINA modül seçimidir (2026-10-29): her modülün\naylık ve yıllık fiyatı ile zorunlu olup olmadığı döner.",
+     "example": "",
+     "names": {
+      "js": "moduleCatalog",
+      "php": "moduleCatalog",
+      "swift": "moduleCatalog",
+      "kotlin": "moduleCatalog"
+     }
+    },
+    {
      "name": "plans",
      "group": null,
      "params": [],
@@ -5429,8 +5598,8 @@
      "moduleGate": null,
      "throttle": null,
      "status": "live",
-     "summary": "Herkese açık paket listesi — fiyatlandırma sayfası için. Oturum gerekmez.",
-     "body": "",
+     "summary": "Herkese açık paket listesi — KORUNAN paket kayıtları. Oturum gerekmez.",
+     "body": "`PACKAGE_SALES_CLOSED` (410) döner; fiyatlandırma için `moduleCatalog()`\nkullanın. Uç, eski abonelikleri okumak için duruyor.",
      "example": "",
      "names": {
       "js": "plans",
@@ -5466,8 +5635,8 @@
      "moduleGate": null,
      "throttle": null,
      "status": "live",
-     "summary": "Tek planın dökümü: modüller, limitler, iki dönem fiyatı ve satılabildiği para birimleri. Ödeme ekranı satın alınacak planı BURADAN okur — istemcide taşınan fiyata ya da sepette kalmış eski kayda güvenilmez.",
-     "body": "",
+     "summary": "Tek planın dökümü: modüller, limitler, iki dönem fiyatı ve satılabildiği para birimleri.",
+     "body": "duruyor. Yeni satış: `moduleCatalog()`.",
      "example": "",
      "names": {
       "js": "plan",
