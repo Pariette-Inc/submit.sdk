@@ -3,6 +3,15 @@
 > Her ekran/servis geliştirmesinden sonra güncellenir. En yeni bölüm en üstte.
 > Format: development-log skill'i (Claude) tarafından otomatik bakılır.
 
+## 2026-10-30 — `platform.mailSetup`: kiracı kendi adresinden gönderir
+
+- Dört pakete de eklendi (js `platform.mailSetup`, php `mailSetup/ensureMailSetup/verifyMailSetup/setMailRelay`, kotlin ve swift aynı adlarla).
+- Uçlar: `GET|POST|PUT /api/platform/my/sites/{id}/mail-setup` ve `POST .../mail-setup/verify`.
+- Akış: `ensure()` Signalbird'de alan adını açar → `status()` DNS kayıtlarını döner → müşteri kendi DNS'ine yazar → `verify()`. Doğrulanmadan o alan adı adına gönderim kapalıdır.
+- `preference('own_smtp')` (php `setMailRelay`): müşteri Signalbird'ü reddeder, postası kendi SMTP'sinden çıkar. Anayasa 6'nın tek istisnası (anayasa 14).
+- `spec/endpoints.json` yeniden üretildi. Önceki üretim `feat/public-batch` dalındaydı ve `test`'teki 6 uç (module-catalog, my/company, my/site-catalog, my/sites-overview, my/sites/{id}/status) spec'e hiç girmemişti; bu üretim onları da getirdi.
+- `pnpm test:contract` 15/15, `packages/js` typecheck temiz.
+
 ## 2026-10-28 — Medya CDN varsayılanı: `media()`, `cdnUrl`; JS `mode` isteğe bağlı
 
 - **Amaç:** Siteye yalnız site token'ı yazılsın. API kökü ve medya CDN'i SDK'dan gelsin (Ahmet, 2026-10-28; WUX `NEXT_PUBLIC_SUBMITCMS_API_URL` ve `NEXT_PUBLIC_CDN_URL` ayarlarını elle istiyordu).
