@@ -3,12 +3,21 @@
 > Her ekran/servis geliştirmesinden sonra güncellenir. En yeni bölüm en üstte.
 > Format: development-log skill'i (Claude) tarafından otomatik bakılır.
 
+## 2026-10-30 — `platform.mailSetup`: kiracı kendi adresinden gönderir
+
+- Dört pakete de eklendi (js `platform.mailSetup`, php `mailSetup/ensureMailSetup/verifyMailSetup/setMailRelay`, kotlin ve swift aynı adlarla).
+- Uçlar: `GET|POST|PUT /api/platform/my/sites/{id}/mail-setup` ve `POST .../mail-setup/verify`.
+- Akış: `ensure()` Signalbird'de alan adını açar → `status()` DNS kayıtlarını döner → müşteri kendi DNS'ine yazar → `verify()`. Doğrulanmadan o alan adı adına gönderim kapalıdır.
+- `preference('own_smtp')` (php `setMailRelay`): müşteri Signalbird'ü reddeder, postası kendi SMTP'sinden çıkar. Anayasa 6'nın tek istisnası (anayasa 14).
+- `spec/endpoints.json` yeniden üretildi. Önceki üretim `feat/public-batch` dalındaydı ve `test`'teki 6 uç (module-catalog, my/company, my/site-catalog, my/sites-overview, my/sites/{id}/status) spec'e hiç girmemişti; bu üretim onları da getirdi.
+- `pnpm test:contract` 15/15, `packages/js` typecheck temiz.
+
 ## 2026-10-29 — Kayıt gövdesi: `account_type`, `company_name` (anayasa 13)
 
 - **Neden:** submit.api kayıt ucu artık üyeyle birlikte bir şirket açıyor (anayasa 13, Ahmet 2026-10-29). Gövde iki alan daha taşır; anayasa 9 gereği aynı işte SDK'ya işlendi.
 - **js:** `RegisterPayload` → `account_type?: 'individual' | 'corporate'`, `company_name?: string`. Kırıcı değişiklik değil: iki alan da isteğe bağlı, verilmezse API bireysel sayar.
 - **php, swift, kotlin:** `register` serbest gövde alır; metot açıklamaları iki alanı ve şirket kuralını anlatır.
-- `spec/endpoints.json` yenilendi (`pnpm spec:generate --api-path …`): kaynak `feat/company-at-register@c648b38`. Aynı yenilemede `public/ticket-submit` ve `public/ticket-content` satırlarının denetleyici ve `throttle` bilgisi de güncellendi — spec en son `feat/public-batch`'ten üretilmişti.
+- `spec/endpoints.json`: dal `main` ile birleştirilirken spec dosyası `main`'inki alındı. 30 Ekim üretimi `test` dalından yapıldığı için bu dalın getirdiği her satırı zaten taşıyor ve daha günceldir.
 - `submit.web/src/data/sdk-reference.json` yeniden üretildi (`docs:publish`).
 - Test: `pnpm test:contract` (15), `pnpm typecheck`. Sürüm yükseltilmedi; yayın sahibin işi.
 

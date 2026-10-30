@@ -56,6 +56,26 @@ class Platform(private val client: SubmitClient) {
 
     suspend fun removeDomain(id: Int): JsonObject = client.delete("/api/platform/my/domains/$id")
 
+    /**
+     * "Kendi adresimden gönder" kurulumu (anayasa 14).
+     *
+     * Sitenin postası müşterinin KENDİ alan adından çıkar. [ensureMailSetup]
+     * hesabı açar, dönen DNS kayıtları müşterinin DNS'ine yazılır ve
+     * [verifyMailSetup] çağrılır. Doğrulanmadan gönderim kapalıdır.
+     */
+    suspend fun mailSetup(siteId: Int): JsonObject =
+        client.get("/api/platform/my/sites/$siteId/mail-setup")
+
+    suspend fun ensureMailSetup(siteId: Int): JsonObject =
+        client.post("/api/platform/my/sites/$siteId/mail-setup")
+
+    suspend fun verifyMailSetup(siteId: Int): JsonObject =
+        client.post("/api/platform/my/sites/$siteId/mail-setup/verify")
+
+    /** `signalbird` ya da `own_smtp`: ikincisinde posta Signalbird'e uğramaz. */
+    suspend fun setMailRelay(siteId: Int, relay: String): JsonObject =
+        client.put("/api/platform/my/sites/$siteId/mail-setup", mapOf("relay" to relay))
+
     suspend fun team(): JsonObject = client.get("/api/platform/my/team")
 
     suspend fun inviteTeamMember(payload: Map<String, Any?>): JsonObject =
